@@ -1,0 +1,30 @@
+{
+  "build": {
+    "builder": "Docker"
+  },
+  "deploy": {
+    "startCommand": "n8n start",
+    "healthcheckPath": "/healthz"
+  },
+  "env": {
+    "N8N_BASIC_AUTH_ACTIVE": "true",
+    "N8N_BASIC_AUTH_USER": "admin",
+    "N8N_BASIC_AUTH_PASSWORD": "rahasia123",
+    "GENERIC_TIMEZONE": "Asia/Jakarta",
+    "WEBHOOK_URL": "https://${{RAILWAY_STATIC_URL}}/",
+    "N8N_ENCRYPTION_KEY": "REPLACE_WITH_YOUR_KEY"
+  },
+  "plugins": {
+    "postgres": {
+      "name": "PostgreSQL",
+      "variables": {
+        "DB_TYPE": "postgresdb",
+        "DB_POSTGRESDB_HOST": "${{PostgreSQL.HOST}}",
+        "DB_POSTGRESDB_PORT": "${{PostgreSQL.PORT}}",
+        "DB_POSTGRESDB_DATABASE": "${{PostgreSQL.DATABASE}}",
+        "DB_POSTGRESDB_USER": "${{PostgreSQL.USER}}",
+        "DB_POSTGRESDB_PASSWORD": "${{PostgreSQL.PASSWORD}}"
+      }
+    }
+  }
+}
