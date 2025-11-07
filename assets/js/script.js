@@ -1,7 +1,7 @@
 // Config
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyVnM9JhKx8xj2EZhETj1BdSCnmJxtNBV4eFmohKE0denRS4VEA3JqPI-RVsQFg7ZuEtw/exec';
-const REFRESH_INTERVAL = 2 * 60 * 1000; // 2 minutes
-const CACHE_DURATION = 60 * 1000; // 1 minute
+const REFRESH_INTERVAL = 10000; // 10s
+const CACHE_DURATION = 10000; // 10s
 const FETCH_TIMEOUT = 10000; // 10s
 
 // State
