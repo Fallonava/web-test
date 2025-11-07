@@ -64,8 +64,18 @@ tr:hover td{transform:translateY(-2px)}
 
 /* footer */
 footer{padding:.6rem 0;text-align:center;background:linear-gradient(135deg,var(--color-primary),var(--color-secondary),var(--color-accent));color:#fff;font-weight:700}
-.footer-scroll{overflow:hidden}
-.footer-scroll p{display:inline-block;padding-left:100%;animation:scrollLeft 20s linear infinite}
+.footer-scroll {
+  overflow: hidden;
+  white-space: nowrap; /* ⬅️ Tambahkan ini */
+}
+
+.footer-scroll p {
+  display: inline-block;
+  white-space: nowrap; /* ⬅️ Pastikan tetap satu baris */
+  padding-left: 100%;
+  animation: scrollLeft 20s linear infinite;
+  line-height: 1.5; /* Opsional, jaga agar vertikal stabil */
+}
 @keyframes scrollLeft{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
 
 /* Particles (lightweight) */
