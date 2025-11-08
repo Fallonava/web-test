@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INFO JADWAL PRAKTEK DOKTER SPESIALIS - RSU SIAGA MEDIKA PURBALINGGA</title>
+  <meta name="description" content="Jadwal praktek dokter spesialis RSU Siaga Medika Purbalingga - Informasi terbaru jam praktek dan status dokter">
+  <style>
+    :root {
+      --color-primary: #283593;
+      --color-primary-dark: #1a237e;
+      --color-secondary: #5c6bc0;
+      --color-accent: #ec407a;
+      --color-accent-light: #ff77a9;
+      --color-bg: #f5f5f5;
+      --color-bg-light: #ffffff;
+      --color-text: #1a237e;
+      --color-text-dark: #0d1440;
+      --color-text-light: #5c6bc0;
+      
+      /* Status Colors - Senada dengan tema */
+      --color-status-buka: #4caf50;
+      --color-status-penuh: #ff9800;
+      --color-status-selesai: #2196f3;
+      --color-status-cuti: #9c27b0;
+      --color-status-tidak: #f44336;
+      --color-status-tidak-poli: #607d8b;
+      
+      --color-surface: #ffffff;
+      --color-border: #e0e0e0;
+      --color-shadow: rgba(26, 35, 126, 0.1);
+      
+      /* Improved spacing system */
+      --spacing-xs: 8px;
+      --spacing-sm: 12px;
+      --spacing-md: 16px;
+      --spacing-lg: 20px;
+      --spacing-xl: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text-dark);
+      opacity: 0;
+      animation: fadeInPage 1s ease forwards;
+      line-height: 1.4;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    @keyframes fadeInPage {
+      to { opacity: 1; }
+    }
+
+    /* ===== TV OPTIMIZATION ===== */
+    @media screen and (min-width: 1920px) {
+      :root {
+        font-size: 14px;
+      }
+    }
+
+    @media screen and (min-width: 3840px) {
+      :root {
+        font-size: 16px;
+      }
+    }
+
+    /* ===== SKIP LINK & ACCESSIBILITY ===== */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 10px;
+      background: var(--color-primary);
+      color: white;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      text-decoration: none;
+      border-radius: 4px;
+      z-index: 100;
+      font-weight: 600;
+      transition: top 0.3s;
+    }
+
+    .skip-link:focus {
+      top: 10px;
+    }
+
+    /* Screen reader only */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* ===== PARTICLE BACKGROUND ===== */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(92, 107, 192, 0.3);
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      from { 
+        transform: translateY(100vh) scale(0.5); 
+        opacity: 0.3; 
+      }
+      to { 
+        transform: translateY(-10vh) scale(1); 
+        opacity: 0; 
+      }
+    }
+
+    /* ===== LOADING INDICATOR & SKELETON ===== */
+    .loading {
+      display: none;
+      text-align: center;
+      padding: var(--spacing-lg);
+      color: var(--color-text);
+      font-weight: 600;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      background: var(--color-surface);
+      border-radius: 10px;
+      box-shadow: 0 4px 12px var(--color-shadow);
+      border: 1px solid var(--color-border);
+    }
+
+    .loading.spinner {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(26, 35, 126, 0.2);
+      border-radius: 50%;
+      border-top-color: var(--color-text);
+      animation: spin 1s ease-in-out infinite;
+      margin-right: var(--spacing-sm);
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Pulse Dots Animation */
+    .pulse-dots {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: var(--spacing-xs);
+    }
+
+    .pulse-dots span {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--color-secondary);
+      margin: 0 2px;
+      animation: pulseDots 1.5s infinite ease-in-out;
+    }
+
+    .pulse-dots span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .pulse-dots span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes pulseDots {
+      0%, 60%, 100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+      }
+      30% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+    }
+
+    /* Skeleton Loading */
+    .skeleton {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: 4px;
+      min-height: 1em;
+    }
+
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .skeleton-row td {
+      padding: var(--spacing-sm) var(--spacing-xs);
+    }
+
+    .skeleton-status {
+      width: 85px;
+      height: 28px;
+      margin: 0 auto;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: relative;
+      text-align: center;
+      padding: var(--spacing-md) var(--spacing-lg);
+      color: white;
+      font-weight: 700;
+      text-transform: uppercase;
+      overflow: hidden;
+      z-index: 1;
+      flex-shrink: 0;
+      height: 140px;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+      background-size: 400% 400%;
+      animation: gradientFlow 12s ease infinite;
+      z-index: -2;
+    }
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 3.0rem;
+      line-height: 0.8;
+      letter-spacing: 0.5px;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      color: white;
+      padding-top: 15px;
+    }
+
+    header h2 {
+      margin: 0;
+      font-size: 2.0rem;
+      line-height: 0.8;
+      letter-spacing: 0.5px;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      color: white;
+      padding-top: 15px;
+    }
+
+    /* ===== CORNER DATETIME ===== */
+    .datetime-corner {
+      position: absolute;
+      top: var(--spacing-md);
+      right: var(--spacing-lg);
+      text-align: right;
+      z-index: 10;
+      animation: fadeIn 1.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .datetime-corner .tanggal {
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+
+    .datetime-corner .jam {
+      position: relative;
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 6px;
+      padding: 20px 28px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--color-primary-dark), var(--color-secondary), var(--color-accent));
+      background-size: 400% 400%;
+      animation: gradientFlow 10s ease infinite, glowFloat 5s ease-in-out infinite;
+      box-shadow: 0 0 25px rgba(92, 107, 192, 0.3);
+      color: white;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+    
+    .jam-utama {
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    
+    .jam-detik {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 8px;
+      color: #e8eaf6;
+      transform-origin: bottom left;
+      animation: floatSec 6s ease-in-out infinite;
+    }
+    
+    @keyframes glowFloat {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(92, 107, 192, 0.3); }
+      50% { transform: scale(1.02); box-shadow: 0 0 40px rgba(92, 107, 192, 0.7); }
+    }
+    
+    @keyframes floatSec {
+      0%, 100% { transform: translateY(0); opacity: 0.8; }
+      50% { transform: translateY(-2px); opacity: 1; }
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .content-wrapper {
+      flex: 1;
+      display: flex;
+      padding: 0 var(--spacing-md) var(--spacing-md);
+      gap: var(--spacing-md);
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .section {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px var(--color-shadow);
+      padding: var(--spacing-sm) 0;
+      flex: 1;
+      min-width: 0;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.8s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section h2 {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      color: white;
+      padding: var(--spacing-sm) 0;
+      margin: 0 var(--spacing-sm) var(--spacing-sm);
+      border-radius: 8px;
+      font-size: 1.4rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      flex-shrink: 0;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .table-container {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      flex: 1;
+    }
+
+    thead {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    th {
+      padding: var(--spacing-sm) var(--spacing-xs);
+      color: var(--color-text-dark);
+      font-weight: 700;
+      border-bottom: 2px solid var(--color-secondary);
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    /* TABLE ALIGNMENT - BEDAH */
+    #tableBedah th:nth-child(1),
+    #tableBedah th:nth-child(2) {
+      text-align: left;
+      padding-left: var(--spacing-md);
+    }
+
+    #tableBedah th:nth-child(3),
+    #tableBedah th:nth-child(4) {
+      text-align: center;
+    }
+
+    #tableBedah td:nth-child(1),
+    #tableBedah td:nth-child(2) {
+      text-align: left;
+      padding-left: var(--spacing-md);
+    }
+
+    #tableBedah td:nth-child(3),
+    #tableBedah td:nth-child(4) {
+      text-align: center;
+    }
+
+    /* TABLE ALIGNMENT - NON BEDAH */
+    #tableNonBedah th:nth-child(1),
+    #tableNonBedah th:nth-child(2) {
+      text-align: left;
+      padding-left: var(--spacing-md);
+    }
+
+    #tableNonBedah th:nth-child(3),
+    #tableNonBedah th:nth-child(4) {
+      text-align: center;
+    }
+
+    #tableNonBedah td:nth-child(1),
+    #tableNonBedah td:nth-child(2) {
+      text-align: left;
+      padding-left: var(--spacing-md);
+    }
+
+    #tableNonBedah td:nth-child(3),
+    #tableNonBedah td:nth-child(4) {
+      text-align: center;
+    }
+
+    tbody {
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    td {
+      padding: var(--spacing-xs) var(--spacing-xs);
+      border-bottom: 1px solid var(--color-border);
+      color: var(--color-text-dark);
+      transition: all 0.3s ease;
+      font-size: 1.7rem;
+      font-weight: 600;
+    }
+
+    tr:hover td {
+      background: #f8fdff;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px var(--color-shadow);
+    }
+
+    /* STATUS STYLES - SENADA DENGAN TEMA */
+    .status {
+      display: inline-block;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: 16px;
+      color: white;
+      font-weight: 700;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      min-width: 85px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    .status:focus {
+      outline: 2px solid var(--color-text);
+      outline-offset: 2px;
+    }
+
+    .status.BUKA { 
+      background: linear-gradient(135deg, var(--color-status-buka), #43a047);
+      border: 1px solid #388e3c;
+      box-shadow: 
+        0 4px 12px rgba(76, 175, 80, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .status.PENUH { 
+      background: linear-gradient(135deg, var(--color-status-penuh), #fb8c00);
+      border: 1px solid #f57c00;
+      box-shadow: 
+        0 4px 12px rgba(255, 152, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .status.SELESAI { 
+      background: linear-gradient(135deg, var(--color-status-selesai), #1976d2);
+      border: 1px solid #1565c0;
+      box-shadow: 
+        0 4px 12px rgba(33, 150, 243, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .status.CUTI { 
+      background: linear-gradient(135deg, var(--color-status-cuti), #7b1fa2);
+      border: 1px solid #6a1b9a;
+      box-shadow: 
+        0 4px 12px rgba(156, 39, 176, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .status.TIDAK { 
+      background: linear-gradient(135deg, var(--color-status-tidak), #e53935);
+      border: 1px solid #d32f2f;
+      box-shadow: 
+        0 4px 12px rgba(244, 67, 54, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .status.TIDAK-ADA-POLI { 
+      background: linear-gradient(135deg, var(--color-status-tidak-poli), #455a64);
+      border: 1px solid #37474f;
+      box-shadow: 
+        0 4px 12px rgba(96, 125, 139, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    tr:hover .status {
+      transform: scale(1.08);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    /* ===== ENHANCED FOOTER WITH CUTI SECTION ===== */
+    footer {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+      color: white;
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Cuti Section Styles */
+    .cuti-footer-section {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: var(--spacing-md) var(--spacing-lg);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .cuti-footer-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .cuti-footer-title {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .cuti-footer-icon {
+      font-size: 1.5rem;
+      animation: gentlePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes gentlePulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    .cuti-scroll-container {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .cuti-scroll-content {
+      display: inline-flex;
+      gap: var(--spacing-xl);
+      animation: scrollCuti 30s linear infinite;
+      padding: 0 var(--spacing-md);
+    }
+
+    .cuti-item {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      background: rgba(255, 255, 255, 0.15);
+      padding: var(--spacing-xs) var(--spacing-md);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .cuti-item:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .cuti-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffeb3b, #ffc107);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary-dark);
+      font-size: 0.9rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .cuti-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .cuti-dokter-name {
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+      white-space: nowrap;
+    }
+
+    .cuti-spesialis {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.8);
+      white-space: nowrap;
+    }
+
+    .cuti-badge {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: white;
+      margin-left: var(--spacing-xs);
+    }
+
+    @keyframes scrollCuti {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Main Footer Styles */
+    .footer-main {
+      padding: var(--spacing-sm) 0;
+    }
+
+    .footer-scroll {
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .footer-scroll p {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scrollLeft 25s linear infinite;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.9);
+      background: linear-gradient(90deg, 
+        #ffffff 0%, 
+        #e3f2fd 25%, 
+        #bbdefb 50%, 
+        #e3f2fd 75%, 
+        #ffffff 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    @keyframes scrollLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* Pause animation on hover */
+    .cuti-scroll-container:hover .cuti-scroll-content,
+    .footer-scroll:hover p {
+      animation-play-state: paused;
+    }
+
+    /* Empty State */
+    .cuti-empty {
+      text-align: center;
+      padding: var(--spacing-md);
+      color: rgba(255, 255, 255, 0.7);
+      font-style: italic;
+    }
+
+    /* ===== ERROR & EMPTY STATES ===== */
+    .error-message {
+      text-align: center;
+      padding: var(--spacing-xl) var(--spacing-lg);
+      color: var(--color-status-tidak);
+      font-weight: 600;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 1rem;
+    }
+
+    .error-message button {
+      background: var(--color-secondary);
+      border: none;
+      border-radius: 8px;
+      padding: var(--spacing-sm) var(--spacing-lg);
+      margin-top: var(--spacing-sm);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+      color: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .error-message button:hover {
+      background: var(--color-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ===== MOBILE RESPONSIVE ===== */
+    @media screen and (max-width: 768px) {
+      :root {
+        font-size: 12px;
+      }
+      
+      header h1 {
+        font-size: 2.2rem;
+        padding-top: 20px;
+      }
+      
+      .datetime-corner {
+        top: var(--spacing-sm);
+        right: var(--spacing-md);
+      }
+      
+      .datetime-corner .tanggal {
+        font-size: 0.8rem;
+      }
+      
+      .datetime-corner .jam {
+        font-size: 1rem;
+        padding: 4px 8px;
+      }
+      
+      .content-wrapper {
+        flex-direction: column;
+        padding: 0 var(--spacing-sm) var(--spacing-sm);
+      }
+      
+      th, td {
+        font-size: 1.3rem;
+      }
+      
+      .status {
+        font-size: 1rem;
+        min-width: 70px;
+      }
+
+      .cuti-footer-section {
+        padding: var(--spacing-sm);
+      }
+      
+      .cuti-footer-title {
+        font-size: 1.1rem;
+      }
+      
+      .cuti-item {
+        padding: var(--spacing-xs) var(--spacing-sm);
+      }
+      
+      .cuti-dokter-name {
+        font-size: 0.9rem;
+      }
+      
+      .cuti-spesialis {
+        font-size: 0.75rem;
+      }
+      
+      .cuti-scroll-content {
+        animation: scrollCuti 20s linear infinite;
+      }
+    }
+
+    /* ===== PRINT STYLES ===== */
+    @media print {
+      .particles,
+      .controls,
+      .loading,
+      footer,
+      .datetime-corner {
+        display: none !important;
+      }
+      
+      body {
+        transform: none !important;
+        animation: none;
+        opacity: 1;
+      }
+      
+      .section {
+        box-shadow: none;
+        border: 2px solid #000;
+        break-inside: avoid;
+      }
+      
+      .status {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    /* Reduced motion for accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      .particle, .footer-scroll p, .jam, .section,
+      .cuti-scroll-content, .cuti-footer-icon {
+        animation: none;
+      }
+      
+      tr:hover .status,
+      tr:hover td {
+        transform: none;
+      }
+      
+      .skeleton {
+        animation: none;
+        background: #f0f0f0;
+      }
+      
+      .pulse-dots span {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Langsung ke konten utama</a>
+  <div class="particles" id="particles"></div>
+
+  <!-- Live region for announcements -->
+  <div aria-live="polite" aria-atomic="true" class="sr-only" id="liveRegion">
+    Data jadwal dokter telah diperbarui
+  </div>
+
+  <header>
+    <h1>INFO PRAKTEK DOKTER SPESIALIS RSU SIAGA MEDIKA PURBALINGGA</h1>
+    <h2 class="tanggal" id="tanggal"></h2>
+    <div class="datetime-corner">
+      <div class="jam" id="jam"></div>
+    </div>
+  </header>
+
+  <div class="loading" id="loadingIndicator">
+    <span class="spinner"></span><span class="pulse-dots"><span></span><span></span><span></span></span>
+  </div>
+
+  <div class="content-wrapper" id="main-content">
+    <div class="section" id="bedahSection">
+      <h2>BEDAH</h2>
+      <div class="table-container">
+        <table id="tableBedah">
+          <thead>
+            <tr>
+              <th>Spesialis</th>
+              <th>Dokter</th>
+              <th>Status</th>
+              <th>Jam</th>
+            </tr>
+          </thead>
+          <tbody id="bedahBody">
+            <!-- Data akan dimuat di sini -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section" id="nonBedahSection">
+      <h2>NON BEDAH</h2>
+      <div class="table-container">
+        <table id="tableNonBedah">
+          <thead>
+            <tr>
+              <th>Spesialis</th>
+              <th>Dokter</th>
+              <th>Status</th>
+              <th>Jam</th>
+            </tr>
+          </thead>
+          <tbody id="nonBedahBody">
+            <!-- Data akan dimuat di sini -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <!-- Cuti Doctors Section -->
+      <div class="cuti-footer-section">
+        <div class="cuti-footer-header">
+          <div class="cuti-footer-title">
+            <span class="cuti-footer-icon">🏖️</span>
+            <span>Dokter Sedang Cuti</span>
+          </div>
+        </div>
+        <div class="cuti-scroll-container">
+          <div class="cuti-scroll-content" id="cutiScrollContent">
+            <!-- Cuti doctors will be loaded here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Footer Message -->
+      <div class="footer-main">
+        <div class="footer-scroll">
+          <p>🌿 Selamat datang di RSU Siaga Medika Purbalingga • 🏥 Pelayanan terbaik untuk kesehatan Anda • 💚 Semoga Anda sehat selalu • 🌟</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const SHEET_URL = "https://script.google.com/macros/s/AKfycbyVnM9JhKx8xj2EZhETj1BdSCnmJxtNBV4eFmohKE0denRS4VEA3JqPI-RVsQFg7ZuEtw/exec";
+    
+    // ⚙️ SETTING AUTO REFRESH - UBAH DI SINI
+    const REFRESH_INTERVAL = 10000; // 10 detik
+    const CACHE_DURATION = 10000; // 10 detik cache
+    const FETCH_TIMEOUT = 10000; // 10 detik timeout
+
+    let allData = [];
+    let dataInterval;
+    let currentFilter = 'all';
+
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const liveRegion = document.getElementById('liveRegion');
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize particles only if user doesn't prefer reduced motion
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        initializeParticles();
+      }
+      
+      updateDateTime();
+      showSkeletonLoading();
+      loadData();
+      
+      setInterval(updateDateTime, 1000);
+      startDataInterval();
+      
+      setupEventListeners();
+      document.addEventListener('visibilitychange', handleVisibilityChange);
+      
+      // Check online status
+      window.addEventListener('online', handleOnlineStatus);
+      window.addEventListener('offline', handleOnlineStatus);
+    });
+
+    function setupEventListeners() {
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filter = btn.dataset.filter;
+          setActiveFilter(filter);
+          applyFilter(filter);
+        });
+        
+        // Keyboard navigation
+        btn.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            btn.click();
+          }
+        });
+      });
+    }
+
+    function setActiveFilter(filter) {
+      filterButtons.forEach(btn => {
+        const isActive = btn.dataset.filter === filter;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', isActive);
+      });
+      currentFilter = filter;
+    }
+
+    function applyFilter(filter) {
+      const rows = document.querySelectorAll('tbody tr:not(.skeleton-row)');
+      let visibleCount = 0;
+      
+      rows.forEach(row => {
+        const statusElement = row.querySelector('.status');
+        let status = '';
+        
+        if (statusElement) {
+          // Check which status class is applied
+          if (statusElement.classList.contains('BUKA')) status = 'BUKA';
+          else if (statusElement.classList.contains('PENUH')) status = 'PENUH';
+          else if (statusElement.classList.contains('SELESAI')) status = 'SELESAI';
+          else if (statusElement.classList.contains('CUTI')) status = 'CUTI';
+          else if (statusElement.classList.contains('TIDAK')) status = 'TIDAK';
+          else if (statusElement.classList.contains('TIDAK-ADA-POLI')) status = 'TIDAK-ADA-POLI';
+        }
+        
+        if (filter === 'all' || filter === status) {
+          row.style.display = '';
+          visibleCount++;
+        } else {
+          row.style.display = 'none';
+        }
+      });
+      
+      // Announce filter change to screen readers
+      if (visibleCount > 0) {
+        liveRegion.textContent = `Menampilkan ${visibleCount} dokter ${filter === 'all' ? '' : 'dengan status ' + filter}`;
+      }
+    }
+
+    function showSkeletonLoading() {
+      const skeletonRowBedah = `
+        <tr class="skeleton-row">
+          <td><div class="skeleton"></div></td>
+          <td><div class="skeleton"></div></td>
+          <td><div class="skeleton skeleton-status"></div></td>
+          <td><div class="skeleton"></div></td>
+        </tr>
+      `;
+      
+      const skeletonRowNonBedah = `
+        <tr class="skeleton-row">
+          <td><div class="skeleton"></div></td>
+          <td><div class="skeleton"></div></td>
+          <td><div class="skeleton skeleton-status"></div></td>
+          <td><div class="skeleton"></div></td>
+        </tr>
+      `;
+      
+      document.getElementById('bedahBody').innerHTML = skeletonRowBedah.repeat(3);
+      document.getElementById('nonBedahBody').innerHTML = skeletonRowNonBedah.repeat(5);
+      
+      document.querySelectorAll('.section').forEach(sec => {
+        sec.classList.add('show');
+      });
+    }
+
+    // Function to display cuti doctors in footer
+    function displayCutiDoctors(data) {
+      const cutiContainer = document.getElementById('cutiScrollContent');
+      
+      if (!data || data.length === 0) {
+        cutiContainer.innerHTML = '<div class="cuti-empty">Tidak ada dokter yang sedang cuti</div>';
+        return;
+      }
+
+      // Filter doctors with CUTI status
+      const cutiDoctors = data.filter(item => {
+        const status = item.Status ? item.Status.toUpperCase() : '';
+        return status.includes('CUTI');
+      });
+
+      if (cutiDoctors.length === 0) {
+        cutiContainer.innerHTML = '<div class="cuti-empty">Tidak ada dokter yang sedang cuti</div>';
+        return;
+      }
+
+      let cutiHTML = '';
+      
+      cutiDoctors.forEach(doctor => {
+        const initials = getInitials(doctor.Dokter || 'Dokter');
+        const spesialis = doctor.Spesialis || 'Spesialis';
+        
+        cutiHTML += `
+          <div class="cuti-item">
+            <div class="cuti-avatar" title="${doctor.Dokter || 'Dokter'}">${initials}</div>
+            <div class="cuti-info">
+              <div class="cuti-dokter-name">${doctor.Dokter || 'Dokter'}</div>
+              <div class="cuti-spesialis">${spesialis}</div>
+            </div>
+            <div class="cuti-badge">CUTI</div>
+          </div>
+        `;
+      });
+
+      // Duplicate content for seamless scrolling
+      cutiContainer.innerHTML = cutiHTML + cutiHTML;
+    }
+
+    // Helper function to get initials
+    function getInitials(name) {
+      return name
+        .split(' ')
+        .map(word => word.charAt(0))
+        .join('')
+        .toUpperCase()
+        .substring(0, 2);
+    }
+
+    async function loadData() {
+      // Check cache first
+      const cached = getCachedData();
+      if (cached) {
+        showData(cached);
+        hideLoading();
+        return;
+      }
+
+      try {
+        showLoading();
+        
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
+        
+        const res = await fetch(SHEET_URL, { 
+          signal: controller.signal 
+        });
+        clearTimeout(timeoutId);
+        
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        
+        const data = await res.json();
+        
+        // Validate data structure
+        if (!validateData(data)) {
+          throw new Error('Format data tidak valid');
+        }
+        
+        allData = data;
+        cacheData(data);
+        showData(data);
+        hideLoading();
+        
+        // Announce update to screen readers
+        liveRegion.textContent = 'Data jadwal dokter telah diperbarui';
+        
+      } catch (err) {
+        console.error("Gagal memuat data:", err);
+        
+        if (err.name === 'AbortError') {
+          showErrorState('Timeout: Server tidak merespons. Memuat data cache jika tersedia.');
+        } else {
+          showErrorState('Gagal memuat data jadwal. Memuat data cache jika tersedia.');
+        }
+        
+        // Try to load cached data as fallback
+        const cached = getCachedData();
+        if (cached) {
+          showData(cached);
+          liveRegion.textContent = 'Menampilkan data cache terakhir';
+        }
+        
+        hideLoading();
+      }
+    }
+
+    function validateData(data) {
+      if (!Array.isArray(data)) return false;
+      
+      return data.every(item => 
+        item && 
+        typeof item === 'object' &&
+        'Spesialis' in item &&
+        'Dokter' in item &&
+        'Status' in item &&
+        'Jenis' in item
+      );
+    }
+
+    // Caching functions
+    function cacheData(data) {
+      try {
+        const cache = {
+          data: data,
+          timestamp: Date.now()
+        };
+        localStorage.setItem('doctorSchedule', JSON.stringify(cache));
+      } catch (e) {
+        console.warn('Gagal menyimpan cache:', e);
+      }
+    }
+
+    function getCachedData() {
+      try {
+        const cached = localStorage.getItem('doctorSchedule');
+        if (!cached) return null;
+        
+        const { data, timestamp } = JSON.parse(cached);
+        
+        // Check if cache is still valid
+        if (Date.now() - timestamp < CACHE_DURATION) {
+          return data;
+        }
+      } catch (e) {
+        console.warn('Gagal memuat cache:', e);
+      }
+      return null;
+    }
+
+    function showData(data) {
+      const bedahTable = document.getElementById("bedahBody");
+      const nonBedahTable = document.getElementById("nonBedahBody");
+      
+      bedahTable.innerHTML = "";
+      nonBedahTable.innerHTML = "";
+
+      if (!data || data.length === 0) {
+        showEmptyState();
+        displayCutiDoctors([]);
+        return;
+      }
+
+      data.forEach(item => {
+        // Determine status class based on the Status value
+        let statusClass = 'TIDAK'; // default
+        if (item.Status) {
+          const status = item.Status.toUpperCase();
+          if (status.includes('BUKA')) statusClass = 'BUKA';
+          else if (status.includes('PENUH')) statusClass = 'PENUH';
+          else if (status.includes('SELESAI')) statusClass = 'SELESAI';
+          else if (status.includes('CUTI')) statusClass = 'CUTI';
+          else if (status.includes('TIDAK ADA POLI') || status.includes('TIDAK-ADA-POLI')) statusClass = 'TIDAK-ADA-POLI';
+          else if (status.includes('TIDAK')) statusClass = 'TIDAK';
+        }
+        
+        if (item.Jenis === "Bedah") {
+          const row = `
+            <tr>
+              <td>${item.Spesialis || '-'}</td>
+              <td>${item.Dokter || '-'}</td>
+              <td><span class="status ${statusClass}" tabindex="0" aria-label="Status: ${statusClass.replace('-', ' ')}">${item.Status || 'TIDAK'}</span></td>
+              <td>${item.Jam || '-'}</td>
+            </tr>
+          `;
+          bedahTable.innerHTML += row;
+        } else {
+          const row = `
+            <tr>
+              <td>${item.Spesialis || '-'}</td>
+              <td>${item.Dokter || '-'}</td>
+              <td><span class="status ${statusClass}" tabindex="0" aria-label="Status: ${statusClass.replace('-', ' ')}">${item.Status || 'TIDAK'}</span></td>
+              <td>${item.Jam || '-'}</td>
+            </tr>
+          `;
+          nonBedahTable.innerHTML += row;
+        }
+      });
+
+      // Display cuti doctors in footer
+      displayCutiDoctors(data);
+
+      applyFilter(currentFilter);
+      
+      document.querySelectorAll('.section').forEach(sec => {
+        sec.classList.remove('show');
+        setTimeout(() => sec.classList.add('show'), 100);
+      });
+    }
+
+    function showLoading() {
+      loadingIndicator.style.display = 'block';
+    }
+
+    function hideLoading() {
+      loadingIndicator.style.display = 'none';
+    }
+
+    function showErrorState(message = '⚠️ Gagal memuat data jadwal dokter.') {
+      const errorHTML = `
+        <tr>
+          <td colspan="4" class="error-message">
+            ${message}<br>
+            <button onclick="loadData()">Coba Lagi</button>
+          </td>
+        </tr>
+      `;
+      
+      document.querySelectorAll('tbody').forEach(tbody => {
+        if (tbody.children.length === 0 || tbody.querySelector('.skeleton-row')) {
+          tbody.innerHTML = errorHTML;
+        }
+      });
+    }
+
+    function showEmptyState() {
+      const emptyHTML = `
+        <tr>
+          <td colspan="4" class="error-message">
+            📝 Tidak ada data jadwal dokter yang tersedia.
+          </td>
+        </tr>
+      `;
+      
+      document.querySelectorAll('tbody').forEach(tbody => {
+        tbody.innerHTML = emptyHTML;
+      });
+    }
+
+    function updateDateTime() {
+      const now = new Date();
+      const tanggal = now.toLocaleDateString('id-ID', { 
+        weekday: 'short', 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric' 
+      });
+      
+      const jam = now.toLocaleTimeString('id-ID', { 
+        hour: '2-digit', 
+        minute: '2-digit'
+      });
+      const detik = now.toLocaleTimeString('id-ID', { 
+        second: '2-digit'
+      });
+    
+      document.getElementById('tanggal').textContent = tanggal;
+      document.getElementById('jam').innerHTML = `
+        <span class="jam-utama">${jam}</span>
+        <span class="jam-detik">${detik}</span>
+      `;
+    }
+
+    function initializeParticles() {
+      const particlesContainer = document.getElementById("particles");
+      const particleCount = Math.min(15, window.innerWidth / 40);
+      
+      for (let i = 0; i < particleCount; i++) {
+        const p = document.createElement("div");
+        p.className = "particle";
+        const size = Math.random() * 6 + 3;
+        p.style.width = `${size}px`;
+        p.style.height = `${size}px`;
+        p.style.left = `${Math.random() * 100}%`;
+        p.style.animationDuration = `${10 + Math.random() * 10}s`;
+        p.style.animationDelay = `${Math.random() * 5}s`;
+        particlesContainer.appendChild(p);
+      }
+    }
+
+    function startDataInterval() {
+      dataInterval = setInterval(loadData, REFRESH_INTERVAL);
+    }
+
+    function handleVisibilityChange() {
+      if (document.hidden) {
+        clearInterval(dataInterval);
+      } else {
+        startDataInterval();
+        loadData(); // Refresh data when tab becomes visible
+      }
+    }
+
+    function handleOnlineStatus() {
+      if (navigator.onLine) {
+        // If we come back online, try to refresh data
+        loadData();
+        liveRegion.textContent = 'Koneksi internet tersedia. Memperbarui data...';
+      } else {
+        liveRegion.textContent = 'Koneksi internet terputus. Menampilkan data cache.';
+      }
+    }
+
+    // Make functions available globally
+    window.loadData = loadData;
+  </script>
+</body>
+</html>
