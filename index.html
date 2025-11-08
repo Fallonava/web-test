@@ -621,29 +621,52 @@
       50% { transform: scale(1.1); opacity: 0.8; }
     }
 
-    .cuti-scroll-container {
-      overflow: hidden;
-      position: relative;
-    }
+    /* Smart centering system */
+.cuti-scroll-container {
+  overflow: hidden;
+  position: relative;
+  min-height: 120px;
+}
 
-    .cuti-scroll-content {
-      display: inline-flex;
-      gap: var(--spacing-xl);
-      animation: scrollCuti 30s linear infinite;
-      padding: 0 var(--spacing-md);
-    }
+.cuti-scroll-content {
+  display: flex;
+  gap: var(--spacing-xl);
+  animation: scrollCuti 40s linear infinite;
+  padding: 0 var(--spacing-md);
+}
+
+/* Auto-center when few items */
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(1)),
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(2)),
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(3)),
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(4)),
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(5)) {
+  display: flex;
+  justify-content: center;
+}
+
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(1)) .cuti-scroll-content,
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(2)) .cuti-scroll-content,
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(3)) .cuti-scroll-content,
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(4)) .cuti-scroll-content,
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(5)) .cuti-scroll-content {
+  animation: none;
+  justify-content: center;
+}
 
     .cuti-item {
       display: flex;
       align-items: center;
       gap: var(--spacing-sm);
       background: rgba(255, 255, 255, 0.15);
-      padding: var(--spacing-xs) var(--spacing-md);
-      border-radius: 20px;
+      padding: var(--spacing-sm) var(--spacing-md);
+      border-radius: 12px;
       border: 1px solid rgba(255, 255, 255, 0.3);
       backdrop-filter: blur(5px);
       transition: all 0.3s ease;
       flex-shrink: 0;
+      min-width: 300px;
+      cursor: pointer;
     }
 
     .cuti-item:hover {
@@ -653,15 +676,15 @@
     }
 
     .cuti-avatar {
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       background: linear-gradient(135deg, #ffeb3b, #ffc107);
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--color-primary-dark);
-      font-size: 0.9rem;
+      font-size: 1rem;
       font-weight: 700;
       flex-shrink: 0;
     }
@@ -669,30 +692,58 @@
     .cuti-info {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 4px;
+      flex: 1;
     }
 
     .cuti-dokter-name {
       font-size: 1rem;
-      font-weight: 600;
+      font-weight: 700;
       color: white;
       white-space: nowrap;
+    }
+
+    .cuti-dates {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .cuti-date-icon {
+      font-size: 0.8rem;
+      opacity: 0.8;
     }
 
     .cuti-spesialis {
       font-size: 0.8rem;
-      color: rgba(255, 255, 255, 0.8);
+      color: rgba(255, 255, 255, 0.7);
       white-space: nowrap;
     }
 
     .cuti-badge {
-      background: rgba(255, 255, 255, 0.2);
-      padding: 2px 8px;
-      border-radius: 10px;
-      font-size: 0.7rem;
-      font-weight: 600;
+      background: linear-gradient(135deg, #ff5722, #e64a19);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
       color: white;
       margin-left: var(--spacing-xs);
+      white-space: nowrap;
+    }
+
+    /* Date status indicators */
+    .cuti-date-ongoing {
+      background: linear-gradient(135deg, #ff9800, #f57c00);
+    }
+
+    .cuti-date-upcoming {
+      background: linear-gradient(135deg, #2196f3, #1976d2);
+    }
+
+    .cuti-date-finished {
+      background: linear-gradient(135deg, #78909c, #546e7a);
     }
 
     @keyframes scrollCuti {
@@ -734,6 +785,137 @@
     @keyframes scrollLeft {
       0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
+    }
+
+    /* ===== CUTI MODAL ===== */
+    .cuti-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cuti-modal.active {
+      display: flex;
+    }
+
+    .cuti-modal-content {
+      background: linear-gradient(135deg, var(--color-surface), #f8fdff);
+      border-radius: 16px;
+      padding: var(--spacing-xl);
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--color-border);
+    }
+
+    .cuti-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--spacing-lg);
+      padding-bottom: var(--spacing-md);
+      border-bottom: 2px solid var(--color-border);
+    }
+
+    .cuti-modal-title {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-text-dark);
+    }
+
+    .cuti-modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--color-text-light);
+      padding: var(--spacing-xs);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .cuti-modal-close:hover {
+      background: var(--color-border);
+      color: var(--color-text-dark);
+    }
+
+    .cuti-detail-item {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      padding: var(--spacing-md);
+      background: white;
+      border-radius: 12px;
+      margin-bottom: var(--spacing-sm);
+      border: 1px solid var(--color-border);
+      transition: all 0.3s ease;
+    }
+
+    .cuti-detail-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 12px var(--color-shadow);
+    }
+
+    .cuti-detail-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-status-cuti), #7b1fa2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .cuti-detail-info {
+      flex: 1;
+    }
+
+    .cuti-detail-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--color-text-dark);
+      margin-bottom: 4px;
+    }
+
+    .cuti-detail-spec {
+      font-size: 0.9rem;
+      color: var(--color-text-light);
+      margin-bottom: 6px;
+    }
+
+    .cuti-detail-dates {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      font-size: 0.85rem;
+      color: var(--color-status-cuti);
+      font-weight: 600;
+    }
+
+    .cuti-detail-status {
+      background: var(--color-status-cuti);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
     }
 
     /* Pause animation on hover */
@@ -833,6 +1015,7 @@
       
       .cuti-item {
         padding: var(--spacing-xs) var(--spacing-sm);
+        min-width: 250px;
       }
       
       .cuti-dokter-name {
@@ -844,7 +1027,7 @@
       }
       
       .cuti-scroll-content {
-        animation: scrollCuti 20s linear infinite;
+        animation: scrollCuti 25s linear infinite;
       }
     }
 
@@ -854,7 +1037,8 @@
       .controls,
       .loading,
       footer,
-      .datetime-corner {
+      .datetime-corner,
+      .cuti-modal {
         display: none !important;
       }
       
@@ -967,7 +1151,7 @@
         <div class="cuti-footer-header">
           <div class="cuti-footer-title">
             <span class="cuti-footer-icon">🏖️</span>
-            <span>Dokter Sedang Cuti</span>
+            <span>Informasi Cuti Dokter</span>
           </div>
         </div>
         <div class="cuti-scroll-container">
@@ -986,15 +1170,34 @@
     </div>
   </footer>
 
+  <!-- Cuti Detail Modal -->
+  <div class="cuti-modal" id="cutiDetailModal">
+    <div class="cuti-modal-content">
+      <div class="cuti-modal-header">
+        <div class="cuti-modal-title">
+          <span>🏖️</span>
+          <span>Detail Cuti Dokter</span>
+        </div>
+        <button class="cuti-modal-close" onclick="closeCutiModal()">×</button>
+      </div>
+      <div id="cutiDetailContent">
+        <!-- Detail cuti akan dimuat di sini -->
+      </div>
+    </div>
+  </div>
+
   <script>
-    const SHEET_URL = "https://script.google.com/macros/s/AKfycbyVnM9JhKx8xj2EZhETj1BdSCnmJxtNBV4eFmohKE0denRS4VEA3JqPI-RVsQFg7ZuEtw/exec";
+    // URL untuk sheet utama dan sheet Footer
+    const MAIN_SHEET_URL = "https://script.google.com/macros/s/AKfycbyVnM9JhKx8xj2EZhETj1BdSCnmJxtNBV4eFmohKE0denRS4VEA3JqPI-RVsQFg7ZuEtw/exec";
+    const FOOTER_SHEET_URL = "https://script.google.com/macros/s/AKfycbxYREx42acZcDyDe8DF75UJlB0hroAoQ4QH_gpd71RgGtbI889yAAtzegrjgwvfLkFY4Q/exec";
     
-    // ⚙️ SETTING AUTO REFRESH - UBAH DI SINI
+    // ⚙️ SETTING AUTO REFRESH
     const REFRESH_INTERVAL = 10000; // 10 detik
     const CACHE_DURATION = 10000; // 10 detik cache
     const FETCH_TIMEOUT = 10000; // 10 detik timeout
 
     let allData = [];
+    let cutiData = [];
     let dataInterval;
     let currentFilter = 'all';
 
@@ -1038,6 +1241,20 @@
             btn.click();
           }
         });
+      });
+
+      // Close modal when clicking outside
+      document.getElementById('cutiDetailModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+          closeCutiModal();
+        }
+      });
+
+      // Close modal with Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeCutiModal();
+        }
       });
     }
 
@@ -1109,7 +1326,7 @@
       });
     }
 
-    // Function to display cuti doctors in footer
+    // Enhanced function to display cuti doctors from Footer sheet
     function displayCutiDoctors(data) {
       const cutiContainer = document.getElementById('cutiScrollContent');
       
@@ -1118,37 +1335,108 @@
         return;
       }
 
-      // Filter doctors with CUTI status
-      const cutiDoctors = data.filter(item => {
-        const status = item.Status ? item.Status.toUpperCase() : '';
-        return status.includes('CUTI');
-      });
-
-      if (cutiDoctors.length === 0) {
-        cutiContainer.innerHTML = '<div class="cuti-empty">Tidak ada dokter yang sedang cuti</div>';
-        return;
-      }
-
       let cutiHTML = '';
       
-      cutiDoctors.forEach(doctor => {
-        const initials = getInitials(doctor.Dokter || 'Dokter');
-        const spesialis = doctor.Spesialis || 'Spesialis';
+      data.forEach(doctor => {
+        const namaDokter = doctor.Dokter || doctor.Nama || doctor['Nama Dokter'] || 'Dokter';
+        const spesialis = doctor.Spesialis || doctor.Poli || doctor['Spesialisasi'] || 'Spesialis';
+        const tanggalCuti = doctor.Tanggal || doctor.Period || doctor.Jam || doctor['Periode Cuti'] || 'Cuti';
+        const initials = getInitials(namaDokter);
+        const statusInfo = parseCutiStatus(tanggalCuti);
         
         cutiHTML += `
-          <div class="cuti-item">
-            <div class="cuti-avatar" title="${doctor.Dokter || 'Dokter'}">${initials}</div>
+          <div class="cuti-item" onclick="showCutiDetail(
+            '${escapeHtml(namaDokter)}', 
+            '${escapeHtml(spesialis)}', 
+            '${escapeHtml(tanggalCuti)}',
+            '${statusInfo.badgeClass}'
+          )">
+            <div class="cuti-avatar" title="${escapeHtml(namaDokter)}">${initials}</div>
             <div class="cuti-info">
-              <div class="cuti-dokter-name">${doctor.Dokter || 'Dokter'}</div>
-              <div class="cuti-spesialis">${spesialis}</div>
+              <div class="cuti-dokter-name">${escapeHtml(namaDokter)}</div>
+              <div class="cuti-dates">
+                <span class="cuti-date-icon">📅</span>
+                <span>${escapeHtml(tanggalCuti)}</span>
+              </div>
+              <div class="cuti-spesialis">${escapeHtml(spesialis)}</div>
             </div>
-            <div class="cuti-badge">CUTI</div>
+            <div class="cuti-badge ${statusInfo.badgeClass}">${statusInfo.statusText}</div>
           </div>
         `;
       });
 
       // Duplicate content for seamless scrolling
-      cutiContainer.innerHTML = cutiHTML + cutiHTML;
+      cutiContainer.innerHTML = cutiHTML;
+    }
+
+    // Function to parse cuti status and dates
+    function parseCutiStatus(dateText) {
+      const today = new Date();
+      const currentYear = today.getFullYear();
+      
+      // Simple date parsing for common formats
+      const patterns = [
+        /(\d{1,2})\s*[-–]\s*(\d{1,2})\s*([A-Za-z]+)/i, // 18-21 November
+        /(\d{1,2})\s*[-–]\s*(\d{1,2})\s*([A-Za-z]+)\s*(\d{4})?/i, // 18-21 November 2024
+        /([A-Za-z]+)\s*(\d{1,2})\s*[-–]\s*(\d{1,2})/i, // November 18-21
+        /(\d{1,2})\/(\d{1,2})\s*[-–]\s*(\d{1,2})\/(\d{1,2})/i, // 18/11-21/11
+      ];
+
+      for (let pattern of patterns) {
+        const match = dateText.match(pattern);
+        if (match) {
+          let startDate, endDate;
+          
+          if (pattern === patterns[0] || pattern === patterns[1]) {
+            // Format: 18-21 November
+            const startDay = parseInt(match[1]);
+            const endDay = parseInt(match[2]);
+            const monthName = match[3];
+            const year = match[4] ? parseInt(match[4]) : currentYear;
+            
+            const month = getMonthNumber(monthName);
+            if (month !== -1) {
+              startDate = new Date(year, month, startDay);
+              endDate = new Date(year, month, endDay);
+            }
+          } else if (pattern === patterns[2]) {
+            // Format: November 18-21
+            const monthName = match[1];
+            const startDay = parseInt(match[2]);
+            const endDay = parseInt(match[3]);
+            const month = getMonthNumber(monthName);
+            
+            if (month !== -1) {
+              startDate = new Date(currentYear, month, startDay);
+              endDate = new Date(currentYear, month, endDay);
+            }
+          }
+
+          if (startDate && endDate) {
+            if (today < startDate) {
+              return { badgeClass: 'cuti-date-upcoming', statusText: 'AKAN CUTI' };
+            } else if (today > endDate) {
+              return { badgeClass: 'cuti-date-finished', statusText: 'SELESAI' };
+            } else {
+              return { badgeClass: 'cuti-date-ongoing', statusText: 'SEDANG CUTI' };
+            }
+          }
+        }
+      }
+
+      // Default fallback
+      return { badgeClass: 'cuti-badge', statusText: 'CUTI' };
+    }
+
+    // Helper function to get month number from name
+    function getMonthNumber(monthName) {
+      const months = {
+        'januari': 0, 'februari': 1, 'maret': 2, 'april': 3, 'mei': 4, 'juni': 5,
+        'juli': 6, 'agustus': 7, 'september': 8, 'oktober': 9, 'november': 10, 'desember': 11,
+        'january': 0, 'february': 1, 'march': 2, 'april': 3, 'may': 4, 'june': 5,
+        'july': 6, 'august': 7, 'september': 8, 'october': 9, 'november': 10, 'december': 11
+      };
+      return months[monthName.toLowerCase()] !== undefined ? months[monthName.toLowerCase()] : -1;
     }
 
     // Helper function to get initials
@@ -1161,11 +1449,19 @@
         .substring(0, 2);
     }
 
+    // Helper function to escape HTML
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
     async function loadData() {
       // Check cache first
       const cached = getCachedData();
       if (cached) {
-        showData(cached);
+        showData(cached.mainData);
+        displayCutiDoctors(cached.cutiData);
         hideLoading();
         return;
       }
@@ -1176,25 +1472,32 @@
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
         
-        const res = await fetch(SHEET_URL, { 
-          signal: controller.signal 
-        });
+        // Load main data and footer data simultaneously
+        const [mainRes, footerRes] = await Promise.all([
+          fetch(MAIN_SHEET_URL, { signal: controller.signal }),
+          fetch(FOOTER_SHEET_URL, { signal: controller.signal })
+        ]);
+        
         clearTimeout(timeoutId);
         
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
+        if (!mainRes.ok || !footerRes.ok) {
+          throw new Error(`HTTP error! status: ${mainRes.status}/${footerRes.status}`);
         }
         
-        const data = await res.json();
+        const mainData = await mainRes.json();
+        const footerData = await footerRes.json();
         
         // Validate data structure
-        if (!validateData(data)) {
-          throw new Error('Format data tidak valid');
+        if (!validateMainData(mainData)) {
+          throw new Error('Format data utama tidak valid');
         }
         
-        allData = data;
-        cacheData(data);
-        showData(data);
+        allData = mainData;
+        cutiData = footerData;
+        
+        cacheData({ mainData, cutiData });
+        showData(mainData);
+        displayCutiDoctors(footerData);
         hideLoading();
         
         // Announce update to screen readers
@@ -1212,7 +1515,8 @@
         // Try to load cached data as fallback
         const cached = getCachedData();
         if (cached) {
-          showData(cached);
+          showData(cached.mainData);
+          displayCutiDoctors(cached.cutiData);
           liveRegion.textContent = 'Menampilkan data cache terakhir';
         }
         
@@ -1220,7 +1524,7 @@
       }
     }
 
-    function validateData(data) {
+    function validateMainData(data) {
       if (!Array.isArray(data)) return false;
       
       return data.every(item => 
@@ -1237,7 +1541,8 @@
     function cacheData(data) {
       try {
         const cache = {
-          data: data,
+          mainData: data.mainData,
+          cutiData: data.cutiData,
           timestamp: Date.now()
         };
         localStorage.setItem('doctorSchedule', JSON.stringify(cache));
@@ -1251,11 +1556,11 @@
         const cached = localStorage.getItem('doctorSchedule');
         if (!cached) return null;
         
-        const { data, timestamp } = JSON.parse(cached);
+        const { mainData, cutiData, timestamp } = JSON.parse(cached);
         
         // Check if cache is still valid
         if (Date.now() - timestamp < CACHE_DURATION) {
-          return data;
+          return { mainData, cutiData };
         }
       } catch (e) {
         console.warn('Gagal memuat cache:', e);
@@ -1272,7 +1577,6 @@
 
       if (!data || data.length === 0) {
         showEmptyState();
-        displayCutiDoctors([]);
         return;
       }
 
@@ -1292,28 +1596,25 @@
         if (item.Jenis === "Bedah") {
           const row = `
             <tr>
-              <td>${item.Spesialis || '-'}</td>
-              <td>${item.Dokter || '-'}</td>
-              <td><span class="status ${statusClass}" tabindex="0" aria-label="Status: ${statusClass.replace('-', ' ')}">${item.Status || 'TIDAK'}</span></td>
-              <td>${item.Jam || '-'}</td>
+              <td>${escapeHtml(item.Spesialis || '-')}</td>
+              <td>${escapeHtml(item.Dokter || '-')}</td>
+              <td><span class="status ${statusClass}" tabindex="0" aria-label="Status: ${statusClass.replace('-', ' ')}">${escapeHtml(item.Status || 'TIDAK')}</span></td>
+              <td>${escapeHtml(item.Jam || '-')}</td>
             </tr>
           `;
           bedahTable.innerHTML += row;
         } else {
           const row = `
             <tr>
-              <td>${item.Spesialis || '-'}</td>
-              <td>${item.Dokter || '-'}</td>
-              <td><span class="status ${statusClass}" tabindex="0" aria-label="Status: ${statusClass.replace('-', ' ')}">${item.Status || 'TIDAK'}</span></td>
-              <td>${item.Jam || '-'}</td>
+              <td>${escapeHtml(item.Spesialis || '-')}</td>
+              <td>${escapeHtml(item.Dokter || '-')}</td>
+              <td><span class="status ${statusClass}" tabindex="0" aria-label="Status: ${statusClass.replace('-', ' ')}">${escapeHtml(item.Status || 'TIDAK')}</span></td>
+              <td>${escapeHtml(item.Jam || '-')}</td>
             </tr>
           `;
           nonBedahTable.innerHTML += row;
         }
       });
-
-      // Display cuti doctors in footer
-      displayCutiDoctors(data);
 
       applyFilter(currentFilter);
       
@@ -1321,6 +1622,43 @@
         sec.classList.remove('show');
         setTimeout(() => sec.classList.add('show'), 100);
       });
+    }
+
+    // Modal functions
+    function showCutiDetail(nama, spesialis, tanggal, badgeClass = 'cuti-badge') {
+      const modal = document.getElementById('cutiDetailModal');
+      const content = document.getElementById('cutiDetailContent');
+      
+      const statusText = getStatusTextFromBadge(badgeClass);
+      
+      content.innerHTML = `
+        <div class="cuti-detail-item">
+          <div class="cuti-detail-avatar">${getInitials(nama)}</div>
+          <div class="cuti-detail-info">
+            <div class="cuti-detail-name">${nama}</div>
+            <div class="cuti-detail-spec">${spesialis}</div>
+            <div class="cuti-detail-dates">
+              <span>📅 ${tanggal}</span>
+            </div>
+          </div>
+          <div class="cuti-detail-status ${badgeClass}">${statusText}</div>
+        </div>
+      `;
+      
+      modal.classList.add('active');
+    }
+
+    function getStatusTextFromBadge(badgeClass) {
+      switch(badgeClass) {
+        case 'cuti-date-upcoming': return 'AKAN CUTI';
+        case 'cuti-date-finished': return 'SELESAI';
+        case 'cuti-date-ongoing': return 'SEDANG CUTI';
+        default: return 'CUTI';
+      }
+    }
+
+    function closeCutiModal() {
+      document.getElementById('cutiDetailModal').classList.remove('active');
     }
 
     function showLoading() {
@@ -1428,6 +1766,8 @@
 
     // Make functions available globally
     window.loadData = loadData;
+    window.showCutiDetail = showCutiDetail;
+    window.closeCutiModal = closeCutiModal;
   </script>
 </body>
 </html>
