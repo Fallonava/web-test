@@ -60,10 +60,77 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      transition: margin-top 0.3s ease;
     }
 
     @keyframes fadeInPage {
       to { opacity: 1; }
+    }
+
+    /* Update Notification */
+    .update-notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #4CAF50;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 10000;
+      animation: slideInRight 0.3s ease, slideOutRight 0.3s ease 2.7s forwards;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideOutRight {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(100%); opacity: 0; }
+    }
+
+    /* Sync Status Indicator */
+    .sync-status {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 16px;
+      font-size: 0.8rem;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sync-status.syncing::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ff9800;
+      animation: pulse 1.5s infinite;
+    }
+
+    .sync-status.up-to-date::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4CAF50;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
     }
 
     /* ===== TV OPTIMIZATION ===== */
@@ -109,6 +176,41 @@
       clip: rect(0, 0, 0, 0);
       white-space: nowrap;
       border: 0;
+    }
+
+    /* Offline Banner */
+    .offline-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #f44336;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      z-index: 10000;
+      font-weight: bold;
+      display: none;
+    }
+
+    .online-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #4caf50;
+      color: white;
+      padding: 8px;
+      text-align: center;
+      z-index: 10000;
+      font-weight: bold;
+      display: none;
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); }
+      to { transform: translateY(0); }
     }
 
     /* ===== LOGO RUMAH SAKIT ===== */
@@ -667,6 +769,16 @@
       box-shadow: 0 2px 8px var(--color-shadow);
     }
 
+    /* Focus styles for keyboard navigation */
+    tr:focus {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    tr:focus td {
+      background: #e3f2fd;
+    }
+
     /* STATUS STYLES - SENADA DENGAN TEMA */
     .status {
       display: inline-block;
@@ -942,42 +1054,6 @@
     @keyframes scrollCuti {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
-    }
-
-    /* Main Footer Styles */
-    .footer-main {
-      padding: var(--spacing-sm) 0;
-    }
-
-    .footer-scroll {
-      overflow: hidden;
-      white-space: nowrap;
-      position: relative;
-    }
-
-    .footer-scroll p {
-      display: inline-block;
-      padding-left: 100%;
-      animation: scrollLeft 25s linear infinite;
-      font-weight: 700;
-      letter-spacing: 0.3px;
-      font-size: 1.1rem;
-      color: rgba(255, 255, 255, 0.9);
-      background: linear-gradient(90deg, 
-        #ffffff 0%, 
-        #e3f2fd 25%, 
-        #bbdefb 50%, 
-        #e3f2fd 75%, 
-        #ffffff 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    @keyframes scrollLeft {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
     }
 
     /* ===== CUTI MODAL ===== */
@@ -1393,7 +1469,11 @@
       footer,
       .datetime-corner,
       .cuti-modal,
-      .hospital-logo {
+      .hospital-logo,
+      .offline-banner,
+      .online-banner,
+      .update-notification,
+      .sync-status {
         display: none !important;
       }
       
@@ -1401,6 +1481,7 @@
         transform: none !important;
         animation: none;
         opacity: 1;
+        margin-top: 0 !important;
       }
       
       .section {
@@ -1420,7 +1501,8 @@
       .particle, .footer-scroll p, .jam, .section,
       .cuti-scroll-content, .cuti-footer-icon,
       .logo-container, .logo-container::before,
-      .tanggal, .tanggal::before {
+      .tanggal, .tanggal::before,
+      .update-notification {
         animation: none;
       }
       
@@ -1445,6 +1527,25 @@
   </style>
 </head>
 <body>
+  <!-- Offline/Online Banners -->
+  <div class="offline-banner" id="offlineBanner">
+    ⚠️ Anda sedang offline. Menampilkan data cache terakhir.
+  </div>
+  <div class="online-banner" id="onlineBanner">
+    ✅ Koneksi internet tersedia. Memperbarui data...
+  </div>
+
+  <!-- Update Notification -->
+  <div class="update-notification" id="updateNotification" style="display: none;">
+    <span>✅</span>
+    <span>Data jadwal diperbarui</span>
+  </div>
+
+  <!-- Sync Status -->
+  <div class="sync-status up-to-date" id="syncStatus">
+    Data terkini
+  </div>
+
   <a href="#main-content" class="skip-link">Langsung ke konten utama</a>
   <div class="particles" id="particles"></div>
 
@@ -1470,7 +1571,9 @@
   </header>
 
   <div class="loading" id="loadingIndicator">
-    <span class="spinner"></span><span class="pulse-dots"><span></span><span></span><span></span></span>
+    <span class="spinner"></span>
+    <span id="loadingMessage">Memuat jadwal terbaru...</span>
+    <span class="pulse-dots"><span></span><span></span><span></span></span>
   </div>
 
   <div class="content-wrapper" id="main-content">
@@ -1549,310 +1652,452 @@
   </div>
 
   <script>
-    // URL untuk sheet utama dan sheet Footer
+    // ==================== CONFIGURATION ====================
     const MAIN_SHEET_URL = "https://script.google.com/macros/s/AKfycbyVnM9JhKx8xj2EZhETj1BdSCnmJxtNBV4eFmohKE0denRS4VEA3JqPI-RVsQFg7ZuEtw/exec";
     const FOOTER_SHEET_URL = "https://script.google.com/macros/s/AKfycbxYREx42acZcDyDe8DF75UJlB0hroAoQ4QH_gpd71RgGtbI889yAAtzegrjgwvfLkFY4Q/exec";
     
-    // ⚙️ SETTING AUTO REFRESH
-    const REFRESH_INTERVAL = 10000; // 10 detik
-    const CACHE_DURATION = 10000; // 10 detik cache
+    const REFRESH_INTERVAL = 30000; // 30 detik (dinaikkan karena smart polling)
+    const CACHE_DURATION = 300000; // 5 menit cache
     const FETCH_TIMEOUT = 10000; // 10 detik timeout
 
+    // ==================== SMART SYNC SYSTEM ====================
+    class SmartDataSync {
+      constructor() {
+        this.lastDataHash = null;
+        this.lastETag = null;
+        this.lastModified = null;
+        this.isChecking = false;
+        this.consecutiveFailures = 0;
+        this.totalChecks = 0;
+        this.changesDetected = 0;
+      }
+
+      // 🎯 GENERATE HASH DARI DATA
+      generateDataHash(data) {
+        if (!data || !Array.isArray(data)) return 'invalid';
+        
+        // Buat string sederhana dari data yang penting
+        const dataString = data.map(doctor => 
+          `${doctor.Dokter}|${doctor.Spesialis}|${doctor.Status}|${doctor.Jam}|${doctor.Jenis}`
+        ).join('||');
+        
+        // Simple hash function
+        let hash = 0;
+        for (let i = 0; i < dataString.length; i++) {
+          const char = dataString.charCodeAt(i);
+          hash = ((hash << 5) - hash) + char;
+          hash = hash & hash; // Convert to 32bit integer
+        }
+        return hash.toString();
+      }
+
+      // 🔍 CHECK FOR UPDATES (SMART POLLING)
+      async checkForUpdates() {
+        if (this.isChecking) {
+          console.log('⏳ Update check already in progress, skipping...');
+          return false;
+        }
+
+        this.isChecking = true;
+        this.totalChecks++;
+
+        try {
+          // Coba gunakan ETag/Last-Modified jika available
+          const headers = {};
+          if (this.lastETag) headers['If-None-Match'] = this.lastETag;
+          if (this.lastModified) headers['If-Modified-Since'] = this.lastModified;
+
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+          const response = await fetch(MAIN_SHEET_URL, {
+            method: 'GET',
+            headers: headers,
+            signal: controller.signal
+          });
+
+          clearTimeout(timeoutId);
+
+          // Update ETag/Last-Modified
+          this.lastETag = response.headers.get('ETag') || this.lastETag;
+          this.lastModified = response.headers.get('Last-Modified') || this.lastModified;
+
+          if (response.status === 304) {
+            // Data tidak berubah (Not Modified)
+            console.log('✅ Data unchanged (304)');
+            this.consecutiveFailures = 0;
+            return false;
+          }
+
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+
+          const data = await response.json();
+          
+          // Validasi data
+          if (!this.validateData(data)) {
+            throw new Error('Invalid data received');
+          }
+
+          // Generate hash dari data baru
+          const newHash = this.generateDataHash(data);
+          const oldHash = this.lastDataHash;
+
+          if (newHash === oldHash && oldHash !== null) {
+            // Hash sama = data tidak berubah
+            console.log('✅ Data unchanged (hash match)');
+            this.consecutiveFailures = 0;
+            return false;
+          }
+
+          // Data berubah!
+          console.log('🔄 Data changed detected!', {
+            oldHash: oldHash?.substring(0, 8),
+            newHash: newHash.substring(0, 8)
+          });
+
+          this.lastDataHash = newHash;
+          this.changesDetected++;
+          this.consecutiveFailures = 0;
+
+          return {
+            data: data,
+            hash: newHash,
+            type: oldHash ? 'update' : 'initial'
+          };
+
+        } catch (error) {
+          this.consecutiveFailures++;
+          console.warn('❌ Update check failed:', error.message);
+          
+          // Jika terlalu banyak gagal, reset state
+          if (this.consecutiveFailures > 5) {
+            console.log('🔄 Resetting sync state after consecutive failures');
+            this.lastETag = null;
+            this.lastModified = null;
+          }
+          
+          return false;
+        } finally {
+          this.isChecking = false;
+        }
+      }
+
+      // ✅ VALIDATE DATA STRUCTURE
+      validateData(data) {
+        if (!Array.isArray(data)) return false;
+        
+        return data.every(item => 
+          item && 
+          typeof item === 'object' &&
+          'Spesialis' in item &&
+          'Dokter' in item &&
+          'Status' in item &&
+          'Jenis' in item
+        );
+      }
+
+      // 📊 GET SYNC STATISTICS
+      getStats() {
+        return {
+          totalChecks: this.totalChecks,
+          changesDetected: this.changesDetected,
+          consecutiveFailures: this.consecutiveFailures,
+          successRate: this.totalChecks > 0 
+            ? ((this.totalChecks - this.consecutiveFailures) / this.totalChecks * 100).toFixed(1)
+            : 0
+        };
+      }
+
+      // 🔄 RESET SYNC STATE
+      reset() {
+        this.lastDataHash = null;
+        this.lastETag = null;
+        this.lastModified = null;
+        this.consecutiveFailures = 0;
+        console.log('🔄 Sync state reset');
+      }
+    }
+
+    // ==================== CORE MANAGERS ====================
+    class ResourceManager {
+      constructor() {
+        this.intervals = [];
+        this.eventListeners = [];
+        this.observers = [];
+      }
+
+      setInterval(callback, delay) {
+        const id = setInterval(callback, delay);
+        this.intervals.push(id);
+        return id;
+      }
+
+      addEventListener(target, event, handler, options) {
+        target.addEventListener(event, handler, options);
+        this.eventListeners.push({ target, event, handler });
+      }
+
+      addObserver(observer, target) {
+        observer.observe(target);
+        this.observers.push(observer);
+      }
+
+      cleanup() {
+        this.intervals.forEach(id => clearInterval(id));
+        this.eventListeners.forEach(({ target, event, handler }) => {
+          target.removeEventListener(event, handler);
+        });
+        this.observers.forEach(observer => observer.disconnect());
+        
+        this.intervals = [];
+        this.eventListeners = [];
+        this.observers = [];
+        
+        console.log('🧹 All resources cleaned up');
+      }
+    }
+
+    class DataFetcher {
+      constructor() {
+        this.retryCount = 0;
+        this.maxRetries = 3;
+      }
+
+      async fetchWithRetry(url, options = {}) {
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
+          
+          const response = await fetch(url, {
+            ...options,
+            signal: controller.signal
+          });
+          
+          clearTimeout(timeoutId);
+          
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+          }
+          
+          const data = await response.json();
+          this.retryCount = 0;
+          return data;
+          
+        } catch (error) {
+          this.retryCount++;
+          
+          if (this.retryCount <= this.maxRetries) {
+            const delay = Math.pow(2, this.retryCount) * 1000;
+            console.log(`Retry ${this.retryCount} in ${delay}ms`);
+            
+            await new Promise(resolve => setTimeout(resolve, delay));
+            return this.fetchWithRetry(url, options);
+          } else {
+            throw new Error(`Gagal memuat data setelah ${this.maxRetries} percobaan: ${error.message}`);
+          }
+        }
+      }
+    }
+
+    // ==================== GLOBAL STATE ====================
     let allData = [];
     let cutiData = [];
     let dataInterval;
     let currentFilter = 'all';
+    let loadingMessageInterval;
 
+    const resources = new ResourceManager();
+    const dataFetcher = new DataFetcher();
+    const smartSync = new SmartDataSync();
+    
     const loadingIndicator = document.getElementById('loadingIndicator');
-    const filterButtons = document.querySelectorAll('.filter-btn');
+    const loadingMessage = document.getElementById('loadingMessage');
     const liveRegion = document.getElementById('liveRegion');
+    const offlineBanner = document.getElementById('offlineBanner');
+    const onlineBanner = document.getElementById('onlineBanner');
+    const updateNotification = document.getElementById('updateNotification');
+    const syncStatus = document.getElementById('syncStatus');
 
+    // ==================== INITIALIZATION ====================
     document.addEventListener('DOMContentLoaded', () => {
-      // Initialize particles only if user doesn't prefer reduced motion
-      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        initializeParticles();
-      }
+      initializeApp();
+    });
+
+    function initializeApp() {
+      initializeParticles();
+      initializeOfflineDetection();
+      initializeKeyboardNavigation();
       
       updateDateTime();
       showSkeletonLoading();
-      loadData();
+      loadInitialData();
       
-      setInterval(updateDateTime, 1000);
-      startDataInterval();
+      resources.setInterval(updateDateTime, 1000);
+      startSmartPolling();
       
-      setupEventListeners();
-      document.addEventListener('visibilitychange', handleVisibilityChange);
-      
-      // Check online status
-      window.addEventListener('online', handleOnlineStatus);
-      window.addEventListener('offline', handleOnlineStatus);
-    });
-
-    function setupEventListeners() {
-      filterButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          const filter = btn.dataset.filter;
-          setActiveFilter(filter);
-          applyFilter(filter);
-        });
-        
-        // Keyboard navigation
-        btn.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            btn.click();
-          }
-        });
-      });
-
-      // Close modal when clicking outside
-      document.getElementById('cutiDetailModal').addEventListener('click', function(e) {
-        if (e.target === this) {
-          closeCutiModal();
-        }
-      });
-
-      // Close modal with Escape key
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-          closeCutiModal();
-        }
+      resources.addEventListener(document, 'visibilitychange', handleVisibilityChange);
+      resources.addEventListener(window, 'online', handleOnlineStatus);
+      resources.addEventListener(window, 'offline', handleOnlineStatus);
+      resources.addEventListener(window, 'beforeunload', () => {
+        resources.cleanup();
+        if (loadingMessageInterval) clearInterval(loadingMessageInterval);
       });
     }
 
-    function setActiveFilter(filter) {
-      filterButtons.forEach(btn => {
-        const isActive = btn.dataset.filter === filter;
-        btn.classList.toggle('active', isActive);
-        btn.setAttribute('aria-pressed', isActive);
-      });
-      currentFilter = filter;
+    // ==================== SMART POLLING SYSTEM ====================
+    function startSmartPolling() {
+      // Ganti interval lama dengan smart polling
+      dataInterval = resources.setInterval(async () => {
+        await checkForDataUpdates();
+      }, REFRESH_INTERVAL);
+
+      console.log('🔄 Smart polling started (30s interval)');
     }
 
-    function applyFilter(filter) {
-      const rows = document.querySelectorAll('tbody tr:not(.skeleton-row)');
-      let visibleCount = 0;
+    async function checkForDataUpdates() {
+      updateSyncStatus('syncing');
       
-      rows.forEach(row => {
-        const statusElement = row.querySelector('.status');
-        let status = '';
+      const updateResult = await smartSync.checkForUpdates();
+      
+      if (updateResult) {
+        // Data berubah - update UI
+        console.log('🎉 Data updated, refreshing display...');
+        await processDataUpdate(updateResult.data);
+        showUpdateNotification();
+        updateSyncStatus('up-to-date');
         
-        if (statusElement) {
-          // Check which status class is applied
-          if (statusElement.classList.contains('BUKA')) status = 'BUKA';
-          else if (statusElement.classList.contains('PENUH')) status = 'PENUH';
-          else if (statusElement.classList.contains('SELESAI')) status = 'SELESAI';
-          else if (statusElement.classList.contains('CUTI')) status = 'CUTI';
-          else if (statusElement.classList.contains('TIDAK')) status = 'TIDAK';
-          else if (statusElement.classList.contains('TIDAK-ADA-POLI')) status = 'TIDAK-ADA-POLI';
-        }
+        // Update cache
+        cacheData({ mainData: updateResult.data, cutiData });
         
-        if (filter === 'all' || filter === status) {
-          row.style.display = '';
-          visibleCount++;
+      } else {
+        // Data tidak berubah
+        updateSyncStatus('up-to-date');
+        console.log('✅ No data changes detected');
+      }
+
+      // Log statistics occasionally
+      if (smartSync.totalChecks % 10 === 0) {
+        const stats = smartSync.getStats();
+        console.log('📊 Sync Stats:', stats);
+      }
+    }
+
+    async function processDataUpdate(newData) {
+      // Validasi data sebelum update
+      if (!validateMainData(newData)) {
+        throw new Error('Data tidak valid dari server');
+      }
+
+      allData = newData;
+      showData(newData);
+      
+      // Announce update to screen readers
+      announceToScreenReader('Data jadwal dokter telah diperbarui');
+    }
+
+    function updateSyncStatus(status) {
+      syncStatus.className = `sync-status ${status}`;
+      
+      const statusText = {
+        'syncing': 'Memeriksa update...',
+        'up-to-date': 'Data terkini'
+      }[status] || 'Data terkini';
+      
+      syncStatus.textContent = statusText;
+    }
+
+    function showUpdateNotification() {
+      updateNotification.style.display = 'flex';
+      
+      // Auto hide setelah 3 detik
+      setTimeout(() => {
+        updateNotification.style.display = 'none';
+      }, 3000);
+    }
+
+    // ==================== OFFLINE DETECTION ====================
+    function initializeOfflineDetection() {
+      function updateOnlineStatus() {
+        if (navigator.onLine) {
+          offlineBanner.style.display = 'none';
+          onlineBanner.style.display = 'block';
+          setTimeout(() => {
+            onlineBanner.style.display = 'none';
+          }, 3000);
         } else {
-          row.style.display = 'none';
+          offlineBanner.style.display = 'block';
+          onlineBanner.style.display = 'none';
         }
-      });
-      
-      // Announce filter change to screen readers
-      if (visibleCount > 0) {
-        liveRegion.textContent = `Menampilkan ${visibleCount} dokter ${filter === 'all' ? '' : 'dengan status ' + filter}`;
-      }
-    }
-
-    function showSkeletonLoading() {
-      const skeletonRowBedah = `
-        <tr class="skeleton-row">
-          <td><div class="skeleton"></div></td>
-          <td><div class="skeleton"></div></td>
-          <td><div class="skeleton skeleton-status"></div></td>
-          <td><div class="skeleton"></div></td>
-        </tr>
-      `;
-      
-      const skeletonRowNonBedah = `
-        <tr class="skeleton-row">
-          <td><div class="skeleton"></div></td>
-          <td><div class="skeleton"></div></td>
-          <td><div class="skeleton skeleton-status"></div></td>
-          <td><div class="skeleton"></div></td>
-        </tr>
-      `;
-      
-      document.getElementById('bedahBody').innerHTML = skeletonRowBedah.repeat(3);
-      document.getElementById('nonBedahBody').innerHTML = skeletonRowNonBedah.repeat(5);
-      
-      document.querySelectorAll('.section').forEach(sec => {
-        sec.classList.add('show');
-      });
-    }
-
-    // Enhanced function to display cuti doctors from Footer sheet - LAYOUT BARU
-    function displayCutiDoctors(data) {
-      const cutiContainer = document.getElementById('cutiScrollContent');
-      
-      if (!data || data.length === 0) {
-        cutiContainer.innerHTML = '<div class="cuti-empty">Tidak ada dokter yang sedang cuti</div>';
-        return;
       }
 
-      let cutiHTML = '';
-      
-      data.forEach(doctor => {
-        const namaDokter = doctor.Dokter || doctor.Nama || doctor['Nama Dokter'] || 'Dokter';
-        const spesialis = doctor.Spesialis || doctor.Poli || doctor['Spesialisasi'] || 'Spesialis';
-        const tanggalCuti = doctor.Tanggal || doctor.Period || doctor.Jam || doctor['Periode Cuti'] || 'Cuti';
-        const initials = getInitials(namaDokter);
-        const statusInfo = parseCutiStatus(tanggalCuti);
-        
-        cutiHTML += `
-          <div class="cuti-item" onclick="showCutiDetail(
-            '${escapeHtml(namaDokter)}', 
-            '${escapeHtml(spesialis)}', 
-            '${escapeHtml(tanggalCuti)}',
-            '${statusInfo.badgeClass}'
-          )">
-            <div class="cuti-avatar" title="${escapeHtml(namaDokter)}">${initials}</div>
-            <div class="cuti-info">
-              <div class="cuti-name-row">
-                <span class="cuti-dokter-name">${escapeHtml(namaDokter)}</span>
-                <span class="cuti-separator">-</span>
-                <span class="cuti-spesialis">${escapeHtml(spesialis)}</span>
-              </div>
-              <div class="cuti-date-row">
-                <span class="cuti-date-icon">📅</span>
-                <span>${escapeHtml(tanggalCuti)}</span>
-              </div>
-            </div>
-            <div class="cuti-badge ${statusInfo.badgeClass}">${statusInfo.statusText}</div>
-          </div>
-        `;
-      });
-
-      // Duplicate content for seamless scrolling
-      cutiContainer.innerHTML = cutiHTML;
+      updateOnlineStatus();
     }
 
-    // Function to parse cuti status and dates
-    function parseCutiStatus(dateText) {
-      const today = new Date();
-      const currentYear = today.getFullYear();
-      
-      // Simple date parsing for common formats
-      const patterns = [
-        /(\d{1,2})\s*[-–]\s*(\d{1,2})\s*([A-Za-z]+)/i, // 18-21 November
-        /(\d{1,2})\s*[-–]\s*(\d{1,2})\s*([A-Za-z]+)\s*(\d{4})?/i, // 18-21 November 2024
-        /([A-Za-z]+)\s*(\d{1,2})\s*[-–]\s*(\d{1,2})/i, // November 18-21
-        /(\d{1,2})\/(\d{1,2})\s*[-–]\s*(\d{1,2})\/(\d{1,2})/i, // 18/11-21/11
-      ];
+    // ==================== KEYBOARD NAVIGATION ====================
+    function initializeKeyboardNavigation() {
+      const skipLink = document.querySelector('.skip-link');
+      resources.addEventListener(skipLink, 'click', (e) => {
+        e.preventDefault();
+        const mainContent = document.getElementById('main-content');
+        mainContent.setAttribute('tabindex', '-1');
+        mainContent.focus();
+        announceToScreenReader('Loncat ke konten utama');
+      });
 
-      for (let pattern of patterns) {
-        const match = dateText.match(pattern);
-        if (match) {
-          let startDate, endDate;
+      setTimeout(() => {
+        const tableRows = document.querySelectorAll('tbody tr');
+        tableRows.forEach((row, index) => {
+          row.setAttribute('tabindex', '0');
+          row.setAttribute('role', 'button');
+          row.setAttribute('aria-label', `Jadwal dokter ${index + 1}`);
           
-          if (pattern === patterns[0] || pattern === patterns[1]) {
-            // Format: 18-21 November
-            const startDay = parseInt(match[1]);
-            const endDay = parseInt(match[2]);
-            const monthName = match[3];
-            const year = match[4] ? parseInt(match[4]) : currentYear;
+          resources.addEventListener(row, 'keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              row.click();
+            }
             
-            const month = getMonthNumber(monthName);
-            if (month !== -1) {
-              startDate = new Date(year, month, startDay);
-              endDate = new Date(year, month, endDay);
+            if (e.key === 'ArrowDown') {
+              e.preventDefault();
+              const nextRow = tableRows[index + 1];
+              if (nextRow) nextRow.focus();
             }
-          } else if (pattern === patterns[2]) {
-            // Format: November 18-21
-            const monthName = match[1];
-            const startDay = parseInt(match[2]);
-            const endDay = parseInt(match[3]);
-            const month = getMonthNumber(monthName);
             
-            if (month !== -1) {
-              startDate = new Date(currentYear, month, startDay);
-              endDate = new Date(currentYear, month, endDay);
+            if (e.key === 'ArrowUp') {
+              e.preventDefault();
+              const prevRow = tableRows[index - 1];
+              if (prevRow) prevRow.focus();
             }
-          }
-
-          if (startDate && endDate) {
-            if (today < startDate) {
-              return { badgeClass: 'cuti-date-upcoming', statusText: 'AKAN CUTI' };
-            } else if (today > endDate) {
-              return { badgeClass: 'cuti-date-finished', statusText: 'SELESAI' };
-            } else {
-              return { badgeClass: 'cuti-date-ongoing', statusText: 'SEDANG CUTI' };
-            }
-          }
-        }
-      }
-
-      // Default fallback
-      return { badgeClass: 'cuti-badge', statusText: 'CUTI' };
+          });
+        });
+      }, 1000);
     }
 
-    // Helper function to get month number from name
-    function getMonthNumber(monthName) {
-      const months = {
-        'januari': 0, 'februari': 1, 'maret': 2, 'april': 3, 'mei': 4, 'juni': 5,
-        'juli': 6, 'agustus': 7, 'september': 8, 'oktober': 9, 'november': 10, 'desember': 11,
-        'january': 0, 'february': 1, 'march': 2, 'april': 3, 'may': 4, 'june': 5,
-        'july': 6, 'august': 7, 'september': 8, 'october': 9, 'november': 10, 'december': 11
-      };
-      return months[monthName.toLowerCase()] !== undefined ? months[monthName.toLowerCase()] : -1;
-    }
-
-    // Helper function to get initials
-    function getInitials(name) {
-      return name
-        .split(' ')
-        .map(word => word.charAt(0))
-        .join('')
-        .toUpperCase()
-        .substring(0, 2);
-    }
-
-    // Helper function to escape HTML
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
-
-    async function loadData() {
-      // Check cache first
+    // ==================== DATA MANAGEMENT ====================
+    async function loadInitialData() {
       const cached = getCachedData();
       if (cached) {
         showData(cached.mainData);
         displayCutiDoctors(cached.cutiData);
+        
+        // Initialize sync dengan data cache
+        smartSync.lastDataHash = smartSync.generateDataHash(cached.mainData);
+        
         hideLoading();
         return;
       }
 
       try {
         showLoading();
+        showSmartLoading();
         
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
-        
-        // Load main data and footer data simultaneously
-        const [mainRes, footerRes] = await Promise.all([
-          fetch(MAIN_SHEET_URL, { signal: controller.signal }),
-          fetch(FOOTER_SHEET_URL, { signal: controller.signal })
+        const [mainData, footerData] = await Promise.all([
+          dataFetcher.fetchWithRetry(MAIN_SHEET_URL),
+          dataFetcher.fetchWithRetry(FOOTER_SHEET_URL)
         ]);
         
-        clearTimeout(timeoutId);
-        
-        if (!mainRes.ok || !footerRes.ok) {
-          throw new Error(`HTTP error! status: ${mainRes.status}/${footerRes.status}`);
-        }
-        
-        const mainData = await mainRes.json();
-        const footerData = await footerRes.json();
-        
-        // Validate data structure
         if (!validateMainData(mainData)) {
           throw new Error('Format data utama tidak valid');
         }
@@ -1860,38 +2105,27 @@
         allData = mainData;
         cutiData = footerData;
         
+        // Initialize sync dengan data baru
+        smartSync.lastDataHash = smartSync.generateDataHash(mainData);
+        
         cacheData({ mainData, cutiData });
         showData(mainData);
         displayCutiDoctors(footerData);
         hideLoading();
+        stopSmartLoading();
         
-        // Announce update to screen readers
-        liveRegion.textContent = 'Data jadwal dokter telah diperbarui';
+        announceToScreenReader('Data jadwal dokter telah dimuat');
         
       } catch (err) {
         console.error("Gagal memuat data:", err);
-        
-        if (err.name === 'AbortError') {
-          showErrorState('Timeout: Server tidak merespons. Memuat data cache jika tersedia.');
-        } else {
-          showErrorState('Gagal memuat data jadwal. Memuat data cache jika tersedia.');
-        }
-        
-        // Try to load cached data as fallback
-        const cached = getCachedData();
-        if (cached) {
-          showData(cached.mainData);
-          displayCutiDoctors(cached.cutiData);
-          liveRegion.textContent = 'Menampilkan data cache terakhir';
-        }
-        
+        stopSmartLoading();
+        showErrorState(getUserFriendlyError(err));
         hideLoading();
       }
     }
 
     function validateMainData(data) {
       if (!Array.isArray(data)) return false;
-      
       return data.every(item => 
         item && 
         typeof item === 'object' &&
@@ -1902,7 +2136,19 @@
       );
     }
 
-    // Caching functions
+    function getUserFriendlyError(error) {
+      if (error.name === 'AbortError') {
+        return 'Timeout: Server tidak merespons. Memuat data cache jika tersedia.';
+      } else if (error.message.includes('Failed to fetch')) {
+        return 'Koneksi internet terputus. Memuat data cache terakhir.';
+      } else if (error.message.includes('HTTP 5')) {
+        return 'Server sedang maintenance. Coba beberapa saat lagi.';
+      } else {
+        return 'Gagal memuat data jadwal. Memuat data cache jika tersedia.';
+      }
+    }
+
+    // ==================== CACHING SYSTEM ====================
     function cacheData(data) {
       try {
         const cache = {
@@ -1923,7 +2169,6 @@
         
         const { mainData, cutiData, timestamp } = JSON.parse(cached);
         
-        // Check if cache is still valid
         if (Date.now() - timestamp < CACHE_DURATION) {
           return { mainData, cutiData };
         }
@@ -1931,6 +2176,49 @@
         console.warn('Gagal memuat cache:', e);
       }
       return null;
+    }
+
+    // ==================== SMART LOADING ====================
+    function showSmartLoading() {
+      const messages = [
+        "Memuat jadwal terbaru...",
+        "Memperbarui data dokter...", 
+        "Menyinkronkan informasi..."
+      ];
+      
+      let messageIndex = 0;
+      loadingMessage.textContent = messages[messageIndex];
+      
+      loadingMessageInterval = setInterval(() => {
+        messageIndex = (messageIndex + 1) % messages.length;
+        loadingMessage.textContent = messages[messageIndex];
+      }, 3000);
+    }
+
+    function stopSmartLoading() {
+      if (loadingMessageInterval) {
+        clearInterval(loadingMessageInterval);
+        loadingMessageInterval = null;
+      }
+    }
+
+    // ==================== UI RENDERING ====================
+    function showSkeletonLoading() {
+      const skeletonRow = `
+        <tr class="skeleton-row">
+          <td><div class="skeleton"></div></td>
+          <td><div class="skeleton"></div></td>
+          <td><div class="skeleton skeleton-status"></div></td>
+          <td><div class="skeleton"></div></td>
+        </tr>
+      `;
+      
+      document.getElementById('bedahBody').innerHTML = skeletonRow.repeat(3);
+      document.getElementById('nonBedahBody').innerHTML = skeletonRow.repeat(5);
+      
+      document.querySelectorAll('.section').forEach(sec => {
+        sec.classList.add('show');
+      });
     }
 
     function showData(data) {
@@ -1946,8 +2234,7 @@
       }
 
       data.forEach(item => {
-        // Determine status class based on the Status value
-        let statusClass = 'TIDAK'; // default
+        let statusClass = 'TIDAK';
         if (item.Status) {
           const status = item.Status.toUpperCase();
           if (status.includes('BUKA')) statusClass = 'BUKA';
@@ -1958,30 +2245,23 @@
           else if (status.includes('TIDAK')) statusClass = 'TIDAK';
         }
         
+        const row = `
+          <tr tabindex="0" role="button" aria-label="Dr. ${escapeHtml(item.Dokter || '-')} - ${escapeHtml(item.Spesialis || '-')}">
+            <td>${escapeHtml(item.Spesialis || '-')}</td>
+            <td>${escapeHtml(item.Dokter || '-')}</td>
+            <td><span class="status ${statusClass}" tabindex="0" aria-label="Status: ${statusClass.replace('-', ' ')}">${escapeHtml(item.Status || 'TIDAK')}</span></td>
+            <td>${escapeHtml(item.Jam || '-')}</td>
+          </tr>
+        `;
+        
         if (item.Jenis === "Bedah") {
-          const row = `
-            <tr>
-              <td>${escapeHtml(item.Spesialis || '-')}</td>
-              <td>${escapeHtml(item.Dokter || '-')}</td>
-              <td><span class="status ${statusClass}" tabindex="0" aria-label="Status: ${statusClass.replace('-', ' ')}">${escapeHtml(item.Status || 'TIDAK')}</span></td>
-              <td>${escapeHtml(item.Jam || '-')}</td>
-            </tr>
-          `;
           bedahTable.innerHTML += row;
         } else {
-          const row = `
-            <tr>
-              <td>${escapeHtml(item.Spesialis || '-')}</td>
-              <td>${escapeHtml(item.Dokter || '-')}</td>
-              <td><span class="status ${statusClass}" tabindex="0" aria-label="Status: ${statusClass.replace('-', ' ')}">${escapeHtml(item.Status || 'TIDAK')}</span></td>
-              <td>${escapeHtml(item.Jam || '-')}</td>
-            </tr>
-          `;
           nonBedahTable.innerHTML += row;
         }
       });
 
-      applyFilter(currentFilter);
+      setTimeout(initializeKeyboardNavigation, 100);
       
       document.querySelectorAll('.section').forEach(sec => {
         sec.classList.remove('show');
@@ -1989,7 +2269,127 @@
       });
     }
 
-    // Modal functions
+    function displayCutiDoctors(data) {
+      const cutiContainer = document.getElementById('cutiScrollContent');
+      
+      if (!data || data.length === 0) {
+        cutiContainer.innerHTML = '<div class="cuti-empty">Tidak ada dokter yang sedang cuti</div>';
+        return;
+      }
+
+      let cutiHTML = '';
+      
+      data.forEach(doctor => {
+        const namaDokter = doctor.Dokter || doctor.Nama || doctor['Nama Dokter'] || 'Dokter';
+        const spesialis = doctor.Spesialis || doctor.Poli || doctor['Spesialisasi'] || 'Spesialis';
+        const tanggalCuti = doctor.Tanggal || doctor.Period || doctor.Jam || doctor['Periode Cuti'] || 'Cuti';
+        const initials = getInitials(namaDokter);
+        const statusInfo = parseCutiStatus(tanggalCuti);
+        
+        cutiHTML += `
+          <div class="cuti-item" tabindex="0" role="button" 
+               onclick="showCutiDetail(
+                 '${escapeHtml(namaDokter)}', 
+                 '${escapeHtml(spesialis)}', 
+                 '${escapeHtml(tanggalCuti)}',
+                 '${statusInfo.badgeClass}'
+               )"
+               onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); this.click(); }">
+            <div class="cuti-avatar" title="${escapeHtml(namaDokter)}">${initials}</div>
+            <div class="cuti-info">
+              <div class="cuti-name-row">
+                <span class="cuti-dokter-name">${escapeHtml(namaDokter)}</span>
+                <span class="cuti-separator">-</span>
+                <span class="cuti-spesialis">${escapeHtml(spesialis)}</span>
+              </div>
+              <div class="cuti-date-row">
+                <span class="cuti-date-icon">📅</span>
+                <span>${escapeHtml(tanggalCuti)}</span>
+              </div>
+            </div>
+            <div class="cuti-badge ${statusInfo.badgeClass}">${statusInfo.statusText}</div>
+          </div>
+        `;
+      });
+
+      cutiContainer.innerHTML = cutiHTML;
+    }
+
+    // ==================== UTILITY FUNCTIONS ====================
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function getInitials(name) {
+      return name
+        .split(' ')
+        .map(word => word.charAt(0))
+        .join('')
+        .toUpperCase()
+        .substring(0, 2);
+    }
+
+    function parseCutiStatus(dateText) {
+      const today = new Date();
+      const currentYear = today.getFullYear();
+      
+      const patterns = [
+        /(\d{1,2})\s*[-–]\s*(\d{1,2})\s*([A-Za-z]+)/i,
+        /(\d{1,2})\s*[-–]\s*(\d{1,2})\s*([A-Za-z]+)\s*(\d{4})?/i,
+        /([A-Za-z]+)\s*(\d{1,2})\s*[-–]\s*(\d{1,2})/i,
+        /(\d{1,2})\/(\d{1,2})\s*[-–]\s*(\d{1,2})\/(\d{1,2})/i,
+      ];
+
+      for (let pattern of patterns) {
+        const match = dateText.match(pattern);
+        if (match) {
+          let startDate, endDate;
+          
+          if (pattern === patterns[0] || pattern === patterns[1]) {
+            const startDay = parseInt(match[1]);
+            const endDay = parseInt(match[2]);
+            const monthName = match[3];
+            const year = match[4] ? parseInt(match[4]) : currentYear;
+            
+            const month = getMonthNumber(monthName);
+            if (month !== -1) {
+              startDate = new Date(year, month, startDay);
+              endDate = new Date(year, month, endDay);
+            }
+          }
+
+          if (startDate && endDate) {
+            if (today < startDate) {
+              return { badgeClass: 'cuti-date-upcoming', statusText: 'AKAN CUTI' };
+            } else if (today > endDate) {
+              return { badgeClass: 'cuti-date-finished', statusText: 'SELESAI' };
+            } else {
+              return { badgeClass: 'cuti-date-ongoing', statusText: 'SEDANG CUTI' };
+            }
+          }
+        }
+      }
+
+      return { badgeClass: 'cuti-badge', statusText: 'CUTI' };
+    }
+
+    function getMonthNumber(monthName) {
+      const months = {
+        'januari': 0, 'februari': 1, 'maret': 2, 'april': 3, 'mei': 4, 'juni': 5,
+        'juli': 6, 'agustus': 7, 'september': 8, 'oktober': 9, 'november': 10, 'desember': 11,
+        'january': 0, 'february': 1, 'march': 2, 'april': 3, 'may': 4, 'june': 5,
+        'july': 6, 'august': 7, 'september': 8, 'october': 9, 'november': 10, 'december': 11
+      };
+      return months[monthName.toLowerCase()] !== undefined ? months[monthName.toLowerCase()] : -1;
+    }
+
+    function announceToScreenReader(message) {
+      liveRegion.textContent = message;
+    }
+
+    // ==================== MODAL FUNCTIONS ====================
     function showCutiDetail(nama, spesialis, tanggal, badgeClass = 'cuti-badge') {
       const modal = document.getElementById('cutiDetailModal');
       const content = document.getElementById('cutiDetailContent');
@@ -2011,6 +2411,7 @@
       `;
       
       modal.classList.add('active');
+      modal.focus();
     }
 
     function getStatusTextFromBadge(badgeClass) {
@@ -2026,6 +2427,7 @@
       document.getElementById('cutiDetailModal').classList.remove('active');
     }
 
+    // ==================== UI STATE MANAGEMENT ====================
     function showLoading() {
       loadingIndicator.style.display = 'block';
     }
@@ -2039,7 +2441,7 @@
         <tr>
           <td colspan="4" class="error-message">
             ${message}<br>
-            <button onclick="loadData()">Coba Lagi</button>
+            <button onclick="loadInitialData()">Coba Lagi</button>
           </td>
         </tr>
       `;
@@ -2065,6 +2467,7 @@
       });
     }
 
+    // ==================== DATE & TIME ====================
     function updateDateTime() {
       const now = new Date();
       const tanggal = now.toLocaleDateString('id-ID', { 
@@ -2089,6 +2492,7 @@
       `;
     }
 
+    // ==================== PARTICLES ====================
     function initializeParticles() {
       const particlesContainer = document.getElementById("particles");
       const particleCount = Math.min(15, window.innerWidth / 40);
@@ -2106,33 +2510,48 @@
       }
     }
 
-    function startDataInterval() {
-      dataInterval = setInterval(loadData, REFRESH_INTERVAL);
-    }
-
+    // ==================== INTERVAL MANAGEMENT ====================
     function handleVisibilityChange() {
       if (document.hidden) {
         clearInterval(dataInterval);
       } else {
-        startDataInterval();
-        loadData(); // Refresh data when tab becomes visible
+        startSmartPolling();
+        // Check for updates immediately when tab becomes visible
+        setTimeout(() => checkForDataUpdates(), 1000);
       }
     }
 
     function handleOnlineStatus() {
       if (navigator.onLine) {
-        // If we come back online, try to refresh data
-        loadData();
-        liveRegion.textContent = 'Koneksi internet tersedia. Memperbarui data...';
+        // Check for updates when coming back online
+        setTimeout(() => checkForDataUpdates(), 2000);
+        announceToScreenReader('Koneksi internet tersedia. Memperbarui data...');
       } else {
-        liveRegion.textContent = 'Koneksi internet terputus. Menampilkan data cache.';
+        announceToScreenReader('Koneksi internet terputus. Menampilkan data cache.');
       }
     }
 
-    // Make functions available globally
-    window.loadData = loadData;
+    // ==================== GLOBAL EXPORTS ====================
+    window.loadInitialData = loadInitialData;
     window.showCutiDetail = showCutiDetail;
     window.closeCutiModal = closeCutiModal;
+
+    // Close modal with Escape key
+    resources.addEventListener(document, 'keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeCutiModal();
+      }
+    });
+
+    // Close modal when clicking outside
+    resources.addEventListener(document.getElementById('cutiDetailModal'), 'click', function(e) {
+      if (e.target === this) {
+        closeCutiModal();
+      }
+    });
+
+    // Debug function untuk melihat sync stats
+    window.getSyncStats = () => smartSync.getStats();
   </script>
 </body>
 </html>
