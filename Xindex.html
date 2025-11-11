@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INFO JADWAL PRAKTEK DOKTER SPESIALIS - RSU SIAGA MEDIKA PURBALINGGA</title>
+  <meta name="description" content="Jadwal praktek dokter spesialis RSU Siaga Medika Purbalingga - Informasi terbaru jam praktek dan status dokter">
+  
+  <!-- CSS Modules -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layouts.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/print.css">
+</head>
+<body>
+  <!-- Offline/Online Banners -->
+  <div class="offline-banner" id="offlineBanner">
+    ⚠️ Anda sedang offline. Menampilkan data cache terakhir.
+  </div>
+  <div class="online-banner" id="onlineBanner">
+    ✅ Koneksi internet tersedia. Memperbarui data...
+  </div>
+
+  <!-- Update Notification -->
+  <div class="update-notification" id="updateNotification" style="display: none;">
+    <span>✅</span>
+    <span>Data jadwal diperbarui</span>
+  </div>
+
+  <!-- Sync Status -->
+  <div class="sync-status up-to-date" id="syncStatus">
+    Data terkini
+  </div>
+
+  <a href="#main-content" class="skip-link">Langsung ke konten utama</a>
+  <div class="particles" id="particles"></div>
+
+  <!-- Live region for announcements -->
+  <div aria-live="polite" aria-atomic="true" class="sr-only" id="liveRegion">
+    Data jadwal dokter telah diperbarui
+  </div>
+
+  <!-- Logo Rumah Sakit -->
+  <div class="hospital-logo">
+    <div class="logo-container">
+      <div class="logo-icon">🏥</div>
+    </div>
+    <div class="logo-text">RSU SIAGA MEDIKA</div>
+  </div>
+
+  <header>
+    <h1>INFORMASI PRAKTEK DOKTER SPESIALIS</h1>
+    <h2 class="tanggal" id="tanggal"></h2>
+    <div class="datetime-corner">
+      <div class="jam" id="jam"></div>
+    </div>
+  </header>
+
+  <div class="loading" id="loadingIndicator">
+    <span class="spinner"></span>
+    <span id="loadingMessage">Memuat jadwal terbaru...</span>
+    <span class="pulse-dots"><span></span><span></span><span></span></span>
+  </div>
+
+  <div class="content-wrapper" id="main-content">
+    <div class="section" id="bedahSection">
+      <h2>BEDAH</h2>
+      <div class="table-container">
+        <table id="tableBedah">
+          <thead>
+            <tr>
+              <th>Spesialis</th>
+              <th>Dokter</th>
+              <th>Status</th>
+              <th>Jam</th>
+            </tr>
+          </thead>
+          <tbody id="bedahBody">
+            <!-- Data akan dimuat di sini -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section" id="nonBedahSection">
+      <h2>NON BEDAH</h2>
+      <div class="table-container">
+        <table id="tableNonBedah">
+          <thead>
+            <tr>
+              <th>Spesialis</th>
+              <th>Dokter</th>
+              <th>Status</th>
+              <th>Jam</th>
+            </tr>
+          </thead>
+          <tbody id="nonBedahBody">
+            <!-- Data akan dimuat di sini -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <!-- Cuti Doctors Section -->
+      <div class="cuti-footer-section">
+        <div class="cuti-footer-header">
+          <div class="cuti-footer-title">
+            <span class="cuti-footer-icon">🏖️</span>
+            <span>Informasi Cuti Dokter</span>
+          </div>
+        </div>
+        <div class="cuti-scroll-container">
+          <div class="cuti-scroll-content" id="cutiScrollContent">
+            <!-- Cuti doctors will be loaded here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cuti Detail Modal -->
+  <div class="cuti-modal" id="cutiDetailModal">
+    <div class="cuti-modal-content">
+      <div class="cuti-modal-header">
+        <div class="cuti-modal-title">
+          <span>🏖️</span>
+          <span>Detail Cuti Dokter</span>
+        </div>
+        <button class="cuti-modal-close" id="cutiModalClose">×</button>
+      </div>
+      <div id="cutiDetailContent">
+        <!-- Detail cuti akan dimuat di sini -->
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Modules -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
