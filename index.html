@@ -15,57 +15,32 @@
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="css/print.css">
   
-  <!-- Preload critical resources -->
-  <link rel="preload" href="css/variables.css" as="style">
-  <link rel="preload" href="css/base.css" as="style">
-  <link rel="preload" href="js/main.js" as="script">
-  
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏥</text></svg>">
-  
-  <!-- Theme Color -->
   <meta name="theme-color" content="#283593">
-  
-  <!-- Apple Touch Icon -->
-  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏥</text></svg>">
-  
-  <!-- PWA Manifest -->
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
   <!-- Offline/Online Banners -->
-  <div class="offline-banner" id="offlineBanner">
-    ⚠️ Anda sedang offline. Menampilkan data cache terakhir.
-  </div>
-  <div class="online-banner" id="onlineBanner">
-    ✅ Koneksi internet tersedia. Memperbarui data...
-  </div>
+  <div class="offline-banner" id="offlineBanner">⚠️ Anda sedang offline. Menampilkan data cache terakhir.</div>
+  <div class="online-banner" id="onlineBanner">✅ Koneksi internet tersedia. Memperbarui data...</div>
 
   <!-- Update Notification -->
   <div class="update-notification" id="updateNotification" style="display: none;">
-    <span>✅</span>
-    <span>Data jadwal diperbarui</span>
+    <span>✅</span><span>Data jadwal diperbarui</span>
   </div>
 
   <!-- Sync Status -->
-  <div class="sync-status up-to-date" id="syncStatus">
-    Data terkini
-  </div>
+  <div class="sync-status up-to-date" id="syncStatus">Data terkini</div>
 
   <!-- Accessibility -->
   <a href="#main-content" class="skip-link">Langsung ke konten utama</a>
   <div class="particles" id="particles"></div>
-
-  <!-- Live region for announcements -->
-  <div aria-live="polite" aria-atomic="true" class="sr-only" id="liveRegion">
-    Data jadwal dokter telah diperbarui
-  </div>
+  <div aria-live="polite" aria-atomic="true" class="sr-only" id="liveRegion">Data jadwal dokter telah diperbarui</div>
 
   <!-- Logo Rumah Sakit -->
   <div class="hospital-logo">
-    <div class="logo-container">
-      <div class="logo-icon">🏥</div>
-    </div>
+    <div class="logo-container"><div class="logo-icon">🏥</div></div>
     <div class="logo-text">RSU SIAGA MEDIKA</div>
   </div>
 
@@ -93,15 +68,10 @@
         <table id="tableBedah">
           <thead>
             <tr>
-              <th>Spesialis</th>
-              <th>Dokter</th>
-              <th>Status</th>
-              <th>Jam</th>
+              <th>Spesialis</th><th>Dokter</th><th>Status</th><th>Jam</th>
             </tr>
           </thead>
-          <tbody id="bedahBody">
-            <!-- Data akan dimuat di sini -->
-          </tbody>
+          <tbody id="bedahBody"><!-- Data akan dimuat di sini --></tbody>
         </table>
       </div>
     </div>
@@ -112,15 +82,10 @@
         <table id="tableNonBedah">
           <thead>
             <tr>
-              <th>Spesialis</th>
-              <th>Dokter</th>
-              <th>Status</th>
-              <th>Jam</th>
+              <th>Spesialis</th><th>Dokter</th><th>Status</th><th>Jam</th>
             </tr>
           </thead>
-          <tbody id="nonBedahBody">
-            <!-- Data akan dimuat di sini -->
-          </tbody>
+          <tbody id="nonBedahBody"><!-- Data akan dimuat di sini --></tbody>
         </table>
       </div>
     </div>
@@ -129,7 +94,6 @@
   <!-- Footer -->
   <footer>
     <div class="footer-container">
-      <!-- Cuti Doctors Section -->
       <div class="cuti-footer-section">
         <div class="cuti-footer-header">
           <div class="cuti-footer-title">
@@ -138,9 +102,7 @@
           </div>
         </div>
         <div class="cuti-scroll-container">
-          <div class="cuti-scroll-content" id="cutiScrollContent">
-            <!-- Cuti doctors will be loaded here -->
-          </div>
+          <div class="cuti-scroll-content" id="cutiScrollContent"><!-- Cuti doctors --></div>
         </div>
       </div>
     </div>
@@ -151,39 +113,15 @@
     <div class="cuti-modal-content">
       <div class="cuti-modal-header">
         <div class="cuti-modal-title">
-          <span>🏖️</span>
-          <span>Detail Cuti Dokter</span>
+          <span>🏖️</span><span>Detail Cuti Dokter</span>
         </div>
         <button class="cuti-modal-close" id="cutiModalClose">×</button>
       </div>
-      <div id="cutiDetailContent">
-        <!-- Detail cuti akan dimuat di sini -->
-      </div>
+      <div id="cutiDetailContent"><!-- Detail cuti --></div>
     </div>
   </div>
 
-  <!-- JavaScript Modules -->
+  <!-- JavaScript -->
   <script type="module" src="js/main.js"></script>
-
-  <!-- Fallback for non-module browsers -->
-  <script>
-    // Simple feature detection for modules
-    if (!('noModule' in HTMLScriptElement.prototype)) {
-      document.write('<script src="js/legacy.js"><\/script>');
-    }
-    
-    // Service Worker Registration for PWA
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js')
-          .then(function(registration) {
-            console.log('SW registered: ', registration);
-          })
-          .catch(function(registrationError) {
-            console.log('SW registration failed: ', registrationError);
-          });
-      });
-    }
-  </script>
 </body>
 </html>
