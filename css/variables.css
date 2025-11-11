@@ -1,0 +1,69 @@
+
+:root {
+  /* Color System */
+  --color-primary: #283593;
+  --color-primary-dark: #1a237e;
+  --color-secondary: #5c6bc0;
+  --color-accent: #ec407a;
+  --color-accent-light: #ff77a9;
+  --color-bg: #f5f5f5;
+  --color-bg-light: #ffffff;
+  --color-text: #1a237e;
+  --color-text-dark: #0d1440;
+  --color-text-light: #5c6bc0;
+  
+  /* Status Colors */
+  --color-status-buka: #4caf50;
+  --color-status-penuh: #ff9800;
+  --color-status-selesai: #2196f3;
+  --color-status-cuti: #9c27b0;
+  --color-status-tidak: #f44336;
+  --color-status-tidak-poli: #607d8b;
+  
+  --color-surface: #ffffff;
+  --color-border: #e0e0e0;
+  --color-shadow: rgba(26, 35, 126, 0.1);
+  
+  /* Spacing System */
+  --spacing-xs: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 20px;
+  --spacing-xl: 24px;
+
+  /* Typography */
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-weight-normal: 400;
+  --font-weight-medium: 600;
+  --font-weight-bold: 700;
+
+  /* Border Radius */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px var(--color-shadow);
+  --shadow-md: 0 4px 12px var(--color-shadow);
+  --shadow-lg: 0 8px 25px rgba(26, 35, 126, 0.15);
+  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.3);
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Z-index */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal: 1040;
+  --z-popover: 1050;
+  --z-tooltip: 1060;
+
+  /* Animations */
+  --animation-duration-fast: 0.3s;
+  --animation-duration-normal: 0.5s;
+  --animation-duration-slow: 1s;
+}
