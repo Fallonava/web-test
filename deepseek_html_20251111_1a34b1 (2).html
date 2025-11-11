@@ -1,0 +1,2704 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INFO JADWAL PRAKTEK DOKTER SPESIALIS - RSU SIAGA MEDIKA PURBALINGGA</title>
+  <meta name="description" content="Jadwal praktek dokter spesialis RSU Siaga Medika Purbalingga - Informasi terbaru jam praktek dan status dokter">
+  
+  <style>
+    :root {
+      --color-primary: #283593;
+      --color-primary-dark: #1a237e;
+      --color-secondary: #5c6bc0;
+      --color-accent: #ec407a;
+      --color-accent-light: #ff77a9;
+      --color-bg: #f5f5f5;
+      --color-bg-light: #ffffff;
+      --color-text: #1a237e;
+      --color-text-dark: #0d1440;
+      --color-text-light: #5c6bc0;
+      
+      /* Status Colors - Senada dengan tema */
+      --color-status-buka: #4caf50;
+      --color-status-penuh: #ff9800;
+      --color-status-selesai: #2196f3;
+      --color-status-cuti: #9c27b0;
+      --color-status-tidak: #f44336;
+      --color-status-tidak-poli: #607d8b;
+      
+      --color-surface: #ffffff;
+      --color-border: #e0e0e0;
+      --color-shadow: rgba(26, 35, 126, 0.1);
+      
+      /* Improved spacing system */
+      --spacing-xs: 8px;
+      --spacing-sm: 12px;
+      --spacing-md: 16px;
+      --spacing-lg: 20px;
+      --spacing-xl: 24px;
+    }
+
+    /* TV Mode Variables */
+    .tv-mode {
+      --tv-font-scale: 1.2;
+      --tv-spacing-scale: 1.1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text-dark);
+      opacity: 0;
+      animation: fadeInPage 1s ease forwards;
+      line-height: 1.4;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      transition: margin-top 0.3s ease;
+    }
+
+    @keyframes fadeInPage {
+      to { opacity: 1; }
+    }
+
+    /* Update Notification */
+    .update-notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #4CAF50;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 10000;
+      animation: slideInRight 0.3s ease, slideOutRight 0.3s ease 2.7s forwards;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideOutRight {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(100%); opacity: 0; }
+    }
+
+    /* Sync Status Indicator */
+    .sync-status {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 16px;
+      font-size: 0.8rem;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sync-status.syncing::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ff9800;
+      animation: pulse 1.5s infinite;
+    }
+
+    .sync-status.up-to-date::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4CAF50;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* ===== TV OPTIMIZATION ===== */
+    @media screen and (min-width: 1920px) {
+      :root {
+        font-size: 14px;
+      }
+      
+      /* Enhance TV visibility */
+      body.tv-mode {
+        font-size: calc(1rem * var(--tv-font-scale, 1.2));
+      }
+    }
+
+    @media screen and (min-width: 3840px) {
+      :root {
+        font-size: 16px;
+      }
+      
+      body.tv-mode {
+        font-size: calc(1rem * var(--tv-font-scale, 1.3));
+      }
+    }
+
+    /* TV Remote Focus Styles */
+    .tv-focus:focus {
+      outline: 3px solid #ff9800 !important;
+      outline-offset: 2px !important;
+      transform: scale(1.02) !important;
+      z-index: 100;
+      box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.3) !important;
+    }
+
+    /* ===== SKIP LINK & ACCESSIBILITY ===== */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 10px;
+      background: var(--color-primary);
+      color: white;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      text-decoration: none;
+      border-radius: 4px;
+      z-index: 100;
+      font-weight: 600;
+      transition: top 0.3s;
+    }
+
+    .skip-link:focus {
+      top: 10px;
+    }
+
+    /* Screen reader only */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Offline Banner */
+    .offline-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #f44336;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      z-index: 10000;
+      font-weight: bold;
+      display: none;
+    }
+
+    .online-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #4caf50;
+      color: white;
+      padding: 8px;
+      text-align: center;
+      z-index: 10000;
+      font-weight: bold;
+      display: none;
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); }
+      to { transform: translateY(0); }
+    }
+
+    /* ===== LOGO RUMAH SAKIT ===== */
+    .hospital-logo {
+      position: absolute;
+      top: var(--spacing-md);
+      left: var(--spacing-lg);
+      z-index: 10;
+      animation: fadeIn 1.5s ease;
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    .logo-container {
+      position: relative;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #ffffff, #e3f2fd);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 
+        0 8px 25px rgba(26, 35, 126, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      overflow: hidden;
+    }
+
+    .tv-mode .logo-container {
+      width: 70px;
+      height: 70px;
+    }
+
+    .logo-container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+      );
+      transform: rotate(45deg);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      80%, 100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+
+    .logo-container:hover {
+      transform: scale(1.05) rotate(2deg);
+      box-shadow: 
+        0 12px 35px rgba(26, 35, 126, 0.25),
+        0 0 0 3px rgba(255, 255, 255, 0.2);
+    }
+
+    .logo-icon {
+      font-size: 2rem;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+      z-index: 2;
+      position: relative;
+    }
+
+    .tv-mode .logo-icon {
+      font-size: 2.3rem;
+    }
+
+    .logo-text {
+      background: linear-gradient(135deg, #ffffff, #e8eaf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 800;
+      font-size: 0.9rem;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      letter-spacing: 0.5px;
+    }
+
+    .tv-mode .logo-text {
+      font-size: 1rem;
+    }
+
+    /* ===== ENHANCED TANGGAL STYLE ===== */
+    .tanggal {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      letter-spacing: 0.8px;
+      margin: 10px auto;
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: 
+        floatDate 6s ease-in-out infinite,
+        fadeInUp 1s ease-out,
+        gentleGlow 4s ease-in-out infinite;
+    }
+
+    .tv-mode .tanggal {
+      font-size: 1.7rem;
+      padding: 15px 30px;
+    }
+
+    /* Floating animation */
+    @keyframes floatDate {
+      0%, 100% { 
+        transform: translateY(0px) scale(1); 
+        box-shadow: 
+          0 10px 30px rgba(0, 0, 0, 0.3),
+          0 0 0 1px rgba(255, 255, 255, 0.1);
+      }
+      50% { 
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 
+          0 15px 40px rgba(0, 0, 0, 0.4),
+          0 0 0 1px rgba(255, 255, 255, 0.2),
+          0 0 20px rgba(255, 255, 255, 0.1);
+      }
+    }
+
+    /* Fade in up animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Gentle glow animation */
+    @keyframes gentleGlow {
+      0%, 100% {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+      50% {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+    }
+
+    /* Calendar icon animation */
+    .tanggal::before {
+      content: '📅 ';
+      margin-right: 10px;
+      display: inline-block;
+      animation: calendarBounce 3s ease-in-out infinite;
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+    }
+
+    @keyframes calendarBounce {
+      0%, 100% { 
+        transform: translateY(0) rotate(0) scale(1); 
+      }
+      25% { 
+        transform: translateY(-2px) rotate(5deg) scale(1.1); 
+      }
+      75% { 
+        transform: translateY(-1px) rotate(-3deg) scale(1.05); 
+      }
+    }
+
+    /* ===== PARTICLE BACKGROUND ===== */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .tv-mode .particles {
+      display: none; /* Non-aktifkan particles di TV untuk performance */
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(92, 107, 192, 0.3);
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      from { 
+        transform: translateY(100vh) scale(0.5); 
+        opacity: 0.3; 
+      }
+      to { 
+        transform: translateY(-10vh) scale(1); 
+        opacity: 0; 
+      }
+    }
+
+    /* ===== LOADING INDICATOR & SKELETON ===== */
+    .loading {
+      display: none;
+      text-align: center;
+      padding: var(--spacing-lg);
+      color: var(--color-text);
+      font-weight: 600;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      background: var(--color-surface);
+      border-radius: 10px;
+      box-shadow: 0 4px 12px var(--color-shadow);
+      border: 1px solid var(--color-border);
+    }
+
+    .loading.spinner {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(26, 35, 126, 0.2);
+      border-radius: 50%;
+      border-top-color: var(--color-text);
+      animation: spin 1s ease-in-out infinite;
+      margin-right: var(--spacing-sm);
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Pulse Dots Animation */
+    .pulse-dots {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: var(--spacing-xs);
+    }
+
+    .pulse-dots span {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--color-secondary);
+      margin: 0 2px;
+      animation: pulseDots 1.5s infinite ease-in-out;
+    }
+
+    .pulse-dots span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .pulse-dots span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes pulseDots {
+      0%, 60%, 100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+      }
+      30% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+    }
+
+    /* Skeleton Loading */
+    .skeleton {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: 4px;
+      min-height: 1em;
+    }
+
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .skeleton-row td {
+      padding: var(--spacing-sm) var(--spacing-xs);
+    }
+
+    .skeleton-status {
+      width: 85px;
+      height: 28px;
+      margin: 0 auto;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: relative;
+      text-align: center;
+      padding: var(--spacing-md) var(--spacing-lg);
+      color: white;
+      font-weight: 700;
+      text-transform: uppercase;
+      overflow: hidden;
+      z-index: 1;
+      flex-shrink: 0;
+      height: 140px;
+    }
+
+    .tv-mode header {
+      height: 160px;
+      padding: var(--spacing-lg) var(--spacing-xl);
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+      background-size: 400% 400%;
+      animation: gradientFlow 12s ease infinite;
+      z-index: -2;
+    }
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 3.0rem;
+      line-height: 0.8;
+      letter-spacing: 0.5px;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      color: white;
+      padding-top: 15px;
+    }
+
+    .tv-mode header h1 {
+      font-size: 3.5rem;
+      padding-top: 20px;
+    }
+
+    header h2 {
+      margin: 0;
+      font-size: 2.0rem;
+      line-height: 0.8;
+      letter-spacing: 0.5px;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      color: white;
+      padding-top: 15px;
+    }
+
+    .tv-mode header h2 {
+      font-size: 2.5rem;
+    }
+
+    /* ===== CORNER DATETIME ===== */
+    .datetime-corner {
+      position: absolute;
+      top: var(--spacing-md);
+      right: var(--spacing-lg);
+      text-align: right;
+      z-index: 10;
+      animation: fadeIn 1.5s ease;
+    }
+
+    .tv-mode .datetime-corner {
+      top: var(--spacing-lg);
+      right: var(--spacing-xl);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .datetime-corner .tanggal {
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+
+    .tv-mode .datetime-corner .tanggal {
+      font-size: 1.2rem;
+    }
+
+    .datetime-corner .jam {
+      position: relative;
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 6px;
+      padding: 20px 28px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--color-primary-dark), var(--color-secondary), var(--color-accent));
+      background-size: 400% 400%;
+      animation: gradientFlow 10s ease infinite, glowFloat 5s ease-in-out infinite;
+      box-shadow: 0 0 25px rgba(92, 107, 192, 0.3);
+      color: white;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+    
+    .tv-mode .datetime-corner .jam {
+      padding: 25px 35px;
+    }
+    
+    .jam-utama {
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .tv-mode .jam-utama {
+      font-size: 3.8rem;
+    }
+    
+    .jam-detik {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 8px;
+      color: #e8eaf6;
+      transform-origin: bottom left;
+      animation: floatSec 6s ease-in-out infinite;
+    }
+
+    .tv-mode .jam-detik {
+      font-size: 1.4rem;
+    }
+    
+    @keyframes glowFloat {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(92, 107, 192, 0.3); }
+      50% { transform: scale(1.02); box-shadow: 0 0 40px rgba(92, 107, 192, 0.7); }
+    }
+    
+    @keyframes floatSec {
+      0%, 100% { transform: translateY(0); opacity: 0.8; }
+      50% { transform: translateY(-2px); opacity: 1; }
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .content-wrapper {
+      flex: 1;
+      display: flex;
+      padding: 0 var(--spacing-md) var(--spacing-md);
+      gap: var(--spacing-md);
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .tv-mode .content-wrapper {
+      padding: 0 var(--spacing-lg) var(--spacing-lg);
+      gap: var(--spacing-lg);
+    }
+
+    .section {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px var(--color-shadow);
+      padding: var(--spacing-sm) 0;
+      flex: 1;
+      min-width: 0;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.8s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .tv-mode .section {
+      padding: var(--spacing-md) 0;
+    }
+
+    .section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section h2 {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      color: white;
+      padding: var(--spacing-sm) 0;
+      margin: 0 var(--spacing-sm) var(--spacing-sm);
+      border-radius: 8px;
+      font-size: 1.4rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      flex-shrink: 0;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .tv-mode .section h2 {
+      font-size: 1.7rem;
+      padding: var(--spacing-md) 0;
+      margin: 0 var(--spacing-md) var(--spacing-md);
+    }
+
+    .table-container {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      flex: 1;
+    }
+
+    .tv-mode table {
+      font-size: 1rem;
+    }
+
+    thead {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    th {
+      padding: var(--spacing-sm) var(--spacing-xs);
+      color: var(--color-text-dark);
+      font-weight: 700;
+      border-bottom: 2px solid var(--color-secondary);
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .tv-mode th {
+      font-size: 1.8rem;
+      padding: var(--spacing-md) var(--spacing-sm);
+    }
+
+    /* REFACTORED: Single class for table alignment */
+    .table-aligned-left th:nth-child(1),
+    .table-aligned-left th:nth-child(2),
+    .table-aligned-left td:nth-child(1),
+    .table-aligned-left td:nth-child(2) {
+      text-align: left;
+      padding-left: var(--spacing-md);
+    }
+
+    .tv-mode .table-aligned-left th:nth-child(1),
+    .tv-mode .table-aligned-left th:nth-child(2),
+    .tv-mode .table-aligned-left td:nth-child(1),
+    .tv-mode .table-aligned-left td:nth-child(2) {
+      padding-left: var(--spacing-lg);
+    }
+
+    .table-aligned-left th:nth-child(3),
+    .table-aligned-left th:nth-child(4),
+    .table-aligned-left td:nth-child(3),
+    .table-aligned-left td:nth-child(4) {
+      text-align: center;
+    }
+
+    tbody {
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    td {
+      padding: var(--spacing-xs) var(--spacing-xs);
+      border-bottom: 1px solid var(--color-border);
+      color: var(--color-text-dark);
+      transition: all 0.3s ease;
+      font-size: 1.7rem;
+      font-weight: 600;
+    }
+
+    .tv-mode td {
+      font-size: 2.0rem;
+      padding: var(--spacing-sm) var(--spacing-sm);
+    }
+
+    tr:hover td {
+      background: #f8fdff;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px var(--color-shadow);
+    }
+
+    /* Focus styles for keyboard navigation */
+    tr:focus {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    tr:focus td {
+      background: #e3f2fd;
+    }
+
+    /* STATUS STYLES - SENADA DENGAN TEMA */
+    .status {
+      display: inline-block;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: 16px;
+      color: white;
+      font-weight: 700;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      min-width: 85px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    .tv-mode .status {
+      font-size: 1.4rem;
+      min-width: 100px;
+      padding: var(--spacing-sm) var(--spacing-md);
+    }
+
+    .status:focus {
+      outline: 2px solid var(--color-text);
+      outline-offset: 2px;
+    }
+
+    .status.BUKA { 
+      background: linear-gradient(135deg, var(--color-status-buka), #43a047);
+      border: 1px solid #388e3c;
+      box-shadow: 
+        0 4px 12px rgba(76, 175, 80, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .status.PENUH { 
+      background: linear-gradient(135deg, var(--color-status-penuh), #fb8c00);
+      border: 1px solid #f57c00;
+      box-shadow: 
+        0 4px 12px rgba(255, 152, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .status.SELESAI { 
+      background: linear-gradient(135deg, var(--color-status-selesai), #1976d2);
+      border: 1px solid #1565c0;
+      box-shadow: 
+        0 4px 12px rgba(33, 150, 243, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .status.CUTI { 
+      background: linear-gradient(135deg, var(--color-status-cuti), #7b1fa2);
+      border: 1px solid #6a1b9a;
+      box-shadow: 
+        0 4px 12px rgba(156, 39, 176, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .status.TIDAK { 
+      background: linear-gradient(135deg, var(--color-status-tidak), #e53935);
+      border: 1px solid #d32f2f;
+      box-shadow: 
+        0 4px 12px rgba(244, 67, 54, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .status.TIDAK-ADA-POLI { 
+      background: linear-gradient(135deg, var(--color-status-tidak-poli), #455a64);
+      border: 1px solid #37474f;
+      box-shadow: 
+        0 4px 12px rgba(96, 125, 139, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    tr:hover .status {
+      transform: scale(1.08);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    /* ===== ENHANCED FOOTER WITH CUTI SECTION ===== */
+    footer {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+      color: white;
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Cuti Section Styles - COMPACT LAYOUT BARU */
+    .cuti-footer-section {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 6px var(--spacing-md);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      min-height: 50px;
+    }
+
+    .tv-mode .cuti-footer-section {
+      padding: 8px var(--spacing-lg);
+      min-height: 60px;
+    }
+
+    .cuti-footer-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-sm);
+      margin-bottom: 6px;
+    }
+
+    .cuti-footer-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .tv-mode .cuti-footer-title {
+      font-size: 1.1rem;
+    }
+
+    .cuti-footer-icon {
+      font-size: 1rem;
+      animation: gentlePulse 2s ease-in-out infinite;
+    }
+
+    .tv-mode .cuti-footer-icon {
+      font-size: 1.2rem;
+    }
+
+    @keyframes gentlePulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    /* Smart centering system */
+    .cuti-scroll-container {
+      overflow: hidden;
+      position: relative;
+      min-height: 50px;
+      height: 50px;
+    }
+
+    .tv-mode .cuti-scroll-container {
+      min-height: 60px;
+      height: 60px;
+    }
+
+    .cuti-scroll-content {
+      display: flex;
+      gap: 10px;
+      animation: scrollCuti 40s linear infinite;
+      padding: 0 var(--spacing-md);
+    }
+
+    .tv-mode .cuti-scroll-content {
+      gap: 12px;
+      padding: 0 var(--spacing-lg);
+    }
+
+    /* Auto-center when few items */
+    .cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(1)),
+    .cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(2)),
+    .cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(3)),
+    .cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(4)),
+    .cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(5)) {
+      display: flex;
+      justify-content: center;
+    }
+
+    .cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(1)) .cuti-scroll-content,
+    .cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(2)) .cuti-scroll-content,
+    .cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(3)) .cuti-scroll-content,
+    .cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(4)) .cuti-scroll-content,
+    .cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(5)) .cuti-scroll-content {
+      animation: none;
+      justify-content: center;
+    }
+
+    /* COMPACT CUTI ITEM LAYOUT BARU */
+    .cuti-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 5px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+      min-width: 200px;
+      height: 40px;
+      cursor: pointer;
+    }
+
+    .tv-mode .cuti-item {
+      min-width: 240px;
+      height: 50px;
+      padding: 8px 12px;
+      gap: 8px;
+    }
+
+    .cuti-item:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .cuti-avatar {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffeb3b, #ffc107);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary-dark);
+      font-size: 0.6rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .tv-mode .cuti-avatar {
+      width: 25px;
+      height: 25px;
+      font-size: 0.7rem;
+    }
+
+    .cuti-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .cuti-name-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.7rem;
+      line-height: 1;
+    }
+
+    .tv-mode .cuti-name-row {
+      font-size: 0.8rem;
+      gap: 8px;
+    }
+
+    .cuti-dokter-name {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: white;
+      white-space: nowrap;
+    }
+
+    .tv-mode .cuti-dokter-name {
+      font-size: 0.8rem;
+    }
+
+    .cuti-separator {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.6rem;
+    }
+
+    .tv-mode .cuti-separator {
+      font-size: 0.7rem;
+    }
+
+    .cuti-spesialis {
+      font-size: 0.65rem;
+      color: rgba(255, 255, 255, 0.8);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .tv-mode .cuti-spesialis {
+      font-size: 0.75rem;
+    }
+
+    .cuti-date-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.65rem;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1;
+    }
+
+    .tv-mode .cuti-date-row {
+      font-size: 0.75rem;
+      gap: 6px;
+    }
+
+    .cuti-date-icon {
+      font-size: 0.6rem;
+      opacity: 0.8;
+    }
+
+    .tv-mode .cuti-date-icon {
+      font-size: 0.7rem;
+    }
+
+    .cuti-badge {
+      background: linear-gradient(135deg, #ff5722, #e64a19);
+      padding: 1px 6px;
+      border-radius: 6px;
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: white;
+      margin-left: 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .tv-mode .cuti-badge {
+      font-size: 0.7rem;
+      padding: 2px 8px;
+    }
+
+    /* Date status indicators */
+    .cuti-date-ongoing {
+      background: linear-gradient(135deg, #ff9800, #f57c00);
+    }
+
+    .cuti-date-upcoming {
+      background: linear-gradient(135deg, #2196f3, #1976d2);
+    }
+
+    .cuti-date-finished {
+      background: linear-gradient(135deg, #78909c, #546e7a);
+    }
+
+    @keyframes scrollCuti {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ===== CUTI MODAL ===== */
+    .cuti-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cuti-modal.active {
+      display: flex;
+    }
+
+    .cuti-modal-content {
+      background: linear-gradient(135deg, var(--color-surface), #f8fdff);
+      border-radius: 16px;
+      padding: var(--spacing-xl);
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--color-border);
+    }
+
+    .tv-mode .cuti-modal-content {
+      max-width: 600px;
+      padding: var(--spacing-xl) var(--spacing-xl);
+    }
+
+    .cuti-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--spacing-lg);
+      padding-bottom: var(--spacing-md);
+      border-bottom: 2px solid var(--color-border);
+    }
+
+    .cuti-modal-title {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-text-dark);
+    }
+
+    .tv-mode .cuti-modal-title {
+      font-size: 1.8rem;
+    }
+
+    .cuti-modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--color-text-light);
+      padding: var(--spacing-xs);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .tv-mode .cuti-modal-close {
+      font-size: 1.8rem;
+      padding: var(--spacing-sm);
+    }
+
+    .cuti-modal-close:hover {
+      background: var(--color-border);
+      color: var(--color-text-dark);
+    }
+
+    .cuti-detail-item {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      padding: var(--spacing-md);
+      background: white;
+      border-radius: 12px;
+      margin-bottom: var(--spacing-sm);
+      border: 1px solid var(--color-border);
+      transition: all 0.3s ease;
+    }
+
+    .tv-mode .cuti-detail-item {
+      padding: var(--spacing-lg);
+      gap: var(--spacing-lg);
+    }
+
+    .cuti-detail-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 12px var(--color-shadow);
+    }
+
+    .cuti-detail-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-status-cuti), #7b1fa2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .tv-mode .cuti-detail-avatar {
+      width: 60px;
+      height: 60px;
+      font-size: 1.3rem;
+    }
+
+    .cuti-detail-info {
+      flex: 1;
+    }
+
+    .cuti-detail-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--color-text-dark);
+      margin-bottom: 4px;
+    }
+
+    .tv-mode .cuti-detail-name {
+      font-size: 1.4rem;
+    }
+
+    .cuti-detail-spec {
+      font-size: 0.9rem;
+      color: var(--color-text-light);
+      margin-bottom: 6px;
+    }
+
+    .tv-mode .cuti-detail-spec {
+      font-size: 1.1rem;
+    }
+
+    .cuti-detail-dates {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      font-size: 0.85rem;
+      color: var(--color-status-cuti);
+      font-weight: 600;
+    }
+
+    .tv-mode .cuti-detail-dates {
+      font-size: 1rem;
+    }
+
+    .cuti-detail-status {
+      background: var(--color-status-cuti);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .tv-mode .cuti-detail-status {
+      font-size: 1rem;
+      padding: 6px 16px;
+    }
+
+    /* Pause animation on hover */
+    .cuti-scroll-container:hover .cuti-scroll-content,
+    .footer-scroll:hover p {
+      animation-play-state: paused;
+    }
+
+    /* Empty State */
+    .cuti-empty {
+      text-align: center;
+      padding: var(--spacing-md);
+      color: rgba(255, 255, 255, 0.7);
+      font-style: italic;
+    }
+
+    .tv-mode .cuti-empty {
+      font-size: 1.1rem;
+    }
+
+    /* ===== ERROR & EMPTY STATES ===== */
+    .error-message {
+      text-align: center;
+      padding: var(--spacing-xl) var(--spacing-lg);
+      color: var(--color-status-tidak);
+      font-weight: 600;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 1rem;
+    }
+
+    .tv-mode .error-message {
+      font-size: 1.2rem;
+    }
+
+    .error-message button {
+      background: var(--color-secondary);
+      border: none;
+      border-radius: 8px;
+      padding: var(--spacing-sm) var(--spacing-lg);
+      margin-top: var(--spacing-sm);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+      color: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .tv-mode .error-message button {
+      font-size: 1.1rem;
+      padding: var(--spacing-md) var(--spacing-xl);
+    }
+
+    .error-message button:hover {
+      background: var(--color-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ===== RESPONSIVE DESIGN ===== */
+
+    /* Tablet */
+    @media screen and (max-width: 1024px) {
+      .cuti-item {
+        min-width: 180px;
+        height: 38px;
+        padding: 4px 6px;
+      }
+      
+      .cuti-name-row {
+        font-size: 0.65rem;
+        gap: 4px;
+      }
+      
+      .cuti-dokter-name {
+        font-size: 0.65rem;
+      }
+      
+      .cuti-spesialis {
+        font-size: 0.6rem;
+      }
+      
+      .cuti-date-row {
+        font-size: 0.6rem;
+      }
+      
+      .cuti-scroll-container {
+        min-height: 45px;
+        height: 45px;
+      }
+
+      /* Logo tablet */
+      .hospital-logo {
+        top: var(--spacing-sm);
+        left: var(--spacing-md);
+      }
+      
+      .logo-container {
+        width: 50px;
+        height: 50px;
+      }
+      
+      .logo-icon {
+        font-size: 1.6rem;
+      }
+      
+      .logo-text {
+        font-size: 0.8rem;
+      }
+
+      /* Tanggal tablet */
+      .tanggal {
+        font-size: 1.2rem;
+        padding: 10px 18px;
+      }
+    }
+
+    /* Mobile */
+    @media screen and (max-width: 768px) {
+      :root {
+        font-size: 12px;
+      }
+      
+      header h1 {
+        font-size: 2.2rem;
+        padding-top: 20px;
+      }
+      
+      .datetime-corner {
+        top: var(--spacing-sm);
+        right: var(--spacing-md);
+      }
+      
+      .datetime-corner .tanggal {
+        font-size: 0.8rem;
+      }
+      
+      .datetime-corner .jam {
+        font-size: 1rem;
+        padding: 4px 8px;
+      }
+      
+      .content-wrapper {
+        flex-direction: column;
+        padding: 0 var(--spacing-sm) var(--spacing-sm);
+      }
+      
+      th, td {
+        font-size: 1.3rem;
+      }
+      
+      .status {
+        font-size: 1rem;
+        min-width: 70px;
+      }
+
+      /* Mobile Cuti Cards */
+      .cuti-item {
+        min-width: 160px;
+        height: 36px;
+        padding: 3px 5px;
+        gap: 4px;
+      }
+      
+      .cuti-avatar {
+        width: 18px;
+        height: 18px;
+        font-size: 0.55rem;
+      }
+      
+      .cuti-name-row {
+        font-size: 0.6rem;
+        gap: 3px;
+      }
+      
+      .cuti-dokter-name {
+        font-size: 0.6rem;
+      }
+      
+      .cuti-spesialis {
+        font-size: 0.55rem;
+      }
+      
+      .cuti-date-row {
+        font-size: 0.55rem;
+      }
+      
+      .cuti-badge {
+        padding: 1px 4px;
+        font-size: 0.55rem;
+      }
+      
+      .cuti-scroll-container {
+        min-height: 40px;
+        height: 40px;
+      }
+      
+      .cuti-footer-section {
+        padding: 4px var(--spacing-sm);
+      }
+      
+      .cuti-footer-title {
+        font-size: 0.8rem;
+      }
+
+      /* Logo mobile */
+      .hospital-logo {
+        top: var(--spacing-xs);
+        left: var(--spacing-sm);
+      }
+      
+      .logo-container {
+        width: 40px;
+        height: 40px;
+      }
+      
+      .logo-icon {
+        font-size: 1.3rem;
+      }
+      
+      .logo-text {
+        display: none; /* Sembunyikan text di mobile */
+      }
+
+      /* Tanggal mobile */
+      .tanggal {
+        font-size: 1.1rem;
+        padding: 8px 16px;
+        margin: 5px auto;
+      }
+      
+      .tanggal::before {
+        margin-right: 6px;
+        font-size: 0.9em;
+      }
+    }
+
+    /* Small Mobile */
+    @media screen and (max-width: 480px) {
+      .cuti-item {
+        min-width: 140px;
+        height: 34px;
+        padding: 2px 4px;
+      }
+      
+      .cuti-dokter-name {
+        font-size: 0.55rem;
+      }
+      
+      .cuti-dates,
+      .cuti-spesialis {
+        font-size: 0.5rem;
+      }
+      
+      .cuti-scroll-content {
+        gap: 6px;
+      }
+
+      /* Logo small mobile */
+      .hospital-logo {
+        top: 6px;
+        left: 8px;
+      }
+      
+      .logo-container {
+        width: 35px;
+        height: 35px;
+      }
+      
+      .logo-icon {
+        font-size: 1.1rem;
+      }
+
+      /* Tanggal small mobile */
+      .tanggal {
+        font-size: 1rem;
+        padding: 6px 12px;
+      }
+      
+      .tanggal::before {
+        margin-right: 4px;
+        font-size: 0.8em;
+      }
+    }
+
+    /* ===== PRINT STYLES ===== */
+    @media print {
+      .particles,
+      .controls,
+      .loading,
+      footer,
+      .datetime-corner,
+      .cuti-modal,
+      .hospital-logo,
+      .offline-banner,
+      .online-banner,
+      .update-notification,
+      .sync-status {
+        display: none !important;
+      }
+      
+      body {
+        transform: none !important;
+        animation: none;
+        opacity: 1;
+        margin-top: 0 !important;
+      }
+      
+      .section {
+        box-shadow: none;
+        border: 2px solid #000;
+        break-inside: avoid;
+      }
+      
+      .status {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    /* Reduced motion for accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      .particle, .footer-scroll p, .jam, .section,
+      .cuti-scroll-content, .cuti-footer-icon,
+      .logo-container, .logo-container::before,
+      .tanggal, .tanggal::before,
+      .update-notification {
+        animation: none;
+      }
+      
+      tr:hover .status,
+      tr:hover td {
+        transform: none;
+      }
+      
+      .skeleton {
+        animation: none;
+        background: #f0f0f0;
+      }
+      
+      .pulse-dots span {
+        animation: none;
+      }
+      
+      .logo-container:hover {
+        transform: none;
+      }
+    }
+
+    /* TV-specific reduced motion */
+    .tv-mode .particle,
+    .tv-mode .logo-container::before {
+      animation: none !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- Offline/Online Banners -->
+  <div class="offline-banner" id="offlineBanner">
+    ⚠️ Anda sedang offline. Menampilkan data cache terakhir.
+  </div>
+  <div class="online-banner" id="onlineBanner">
+    ✅ Koneksi internet tersedia. Memperbarui data...
+  </div>
+
+  <!-- Update Notification -->
+  <div class="update-notification" id="updateNotification" style="display: none;">
+    <span>✅</span>
+    <span>Data jadwal diperbarui</span>
+  </div>
+
+  <!-- Sync Status -->
+  <div class="sync-status up-to-date" id="syncStatus">
+    Data terkini
+  </div>
+
+  <a href="#main-content" class="skip-link">Langsung ke konten utama</a>
+  <div class="particles" id="particles"></div>
+
+  <!-- Live region for announcements -->
+  <div aria-live="polite" aria-atomic="true" class="sr-only" id="liveRegion">
+    Data jadwal dokter telah diperbarui
+  </div>
+
+  <!-- Logo Rumah Sakit -->
+  <div class="hospital-logo">
+    <div class="logo-container">
+      <div class="logo-icon">🏥</div>
+    </div>
+    <div class="logo-text">RSU SIAGA MEDIKA</div>
+  </div>
+
+  <header>
+    <h1>INFORMASI PRAKTEK DOKTER SPESIALIS</h1>
+    <h2 class="tanggal" id="tanggal"></h2>
+    <div class="datetime-corner">
+      <div class="jam" id="jam"></div>
+    </div>
+  </header>
+
+  <div class="loading" id="loadingIndicator">
+    <span class="spinner"></span>
+    <span id="loadingMessage">Memuat jadwal terbaru...</span>
+    <span class="pulse-dots"><span></span><span></span><span></span></span>
+  </div>
+
+  <div class="content-wrapper" id="main-content">
+    <div class="section" id="bedahSection">
+      <h2>BEDAH</h2>
+      <div class="table-container">
+        <table id="tableBedah" class="table-aligned-left">
+          <thead>
+            <tr>
+              <th>Spesialis</th>
+              <th>Dokter</th>
+              <th>Status</th>
+              <th>Jam</th>
+            </tr>
+          </thead>
+          <tbody id="bedahBody">
+            <!-- Data akan dimuat di sini -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section" id="nonBedahSection">
+      <h2>NON BEDAH</h2>
+      <div class="table-container">
+        <table id="tableNonBedah" class="table-aligned-left">
+          <thead>
+            <tr>
+              <th>Spesialis</th>
+              <th>Dokter</th>
+              <th>Status</th>
+              <th>Jam</th>
+            </tr>
+          </thead>
+          <tbody id="nonBedahBody">
+            <!-- Data akan dimuat di sini -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <!-- Cuti Doctors Section -->
+      <div class="cuti-footer-section">
+        <div class="cuti-footer-header">
+          <div class="cuti-footer-title">
+            <span class="cuti-footer-icon">🏖️</span>
+            <span>Informasi Cuti Dokter</span>
+          </div>
+        </div>
+        <div class="cuti-scroll-container">
+          <div class="cuti-scroll-content" id="cutiScrollContent">
+            <!-- Cuti doctors will be loaded here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cuti Detail Modal -->
+  <div class="cuti-modal" id="cutiDetailModal">
+    <div class="cuti-modal-content">
+      <div class="cuti-modal-header">
+        <div class="cuti-modal-title">
+          <span>🏖️</span>
+          <span>Detail Cuti Dokter</span>
+        </div>
+        <button class="cuti-modal-close" onclick="closeCutiModal()">×</button>
+      </div>
+      <div id="cutiDetailContent">
+        <!-- Detail cuti akan dimuat di sini -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ==================== KONFIGURASI YANG DIPERBAIKI ====================
+    const MAIN_SHEET_URL = "https://script.google.com/macros/s/AKfycbyVnM9JhKx8xj2EZhETj1BdSCnmJxtNBV4eFmohKE0denRS4VEA3JqPI-RVsQFg7ZuEtw/exec";
+    const FOOTER_SHEET_URL = "https://script.google.com/macros/s/AKfycbxYREx42acZcDyDe8DF75UJlB0hroAoQ4QH_gpd71RgGtbI889yAAtzegrjgwvfLkFY4Q/exec";
+    
+    // Fallback data dengan jenis yang benar
+    const FALLBACK_DATA = [
+      {
+        "Spesialis": "Bedah Umum",
+        "Dokter": "dr. Ahmad Wijaya, Sp.B",
+        "Status": "BUKA",
+        "Jam": "08:00 - 12:00",
+        "Jenis": "Bedah"
+      },
+      {
+        "Spesialis": "Bedah Orthopedi", 
+        "Dokter": "dr. Bambang Sutrisno, Sp.OT",
+        "Status": "PENUH",
+        "Jam": "09:00 - 13:00",
+        "Jenis": "Bedah"
+      },
+      {
+        "Spesialis": "Penyakit Dalam",
+        "Dokter": "dr. Siti Rahma, Sp.PD",
+        "Status": "BUKA", 
+        "Jam": "10:00 - 14:00",
+        "Jenis": "Non Bedah"
+      },
+      {
+        "Spesialis": "Anak",
+        "Dokter": "dr. Budi Santoso, Sp.A",
+        "Status": "BUKA",
+        "Jam": "08:30 - 12:30",
+        "Jenis": "Non Bedah"
+      },
+      {
+        "Spesialis": "Kandungan",
+        "Dokter": "dr. Rina Marlina, Sp.OG",
+        "Status": "CUTI",
+        "Jam": "-",
+        "Jenis": "Non Bedah"
+      },
+      {
+        "Spesialis": "Jantung",
+        "Dokter": "dr. Andi Pratama, Sp.JP",
+        "Status": "SELESAI",
+        "Jam": "07:00 - 11:00",
+        "Jenis": "Non Bedah"
+      },
+      {
+        "Spesialis": "THT",
+        "Dokter": "dr. Citra Dewi, Sp.THT",
+        "Status": "BUKA",
+        "Jam": "13:00 - 17:00",
+        "Jenis": "Non Bedah"
+      }
+    ];
+
+    const FALLBACK_CUTI_DATA = [
+      {
+        "Dokter": "dr. Rina Marlina, Sp.OG",
+        "Spesialis": "Kandungan",
+        "Tanggal": "15 - 20 Desember 2024"
+      },
+      {
+        "Dokter": "dr. Andi Pratama, Sp.JP", 
+        "Spesialis": "Jantung",
+        "Tanggal": "10 - 12 Desember 2024"
+      }
+    ];
+
+    const REFRESH_INTERVAL = 30000;
+    const CACHE_DURATION = 300000;
+    const FETCH_TIMEOUT = 15000;
+
+    // ==================== UTILITIES YANG DIPERBAIKI ====================
+    class SecurityUtils {
+      static escapeHtml(unsafe) {
+        if (typeof unsafe !== 'string') return '';
+        return unsafe
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      static safeTemplate(strings, ...values) {
+        return strings.reduce((result, str, i) => {
+          const value = values[i] ?? '';
+          return result + str + this.escapeHtml(String(value));
+        }, '');
+      }
+
+      static sanitizeObject(obj) {
+        if (!obj || typeof obj !== 'object') return obj;
+        
+        const sanitized = {};
+        for (const [key, value] of Object.entries(obj)) {
+          if (typeof value === 'string') {
+            sanitized[key] = this.escapeHtml(value);
+          } else {
+            sanitized[key] = value;
+          }
+        }
+        return sanitized;
+      }
+    }
+
+    // ==================== DATA FETCHER YANG LEBIH ROBUST ====================
+    class DataFetcher {
+      constructor() {
+        this.retryCount = 0;
+        this.maxRetries = 2;
+      }
+
+      async fetchWithRetry(url, options = {}) {
+        try {
+          console.log(`📡 Fetching from: ${url}`);
+          
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
+          
+          const cacheBusterUrl = url + (url.includes('?') ? '&' : '?') + '_=' + Date.now();
+          
+          const response = await fetch(cacheBusterUrl, {
+            ...options,
+            signal: controller.signal,
+            mode: 'cors'
+          });
+          
+          clearTimeout(timeoutId);
+          
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+          }
+          
+          const data = await response.json();
+          console.log('✅ Data fetched successfully');
+          this.retryCount = 0;
+          return data;
+          
+        } catch (error) {
+          console.warn(`❌ Fetch error (attempt ${this.retryCount + 1}):`, error.message);
+          
+          if (error.name === 'AbortError') {
+            throw new Error('Timeout: Server tidak merespons');
+          }
+          
+          this.retryCount++;
+          
+          if (this.retryCount <= this.maxRetries) {
+            const delay = Math.pow(2, this.retryCount) * 1000;
+            console.log(`🔄 Retry ${this.retryCount} in ${delay}ms`);
+            
+            await new Promise(resolve => setTimeout(resolve, delay));
+            return this.fetchWithRetry(url, options);
+          } else {
+            throw new Error(`Gagal memuat data: ${error.message}`);
+          }
+        }
+      }
+
+      async fetchWithFallback(url, fallbackData, dataType = 'main') {
+        try {
+          const data = await this.fetchWithRetry(url);
+          
+          if (dataType === 'main' && !this.isValidMainData(data)) {
+            console.warn('⚠️ Data tidak valid, menggunakan fallback');
+            return fallbackData;
+          }
+          
+          if (dataType === 'cuti' && !this.isValidCutiData(data)) {
+            console.warn('⚠️ Data cuti tidak valid, menggunakan fallback');
+            return fallbackData;
+          }
+          
+          return data;
+        } catch (error) {
+          console.warn(`⚠️ Menggunakan fallback data: ${error.message}`);
+          return fallbackData;
+        }
+      }
+
+      isValidMainData(data) {
+        if (!Array.isArray(data)) {
+          console.warn('Data bukan array');
+          return false;
+        }
+        
+        if (data.length === 0) {
+          console.warn('Data array kosong');
+          return false;
+        }
+        
+        const firstItem = data[0];
+        if (!firstItem || typeof firstItem !== 'object') {
+          console.warn('Item data bukan object');
+          return false;
+        }
+        
+        const hasRequiredProps = ['Spesialis', 'Dokter', 'Status', 'Jenis'].some(prop => 
+          prop in firstItem
+        );
+        
+        if (!hasRequiredProps) {
+          console.warn('Data tidak memiliki properti yang diperlukan');
+          return false;
+        }
+        
+        return true;
+      }
+
+      isValidCutiData(data) {
+        if (!Array.isArray(data)) return false;
+        if (data.length === 0) return true;
+        
+        const firstItem = data[0];
+        if (!firstItem || typeof firstItem !== 'object') return false;
+        
+        return ('Dokter' in firstItem || 'Nama' in firstItem);
+      }
+    }
+
+    // ==================== RESOURCE MANAGER ====================
+    class ResourceManager {
+      constructor() {
+        this.intervals = [];
+        this.timeouts = [];
+        this.eventListeners = [];
+      }
+
+      setInterval(callback, delay) {
+        const id = setInterval(callback, delay);
+        this.intervals.push(id);
+        return id;
+      }
+
+      setTimeout(callback, delay) {
+        const id = setTimeout(callback, delay);
+        this.timeouts.push(id);
+        return id;
+      }
+
+      addEventListener(target, event, handler, options) {
+        target.addEventListener(event, handler, options);
+        this.eventListeners.push({ target, event, handler });
+      }
+
+      cleanup() {
+        this.intervals.forEach(id => clearInterval(id));
+        this.timeouts.forEach(id => clearTimeout(id));
+        this.eventListeners.forEach(({ target, event, handler }) => {
+          target.removeEventListener(event, handler);
+        });
+        
+        this.intervals = [];
+        this.timeouts = [];
+        this.eventListeners = [];
+      }
+    }
+
+    // ==================== GLOBAL STATE ====================
+    let allData = [];
+    let cutiData = [];
+    let dataInterval;
+    let loadingMessageInterval;
+
+    const resources = new ResourceManager();
+    const dataFetcher = new DataFetcher();
+    
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    const loadingMessage = document.getElementById('loadingMessage');
+    const liveRegion = document.getElementById('liveRegion');
+    const offlineBanner = document.getElementById('offlineBanner');
+    const onlineBanner = document.getElementById('onlineBanner');
+    const updateNotification = document.getElementById('updateNotification');
+    const syncStatus = document.getElementById('syncStatus');
+
+    // ==================== INITIALIZATION ====================
+    document.addEventListener('DOMContentLoaded', () => {
+      initializeApp();
+    });
+
+    function initializeApp() {
+      console.log('🚀 Initializing application...');
+      
+      initializeOfflineDetection();
+      initializeKeyboardNavigation();
+      
+      updateDateTime();
+      showSkeletonLoading();
+      
+      resources.setTimeout(() => {
+        loadInitialData();
+      }, 100);
+      
+      resources.setInterval(updateDateTime, 1000);
+      startDataPolling();
+      
+      resources.addEventListener(document, 'visibilitychange', handleVisibilityChange);
+      resources.addEventListener(window, 'online', handleOnlineStatus);
+      resources.addEventListener(window, 'offline', handleOnlineStatus);
+      
+      initializeParticles();
+    }
+
+    // ==================== DATA LOADING YANG DIPERBAIKI ====================
+    async function loadInitialData() {
+      console.log('📥 Loading initial data...');
+      
+      const cached = getCachedData();
+      if (cached && cached.mainData && cached.mainData.length > 0) {
+        console.log('📂 Loading from cache:', cached.mainData.length, 'items');
+        allData = cached.mainData;
+        cutiData = cached.cutiData || [];
+        
+        showData(allData);
+        displayCutiDoctors(cutiData);
+        hideLoading();
+        
+        resources.setTimeout(() => {
+          loadFreshData();
+        }, 2000);
+        
+        return;
+      }
+
+      await loadFreshData();
+    }
+
+    async function loadFreshData() {
+      showLoading();
+      
+      try {
+        console.log('🔄 Loading fresh data from server...');
+        
+        const [mainData, footerData] = await Promise.allSettled([
+          dataFetcher.fetchWithFallback(MAIN_SHEET_URL, FALLBACK_DATA),
+          dataFetcher.fetchWithFallback(FOOTER_SHEET_URL, FALLBACK_CUTI_DATA, 'cuti')
+        ]);
+
+        if (mainData.status === 'fulfilled') {
+          allData = mainData.value;
+          console.log('✅ Main data loaded:', allData.length, 'items');
+          
+          // Debug: Log jenis data untuk troubleshooting
+          console.log('🔍 Data types distribution:');
+          const jenisCount = {};
+          allData.forEach(item => {
+            const jenis = item.Jenis || 'Unknown';
+            jenisCount[jenis] = (jenisCount[jenis] || 0) + 1;
+          });
+          console.log('Jenis distribution:', jenisCount);
+        } else {
+          console.error('❌ Main data failed:', mainData.reason);
+          allData = FALLBACK_DATA;
+        }
+
+        if (footerData.status === 'fulfilled') {
+          cutiData = footerData.value;
+          console.log('✅ Cuti data loaded:', cutiData?.length || 0, 'items');
+        } else {
+          console.error('❌ Cuti data failed:', footerData.reason);
+          cutiData = FALLBACK_CUTI_DATA;
+        }
+
+        if (!allData || allData.length === 0) {
+          throw new Error('Tidak ada data yang dapat dimuat');
+        }
+
+        cacheData({ mainData: allData, cutiData });
+        
+        showData(allData);
+        displayCutiDoctors(cutiData);
+        hideLoading();
+        
+        announceToScreenReader('Data jadwal dokter telah dimuat');
+        
+      } catch (error) {
+        console.error('💥 Critical load error:', error);
+        showErrorState('Gagal memuat data. Menampilkan data contoh.');
+        
+        allData = FALLBACK_DATA;
+        cutiData = FALLBACK_CUTI_DATA;
+        showData(allData);
+        displayCutiDoctors(cutiData);
+        hideLoading();
+      }
+    }
+
+    // ==================== DATA POLLING ====================
+    function startDataPolling() {
+      dataInterval = resources.setInterval(async () => {
+        await checkForDataUpdates();
+      }, REFRESH_INTERVAL);
+      console.log('🔄 Data polling started');
+    }
+
+    async function checkForDataUpdates() {
+      if (!navigator.onLine) {
+        updateSyncStatus('offline');
+        return;
+      }
+
+      updateSyncStatus('syncing');
+      
+      try {
+        const dataFetcher = new DataFetcher();
+        const newData = await dataFetcher.fetchWithFallback(MAIN_SHEET_URL, allData);
+
+        // Simple check for changes
+        if (JSON.stringify(newData) !== JSON.stringify(allData)) {
+          console.log('🎉 Data updated, refreshing display...');
+          allData = newData;
+          showData(allData);
+          showUpdateNotification();
+          updateSyncStatus('up-to-date');
+          cacheData({ mainData: allData, cutiData });
+        } else {
+          updateSyncStatus('up-to-date');
+          console.log('✅ No data changes detected');
+        }
+      } catch (error) {
+        console.warn('❌ Update check failed:', error);
+        updateSyncStatus('error');
+      }
+    }
+
+    function updateSyncStatus(status) {
+      syncStatus.className = `sync-status ${status}`;
+      
+      const statusText = {
+        'syncing': 'Memeriksa update...',
+        'up-to-date': 'Data terkini',
+        'offline': 'Mode offline',
+        'error': 'Gagal update'
+      }[status] || 'Data terkini';
+      
+      syncStatus.textContent = statusText;
+    }
+
+    function showUpdateNotification() {
+      updateNotification.style.display = 'flex';
+      resources.setTimeout(() => {
+        updateNotification.style.display = 'none';
+      }, 3000);
+    }
+
+    // ==================== UI RENDERING YANG DIPERBAIKI ====================
+    function showSkeletonLoading() {
+      const skeletonRow = `
+        <tr class="skeleton-row">
+          <td><div class="skeleton"></div></td>
+          <td><div class="skeleton"></div></td>
+          <td><div class="skeleton skeleton-status"></div></td>
+          <td><div class="skeleton"></div></td>
+        </tr>
+      `;
+      
+      document.getElementById('bedahBody').innerHTML = skeletonRow.repeat(3);
+      document.getElementById('nonBedahBody').innerHTML = skeletonRow.repeat(5);
+    }
+
+    function showData(data) {
+      const bedahTable = document.getElementById("bedahBody");
+      const nonBedahTable = document.getElementById("nonBedahBody");
+      
+      bedahTable.innerHTML = "";
+      nonBedahTable.innerHTML = "";
+
+      if (!data || data.length === 0) {
+        showEmptyState();
+        return;
+      }
+
+      let bedahCount = 0;
+      let nonBedahCount = 0;
+
+      data.forEach(item => {
+        const safeItem = SecurityUtils.sanitizeObject(item);
+        let statusClass = 'TIDAK';
+        
+        if (safeItem.Status) {
+          const status = safeItem.Status.toUpperCase();
+          if (status.includes('BUKA')) statusClass = 'BUKA';
+          else if (status.includes('PENUH')) statusClass = 'PENUH';
+          else if (status.includes('SELESAI')) statusClass = 'SELESAI';
+          else if (status.includes('CUTI')) statusClass = 'CUTI';
+          else if (status.includes('TIDAK ADA POLI') || status.includes('TIDAK-ADA-POLI')) statusClass = 'TIDAK-ADA-POLI';
+          else if (status.includes('TIDAK')) statusClass = 'TIDAK';
+        }
+        
+        const rowHTML = SecurityUtils.safeTemplate`
+          <tr tabindex="0" role="button" aria-label="Dr. ${safeItem.Dokter || '-'} - ${safeItem.Spesialis || '-'}">
+            <td>${safeItem.Spesialis || '-'}</td>
+            <td>${safeItem.Dokter || '-'}</td>
+            <td><span class="status ${statusClass}" aria-label="Status: ${statusClass.replace('-', ' ')}">${safeItem.Status || 'TIDAK'}</span></td>
+            <td>${safeItem.Jam || '-'}</td>
+          </tr>
+        `;
+        
+        // PERBAIKAN: Logika filtering yang lebih robust
+        const jenis = (safeItem.Jenis || '').toLowerCase().trim();
+        console.log(`Processing: ${safeItem.Dokter} - Jenis: "${jenis}"`);
+        
+        if (jenis === 'bedah') {
+          bedahTable.innerHTML += rowHTML;
+          bedahCount++;
+        } else if (jenis === 'non bedah' || jenis === 'nonbedah') {
+          nonBedahTable.innerHTML += rowHTML;
+          nonBedahCount++;
+        } else {
+          // Default fallback: jika tidak jelas, masukkan ke non-bedah
+          console.warn(`Unknown jenis "${jenis}" for ${safeItem.Dokter}, defaulting to Non Bedah`);
+          nonBedahTable.innerHTML += rowHTML;
+          nonBedahCount++;
+        }
+      });
+
+      console.log(`📊 Data distribution - Bedah: ${bedahCount}, Non Bedah: ${nonBedahCount}`);
+
+      // Handle empty sections dengan pesan yang lebih informatif
+      if (bedahCount === 0) {
+        bedahTable.innerHTML = `
+          <tr>
+            <td colspan="4" style="text-align: center; padding: 30px; color: #666; font-style: italic;">
+              Tidak ada jadwal praktek dokter bedah hari ini
+            </td>
+          </tr>
+        `;
+      }
+
+      if (nonBedahCount === 0) {
+        nonBedahTable.innerHTML = `
+          <tr>
+            <td colspan="4" style="text-align: center; padding: 30px; color: #666; font-style: italic;">
+              Tidak ada jadwal praktek dokter non-bedah hari ini
+            </td>
+          </tr>
+        `;
+      }
+
+      document.querySelectorAll('.section').forEach(sec => {
+        sec.classList.add('show');
+      });
+    }
+
+    function displayCutiDoctors(data) {
+      const cutiContainer = document.getElementById('cutiScrollContent');
+      
+      if (!data || !Array.isArray(data) || data.length === 0) {
+        cutiContainer.innerHTML = '<div class="cuti-empty">Tidak ada dokter yang sedang cuti</div>';
+        return;
+      }
+
+      let cutiHTML = '';
+      
+      data.forEach((doctor, index) => {
+        try {
+          const safeDoctor = SecurityUtils.sanitizeObject(doctor);
+          const namaDokter = safeDoctor.Dokter || safeDoctor.Nama || safeDoctor['Nama Dokter'] || `Dokter ${index + 1}`;
+          const spesialis = safeDoctor.Spesialis || safeDoctor.Poli || safeDoctor['Spesialisasi'] || 'Spesialis';
+          const tanggalCuti = safeDoctor.Tanggal || safeDoctor.Period || safeDoctor.Jam || safeDoctor['Periode Cuti'] || 'Cuti';
+          
+          const initials = getInitials(namaDokter);
+          const statusInfo = parseCutiStatus(tanggalCuti);
+          
+          const cutiItemHTML = SecurityUtils.safeTemplate`
+            <div class="cuti-item" tabindex="0" role="button" 
+                 onclick="showCutiDetail(
+                   '${namaDokter}', 
+                   '${spesialis}', 
+                   '${tanggalCuti}',
+                   '${statusInfo.badgeClass}'
+                 )">
+              <div class="cuti-avatar" title="${namaDokter}">${initials}</div>
+              <div class="cuti-info">
+                <div class="cuti-name-row">
+                  <span class="cuti-dokter-name">${namaDokter}</span>
+                  <span class="cuti-separator">-</span>
+                  <span class="cuti-spesialis">${spesialis}</span>
+                </div>
+                <div class="cuti-date-row">
+                  <span class="cuti-date-icon">📅</span>
+                  <span>${tanggalCuti}</span>
+                </div>
+              </div>
+              <div class="cuti-badge ${statusInfo.badgeClass}">${statusInfo.statusText}</div>
+            </div>
+          `;
+          
+          cutiHTML += cutiItemHTML;
+          
+        } catch (error) {
+          console.error('Error processing cuti doctor:', error);
+        }
+      });
+
+      cutiContainer.innerHTML = cutiHTML;
+    }
+
+    // ==================== UTILITY FUNCTIONS ====================
+    function getInitials(name) {
+      return name
+        .split(' ')
+        .map(word => word.charAt(0))
+        .join('')
+        .toUpperCase()
+        .substring(0, 2);
+    }
+
+    function parseCutiStatus(dateText) {
+      return { badgeClass: 'cuti-date-ongoing', statusText: 'CUTI' };
+    }
+
+    function announceToScreenReader(message) {
+      liveRegion.textContent = message;
+    }
+
+    // ==================== CACHING SYSTEM ====================
+    function cacheData(data) {
+      try {
+        const cache = {
+          mainData: data.mainData,
+          cutiData: data.cutiData,
+          timestamp: Date.now()
+        };
+        localStorage.setItem('doctorSchedule', JSON.stringify(cache));
+      } catch (e) {
+        console.warn('Gagal menyimpan cache:', e);
+      }
+    }
+
+    function getCachedData() {
+      try {
+        const cached = localStorage.getItem('doctorSchedule');
+        if (!cached) return null;
+        
+        const data = JSON.parse(cached);
+        
+        if (Date.now() - data.timestamp < CACHE_DURATION) {
+          return data;
+        }
+      } catch (e) {
+        console.warn('Gagal memuat cache:', e);
+      }
+      return null;
+    }
+
+    // ==================== MODAL FUNCTIONS ====================
+    function showCutiDetail(nama, spesialis, tanggal, badgeClass = 'cuti-badge') {
+      const modal = document.getElementById('cutiDetailModal');
+      const content = document.getElementById('cutiDetailContent');
+      
+      const statusText = 'CUTI';
+      
+      const modalHTML = SecurityUtils.safeTemplate`
+        <div class="cuti-detail-item">
+          <div class="cuti-detail-avatar">${getInitials(nama)}</div>
+          <div class="cuti-detail-info">
+            <div class="cuti-detail-name">${nama}</div>
+            <div class="cuti-detail-spec">${spesialis}</div>
+            <div class="cuti-detail-dates">
+              <span>📅 ${tanggal}</span>
+            </div>
+          </div>
+          <div class="cuti-detail-status ${badgeClass}">${statusText}</div>
+        </div>
+      `;
+      
+      content.innerHTML = modalHTML;
+      modal.classList.add('active');
+    }
+
+    function closeCutiModal() {
+      document.getElementById('cutiDetailModal').classList.remove('active');
+    }
+
+    // ==================== UI STATE MANAGEMENT ====================
+    function showLoading() {
+      loadingIndicator.style.display = 'block';
+      loadingMessage.textContent = 'Memuat jadwal terbaru...';
+    }
+
+    function hideLoading() {
+      loadingIndicator.style.display = 'none';
+    }
+
+    function showErrorState(message) {
+      const errorHTML = SecurityUtils.safeTemplate`
+        <tr>
+          <td colspan="4" class="error-message">
+            ${message}<br>
+            <button onclick="loadFreshData()">Coba Lagi</button>
+          </td>
+        </tr>
+      `;
+      
+      document.querySelectorAll('tbody').forEach(tbody => {
+        tbody.innerHTML = errorHTML;
+      });
+      
+      hideLoading();
+    }
+
+    function showEmptyState() {
+      const emptyHTML = `
+        <tr>
+          <td colspan="4" class="error-message">
+            📝 Tidak ada data jadwal dokter yang tersedia.
+          </td>
+        </tr>
+      `;
+      
+      document.querySelectorAll('tbody').forEach(tbody => {
+        tbody.innerHTML = emptyHTML;
+      });
+    }
+
+    // ==================== DATE & TIME ====================
+    function updateDateTime() {
+      const now = new Date();
+      const tanggal = now.toLocaleDateString('id-ID', { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+      
+      const jam = now.toLocaleTimeString('id-ID', { 
+        hour: '2-digit', 
+        minute: '2-digit'
+      });
+      const detik = now.toLocaleTimeString('id-ID', { 
+        second: '2-digit'
+      });
+    
+      document.getElementById('tanggal').textContent = tanggal;
+      document.getElementById('jam').innerHTML = `
+        <span class="jam-utama">${SecurityUtils.escapeHtml(jam)}</span>
+        <span class="jam-detik">${SecurityUtils.escapeHtml(detik)}</span>
+      `;
+    }
+
+    // ==================== OFFLINE DETECTION ====================
+    function initializeOfflineDetection() {
+      function updateOnlineStatus() {
+        if (navigator.onLine) {
+          offlineBanner.style.display = 'none';
+          onlineBanner.style.display = 'block';
+          resources.setTimeout(() => {
+            onlineBanner.style.display = 'none';
+          }, 3000);
+        } else {
+          offlineBanner.style.display = 'block';
+          onlineBanner.style.display = 'none';
+        }
+      }
+
+      updateOnlineStatus();
+      resources.addEventListener(window, 'online', updateOnlineStatus);
+      resources.addEventListener(window, 'offline', updateOnlineStatus);
+    }
+
+    // ==================== KEYBOARD NAVIGATION ====================
+    function initializeKeyboardNavigation() {
+      const skipLink = document.querySelector('.skip-link');
+      resources.addEventListener(skipLink, 'click', (e) => {
+        e.preventDefault();
+        const mainContent = document.getElementById('main-content');
+        mainContent.setAttribute('tabindex', '-1');
+        mainContent.focus();
+      });
+    }
+
+    // ==================== INTERVAL MANAGEMENT ====================
+    function handleVisibilityChange() {
+      if (document.hidden) {
+        clearInterval(dataInterval);
+      } else {
+        startDataPolling();
+      }
+    }
+
+    function handleOnlineStatus() {
+      if (navigator.onLine) {
+        resources.setTimeout(() => checkForDataUpdates(), 2000);
+      }
+    }
+
+    // ==================== PARTICLES ====================
+    function initializeParticles() {
+      const particlesContainer = document.getElementById("particles");
+      const particleCount = Math.min(15, window.innerWidth / 40);
+      
+      for (let i = 0; i < particleCount; i++) {
+        const p = document.createElement("div");
+        p.className = "particle";
+        const size = Math.random() * 6 + 3;
+        p.style.width = `${size}px`;
+        p.style.height = `${size}px`;
+        p.style.left = `${Math.random() * 100}%`;
+        p.style.animationDuration = `${10 + Math.random() * 10}s`;
+        p.style.animationDelay = `${Math.random() * 5}s`;
+        particlesContainer.appendChild(p);
+      }
+    }
+
+    // ==================== GLOBAL EXPORTS ====================
+    window.loadInitialData = loadInitialData;
+    window.loadFreshData = loadFreshData;
+    window.showCutiDetail = showCutiDetail;
+    window.closeCutiModal = closeCutiModal;
+
+    resources.addEventListener(document, 'keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeCutiModal();
+      }
+    });
+
+    resources.addEventListener(document.getElementById('cutiDetailModal'), 'click', function(e) {
+      if (e.target === this) {
+        closeCutiModal();
+      }
+    });
+  </script>
+</body>
+</html>
