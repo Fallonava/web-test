@@ -14,6 +14,23 @@
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="css/print.css">
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="css/variables.css" as="style">
+  <link rel="preload" href="css/base.css" as="style">
+  <link rel="preload" href="js/main.js" as="script">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏥</text></svg>">
+  
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#283593">
+  
+  <!-- Apple Touch Icon -->
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏥</text></svg>">
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
 </head>
 <body>
   <!-- Offline/Online Banners -->
@@ -35,6 +52,7 @@
     Data terkini
   </div>
 
+  <!-- Accessibility -->
   <a href="#main-content" class="skip-link">Langsung ke konten utama</a>
   <div class="particles" id="particles"></div>
 
@@ -51,6 +69,7 @@
     <div class="logo-text">RSU SIAGA MEDIKA</div>
   </div>
 
+  <!-- Header -->
   <header>
     <h1>INFORMASI PRAKTEK DOKTER SPESIALIS</h1>
     <h2 class="tanggal" id="tanggal"></h2>
@@ -59,13 +78,15 @@
     </div>
   </header>
 
+  <!-- Loading Indicator -->
   <div class="loading" id="loadingIndicator">
     <span class="spinner"></span>
     <span id="loadingMessage">Memuat jadwal terbaru...</span>
     <span class="pulse-dots"><span></span><span></span><span></span></span>
   </div>
 
-  <div class="content-wrapper" id="main-content">
+  <!-- Main Content -->
+  <main class="content-wrapper" id="main-content">
     <div class="section" id="bedahSection">
       <h2>BEDAH</h2>
       <div class="table-container">
@@ -103,8 +124,9 @@
         </table>
       </div>
     </div>
-  </div>
+  </main>
 
+  <!-- Footer -->
   <footer>
     <div class="footer-container">
       <!-- Cuti Doctors Section -->
@@ -142,5 +164,26 @@
 
   <!-- JavaScript Modules -->
   <script type="module" src="js/main.js"></script>
+
+  <!-- Fallback for non-module browsers -->
+  <script>
+    // Simple feature detection for modules
+    if (!('noModule' in HTMLScriptElement.prototype)) {
+      document.write('<script src="js/legacy.js"><\/script>');
+    }
+    
+    // Service Worker Registration for PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js')
+          .then(function(registration) {
+            console.log('SW registered: ', registration);
+          })
+          .catch(function(registrationError) {
+            console.log('SW registration failed: ', registrationError);
+          });
+      });
+    }
+  </script>
 </body>
 </html>
