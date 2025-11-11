@@ -91,3 +91,202 @@
   }
   
   th, td {
+    font-size: 1.3rem;
+  }
+  
+  .status {
+    font-size: 1rem;
+    min-width: 70px;
+  }
+
+  /* Mobile Cuti Cards */
+  .cuti-item {
+    min-width: 160px;
+    height: 36px;
+    padding: 3px 5px;
+    gap: 4px;
+  }
+  
+  .cuti-avatar {
+    width: 18px;
+    height: 18px;
+    font-size: 0.55rem;
+  }
+  
+  .cuti-name-row {
+    font-size: 0.6rem;
+    gap: 3px;
+  }
+  
+  .cuti-dokter-name {
+    font-size: 0.6rem;
+  }
+  
+  .cuti-spesialis {
+    font-size: 0.55rem;
+  }
+  
+  .cuti-date-row {
+    font-size: 0.55rem;
+  }
+  
+  .cuti-badge {
+    padding: 1px 4px;
+    font-size: 0.55rem;
+  }
+  
+  .cuti-scroll-container {
+    min-height: 40px;
+    height: 40px;
+  }
+  
+  .cuti-footer-section {
+    padding: 4px var(--spacing-sm);
+  }
+  
+  .cuti-footer-title {
+    font-size: 0.8rem;
+  }
+
+  /* Logo mobile */
+  .hospital-logo {
+    top: var(--spacing-xs);
+    left: var(--spacing-sm);
+  }
+  
+  .logo-container {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .logo-icon {
+    font-size: 1.3rem;
+  }
+  
+  .logo-text {
+    display: none;
+  }
+
+  /* Tanggal mobile */
+  .tanggal {
+    font-size: 1.1rem;
+    padding: 8px 16px;
+    margin: 5px auto;
+  }
+  
+  .tanggal::before {
+    margin-right: 6px;
+    font-size: 0.9em;
+  }
+}
+
+/* Small Mobile */
+@media screen and (max-width: 480px) {
+  .cuti-item {
+    min-width: 140px;
+    height: 34px;
+    padding: 2px 4px;
+  }
+  
+  .cuti-dokter-name {
+    font-size: 0.55rem;
+  }
+  
+  .cuti-spesialis {
+    font-size: 0.5rem;
+  }
+  
+  .cuti-scroll-content {
+    gap: 6px;
+  }
+
+  .hospital-logo {
+    top: 6px;
+    left: 8px;
+  }
+  
+  .logo-container {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .logo-icon {
+    font-size: 1.1rem;
+  }
+
+  .tanggal {
+    font-size: 1rem;
+    padding: 6px 12px;
+  }
+  
+  .tanggal::before {
+    margin-right: 4px;
+    font-size: 0.8em;
+  }
+}
+
+/* Smart centering for few cuti items */
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(1)),
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(2)),
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(3)),
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(4)),
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(5)) {
+  display: flex;
+  justify-content: center;
+}
+
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(1)) .cuti-scroll-content,
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(2)) .cuti-scroll-content,
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(3)) .cuti-scroll-content,
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(4)) .cuti-scroll-content,
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(5)) .cuti-scroll-content {
+  animation: none;
+  justify-content: center;
+}
+
+/* Pause animation on hover */
+.cuti-scroll-container:hover .cuti-scroll-content {
+  animation-play-state: paused;
+}
+
+/* Empty State */
+.cuti-empty {
+  text-align: center;
+  padding: var(--spacing-md);
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+}
+
+/* Error States */
+.error-message {
+  text-align: center;
+  padding: var(--spacing-xl) var(--spacing-lg);
+  color: var(--color-status-tidak);
+  font-weight: var(--font-weight-medium);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.error-message button {
+  background: var(--color-secondary);
+  border: none;
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  margin-top: var(--spacing-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  font-size: 0.9rem;
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.error-message button:hover {
+  background: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
