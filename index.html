@@ -7,32 +7,35 @@
   <meta name="description" content="Jadwal praktek dokter spesialis RSU Siaga Medika Purbalingga - Informasi terbaru jam praktek dan status dokter">
   <style>
     :root {
-      --color-primary: #283593;
-      --color-primary-dark: #1a237e;
-      --color-secondary: #5c6bc0;
-      --color-accent: #ec407a;
-      --color-accent-light: #ff77a9;
-      --color-bg: #f5f5f7;
-      --color-bg-light: #ffffff;
-      --color-text: #1a237e;
-      --color-text-dark: #0d1440;
-      --color-text-light: #5c6bc0;
+      /* New Minimalist Color Palette */
+      --color-primary: #6366f1;
+      --color-primary-dark: #4f46e5;
+      --color-secondary: #8b5cf6;
+      --color-accent: #06b6d4;
+      --color-accent-light: #67e8f9;
       
-      /* Status Colors */
-      --color-status-buka: #4caf50;
-      --color-status-penuh: #ff9800;
-      --color-status-selesai: #2196f3;
-      --color-status-cuti: #9c27b0;
-      --color-status-tidak: #f44336;
-      --color-status-tidak-poli: #607d8b;
+      /* Neutral Colors */
+      --color-bg: #f8fafc;
+      --color-bg-light: #ffffff;
+      --color-surface: #ffffff;
+      --color-text: #1e293b;
+      --color-text-dark: #0f172a;
+      --color-text-light: #64748b;
+      
+      /* Status Colors - Soft & Modern */
+      --color-status-buka: #10b981;
+      --color-status-penuh: #f59e0b;
+      --color-status-selesai: #3b82f6;
+      --color-status-cuti: #8b5cf6;
+      --color-status-tidak: #ef4444;
+      --color-status-tidak-poli: #6b7280;
       
       /* Status Cuti Colors */
-      --color-status-akan-cuti: #ffc107;
-      --color-status-sedang-cuti: #f44336;
+      --color-status-akan-cuti: #f59e0b;
+      --color-status-sedang-cuti: #ef4444;
       
-      --color-surface: #ffffff;
-      --color-border: rgba(0, 0, 0, 0.08);
-      --color-shadow: rgba(26, 35, 126, 0.08);
+      --color-border: rgba(0, 0, 0, 0.06);
+      --color-shadow: rgba(0, 0, 0, 0.05);
       
       /* Improved spacing system */
       --spacing-xs: 8px;
@@ -41,10 +44,10 @@
       --spacing-lg: 20px;
       --spacing-xl: 24px;
       
-      /* Apple Dashboard Variables - Optimized for TV */
-      --glass-bg: rgba(255, 255, 255, 0.95);
-      --glass-border: rgba(255, 255, 255, 0.3);
-      --glass-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      /* Glassmorphism Variables */
+      --glass-bg: rgba(255, 255, 255, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
       --card-radius: 16px;
     }
 
@@ -61,8 +64,8 @@
 
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
-      background: linear-gradient(135deg, #f5f5f7 0%, #e8e8ed 100%);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #f0f4ff 0%, #f8fafc 100%);
       color: var(--color-text-dark);
       opacity: 0;
       animation: fadeInPage 1s ease forwards;
@@ -81,15 +84,16 @@
       position: fixed;
       top: 20px;
       right: 20px;
-      background: rgba(76, 175, 80, 0.95);
+      background: rgba(16, 185, 129, 0.95);
       color: white;
       padding: 12px 18px;
       border-radius: 14px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      box-shadow: var(--glass-shadow);
       z-index: 10000;
       font-weight: 600;
       display: none;
       border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
     }
 
     /* Sync Status Indicator */
@@ -97,12 +101,13 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: rgba(0,0,0,0.8);
+      background: rgba(30, 41, 59, 0.9);
       color: white;
       padding: 8px 16px;
       border-radius: 20px;
       font-size: 0.8rem;
       z-index: 1000;
+      backdrop-filter: blur(10px);
     }
 
     .sync-status.syncing::before {
@@ -110,9 +115,10 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #ff9800;
+      background: #f59e0b;
       display: inline-block;
       margin-right: 6px;
+      animation: pulse 1.5s infinite;
     }
 
     .sync-status.up-to-date::before {
@@ -120,9 +126,14 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #4CAF50;
+      background: #10b981;
       display: inline-block;
       margin-right: 6px;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
     }
 
     /* ===== ACCESSIBILITY ===== */
@@ -162,7 +173,7 @@
       top: 0;
       left: 0;
       right: 0;
-      background: #f44336;
+      background: #ef4444;
       color: white;
       padding: 10px;
       text-align: center;
@@ -176,7 +187,7 @@
       top: 0;
       left: 0;
       right: 0;
-      background: #4caf50;
+      background: #10b981;
       color: white;
       padding: 8px;
       text-align: center;
@@ -207,6 +218,7 @@
       justify-content: center;
       box-shadow: var(--glass-shadow);
       border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
     }
 
     .logo-icon {
@@ -235,11 +247,12 @@
       padding: 12px 24px;
       border-radius: 16px;
       background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
       letter-spacing: 0.8px;
       margin: 10px auto;
       display: inline-block;
+      backdrop-filter: blur(10px);
     }
 
     .particles {
@@ -262,15 +275,16 @@
       border-radius: var(--card-radius);
       box-shadow: var(--glass-shadow);
       border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
     }
 
     .loading.spinner {
       display: inline-block;
       width: 24px;
       height: 24px;
-      border: 3px solid rgba(26, 35, 126, 0.2);
+      border: 3px solid rgba(99, 102, 241, 0.2);
       border-radius: 50%;
-      border-top-color: var(--color-text);
+      border-top-color: var(--color-primary);
       animation: spin 1s ease-in-out infinite;
       margin-right: var(--spacing-sm);
       vertical-align: middle;
@@ -300,6 +314,7 @@
       );
       border-bottom-left-radius: var(--card-radius);
       border-bottom-right-radius: var(--card-radius);
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.2);
     }
 
     header h1 {
@@ -309,7 +324,7 @@
       letter-spacing: 0.5px;
       position: relative;
       z-index: 2;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
       color: white;
       padding-top: 15px;
     }
@@ -321,7 +336,7 @@
       letter-spacing: 0.5px;
       position: relative;
       z-index: 2;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
       color: white;
       padding-top: 15px;
     }
@@ -339,7 +354,7 @@
       font-size: 1rem;
       font-weight: 600;
       color: white;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       margin-bottom: 4px;
       line-height: 1.2;
     }
@@ -353,10 +368,11 @@
       border-radius: 18px;
       background: rgba(255, 255, 255, 0.15);
       color: white;
-      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
       will-change: transform;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
     }
     
     .jam-utama {
@@ -401,6 +417,7 @@
       flex-direction: column;
       height: 100%;
       will-change: transform, opacity;
+      backdrop-filter: blur(10px);
     }
 
     .section.show {
@@ -418,9 +435,9 @@
       text-align: center;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       flex-shrink: 0;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     }
 
     .table-container {
@@ -451,6 +468,7 @@
       font-size: 1.5rem;
       text-transform: uppercase;
       letter-spacing: 0.3px;
+      background: rgba(255, 255, 255, 0.8);
     }
 
     /* OPTIMIZED TABLE ALIGNMENT */
@@ -476,7 +494,7 @@
       font-weight: 600;
     }
 
-    /* OPTIMIZED STATUS STYLES */
+    /* OPTIMIZED STATUS STYLES - Aesthetic Gradient */
     .status {
       display: inline-block;
       padding: var(--spacing-xs) var(--spacing-sm);
@@ -485,104 +503,72 @@
       font-weight: 700;
       font-size: 1.2rem;
       min-width: 85px;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
       will-change: transform;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease;
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .status:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .status::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .status:hover::before {
+      left: 100%;
     }
 
     .status--buka { 
-      background: linear-gradient(135deg, var(--color-status-buka), #43a047);
+      --gradient-start: #10b981;
+      --gradient-end: #059669;
+      background: linear-gradient(135deg, #10b981, #059669, #047857);
     }
 
     .status--penuh { 
-      background: linear-gradient(135deg, var(--color-status-penuh), #fb8c00);
+      --gradient-start: #f59e0b;
+      --gradient-end: #d97706;
+      background: linear-gradient(135deg, #f59e0b, #d97706, #b45309);
     }
 
     .status--selesai { 
-      background: linear-gradient(135deg, var(--color-status-selesai), #1976d2);
+      --gradient-start: #3b82f6;
+      --gradient-end: #2563eb;
+      background: linear-gradient(135deg, #3b82f6, #2563eb, #1d4ed8);
     }
 
     .status--cuti { 
-      background: linear-gradient(135deg, var(--color-status-cuti), #7b1fa2);
+      --gradient-start: #8b5cf6;
+      --gradient-end: #7c3aed;
+      background: linear-gradient(135deg, #8b5cf6, #7c3aed, #6d28d9);
     }
 
     .status--tidak { 
-      background: linear-gradient(135deg, var(--color-status-tidak), #e53935);
+      --gradient-start: #ef4444;
+      --gradient-end: #dc2626;
+      background: linear-gradient(135deg, #ef4444, #dc2626, #b91c1c);
     }
 
     .status--tidak-poli { 
-      background: linear-gradient(135deg, var(--color-status-tidak-poli), #455a64);
+      --gradient-start: #6b7280;
+      --gradient-end: #4b5563;
+      background: linear-gradient(135deg, #6b7280, #4b5563, #374151);
     }
 
-    /* ===== APPLE DASHBOARD FOOTER ===== */
-    footer {
-      background: linear-gradient(135deg, 
-        rgba(40, 53, 147, 0.9) 0%, 
-        rgba(92, 107, 192, 0.85) 50%, 
-        rgba(236, 64, 122, 0.8) 100%);
-      color: white;
-      padding: 0;
-      overflow: hidden;
-      position: relative;
-      z-index: 2;
-      flex-shrink: 0;
-      border-top-left-radius: var(--card-radius);
-      border-top-right-radius: var(--card-radius);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .footer-container {
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* APPLE DASHBOARD CUTI SECTION */
-    .cuti-footer-section {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 12px var(--spacing-md);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      min-height: 70px;
-    }
-
-    .cuti-footer-header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: var(--spacing-sm);
-      margin-bottom: 8px;
-    }
-
-    .cuti-footer-title {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 1rem;
-      font-weight: 700;
-      color: white;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-      background: rgba(255, 255, 255, 0.15);
-      padding: 6px 12px;
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    /* APPLE DASHBOARD SCROLL CONTAINER */
-    .cuti-scroll-container {
-      overflow: hidden;
-      position: relative;
-      min-height: 60px;
-      height: 60px;
-    }
-
-    .cuti-scroll-content {
-      display: flex;
-      gap: 12px;
-      animation: scrollCuti 40s linear infinite;
-      padding: 0 var(--spacing-md);
-      will-change: transform;
-      transform: translate3d(0, 0, 0);
-    }
+   
 
     /* Auto-center optimization */
     .cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(1)) .cuti-scroll-content,
@@ -594,116 +580,217 @@
       justify-content: center;
     }
 
-    /* APPLE DASHBOARD CUTI ITEM */
-    .cuti-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.15);
-      padding: 8px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      flex-shrink: 0;
-      min-width: 220px;
-      height: 48px;
-      cursor: pointer;
-      will-change: transform;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(5px);
-    }
+   /* ===== APPLE DASHBOARD FOOTER ===== */
+footer {
+  background: linear-gradient(135deg, 
+    rgba(99, 102, 241, 0.9) 0%, 
+    rgba(139, 92, 246, 0.85) 50%, 
+    rgba(6, 182, 212, 0.8) 100%);
+  color: white;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  border-top-left-radius: var(--card-radius);
+  border-top-right-radius: var(--card-radius);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 -4px 20px rgba(99, 102, 241, 0.1);
+}
 
-    .cuti-item:hover {
-      background: rgba(255, 255, 255, 0.25);
-      transform: translateY(-2px);
-    }
+.footer-container {
+  display: flex;
+  flex-direction: column;
+}
 
-    .cuti-avatar {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #ffeb3b, #ffc107);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--color-primary-dark);
-      font-size: 0.7rem;
-      font-weight: 700;
-      flex-shrink: 0;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
+/* APPLE DASHBOARD CUTI SECTION */
+.cuti-footer-section {
+  background: rgba(255, 255, 255, 0.08); /* Lebih transparan */
+  padding: 12px var(--spacing-md);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  min-height: 70px;
+  backdrop-filter: blur(15px); /* Blur seperti jam */
+}
 
-    .cuti-info {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      flex: 1;
-      min-width: 0;
-      overflow: hidden;
-    }
+.cuti-footer-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  margin-bottom: 8px;
+}
 
-    .cuti-name-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.8rem;
-      line-height: 1;
-    }
+.cuti-footer-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.12);
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(12px); /* Blur konsisten */
+}
 
-    .cuti-dokter-name {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: white;
-      white-space: nowrap;
-    }
+/* APPLE DASHBOARD SCROLL CONTAINER */
+.cuti-scroll-container {
+  overflow: hidden;
+  position: relative;
+  min-height: 60px;
+  height: 60px;
+}
 
-    .cuti-separator {
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 0.7rem;
-    }
+.cuti-scroll-content {
+  display: flex;
+  gap: 12px;
+  animation: scrollCuti 40s linear infinite;
+  padding: 0 var(--spacing-md);
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
 
-    .cuti-spesialis {
-      font-size: 0.75rem;
-      color: rgba(255, 255, 255, 0.8);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+/* APPLE DASHBOARD CUTI ITEM */
+.cuti-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1); /* Sangat transparan */
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  flex-shrink: 0;
+  min-width: 220px;
+  height: 48px;
+  cursor: pointer;
+  will-change: transform;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(15px); /* Blur seperti jam */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
 
-    .cuti-date-row {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.7rem;
-      color: rgba(255, 255, 255, 0.9);
-      line-height: 1;
-    }
+.cuti-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  backdrop-filter: blur(20px); /* Blur lebih kuat saat hover */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
 
-    .cuti-date-icon {
-      font-size: 0.7rem;
-      opacity: 0.8;
-    }
+.cuti-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary-dark);
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+}
 
-    /* APPLE DASHBOARD CUTI BADGE STYLES */
-    .cuti-badge {
-      padding: 4px 10px;
-      border-radius: 10px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: white;
-      margin-left: 6px;
-      white-space: nowrap;
-      flex-shrink: 0;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    }
+.cuti-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
 
-    .cuti-badge.akan-cuti {
-      background: linear-gradient(135deg, var(--color-status-akan-cuti), #ff8f00);
-    }
+.cuti-name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  line-height: 1;
+}
 
-    .cuti-badge.sedang-cuti {
-      background: linear-gradient(135deg, var(--color-status-sedang-cuti), #d32f2f);
-    }
+.cuti-dokter-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: white;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.cuti-separator {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.7rem;
+}
+
+.cuti-spesialis {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.85);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cuti-date-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1;
+}
+
+.cuti-date-icon {
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+/* APPLE DASHBOARD CUTI BADGE STYLES */
+.cuti-badge {
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: white;
+  margin-left: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(5px);
+}
+
+.cuti-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.cuti-badge:hover::before {
+  left: 100%;
+}
+
+.cuti-badge.akan-cuti {
+  --gradient-start: #f59e0b;
+  --gradient-end: #d97706;
+  background: linear-gradient(135deg, #f59e0b, #d97706, #b45309);
+}
+
+.cuti-badge.sedang-cuti {
+  --gradient-start: #ef4444;
+  --gradient-end: #dc2626;
+  background: linear-gradient(135deg, #ef4444, #dc2626, #b91c1c);
+}
 
     @keyframes scrollCuti {
       0% { transform: translateX(0); }
@@ -722,6 +809,7 @@
       z-index: 1000;
       align-items: center;
       justify-content: center;
+      backdrop-filter: blur(5px);
     }
 
     .cuti-modal.active {
@@ -739,6 +827,7 @@
       box-shadow: var(--glass-shadow);
       border: 1px solid var(--glass-border);
       will-change: transform;
+      backdrop-filter: blur(10px);
     }
 
     .cuti-modal-header {
@@ -767,6 +856,11 @@
       color: var(--color-text-light);
       padding: var(--spacing-xs);
       border-radius: 8px;
+      transition: background 0.2s ease;
+    }
+
+    .cuti-modal-close:hover {
+      background: rgba(0, 0, 0, 0.05);
     }
 
     .cuti-detail-item {
@@ -784,7 +878,7 @@
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--color-status-cuti), #7b1fa2);
+      background: linear-gradient(135deg, var(--color-status-cuti), #7c3aed);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -826,16 +920,38 @@
       font-size: 0.8rem;
       font-weight: 700;
       color: white;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cuti-detail-status::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .cuti-detail-status:hover::before {
+      left: 100%;
     }
 
     .cuti-detail-status.akan-cuti {
-      background: linear-gradient(135deg, var(--color-status-akan-cuti), #ff8f00);
+      --gradient-start: #f59e0b;
+      --gradient-end: #d97706;
+      background: linear-gradient(135deg, #f59e0b, #d97706, #b45309);
     }
 
     .cuti-detail-status.sedang-cuti {
-      background: linear-gradient(135deg, var(--color-status-sedang-cuti), #d32f2f);
+      --gradient-start: #ef4444;
+      --gradient-end: #dc2626;
+      background: linear-gradient(135deg, #ef4444, #dc2626, #b91c1c);
     }
 
     /* Empty State */
@@ -871,6 +987,11 @@
       font-size: 0.9rem;
       color: white;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .error-message button:hover {
+      transform: translateY(-2px);
     }
 
     /* ===== RESPONSIVE OPTIMIZATIONS ===== */
