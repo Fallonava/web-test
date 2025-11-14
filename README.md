@@ -10,5 +10,3 @@ Aplikasi web untuk menampilkan jadwal dokter spesialis RSU Siaga Medika Purbalin
 - PWA ready
 - Accessibility features
 - Performance optimized
-
-## 📁 Struktur Project
