@@ -35,15 +35,33 @@
       --color-status-akan-cuti: #F6AD55;
       --color-status-sedang-cuti: #FC8181;
       
+      /* Semantic Colors */
+      --color-success: var(--color-status-buka);
+      --color-warning: var(--color-status-penuh);
+      --color-info: var(--color-status-selesai);
+      --color-error: var(--color-status-tidak);
+      
       --color-border: rgba(0, 0, 0, 0.08);
       --color-shadow: rgba(0, 0, 0, 0.04);
       
-      /* Improved spacing system */
-      --spacing-xs: 8px;
-      --spacing-sm: 12px;
-      --spacing-md: 16px;
-      --spacing-lg: 20px;
-      --spacing-xl: 24px;
+      /* Enhanced spacing system */
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      
+      /* Typography Scale */
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.125rem;
+      --text-xl: 1.25rem;
+      --text-2xl: 1.5rem;
+      --text-3xl: 1.875rem;
+      --text-4xl: 2.25rem;
       
       /* Glassmorphism Variables */
       --glass-bg: rgba(255, 255, 255, 0.85);
@@ -52,7 +70,7 @@
       --card-radius: 12px;
       
       /* Header Overlap Variables */
-      --header-overlap: 160px; /* Nilai overlap header */
+      --header-overlap: 150px;
     }
 
     * {
@@ -94,13 +112,13 @@
     header {
       position: relative;
       text-align: center;
-      padding: var(--spacing-md) var(--spacing-lg);
+      padding: var(--space-4) var(--space-6);
       color: white;
       font-weight: 600;
       text-transform: uppercase;
       overflow: hidden;
       z-index: 1;
-      height: 300px;
+      height: 220px;
       background: linear-gradient(
         135deg,
         var(--color-primary) 0%,
@@ -114,27 +132,27 @@
 
     header h1 {
       margin: 0;
-      font-size: 2.5rem;
+      font-size: var(--text-3xl);
       line-height: 1.1;
       letter-spacing: 0.5px;
       position: relative;
       z-index: 2;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
       color: white;
-      padding-top: 15px;
+      padding-top: var(--space-4);
       font-weight: 700;
     }
 
     header h2 {
       margin: 0;
-      font-size: 1.8rem;
+      font-size: var(--text-xl);
       line-height: 1.1;
       letter-spacing: 0.5px;
       position: relative;
       z-index: 2;
       text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
       color: white;
-      padding-top: 10px;
+      padding-top: var(--space-3);
       font-weight: 600;
     }
 
@@ -142,13 +160,13 @@
     .content-wrapper {
       flex: 1;
       display: flex;
-      padding: 0 var(--spacing-md) var(--spacing-md);
-      gap: var(--spacing-md);
+      padding: 0 var(--space-4) var(--space-4);
+      gap: var(--space-4);
       min-height: 0;
       overflow: hidden;
       position: relative;
       z-index: 3;
-      margin-top: calc(var(--header-overlap) * -1); /* Efek overlap */
+      margin-top: calc(var(--header-overlap) * -1);
     }
 
     .section {
@@ -156,7 +174,7 @@
       border: 1px solid var(--glass-border);
       border-radius: var(--card-radius);
       box-shadow: var(--glass-shadow);
-      padding: var(--spacing-sm) 0;
+      padding: var(--space-3) 0;
       flex: 1;
       min-width: 0;
       opacity: 0;
@@ -179,10 +197,10 @@
     .section h2 {
       background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
       color: white;
-      padding: var(--spacing-sm) 0;
-      margin: 0 var(--spacing-sm) var(--spacing-sm);
+      padding: var(--space-3) 0;
+      margin: 0 var(--space-3) var(--space-3);
       border-radius: var(--card-radius);
-      font-size: 1.2rem;
+      font-size: var(--text-lg);
       text-align: center;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -216,9 +234,9 @@
       right: 20px;
       background: rgba(45, 55, 72, 0.9);
       color: white;
-      padding: 8px 16px;
+      padding: var(--space-2) var(--space-4);
       border-radius: 20px;
-      font-size: 0.8rem;
+      font-size: var(--text-xs);
       z-index: 1000;
       backdrop-filter: blur(10px);
     }
@@ -256,7 +274,7 @@
       left: 10px;
       background: var(--color-primary);
       color: white;
-      padding: var(--spacing-xs) var(--spacing-sm);
+      padding: var(--space-2) var(--space-3);
       text-decoration: none;
       border-radius: 4px;
       z-index: 100;
@@ -312,12 +330,12 @@
     /* ===== OPTIMIZED LOGO ===== */
     .hospital-logo {
       position: absolute;
-      top: var(--spacing-md);
-      left: var(--spacing-lg);
+      top: var(--space-4);
+      left: var(--space-6);
       z-index: 10;
       display: flex;
       align-items: center;
-      gap: var(--spacing-sm);
+      gap: var(--space-3);
     }
 
     .logo-container {
@@ -348,22 +366,22 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: var(--text-sm);
       letter-spacing: 0.5px;
     }
 
     /* ===== OPTIMIZED DATE STYLES ===== */
     .tanggal {
-      font-size: 1.2rem;
+      font-size: var(--text-lg);
       font-weight: 600;
       color: white;
-      padding: 10px 20px;
+      padding: var(--space-3) var(--space-5);
       border-radius: var(--card-radius);
       background: rgba(255, 255, 255, 0.15);
       border: 1px solid rgba(255, 255, 255, 0.2);
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
       letter-spacing: 0.5px;
-      margin: 10px auto;
+      margin: var(--space-3) auto;
       display: inline-block;
       backdrop-filter: blur(10px);
     }
@@ -376,7 +394,7 @@
     .loading {
       display: none;
       text-align: center;
-      padding: var(--spacing-lg);
+      padding: var(--space-6);
       color: var(--color-text);
       font-weight: 600;
       position: absolute;
@@ -399,7 +417,7 @@
       border-radius: 50%;
       border-top-color: var(--color-primary);
       animation: spin 1s ease-in-out infinite;
-      margin-right: var(--spacing-sm);
+      margin-right: var(--space-3);
       vertical-align: middle;
     }
 
@@ -410,14 +428,14 @@
     /* ===== OPTIMIZED DATETIME CORNER ===== */
     .datetime-corner {
       position: absolute;
-      top: var(--spacing-md);
-      right: var(--spacing-lg);
+      top: var(--space-4);
+      right: var(--space-6);
       text-align: right;
       z-index: 10;
     }
 
     .datetime-corner .tanggal {
-      font-size: 0.9rem;
+      font-size: var(--text-sm);
       font-weight: 600;
       color: white;
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -430,7 +448,7 @@
       display: inline-flex;
       align-items: flex-end;
       gap: 6px;
-      padding: 15px 20px;
+      padding: var(--space-4) var(--space-5);
       border-radius: var(--card-radius);
       background: rgba(255, 255, 255, 0.15);
       color: white;
@@ -442,7 +460,7 @@
     }
     
     .jam-utama {
-      font-size: 2.5rem;
+      font-size: var(--text-3xl);
       font-weight: 700;
       line-height: 1;
       position: relative;
@@ -450,7 +468,7 @@
     }
     
     .jam-detik {
-      font-size: 1rem;
+      font-size: var(--text-base);
       opacity: 0.9;
       margin-bottom: 6px;
       color: rgba(255, 255, 255, 0.9);
@@ -468,8 +486,9 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.9rem;
+      font-size: var(--text-base);
       flex: 1;
+      border-spacing: 0;
     }
 
     thead {
@@ -479,20 +498,20 @@
     }
 
     th {
-      padding: var(--spacing-sm) var(--spacing-xs);
+      padding: var(--space-3) var(--space-4);
       color: var(--color-text-dark);
       font-weight: 600;
       border-bottom: 2px solid var(--color-primary-light);
-      font-size: 1.2rem;
+      font-size: var(--text-lg);
       text-transform: uppercase;
       letter-spacing: 0.3px;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
     }
 
     /* OPTIMIZED TABLE ALIGNMENT */
     .table-align-left {
       text-align: left;
-      padding-left: var(--spacing-md);
+      padding-left: var(--space-4);
     }
 
     .table-align-center {
@@ -504,52 +523,62 @@
       flex: 1;
     }
 
-    td {
-      padding: var(--spacing-xs) var(--spacing-xs);
-      border-bottom: 1px solid var(--color-border);
-      color: var(--color-text-dark);
-      font-size: 1.4rem;
-      font-weight: 500;
-      background: #FFFFFF;
+    tbody tr {
+      transition: background-color 0.15s ease;
+      vertical-align: middle;
     }
 
-    /* OPTIMIZED STATUS STYLES - Soft Pastel */
+    tbody tr:hover {
+      background-color: rgba(109, 139, 255, 0.04);
+    }
+
+    /* Zebra striping untuk readability */
+    tbody tr:nth-child(even) {
+      background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    tbody tr:nth-child(even):hover {
+      background-color: rgba(109, 139, 255, 0.06);
+    }
+
+    td {
+      padding: var(--space-3) var(--space-4);
+      border-bottom: 1px solid var(--color-border);
+      color: var(--color-text-dark);
+      font-size: var(--text-base);
+      font-weight: 500;
+      background: transparent;
+      line-height: 1.4;
+    }
+
+    /* OPTIMIZED STATUS STYLES - Simplified for TV */
     .status {
-      display: inline-block;
-      padding: var(--spacing-xs) var(--spacing-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-3);
       border-radius: 12px;
       color: white;
       font-weight: 600;
-      font-size: 1rem;
-      min-width: 80px;
+      font-size: var(--text-sm);
+      min-width: 100px;
+      min-height: 44px;
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
       will-change: transform;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
-      transition: transform 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
       position: relative;
       overflow: hidden;
+      justify-content: center;
     }
 
-    .status:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    }
-
-    .status::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.5s ease;
-    }
-
-    .status:hover::before {
-      left: 100%;
-    }
+    /* Status dengan icons */
+    .status--buku::before { content: "✅ "; }
+    .status--penuh::before { content: "🟡 "; }
+    .status--selesai::before { content: "🔵 "; }
+    .status--cuti::before { content: "🏖️ "; }
+    .status--tidak::before { content: "❌ "; }
+    .status--tidak-poli::before { content: "🚫 "; }
 
     .status--buka { 
       --gradient-start: #68D391;
@@ -585,6 +614,55 @@
       --gradient-start: #A0AEC0;
       --gradient-end: #718096;
       background: linear-gradient(135deg, #A0AEC0, #718096, #4A5568);
+    }
+
+    /* Skeleton Loading */
+    .skeleton-line {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: 4px;
+      height: 16px;
+    }
+
+    .skeleton-status {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: 12px;
+      width: 85px;
+      height: 28px;
+      margin: 0 auto;
+    }
+
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* Empty State Styles */
+    .empty-state {
+      text-align: center;
+      padding: var(--space-8) var(--space-6);
+      color: var(--color-text-light);
+    }
+
+    .empty-icon {
+      font-size: 3rem;
+      margin-bottom: var(--space-4);
+      opacity: 0.5;
+    }
+
+    .empty-message {
+      font-size: var(--text-lg);
+      font-weight: 600;
+      margin-bottom: var(--space-2);
+      color: var(--color-text);
+    }
+
+    .empty-help {
+      font-size: var(--text-sm);
+      opacity: 0.7;
     }
 
     /* Auto-center optimization */
@@ -630,7 +708,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 20px;
+      padding: var(--space-3) var(--space-5);
       background: linear-gradient(135deg, 
         rgba(109, 139, 255, 0.9) 0%, 
         rgba(255, 158, 125, 0.85) 50%, 
@@ -641,8 +719,8 @@
     .floating-footer-title {
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-size: 0.95rem;
+      gap: var(--space-3);
+      font-size: var(--text-sm);
       font-weight: 600;
       color: white;
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -653,14 +731,16 @@
       border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 8px;
       color: white;
-      width: 28px;
-      height: 28px;
+      width: 32px;
+      height: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       transition: all 0.2s ease;
       backdrop-filter: blur(5px);
+      min-height: 44px;
+      min-width: 44px;
     }
 
     .floating-footer-toggle:hover {
@@ -669,7 +749,7 @@
     }
 
     .floating-footer-content {
-      padding: 15px;
+      padding: var(--space-4);
       max-height: 200px;
       overflow: hidden;
       transition: max-height 0.4s ease;
@@ -685,14 +765,14 @@
     .floating-cuti-scroll-container {
       overflow: hidden;
       position: relative;
-      height: 70px;
+      height: 80px;
     }
 
     .floating-cuti-scroll-content {
       display: flex;
-      gap: 15px;
+      gap: var(--space-4);
       animation: scrollCuti 40s linear infinite;
-      padding: 0 10px;
+      padding: 0 var(--space-3);
       will-change: transform;
       transform: translate3d(0, 0, 0);
     }
@@ -701,14 +781,15 @@
     .floating-cuti-item {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: var(--space-3);
       background: rgba(255, 255, 255, 0.7);
-      padding: 10px 15px;
+      padding: var(--space-3) var(--space-4);
       border-radius: 14px;
       border: 1px solid rgba(255, 255, 255, 0.5);
       flex-shrink: 0;
-      min-width: 240px;
-      height: 60px;
+      min-width: 260px;
+      height: 70px;
+      min-height: 60px;
       cursor: pointer;
       will-change: transform;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -728,15 +809,15 @@
     }
 
     .floating-cuti-avatar {
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       background: linear-gradient(135deg, #6D8BFF, #7DE0FF);
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 0.8rem;
+      font-size: var(--text-sm);
       font-weight: 700;
       flex-shrink: 0;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -745,7 +826,7 @@
     .floating-cuti-info {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: var(--space-1);
       flex: 1;
       min-width: 0;
       overflow: hidden;
@@ -754,13 +835,13 @@
     .floating-cuti-name-row {
       display: flex;
       align-items: center;
-      gap: 6px;
-      font-size: 0.85rem;
+      gap: var(--space-2);
+      font-size: var(--text-sm);
       line-height: 1;
     }
 
     .floating-cuti-dokter-name {
-      font-size: 0.85rem;
+      font-size: var(--text-sm);
       font-weight: 600;
       color: var(--color-text-dark);
       white-space: nowrap;
@@ -768,11 +849,11 @@
 
     .floating-cuti-separator {
       color: var(--color-text-light);
-      font-size: 0.75rem;
+      font-size: var(--text-xs);
     }
 
     .floating-cuti-spesialis {
-      font-size: 0.8rem;
+      font-size: var(--text-xs);
       color: var(--color-text-light);
       white-space: nowrap;
       overflow: hidden;
@@ -782,25 +863,25 @@
     .floating-cuti-date-row {
       display: flex;
       align-items: center;
-      gap: 5px;
-      font-size: 0.75rem;
+      gap: var(--space-1);
+      font-size: var(--text-xs);
       color: var(--color-text);
       line-height: 1;
     }
 
     .floating-cuti-date-icon {
-      font-size: 0.75rem;
+      font-size: var(--text-xs);
       opacity: 0.7;
     }
 
     /* Floating Cuti Badge Styles */
     .floating-cuti-badge {
-      padding: 5px 12px;
+      padding: var(--space-2) var(--space-3);
       border-radius: 10px;
-      font-size: 0.75rem;
+      font-size: var(--text-xs);
       font-weight: 600;
       color: white;
-      margin-left: 6px;
+      margin-left: var(--space-2);
       white-space: nowrap;
       flex-shrink: 0;
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -810,21 +891,10 @@
       overflow: hidden;
       backdrop-filter: blur(5px);
       border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-
-    .floating-cuti-badge::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.5s ease;
-    }
-
-    .floating-cuti-badge:hover::before {
-      left: 100%;
+      min-height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .floating-cuti-badge.akan-cuti {
@@ -847,10 +917,10 @@
     /* Empty State */
     .floating-cuti-empty {
       text-align: center;
-      padding: 20px;
+      padding: var(--space-5);
       color: var(--color-text-light);
       font-style: italic;
-      font-size: 0.9rem;
+      font-size: var(--text-sm);
     }
 
     /* ===== OPTIMIZED MODAL ===== */
@@ -875,7 +945,7 @@
     .cuti-modal-content {
       background: var(--glass-bg);
       border-radius: var(--card-radius);
-      padding: var(--spacing-xl);
+      padding: var(--space-6);
       max-width: 500px;
       width: 90%;
       max-height: 80vh;
@@ -890,16 +960,16 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: var(--spacing-lg);
-      padding-bottom: var(--spacing-md);
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-4);
       border-bottom: 2px solid var(--color-border);
     }
 
     .cuti-modal-title {
       display: flex;
       align-items: center;
-      gap: var(--spacing-sm);
-      font-size: 1.3rem;
+      gap: var(--space-3);
+      font-size: var(--text-xl);
       font-weight: 600;
       color: var(--color-text-dark);
     }
@@ -907,12 +977,17 @@
     .cuti-modal-close {
       background: none;
       border: none;
-      font-size: 1.5rem;
+      font-size: var(--text-2xl);
       cursor: pointer;
       color: var(--color-text-light);
-      padding: var(--spacing-xs);
+      padding: var(--space-2);
       border-radius: 8px;
       transition: background 0.2s ease;
+      min-height: 44px;
+      min-width: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .cuti-modal-close:hover {
@@ -922,24 +997,24 @@
     .cuti-detail-item {
       display: flex;
       align-items: center;
-      gap: var(--spacing-md);
-      padding: var(--spacing-md);
+      gap: var(--space-4);
+      padding: var(--space-4);
       background: rgba(255, 255, 255, 0.6);
       border-radius: var(--card-radius);
-      margin-bottom: var(--spacing-sm);
+      margin-bottom: var(--space-3);
       border: 1px solid var(--color-border);
     }
 
     .cuti-detail-avatar {
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--color-status-cuti), #9F7AEA);
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 1.1rem;
+      font-size: var(--text-lg);
       font-weight: 700;
       flex-shrink: 0;
     }
@@ -949,31 +1024,31 @@
     }
 
     .cuti-detail-name {
-      font-size: 1.2rem;
+      font-size: var(--text-xl);
       font-weight: 600;
       color: var(--color-text-dark);
-      margin-bottom: 4px;
+      margin-bottom: var(--space-1);
     }
 
     .cuti-detail-spec {
-      font-size: 0.9rem;
+      font-size: var(--text-sm);
       color: var(--color-text-light);
-      margin-bottom: 6px;
+      margin-bottom: var(--space-2);
     }
 
     .cuti-detail-dates {
       display: flex;
       align-items: center;
-      gap: var(--spacing-sm);
-      font-size: 0.85rem;
+      gap: var(--space-3);
+      font-size: var(--text-xs);
       color: var(--color-status-cuti);
       font-weight: 600;
     }
 
     .cuti-detail-status {
-      padding: 6px 12px;
+      padding: var(--space-2) var(--space-3);
       border-radius: 20px;
-      font-size: 0.8rem;
+      font-size: var(--text-xs);
       font-weight: 600;
       color: white;
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -981,21 +1056,10 @@
       background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
       position: relative;
       overflow: hidden;
-    }
-
-    .cuti-detail-status::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.5s ease;
-    }
-
-    .cuti-detail-status:hover::before {
-      left: 100%;
+      min-height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .cuti-detail-status.akan-cuti {
@@ -1013,7 +1077,7 @@
     /* ===== ERROR STATES ===== */
     .error-message {
       text-align: center;
-      padding: var(--spacing-xl) var(--spacing-lg);
+      padding: var(--space-6) var(--space-6);
       color: var(--color-status-tidak);
       font-weight: 600;
       flex: 1;
@@ -1021,21 +1085,23 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      font-size: 1rem;
+      font-size: var(--text-base);
     }
 
     .error-message button {
       background: var(--color-secondary);
       border: none;
       border-radius: 8px;
-      padding: var(--spacing-sm) var(--spacing-lg);
-      margin-top: var(--spacing-sm);
+      padding: var(--space-3) var(--space-6);
+      margin-top: var(--space-3);
       font-weight: 600;
       cursor: pointer;
-      font-size: 0.9rem;
+      font-size: var(--text-sm);
       color: white;
       box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
       transition: transform 0.2s ease;
+      min-height: 44px;
+      min-width: 120px;
     }
 
     .error-message button:hover {
@@ -1050,14 +1116,14 @@
       }
       
       .floating-cuti-item {
-        min-width: 220px;
-        height: 55px;
-        padding: 8px 12px;
+        min-width: 240px;
+        height: 65px;
+        padding: var(--space-3) var(--space-4);
       }
       
       .hospital-logo {
-        top: var(--spacing-sm);
-        left: var(--spacing-md);
+        top: var(--space-3);
+        left: var(--space-4);
       }
       
       .logo-container {
@@ -1066,18 +1132,23 @@
       }
       
       .tanggal {
-        font-size: 1.1rem;
-        padding: 8px 16px;
+        font-size: var(--text-base);
+        padding: var(--space-2) var(--space-4);
       }
     }
 
     @media screen and (max-width: 768px) {
       :root {
-        font-size: 12px;
+        font-size: 14px;
+      }
+      
+      header {
+        height: 180px;
+        padding: var(--space-3) var(--space-4);
       }
       
       header h1 {
-        font-size: 2rem;
+        font-size: var(--text-2xl);
       }
       
       .content-wrapper {
@@ -1090,42 +1161,52 @@
       }
       
       .floating-cuti-item {
-        min-width: 200px;
-        height: 50px;
+        min-width: 220px;
+        height: 60px;
       }
       
       .floating-cuti-avatar {
-        width: 28px;
-        height: 28px;
-        font-size: 0.7rem;
+        width: 36px;
+        height: 36px;
+        font-size: var(--text-xs);
       }
       
       .floating-cuti-dokter-name,
       .floating-cuti-spesialis {
-        font-size: 0.75rem;
+        font-size: var(--text-xs);
       }
       
       .floating-cuti-date-row {
-        font-size: 0.7rem;
+        font-size: var(--text-xs);
       }
       
       .floating-cuti-badge {
-        font-size: 0.7rem;
-        padding: 4px 10px;
+        font-size: var(--text-xs);
+        padding: var(--space-1) var(--space-3);
       }
       
       .hospital-logo {
-        top: var(--spacing-xs);
-        left: var(--spacing-sm);
+        top: var(--space-2);
+        left: var(--space-3);
       }
       
       .logo-container {
-        width: 40px;
-        height: 40px;
+        width: 45px;
+        height: 45px;
       }
       
       .logo-text {
         display: none;
+      }
+
+      td {
+        padding: var(--space-2) var(--space-3);
+        font-size: var(--text-sm);
+      }
+
+      th {
+        padding: var(--space-2) var(--space-3);
+        font-size: var(--text-base);
       }
     }
 
@@ -1136,37 +1217,177 @@
       }
       
       .floating-footer-header {
-        padding: 10px 15px;
+        padding: var(--space-3) var(--space-4);
       }
       
       .floating-footer-content {
-        padding: 10px;
+        padding: var(--space-3);
       }
       
       .floating-cuti-scroll-container {
-        height: 60px;
+        height: 70px;
       }
       
       .floating-cuti-item {
-        min-width: 180px;
-        height: 45px;
-        padding: 6px 10px;
+        min-width: 200px;
+        height: 55px;
+        padding: var(--space-2) var(--space-3);
       }
       
       .floating-cuti-avatar {
-        width: 24px;
-        height: 24px;
-        font-size: 0.6rem;
+        width: 32px;
+        height: 32px;
+        font-size: var(--text-xs);
       }
       
       .hospital-logo {
-        top: 6px;
-        left: 8px;
+        top: 8px;
+        left: 10px;
       }
       
       .logo-container {
-        width: 35px;
-        height: 35px;
+        width: 40px;
+        height: 40px;
+      }
+
+      header {
+        height: 160px;
+      }
+
+      header h1 {
+        font-size: var(--text-xl);
+        padding-top: var(--space-2);
+      }
+
+      header h2 {
+        font-size: var(--text-base);
+        padding-top: var(--space-2);
+      }
+    }
+
+    /* ===== TV 43 INCH OPTIMIZATION ===== */
+    @media screen and (min-width: 1920px) and (max-height: 1080px),
+           screen and (min-width: 1920px) and (max-width: 1920px) and (max-height: 1200px) {
+      :root {
+        font-size: 18px; /* Increased for TV viewing distance */
+      }
+      
+      /* Optimasi Header */
+      header {
+        height: 180px;
+        padding: var(--space-4) var(--space-6);
+      }
+      
+      header h1 {
+        font-size: var(--text-3xl);
+        line-height: 1;
+        padding-top: var(--space-3);
+      }
+      
+      header h2 {
+        font-size: var(--text-xl);
+        line-height: 1;
+        padding-top: var(--space-2);
+      }
+      
+      .tanggal {
+        font-size: var(--text-lg);
+        padding: var(--space-2) var(--space-5);
+        margin: var(--space-2) auto;
+      }
+      
+      /* Optimasi Jam */
+      .datetime-corner {
+        top: var(--space-4);
+        right: var(--space-6);
+      }
+      
+      .datetime-corner .jam {
+        padding: var(--space-3) var(--space-5);
+      }
+      
+      .jam-utama {
+        font-size: var(--text-3xl);
+      }
+      
+      .jam-detik {
+        font-size: var(--text-base);
+        margin-bottom: var(--space-1);
+      }
+      
+      /* Optimasi Tabel */
+      .section h2 {
+        font-size: var(--text-xl);
+        padding: var(--space-3) 0;
+        margin: 0 var(--space-3) var(--space-3);
+      }
+      
+      th {
+        font-size: var(--text-lg);
+        padding: var(--space-3) var(--space-4);
+      }
+      
+      td {
+        font-size: var(--text-base);
+        padding: var(--space-3) var(--space-4);
+      }
+      
+      .status {
+        font-size: var(--text-sm);
+        min-width: 100px;
+        padding: var(--space-2) var(--space-3);
+      }
+      
+      /* Optimasi Layout */
+      .content-wrapper {
+        padding: 0 var(--space-4) var(--space-4);
+        gap: var(--space-4);
+      }
+      
+      /* Optimasi Logo */
+      .hospital-logo {
+        top: var(--space-4);
+        left: var(--space-6);
+      }
+      
+      .logo-container {
+        width: 60px;
+        height: 60px;
+      }
+      
+      .logo-icon {
+        font-size: 1.8rem;
+      }
+      
+      /* Optimasi Floating Footer */
+      .floating-footer {
+        width: 85%;
+        bottom: 30px;
+      }
+      
+      .floating-cuti-item {
+        min-width: 280px;
+        height: 75px;
+      }
+      
+      .floating-cuti-avatar {
+        width: 44px;
+        height: 44px;
+        font-size: var(--text-sm);
+      }
+      
+      .floating-cuti-dokter-name,
+      .floating-cuti-spesialis {
+        font-size: var(--text-sm);
+      }
+      
+      .floating-cuti-date-row {
+        font-size: var(--text-xs);
+      }
+      
+      .floating-cuti-badge {
+        font-size: var(--text-xs);
+        padding: var(--space-2) var(--space-4);
       }
     }
 
@@ -1203,6 +1424,10 @@
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
+
+      tbody tr:nth-child(even) {
+        background-color: #f9f9f9 !important;
+      }
     }
 
     /* Reduced motion */
@@ -1211,133 +1436,116 @@
         animation: none !important;
         transition: none !important;
       }
+      
+      .floating-cuti-scroll-content {
+        animation: none !important;
+      }
+      
+      .status:hover {
+        transform: none !important;
+      }
     }
+    
+    /* ===== PC & TV LARGE SCREEN OPTIMIZATION ===== */
+@media screen and (min-width: 1200px) {
+  :root {
+    font-size: 20px !important; /* Perbesar font dasar */
+  }
+  
+  /* PERBESAR HEADER */
+  header {
+    height: 200px;
+  }
+  
+  header h1 {
+    font-size: 2.5rem !important;
+    padding-top: 30px;
+  }
+  
+  header h2 {
+    font-size: 1.8rem !important;
+  }
+  
+  /* PERBESAR TABEL */
+  .section h2 {
+    font-size: 1.5rem !important;
+    padding: 20px 0;
+  }
+  
+  th {
+    font-size: 1.3rem !important;
+    padding: 20px 25px;
+  }
+  
+  td {
+    font-size: 1.2rem !important;
+    padding: 18px 25px;
+  }
+  
+  .status {
+    font-size: 1.1rem !important;
+    min-width: 140px;
+    padding: 12px 20px;
+  }
+  
+  /* PERBESAR & PANJANGKAN FOOTER */
+  .floating-footer {
+    width: 98% !important;
+    max-width: 1800px;
+    bottom: 35px;
+  }
+  
+  .floating-cuti-item {
+    min-width: 350px;
+    height: 90px;
+    padding: 20px 25px;
+  }
+  
+  .floating-cuti-avatar {
+    width: 55px;
+    height: 55px;
+    font-size: 1.2rem;
+  }
+  
+  .floating-cuti-dokter-name {
+    font-size: 1.2rem !important;
+  }
+  
+  .floating-cuti-spesialis {
+    font-size: 1.1rem !important;
+  }
+  
+  /* PERBESAR JAM & TANGGAL */
+  .tanggal {
+    font-size: 1.5rem !important;
+    padding: 15px 30px;
+  }
+  
+  .jam-utama {
+    font-size: 2.8rem !important;
+  }
+  
+  .jam-detik {
+    font-size: 1.3rem !important;
+  }
+}
 
-    /* ===== TV 43 INCH OPTIMIZATION ===== */
-    @media screen and (min-width: 1920px) and (max-height: 1080px),
-           screen and (min-width: 1920px) and (max-width: 1920px) and (max-height: 1200px) {
-      :root {
-        font-size: 14px;
-      }
-      
-      /* Optimasi Header */
-      header {
-        height: 120px;
-        padding: 15px 25px;
-      }
-      
-      header h1 {
-        font-size: 2.4rem;
-        line-height: 1;
-        padding-top: 12px;
-      }
-      
-      header h2 {
-        font-size: 1.6rem;
-        line-height: 1;
-        padding-top: 8px;
-      }
-      
-      .tanggal {
-        font-size: 1.1rem;
-        padding: 8px 18px;
-        margin: 8px auto;
-      }
-      
-      /* Optimasi Jam */
-      .datetime-corner {
-        top: 15px;
-        right: 20px;
-      }
-      
-      .datetime-corner .jam {
-        padding: 12px 20px;
-      }
-      
-      .jam-utama {
-        font-size: 2.4rem;
-      }
-      
-      .jam-detik {
-        font-size: 0.9rem;
-        margin-bottom: 5px;
-      }
-      
-      /* Optimasi Tabel */
-      .section h2 {
-        font-size: 1.2rem;
-        padding: 10px 0;
-        margin: 0 12px 10px;
-      }
-      
-      th {
-        font-size: 1.2rem;
-        padding: 10px 8px;
-      }
-      
-      td {
-        font-size: 1.3rem;
-        padding: 8px 6px;
-      }
-      
-      .status {
-        font-size: 1rem;
-        min-width: 75px;
-        padding: 7px 10px;
-      }
-      
-      /* Optimasi Layout */
-      .content-wrapper {
-        padding: 0 15px 15px;
-        gap: 15px;
-      }
-      
-      /* Optimasi Logo */
-      .hospital-logo {
-        top: 15px;
-        left: 20px;
-      }
-      
-      .logo-container {
-        width: 50px;
-        height: 50px;
-      }
-      
-      .logo-icon {
-        font-size: 1.6rem;
-      }
-      
-      /* Optimasi Floating Footer */
-      .floating-footer {
-        width: 85%;
-        bottom: 30px;
-      }
-      
-      .floating-cuti-item {
-        min-width: 260px;
-        height: 65px;
-      }
-      
-      .floating-cuti-avatar {
-        width: 36px;
-        height: 36px;
-        font-size: 0.9rem;
-      }
-      
-      .floating-cuti-dokter-name,
-      .floating-cuti-spesialis {
-        font-size: 0.9rem;
-      }
-      
-      .floating-cuti-date-row {
-        font-size: 0.8rem;
-      }
-      
-      .floating-cuti-badge {
-        font-size: 0.8rem;
-        padding: 6px 14px;
-      }
-    }
+/* Untuk layar VERY LARGE (TV) */
+@media screen and (min-width: 1600px) {
+  :root {
+    font-size: 22px !important;
+  }
+  
+  .floating-footer {
+    width: 99% !important;
+    max-width: 2000px;
+  }
+  
+  .floating-cuti-item {
+    min-width: 400px;
+  }
+}
+    
   </style>
 </head>
 <body>
@@ -1809,8 +2017,10 @@
       static showEmptyState() {
         const emptyHTML = `
           <tr>
-            <td colspan="4" class="error-message">
-              📝 Tidak ada data jadwal dokter yang tersedia.
+            <td colspan="4" class="empty-state">
+              <div class="empty-icon">👨‍⚕️</div>
+              <div class="empty-message">Tidak ada jadwal praktek hari ini</div>
+              <div class="empty-help">Jadwal akan tersedia saat hari praktek</div>
             </td>
           </tr>
         `;
@@ -1941,6 +2151,7 @@
         this.initializeEventDelegation();
         this.initializeModalEvents();
         this.initializeFloatingFooter();
+        this.initializeRemoteNavigation();
         
         this.updateDateTime();
         this.showSkeletonLoading();
@@ -1971,15 +2182,23 @@
           floatingFooter: document.getElementById('floatingFooter'),
           floatingFooterToggle: document.getElementById('floatingFooterToggle'),
           tanggal: document.getElementById('tanggal'),
-          jam: document.getElementById('jam')
+          jam: document.getElementById('jam'),
+          bedahBody: document.getElementById('bedahBody'),
+          nonBedahBody: document.getElementById('nonBedahBody')
         };
       },
 
       cleanup() {
-        console.log('🧹 Cleaning up application...');
-        this.resources.cleanup();
-        this.eventManager.cleanup();
-      },
+  console.log('🧹 Cleaning up application...');
+  this.resources.cleanup();
+  this.eventManager.cleanup();
+  
+  // 🔥 TAMBAHKAN BARIS INI:
+  // Bersihkan interval footer
+  if (this.footerAutoInterval) {
+    clearInterval(this.footerAutoInterval);
+  }
+},
 
       initializeOfflineDetection() {
         this.updateOnlineStatus();
@@ -2025,11 +2244,82 @@
       },
 
       initializeFloatingFooter() {
-        this.resources.addEventListener(this.elements.floatingFooterToggle, 'click', () => {
-          this.elements.floatingFooter.classList.toggle('collapsed');
-          const toggleIcon = this.elements.floatingFooterToggle.querySelector('span');
-          toggleIcon.textContent = this.elements.floatingFooter.classList.contains('collapsed') ? '+' : '−';
+  // Toggle manual
+  this.resources.addEventListener(this.elements.floatingFooterToggle, 'click', () => {
+    this.toggleFloatingFooter();
+  });
+
+  // Start siklus otomatis
+  this.startAutoFooterCycle();
+},
+
+toggleFloatingFooter() {
+  this.elements.floatingFooter.classList.toggle('collapsed');
+  const toggleIcon = this.elements.floatingFooterToggle.querySelector('span');
+  toggleIcon.textContent = this.elements.floatingFooter.classList.contains('collapsed') ? '+' : '−';
+},
+
+startAutoFooterCycle() {
+  // Buka setiap 5 menit (300,000 ms), tutup setelah 20 detik
+  const OPEN_INTERVAL = 5 * 60 * 1000; // 5 menit
+  const CLOSE_DELAY = 20 * 1000; // 20 detik
+
+  const autoCycle = () => {
+    console.log('🔄 Auto-opening floating footer');
+    
+    // Buka footer
+    if (this.elements.floatingFooter.classList.contains('collapsed')) {
+      this.elements.floatingFooter.classList.remove('collapsed');
+      this.elements.floatingFooterToggle.querySelector('span').textContent = '−';
+    }
+    
+    // Tutup setelah 20 detik
+    this.resources.setTimeout(() => {
+      if (!this.elements.floatingFooter.classList.contains('collapsed')) {
+        console.log('🔒 Auto-closing floating footer');
+        this.elements.floatingFooter.classList.add('collapsed');
+        this.elements.floatingFooterToggle.querySelector('span').textContent = '+';
+      }
+    }, CLOSE_DELAY);
+  };
+
+  // Jalankan segera sekali saat startup
+  autoCycle();
+
+  // Set interval untuk berulang setiap 5 menit
+  this.footerAutoInterval = this.resources.setInterval(autoCycle, OPEN_INTERVAL);
+},
+
+
+      initializeRemoteNavigation() {
+        this.resources.addEventListener(document, 'keydown', (e) => {
+          switch(e.key) {
+            case 'ArrowUp':
+            case 'ArrowDown':
+              e.preventDefault();
+              this.navigateTable(e.key);
+              break;
+          }
         });
+      },
+
+      navigateTable(direction) {
+        // Basic keyboard navigation untuk remote control
+        const tables = document.querySelectorAll('table');
+        const currentFocus = document.activeElement;
+        
+        if (currentFocus.tagName === 'BUTTON' || currentFocus.classList.contains('floating-cuti-item')) {
+          return; // Skip jika sudah di element yang bisa di-focus
+        }
+
+        // Focus ke tabel pertama jika belum ada focus
+        if (!currentFocus.closest('table')) {
+          const firstCell = tables[0]?.querySelector('td, th');
+          if (firstCell) {
+            firstCell.tabIndex = 0;
+            firstCell.focus();
+          }
+        }
       },
 
       async loadInitialData() {
@@ -2182,15 +2472,15 @@
       showSkeletonLoading() {
         const skeletonRow = `
           <tr class="skeleton-row">
-            <td class="table-align-left"><div class="skeleton"></div></td>
-            <td class="table-align-left"><div class="skeleton"></div></td>
-            <td class="table-align-center"><div class="skeleton" style="width: 85px; height: 28px; margin: 0 auto;"></div></td>
-            <td class="table-align-center"><div class="skeleton"></div></td>
+            <td class="table-align-left"><div class="skeleton-line" style="width: 80%"></div></td>
+            <td class="table-align-left"><div class="skeleton-line" style="width: 60%"></div></td>
+            <td class="table-align-center"><div class="skeleton-status"></div></td>
+            <td class="table-align-center"><div class="skeleton-line" style="width: 40%"></div></td>
           </tr>
         `;
         
-        document.getElementById('bedahBody').innerHTML = skeletonRow.repeat(3);
-        document.getElementById('nonBedahBody').innerHTML = skeletonRow.repeat(5);
+        this.elements.bedahBody.innerHTML = skeletonRow.repeat(3);
+        this.elements.nonBedahBody.innerHTML = skeletonRow.repeat(5);
         
         document.querySelectorAll('.section').forEach(sec => {
           sec.classList.add('show');
