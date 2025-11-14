@@ -7,35 +7,36 @@
   <meta name="description" content="Jadwal praktek dokter spesialis RSU Siaga Medika Purbalingga - Informasi terbaru jam praktek dan status dokter">
   <style>
     :root {
-      /* New Minimalist Color Palette */
-      --color-primary: #6366f1;
-      --color-primary-dark: #4f46e5;
-      --color-secondary: #8b5cf6;
-      --color-accent: #06b6d4;
-      --color-accent-light: #67e8f9;
+      /* New Color Palette - Soft Pastels */
+      --color-primary: #6D8BFF;
+      --color-primary-light: #8FA6FF;
+      --color-primary-dark: #5A75E6;
+      --color-secondary: #FF9E7D;
+      --color-accent: #7DE0FF;
+      --color-accent-light: #A5EBFF;
       
-      /* Neutral Colors */
-      --color-bg: #f8fafc;
-      --color-bg-light: #ffffff;
-      --color-surface: #ffffff;
-      --color-text: #1e293b;
-      --color-text-dark: #0f172a;
-      --color-text-light: #64748b;
+      /* Neutral Colors - Soft & Clean */
+      --color-bg: #F7F9FC;
+      --color-bg-light: #FFFFFF;
+      --color-surface: #FFFFFF;
+      --color-text: #2D3748;
+      --color-text-dark: #1A202C;
+      --color-text-light: #718096;
       
-      /* Status Colors - Soft & Modern */
-      --color-status-buka: #10b981;
-      --color-status-penuh: #f59e0b;
-      --color-status-selesai: #3b82f6;
-      --color-status-cuti: #8b5cf6;
-      --color-status-tidak: #ef4444;
-      --color-status-tidak-poli: #6b7280;
+      /* Status Colors - Soft Pastels */
+      --color-status-buka: #68D391;
+      --color-status-penuh: #F6AD55;
+      --color-status-selesai: #63B3ED;
+      --color-status-cuti: #B794F4;
+      --color-status-tidak: #FC8181;
+      --color-status-tidak-poli: #A0AEC0;
       
       /* Status Cuti Colors */
-      --color-status-akan-cuti: #f59e0b;
-      --color-status-sedang-cuti: #ef4444;
+      --color-status-akan-cuti: #F6AD55;
+      --color-status-sedang-cuti: #FC8181;
       
-      --color-border: rgba(0, 0, 0, 0.06);
-      --color-shadow: rgba(0, 0, 0, 0.05);
+      --color-border: rgba(0, 0, 0, 0.08);
+      --color-shadow: rgba(0, 0, 0, 0.04);
       
       /* Improved spacing system */
       --spacing-xs: 8px;
@@ -45,10 +46,13 @@
       --spacing-xl: 24px;
       
       /* Glassmorphism Variables */
-      --glass-bg: rgba(255, 255, 255, 0.7);
-      --glass-border: rgba(255, 255, 255, 0.2);
-      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-      --card-radius: 16px;
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(255, 255, 255, 0.25);
+      --glass-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+      --card-radius: 12px;
+      
+      /* Header Overlap Variables */
+      --header-overlap: 160px; /* Nilai overlap header */
     }
 
     * {
@@ -64,19 +68,128 @@
 
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-      background: linear-gradient(135deg, #f0f4ff 0%, #f8fafc 100%);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #F0F4FF 0%, #F7F9FC 100%);
       color: var(--color-text-dark);
       opacity: 0;
       animation: fadeInPage 1s ease forwards;
-      line-height: 1.4;
+      line-height: 1.5;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      font-weight: 400;
     }
 
     @keyframes fadeInPage {
       to { opacity: 1; }
+    }
+
+    /* ===== HEADER OVERLAP EFFECT ===== */
+    .header-container {
+      position: relative;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+
+    header {
+      position: relative;
+      text-align: center;
+      padding: var(--spacing-md) var(--spacing-lg);
+      color: white;
+      font-weight: 600;
+      text-transform: uppercase;
+      overflow: hidden;
+      z-index: 1;
+      height: 300px;
+      background: linear-gradient(
+        135deg,
+        var(--color-primary) 0%,
+        var(--color-primary-light) 50%,
+        var(--color-accent) 100%
+      );
+      border-bottom-left-radius: var(--card-radius);
+      border-bottom-right-radius: var(--card-radius);
+      box-shadow: 0 4px 15px rgba(109, 139, 255, 0.15);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      line-height: 1.1;
+      letter-spacing: 0.5px;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      color: white;
+      padding-top: 15px;
+      font-weight: 700;
+    }
+
+    header h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      line-height: 1.1;
+      letter-spacing: 0.5px;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      color: white;
+      padding-top: 10px;
+      font-weight: 600;
+    }
+
+    /* ===== CONTENT WITH HEADER OVERLAP ===== */
+    .content-wrapper {
+      flex: 1;
+      display: flex;
+      padding: 0 var(--spacing-md) var(--spacing-md);
+      gap: var(--spacing-md);
+      min-height: 0;
+      overflow: hidden;
+      position: relative;
+      z-index: 3;
+      margin-top: calc(var(--header-overlap) * -1); /* Efek overlap */
+    }
+
+    .section {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--card-radius);
+      box-shadow: var(--glass-shadow);
+      padding: var(--spacing-sm) 0;
+      flex: 1;
+      min-width: 0;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.8s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      will-change: transform, opacity;
+      backdrop-filter: blur(10px);
+      position: relative;
+      z-index: 3;
+    }
+
+    .section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section h2 {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      color: white;
+      padding: var(--spacing-sm) 0;
+      margin: 0 var(--spacing-sm) var(--spacing-sm);
+      border-radius: var(--card-radius);
+      font-size: 1.2rem;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      flex-shrink: 0;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      font-weight: 600;
     }
 
     /* Update Notification */
@@ -84,10 +197,10 @@
       position: fixed;
       top: 20px;
       right: 20px;
-      background: rgba(16, 185, 129, 0.95);
+      background: rgba(104, 211, 145, 0.95);
       color: white;
       padding: 12px 18px;
-      border-radius: 14px;
+      border-radius: 10px;
       box-shadow: var(--glass-shadow);
       z-index: 10000;
       font-weight: 600;
@@ -101,7 +214,7 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: rgba(30, 41, 59, 0.9);
+      background: rgba(45, 55, 72, 0.9);
       color: white;
       padding: 8px 16px;
       border-radius: 20px;
@@ -115,7 +228,7 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #f59e0b;
+      background: #F6AD55;
       display: inline-block;
       margin-right: 6px;
       animation: pulse 1.5s infinite;
@@ -126,7 +239,7 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #10b981;
+      background: #68D391;
       display: inline-block;
       margin-right: 6px;
     }
@@ -173,7 +286,7 @@
       top: 0;
       left: 0;
       right: 0;
-      background: #ef4444;
+      background: #FC8181;
       color: white;
       padding: 10px;
       text-align: center;
@@ -187,7 +300,7 @@
       top: 0;
       left: 0;
       right: 0;
-      background: #10b981;
+      background: #68D391;
       color: white;
       padding: 8px;
       text-align: center;
@@ -212,7 +325,7 @@
       width: 60px;
       height: 60px;
       background: var(--glass-bg);
-      border-radius: 16px;
+      border-radius: var(--card-radius);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -230,26 +343,26 @@
     }
 
     .logo-text {
-      background: linear-gradient(135deg, #ffffff, #e8eaf6);
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      font-weight: 800;
+      font-weight: 700;
       font-size: 0.9rem;
       letter-spacing: 0.5px;
     }
 
     /* ===== OPTIMIZED DATE STYLES ===== */
     .tanggal {
-      font-size: 1.4rem;
-      font-weight: 700;
+      font-size: 1.2rem;
+      font-weight: 600;
       color: white;
-      padding: 12px 24px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.1);
+      padding: 10px 20px;
+      border-radius: var(--card-radius);
+      background: rgba(255, 255, 255, 0.15);
       border: 1px solid rgba(255, 255, 255, 0.2);
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-      letter-spacing: 0.8px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      letter-spacing: 0.5px;
       margin: 10px auto;
       display: inline-block;
       backdrop-filter: blur(10px);
@@ -282,7 +395,7 @@
       display: inline-block;
       width: 24px;
       height: 24px;
-      border: 3px solid rgba(99, 102, 241, 0.2);
+      border: 3px solid rgba(109, 139, 255, 0.2);
       border-radius: 50%;
       border-top-color: var(--color-primary);
       animation: spin 1s ease-in-out infinite;
@@ -292,53 +405,6 @@
 
     @keyframes spin {
       to { transform: rotate(360deg); }
-    }
-
-    /* ===== OPTIMIZED HEADER ===== */
-    header {
-      position: relative;
-      text-align: center;
-      padding: var(--spacing-md) var(--spacing-lg);
-      color: white;
-      font-weight: 700;
-      text-transform: uppercase;
-      overflow: hidden;
-      z-index: 1;
-      flex-shrink: 0;
-      height: 140px;
-      background: linear-gradient(
-        135deg,
-        var(--color-primary) 0%,
-        var(--color-secondary) 50%,
-        var(--color-accent) 100%
-      );
-      border-bottom-left-radius: var(--card-radius);
-      border-bottom-right-radius: var(--card-radius);
-      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.2);
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 3.0rem;
-      line-height: 0.8;
-      letter-spacing: 0.5px;
-      position: relative;
-      z-index: 2;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-      color: white;
-      padding-top: 15px;
-    }
-
-    header h2 {
-      margin: 0;
-      font-size: 2.0rem;
-      line-height: 0.8;
-      letter-spacing: 0.5px;
-      position: relative;
-      z-index: 2;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-      color: white;
-      padding-top: 15px;
     }
 
     /* ===== OPTIMIZED DATETIME CORNER ===== */
@@ -351,10 +417,10 @@
     }
 
     .datetime-corner .tanggal {
-      font-size: 1rem;
+      font-size: 0.9rem;
       font-weight: 600;
       color: white;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
       margin-bottom: 4px;
       line-height: 1.2;
     }
@@ -364,11 +430,11 @@
       display: inline-flex;
       align-items: flex-end;
       gap: 6px;
-      padding: 20px 28px;
-      border-radius: 18px;
+      padding: 15px 20px;
+      border-radius: var(--card-radius);
       background: rgba(255, 255, 255, 0.15);
       color: white;
-      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
       will-change: transform;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.2);
@@ -376,7 +442,7 @@
     }
     
     .jam-utama {
-      font-size: 3.2rem;
+      font-size: 2.5rem;
       font-weight: 700;
       line-height: 1;
       position: relative;
@@ -384,60 +450,12 @@
     }
     
     .jam-detik {
-      font-size: 1.2rem;
+      font-size: 1rem;
       opacity: 0.9;
-      margin-bottom: 8px;
-      color: #e8eaf6;
+      margin-bottom: 6px;
+      color: rgba(255, 255, 255, 0.9);
       position: relative;
       z-index: 2;
-    }
-
-    /* ===== OPTIMIZED MAIN CONTENT ===== */
-    .content-wrapper {
-      flex: 1;
-      display: flex;
-      padding: var(--spacing-md);
-      gap: var(--spacing-md);
-      min-height: 0;
-      overflow: hidden;
-    }
-
-    .section {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--card-radius);
-      box-shadow: var(--glass-shadow);
-      padding: var(--spacing-sm) 0;
-      flex: 1;
-      min-width: 0;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: all 0.8s ease;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      will-change: transform, opacity;
-      backdrop-filter: blur(10px);
-    }
-
-    .section.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .section h2 {
-      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-      color: white;
-      padding: var(--spacing-sm) 0;
-      margin: 0 var(--spacing-sm) var(--spacing-sm);
-      border-radius: 14px;
-      font-size: 1.4rem;
-      text-align: center;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      flex-shrink: 0;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     }
 
     .table-container {
@@ -463,12 +481,12 @@
     th {
       padding: var(--spacing-sm) var(--spacing-xs);
       color: var(--color-text-dark);
-      font-weight: 700;
-      border-bottom: 2px solid var(--color-secondary);
-      font-size: 1.5rem;
+      font-weight: 600;
+      border-bottom: 2px solid var(--color-primary-light);
+      font-size: 1.2rem;
       text-transform: uppercase;
       letter-spacing: 0.3px;
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.9);
     }
 
     /* OPTIMIZED TABLE ALIGNMENT */
@@ -490,22 +508,23 @@
       padding: var(--spacing-xs) var(--spacing-xs);
       border-bottom: 1px solid var(--color-border);
       color: var(--color-text-dark);
-      font-size: 1.7rem;
-      font-weight: 600;
+      font-size: 1.4rem;
+      font-weight: 500;
+      background: #FFFFFF;
     }
 
-    /* OPTIMIZED STATUS STYLES - Aesthetic Gradient */
+    /* OPTIMIZED STATUS STYLES - Soft Pastel */
     .status {
       display: inline-block;
       padding: var(--spacing-xs) var(--spacing-sm);
-      border-radius: 16px;
+      border-radius: 12px;
       color: white;
-      font-weight: 700;
-      font-size: 1.2rem;
-      min-width: 85px;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      font-weight: 600;
+      font-size: 1rem;
+      min-width: 80px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
       will-change: transform;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
       transition: transform 0.2s ease;
       background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
       position: relative;
@@ -513,8 +532,8 @@
     }
 
     .status:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
     .status::before {
@@ -533,42 +552,40 @@
     }
 
     .status--buka { 
-      --gradient-start: #10b981;
-      --gradient-end: #059669;
-      background: linear-gradient(135deg, #10b981, #059669, #047857);
+      --gradient-start: #68D391;
+      --gradient-end: #48BB78;
+      background: linear-gradient(135deg, #68D391, #48BB78, #38A169);
     }
 
     .status--penuh { 
-      --gradient-start: #f59e0b;
-      --gradient-end: #d97706;
-      background: linear-gradient(135deg, #f59e0b, #d97706, #b45309);
+      --gradient-start: #F6AD55;
+      --gradient-end: #ED8936;
+      background: linear-gradient(135deg, #F6AD55, #ED8936, #DD6B20);
     }
 
     .status--selesai { 
-      --gradient-start: #3b82f6;
-      --gradient-end: #2563eb;
-      background: linear-gradient(135deg, #3b82f6, #2563eb, #1d4ed8);
+      --gradient-start: #63B3ED;
+      --gradient-end: #4299E1;
+      background: linear-gradient(135deg, #63B3ED, #4299E1, #3182CE);
     }
 
     .status--cuti { 
-      --gradient-start: #8b5cf6;
-      --gradient-end: #7c3aed;
-      background: linear-gradient(135deg, #8b5cf6, #7c3aed, #6d28d9);
+      --gradient-start: #B794F4;
+      --gradient-end: #9F7AEA;
+      background: linear-gradient(135deg, #B794F4, #9F7AEA, #805AD5);
     }
 
     .status--tidak { 
-      --gradient-start: #ef4444;
-      --gradient-end: #dc2626;
-      background: linear-gradient(135deg, #ef4444, #dc2626, #b91c1c);
+      --gradient-start: #FC8181;
+      --gradient-end: #F56565;
+      background: linear-gradient(135deg, #FC8181, #F56565, #E53E3E);
     }
 
     .status--tidak-poli { 
-      --gradient-start: #6b7280;
-      --gradient-end: #4b5563;
-      background: linear-gradient(135deg, #6b7280, #4b5563, #374151);
+      --gradient-start: #A0AEC0;
+      --gradient-end: #718096;
+      background: linear-gradient(135deg, #A0AEC0, #718096, #4A5568);
     }
-
-   
 
     /* Auto-center optimization */
     .cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(1)) .cuti-scroll-content,
@@ -580,221 +597,260 @@
       justify-content: center;
     }
 
-   /* ===== APPLE DASHBOARD FOOTER ===== */
-footer {
-  background: linear-gradient(135deg, 
-    rgba(99, 102, 241, 0.9) 0%, 
-    rgba(139, 92, 246, 0.85) 50%, 
-    rgba(6, 182, 212, 0.8) 100%);
-  color: white;
-  padding: 0;
-  overflow: hidden;
-  position: relative;
-  z-index: 2;
-  flex-shrink: 0;
-  border-top-left-radius: var(--card-radius);
-  border-top-right-radius: var(--card-radius);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 -4px 20px rgba(99, 102, 241, 0.1);
-}
+    /* ===== FLOATING MODERN FOOTER ===== */
+    .floating-footer {
+      position: fixed;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 1200px;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 20px;
+      box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.1),
+        0 1px 8px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
 
-.footer-container {
-  display: flex;
-  flex-direction: column;
-}
+    .floating-footer:hover {
+      transform: translateX(-50%) translateY(-5px);
+      box-shadow: 
+        0 15px 40px rgba(0, 0, 0, 0.15),
+        0 5px 15px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    }
 
-/* APPLE DASHBOARD CUTI SECTION */
-.cuti-footer-section {
-  background: rgba(255, 255, 255, 0.08); /* Lebih transparan */
-  padding: 12px var(--spacing-md);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  min-height: 70px;
-  backdrop-filter: blur(15px); /* Blur seperti jam */
-}
+    .floating-footer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: linear-gradient(135deg, 
+        rgba(109, 139, 255, 0.9) 0%, 
+        rgba(255, 158, 125, 0.85) 50%, 
+        rgba(125, 224, 255, 0.8) 100%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
 
-.cuti-footer-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-sm);
-  margin-bottom: 8px;
-}
+    .floating-footer-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: white;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
 
-.cuti-footer-title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 1rem;
-  font-weight: 700;
-  color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  background: rgba(255, 255, 255, 0.12);
-  padding: 6px 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(12px); /* Blur konsisten */
-}
+    .floating-footer-toggle {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      color: white;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      backdrop-filter: blur(5px);
+    }
 
-/* APPLE DASHBOARD SCROLL CONTAINER */
-.cuti-scroll-container {
-  overflow: hidden;
-  position: relative;
-  min-height: 60px;
-  height: 60px;
-}
+    .floating-footer-toggle:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
 
-.cuti-scroll-content {
-  display: flex;
-  gap: 12px;
-  animation: scrollCuti 40s linear infinite;
-  padding: 0 var(--spacing-md);
-  will-change: transform;
-  transform: translate3d(0, 0, 0);
-}
+    .floating-footer-content {
+      padding: 15px;
+      max-height: 200px;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
 
-/* APPLE DASHBOARD CUTI ITEM */
-.cuti-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.1); /* Sangat transparan */
-  padding: 8px 12px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  flex-shrink: 0;
-  min-width: 220px;
-  height: 48px;
-  cursor: pointer;
-  will-change: transform;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(15px); /* Blur seperti jam */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
+    .floating-footer.collapsed .floating-footer-content {
+      max-height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
 
-.cuti-item:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-  backdrop-filter: blur(20px); /* Blur lebih kuat saat hover */
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
+    /* Floating Cuti Scroll Container */
+    .floating-cuti-scroll-container {
+      overflow: hidden;
+      position: relative;
+      height: 70px;
+    }
 
-.cuti-avatar {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #fbbf24, #f59e0b);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-primary-dark);
-  font-size: 0.7rem;
-  font-weight: 700;
-  flex-shrink: 0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5px);
-}
+    .floating-cuti-scroll-content {
+      display: flex;
+      gap: 15px;
+      animation: scrollCuti 40s linear infinite;
+      padding: 0 10px;
+      will-change: transform;
+      transform: translate3d(0, 0, 0);
+    }
 
-.cuti-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
-}
+    /* Floating Cuti Item */
+    .floating-cuti-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 10px 15px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      flex-shrink: 0;
+      min-width: 240px;
+      height: 60px;
+      cursor: pointer;
+      will-change: transform;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(10px);
+      box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.05),
+        0 1px 3px rgba(0, 0, 0, 0.03);
+    }
 
-.cuti-name-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.8rem;
-  line-height: 1;
-}
+    .floating-cuti-item:hover {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(109, 139, 255, 0.3);
+      box-shadow: 
+        0 8px 20px rgba(0, 0, 0, 0.08),
+        0 3px 8px rgba(0, 0, 0, 0.05);
+      transform: translateY(-2px);
+    }
 
-.cuti-dokter-name {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: white;
-  white-space: nowrap;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
+    .floating-cuti-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6D8BFF, #7DE0FF);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
 
-.cuti-separator {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.7rem;
-}
+    .floating-cuti-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+    }
 
-.cuti-spesialis {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.85);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+    .floating-cuti-name-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      line-height: 1;
+    }
 
-.cuti-date-row {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 1;
-}
+    .floating-cuti-dokter-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-text-dark);
+      white-space: nowrap;
+    }
 
-.cuti-date-icon {
-  font-size: 0.7rem;
-  opacity: 0.8;
-}
+    .floating-cuti-separator {
+      color: var(--color-text-light);
+      font-size: 0.75rem;
+    }
 
-/* APPLE DASHBOARD CUTI BADGE STYLES */
-.cuti-badge {
-  padding: 4px 10px;
-  border-radius: 10px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: white;
-  margin-left: 6px;
-  white-space: nowrap;
-  flex-shrink: 0;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(5px);
-}
+    .floating-cuti-spesialis {
+      font-size: 0.8rem;
+      color: var(--color-text-light);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-.cuti-badge::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s ease;
-}
+    .floating-cuti-date-row {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.75rem;
+      color: var(--color-text);
+      line-height: 1;
+    }
 
-.cuti-badge:hover::before {
-  left: 100%;
-}
+    .floating-cuti-date-icon {
+      font-size: 0.75rem;
+      opacity: 0.7;
+    }
 
-.cuti-badge.akan-cuti {
-  --gradient-start: #f59e0b;
-  --gradient-end: #d97706;
-  background: linear-gradient(135deg, #f59e0b, #d97706, #b45309);
-}
+    /* Floating Cuti Badge Styles */
+    .floating-cuti-badge {
+      padding: 5px 12px;
+      border-radius: 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: white;
+      margin-left: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
 
-.cuti-badge.sedang-cuti {
-  --gradient-start: #ef4444;
-  --gradient-end: #dc2626;
-  background: linear-gradient(135deg, #ef4444, #dc2626, #b91c1c);
-}
+    .floating-cuti-badge::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .floating-cuti-badge:hover::before {
+      left: 100%;
+    }
+
+    .floating-cuti-badge.akan-cuti {
+      --gradient-start: #F6AD55;
+      --gradient-end: #ED8936;
+      background: linear-gradient(135deg, #F6AD55, #ED8936, #DD6B20);
+    }
+
+    .floating-cuti-badge.sedang-cuti {
+      --gradient-start: #FC8181;
+      --gradient-end: #F56565;
+      background: linear-gradient(135deg, #FC8181, #F56565, #E53E3E);
+    }
 
     @keyframes scrollCuti {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
+    }
+
+    /* Empty State */
+    .floating-cuti-empty {
+      text-align: center;
+      padding: 20px;
+      color: var(--color-text-light);
+      font-style: italic;
+      font-size: 0.9rem;
     }
 
     /* ===== OPTIMIZED MODAL ===== */
@@ -805,7 +861,7 @@ footer {
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.4);
       z-index: 1000;
       align-items: center;
       justify-content: center;
@@ -843,8 +899,8 @@ footer {
       display: flex;
       align-items: center;
       gap: var(--spacing-sm);
-      font-size: 1.5rem;
-      font-weight: 700;
+      font-size: 1.3rem;
+      font-weight: 600;
       color: var(--color-text-dark);
     }
 
@@ -868,8 +924,8 @@ footer {
       align-items: center;
       gap: var(--spacing-md);
       padding: var(--spacing-md);
-      background: rgba(255, 255, 255, 0.5);
-      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: var(--card-radius);
       margin-bottom: var(--spacing-sm);
       border: 1px solid var(--color-border);
     }
@@ -878,7 +934,7 @@ footer {
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--color-status-cuti), #7c3aed);
+      background: linear-gradient(135deg, var(--color-status-cuti), #9F7AEA);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -894,7 +950,7 @@ footer {
 
     .cuti-detail-name {
       font-size: 1.2rem;
-      font-weight: 700;
+      font-weight: 600;
       color: var(--color-text-dark);
       margin-bottom: 4px;
     }
@@ -918,10 +974,10 @@ footer {
       padding: 6px 12px;
       border-radius: 20px;
       font-size: 0.8rem;
-      font-weight: 700;
+      font-weight: 600;
       color: white;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
       background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
       position: relative;
       overflow: hidden;
@@ -943,23 +999,15 @@ footer {
     }
 
     .cuti-detail-status.akan-cuti {
-      --gradient-start: #f59e0b;
-      --gradient-end: #d97706;
-      background: linear-gradient(135deg, #f59e0b, #d97706, #b45309);
+      --gradient-start: #F6AD55;
+      --gradient-end: #ED8936;
+      background: linear-gradient(135deg, #F6AD55, #ED8936, #DD6B20);
     }
 
     .cuti-detail-status.sedang-cuti {
-      --gradient-start: #ef4444;
-      --gradient-end: #dc2626;
-      background: linear-gradient(135deg, #ef4444, #dc2626, #b91c1c);
-    }
-
-    /* Empty State */
-    .cuti-empty {
-      text-align: center;
-      padding: var(--spacing-md);
-      color: rgba(255, 255, 255, 0.7);
-      font-style: italic;
+      --gradient-start: #FC8181;
+      --gradient-end: #F56565;
+      background: linear-gradient(135deg, #FC8181, #F56565, #E53E3E);
     }
 
     /* ===== ERROR STATES ===== */
@@ -979,14 +1027,14 @@ footer {
     .error-message button {
       background: var(--color-secondary);
       border: none;
-      border-radius: 12px;
+      border-radius: 8px;
       padding: var(--spacing-sm) var(--spacing-lg);
       margin-top: var(--spacing-sm);
       font-weight: 600;
       cursor: pointer;
       font-size: 0.9rem;
       color: white;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
       transition: transform 0.2s ease;
     }
 
@@ -996,10 +1044,15 @@ footer {
 
     /* ===== RESPONSIVE OPTIMIZATIONS ===== */
     @media screen and (max-width: 1024px) {
-      .cuti-item {
-        min-width: 200px;
-        height: 44px;
-        padding: 6px 10px;
+      .floating-footer {
+        width: 95%;
+        bottom: 20px;
+      }
+      
+      .floating-cuti-item {
+        min-width: 220px;
+        height: 55px;
+        padding: 8px 12px;
       }
       
       .hospital-logo {
@@ -1013,8 +1066,8 @@ footer {
       }
       
       .tanggal {
-        font-size: 1.2rem;
-        padding: 10px 18px;
+        font-size: 1.1rem;
+        padding: 8px 16px;
       }
     }
 
@@ -1024,11 +1077,41 @@ footer {
       }
       
       header h1 {
-        font-size: 2.2rem;
+        font-size: 2rem;
       }
       
       .content-wrapper {
         flex-direction: column;
+      }
+      
+      .floating-footer {
+        width: 92%;
+        bottom: 15px;
+      }
+      
+      .floating-cuti-item {
+        min-width: 200px;
+        height: 50px;
+      }
+      
+      .floating-cuti-avatar {
+        width: 28px;
+        height: 28px;
+        font-size: 0.7rem;
+      }
+      
+      .floating-cuti-dokter-name,
+      .floating-cuti-spesialis {
+        font-size: 0.75rem;
+      }
+      
+      .floating-cuti-date-row {
+        font-size: 0.7rem;
+      }
+      
+      .floating-cuti-badge {
+        font-size: 0.7rem;
+        padding: 4px 10px;
       }
       
       .hospital-logo {
@@ -1047,6 +1130,35 @@ footer {
     }
 
     @media screen and (max-width: 480px) {
+      .floating-footer {
+        width: 90%;
+        bottom: 10px;
+      }
+      
+      .floating-footer-header {
+        padding: 10px 15px;
+      }
+      
+      .floating-footer-content {
+        padding: 10px;
+      }
+      
+      .floating-cuti-scroll-container {
+        height: 60px;
+      }
+      
+      .floating-cuti-item {
+        min-width: 180px;
+        height: 45px;
+        padding: 6px 10px;
+      }
+      
+      .floating-cuti-avatar {
+        width: 24px;
+        height: 24px;
+        font-size: 0.6rem;
+      }
+      
       .hospital-logo {
         top: 6px;
         left: 8px;
@@ -1063,7 +1175,7 @@ footer {
       .particles,
       .controls,
       .loading,
-      footer,
+      .floating-footer,
       .datetime-corner,
       .cuti-modal,
       .hospital-logo,
@@ -1115,20 +1227,20 @@ footer {
       }
       
       header h1 {
-        font-size: 2.8rem;
+        font-size: 2.4rem;
         line-height: 1;
         padding-top: 12px;
       }
       
       header h2 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         line-height: 1;
         padding-top: 8px;
       }
       
       .tanggal {
-        font-size: 1.3rem;
-        padding: 10px 20px;
+        font-size: 1.1rem;
+        padding: 8px 18px;
         margin: 8px auto;
       }
       
@@ -1139,39 +1251,39 @@ footer {
       }
       
       .datetime-corner .jam {
-        padding: 15px 25px;
+        padding: 12px 20px;
       }
       
       .jam-utama {
-        font-size: 2.8rem;
+        font-size: 2.4rem;
       }
       
       .jam-detik {
-        font-size: 1.1rem;
-        margin-bottom: 6px;
+        font-size: 0.9rem;
+        margin-bottom: 5px;
       }
       
       /* Optimasi Tabel */
       .section h2 {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         padding: 10px 0;
         margin: 0 12px 10px;
       }
       
       th {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         padding: 10px 8px;
       }
       
       td {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         padding: 8px 6px;
       }
       
       .status {
-        font-size: 1.1rem;
-        min-width: 80px;
-        padding: 8px 12px;
+        font-size: 1rem;
+        min-width: 75px;
+        padding: 7px 10px;
       }
       
       /* Optimasi Layout */
@@ -1187,49 +1299,43 @@ footer {
       }
       
       .logo-container {
-        width: 55px;
-        height: 55px;
+        width: 50px;
+        height: 50px;
       }
       
       .logo-icon {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
       }
       
-      /* Optimasi Footer */
-      .cuti-footer-section {
-        padding: 10px 15px;
-        min-height: 65px;
+      /* Optimasi Floating Footer */
+      .floating-footer {
+        width: 85%;
+        bottom: 30px;
       }
       
-      .cuti-scroll-container {
-        min-height: 55px;
-        height: 55px;
+      .floating-cuti-item {
+        min-width: 260px;
+        height: 65px;
       }
       
-      .cuti-item {
-        min-width: 210px;
-        height: 45px;
-        padding: 7px 11px;
+      .floating-cuti-avatar {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
       }
       
-      .cuti-avatar {
-        width: 22px;
-        height: 22px;
-        font-size: 0.65rem;
+      .floating-cuti-dokter-name,
+      .floating-cuti-spesialis {
+        font-size: 0.9rem;
       }
       
-      .cuti-dokter-name,
-      .cuti-spesialis {
-        font-size: 0.75rem;
+      .floating-cuti-date-row {
+        font-size: 0.8rem;
       }
       
-      .cuti-date-row {
-        font-size: 0.65rem;
-      }
-      
-      .cuti-badge {
-        font-size: 0.65rem;
-        padding: 3px 8px;
+      .floating-cuti-badge {
+        font-size: 0.8rem;
+        padding: 6px 14px;
       }
     }
   </style>
@@ -1269,13 +1375,16 @@ footer {
     <div class="logo-text"></div>
   </div>
 
-  <header>
-    <h1>INFORMASI PRAKTEK DOKTER SPESIALIS</h1>
-    <h2 class="tanggal" id="tanggal"></h2>
-    <div class="datetime-corner">
-      <div class="jam" id="jam"></div>
-    </div>
-  </header>
+  <!-- Header Container -->
+  <div class="header-container">
+    <header>
+      <h1>INFORMASI PRAKTEK DOKTER SPESIALIS</h1>
+      <h2 class="tanggal" id="tanggal"></h2>
+      <div class="datetime-corner">
+        <div class="jam" id="jam"></div>
+      </div>
+    </header>
+  </div>
 
   <div class="loading" id="loadingIndicator">
     <span class="spinner"></span>
@@ -1322,23 +1431,25 @@ footer {
     </div>
   </div>
 
-  <footer>
-    <div class="footer-container">
-      <div class="cuti-footer-section">
-        <div class="cuti-footer-header">
-          <div class="cuti-footer-title">
-            <span>🏖️</span>
-            <span>Informasi Cuti Dokter</span>
-          </div>
-        </div>
-        <div class="cuti-scroll-container">
-          <div class="cuti-scroll-content" id="cutiScrollContent">
-            <!-- Cuti doctors will be loaded here -->
-          </div>
+  <!-- Floating Footer -->
+  <div class="floating-footer" id="floatingFooter">
+    <div class="floating-footer-header">
+      <div class="floating-footer-title">
+        <span>🏖️</span>
+        <span>Informasi Cuti Dokter</span>
+      </div>
+      <div class="floating-footer-toggle" id="floatingFooterToggle">
+        <span>−</span>
+      </div>
+    </div>
+    <div class="floating-footer-content">
+      <div class="floating-cuti-scroll-container">
+        <div class="floating-cuti-scroll-content" id="floatingCutiScrollContent">
+          <!-- Cuti doctors will be loaded here -->
         </div>
       </div>
     </div>
-  </footer>
+  </div>
 
   <!-- Cuti Detail Modal -->
   <div class="cuti-modal" id="cutiDetailModal">
@@ -1710,10 +1821,10 @@ footer {
       }
 
       static displayCutiDoctors(data) {
-        const cutiContainer = document.getElementById('cutiScrollContent');
+        const cutiContainer = document.getElementById('floatingCutiScrollContent');
         
         if (!data || !Array.isArray(data) || data.length === 0) {
-          cutiContainer.innerHTML = '<div class="cuti-empty">Tidak ada dokter yang sedang cuti</div>';
+          cutiContainer.innerHTML = '<div class="floating-cuti-empty">Tidak ada dokter yang sedang cuti</div>';
           return;
         }
 
@@ -1734,25 +1845,25 @@ footer {
               const badgeText = statusCuti === 'akan-cuti' ? 'AKAN CUTI' : 'SEDANG CUTI';
               
               const cutiItem = document.createElement('div');
-              cutiItem.className = 'cuti-item';
+              cutiItem.className = 'floating-cuti-item';
               cutiItem.setAttribute('data-dokter', Utils.escapeHtml(namaDokter));
               cutiItem.setAttribute('data-spesialis', Utils.escapeHtml(spesialis));
               cutiItem.setAttribute('data-tanggal', Utils.escapeHtml(tanggalCuti));
               cutiItem.setAttribute('data-status', badgeClass);
               cutiItem.innerHTML = `
-                <div class="cuti-avatar">${Utils.getInitials(namaDokter)}</div>
-                <div class="cuti-info">
-                  <div class="cuti-name-row">
-                    <span class="cuti-dokter-name">${Utils.escapeHtml(namaDokter)}</span>
-                    <span class="cuti-separator">-</span>
-                    <span class="cuti-spesialis">${Utils.escapeHtml(spesialis)}</span>
+                <div class="floating-cuti-avatar">${Utils.getInitials(namaDokter)}</div>
+                <div class="floating-cuti-info">
+                  <div class="floating-cuti-name-row">
+                    <span class="floating-cuti-dokter-name">${Utils.escapeHtml(namaDokter)}</span>
+                    <span class="floating-cuti-separator">-</span>
+                    <span class="floating-cuti-spesialis">${Utils.escapeHtml(spesialis)}</span>
                   </div>
-                  <div class="cuti-date-row">
-                    <span class="cuti-date-icon">📅</span>
+                  <div class="floating-cuti-date-row">
+                    <span class="floating-cuti-date-icon">📅</span>
                     <span>${Utils.escapeHtml(tanggalCuti)}</span>
                   </div>
                 </div>
-                <div class="cuti-badge ${badgeClass}">${badgeText}</div>
+                <div class="floating-cuti-badge ${badgeClass}">${badgeText}</div>
               `;
               
               fragment.appendChild(cutiItem);
@@ -1767,7 +1878,7 @@ footer {
           cutiContainer.appendChild(fragment);
           
           if (validItems === 0) {
-            cutiContainer.innerHTML = '<div class="cuti-empty">Tidak ada data cuti yang valid</div>';
+            cutiContainer.innerHTML = '<div class="floating-cuti-empty">Tidak ada data cuti yang valid</div>';
           }
         });
       }
@@ -1829,6 +1940,7 @@ footer {
         this.initializeOfflineDetection();
         this.initializeEventDelegation();
         this.initializeModalEvents();
+        this.initializeFloatingFooter();
         
         this.updateDateTime();
         this.showSkeletonLoading();
@@ -1855,7 +1967,9 @@ footer {
           cutiModal: document.getElementById('cutiDetailModal'),
           cutiModalClose: document.getElementById('cutiModalClose'),
           cutiDetailContent: document.getElementById('cutiDetailContent'),
-          cutiScrollContent: document.getElementById('cutiScrollContent'),
+          floatingCutiScrollContent: document.getElementById('floatingCutiScrollContent'),
+          floatingFooter: document.getElementById('floatingFooter'),
+          floatingFooterToggle: document.getElementById('floatingFooterToggle'),
           tanggal: document.getElementById('tanggal'),
           jam: document.getElementById('jam')
         };
@@ -1887,9 +2001,9 @@ footer {
 
       initializeEventDelegation() {
         this.eventManager.addDelegatedEvent(
-          this.elements.cutiScrollContent,
+          this.elements.floatingCutiScrollContent,
           'click',
-          '.cuti-item',
+          '.floating-cuti-item',
           (e, target) => {
             const dokter = target.getAttribute('data-dokter');
             const spesialis = target.getAttribute('data-spesialis');
@@ -1907,6 +2021,14 @@ footer {
         });
         this.resources.addEventListener(this.elements.cutiModal, 'click', (e) => {
           if (e.target === this.elements.cutiModal) this.closeCutiModal();
+        });
+      },
+
+      initializeFloatingFooter() {
+        this.resources.addEventListener(this.elements.floatingFooterToggle, 'click', () => {
+          this.elements.floatingFooter.classList.toggle('collapsed');
+          const toggleIcon = this.elements.floatingFooterToggle.querySelector('span');
+          toggleIcon.textContent = this.elements.floatingFooter.classList.contains('collapsed') ? '+' : '−';
         });
       },
 
