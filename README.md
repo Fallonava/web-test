@@ -2,8 +2,6 @@
 
 Aplikasi web modern untuk menampilkan jadwal praktek dokter spesialis di RSU Siaga Medika Purbalingga.
 
-https://img.shields.io/badge/version-1.0.0-blue.svg
-https://img.shields.io/badge/license-MIT-green.svg
 
 ✨ Fitur
 
