@@ -1,0 +1,92 @@
+// ==================== OPTIMIZED UTILITY FUNCTIONS ====================
+const Utils = {
+  escapeHtml(text) {
+    if (text == null) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  },
+
+  getInitials(name) {
+    if (!name) return 'DR';
+    return name
+      .split(/\s+/)
+      .map(word => word.charAt(0))
+      .join('')
+      .toUpperCase()
+      .substring(0, 2);
+  },
+
+  debounce(func, wait, immediate = false) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        timeout = null;
+        if (!immediate) func(...args);
+      };
+      const callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func(...args);
+    };
+  },
+
+  throttle(func, limit) {
+    let inThrottle;
+    return function(...args) {
+      if (!inThrottle) {
+        func.apply(this, args);
+        inThrottle = true;
+        setTimeout(() => inThrottle = false, limit);
+      }
+    };
+  },
+
+  determineCutiStatus(doctor) {
+    const statusCuti = doctor.StatusCuti || '';
+    const tanggalCuti = doctor.Tanggal || '';
+    const today = new Date();
+    
+    if (statusCuti.toLowerCase().includes('akan')) {
+      return 'akan-cuti';
+    }
+    if (statusCuti.toLowerCase().includes('sedang')) {
+      return 'sedang-cuti';
+    }
+    
+    const dateMatch = tanggalCuti.match(/(\d{1,2})\s*[-–]\s*(\d{1,2})\s+([A-Za-z]+)/i);
+    if (dateMatch) {
+      const startDay = parseInt(dateMatch[1]);
+      const endDay = parseInt(dateMatch[2]);
+      const monthName = dateMatch[3].toLowerCase();
+      
+      const monthMap = {
+        'januari': 0, 'februari': 1, 'maret': 2, 'april': 3,
+        'mei': 4, 'juni': 5, 'juli': 6, 'agustus': 7,
+        'september': 8, 'oktober': 9, 'november': 10, 'desember': 11
+      };
+      
+      const currentMonth = today.getMonth();
+      const currentDay = today.getDate();
+      const cutiMonth = monthMap[monthName];
+      
+      if (cutiMonth !== undefined) {
+        if (cutiMonth > currentMonth) {
+          return 'akan-cuti';
+        } else if (cutiMonth === currentMonth) {
+          if (currentDay < startDay) {
+            return 'akan-cuti';
+          } else if (currentDay >= startDay && currentDay <= endDay) {
+            return 'sedang-cuti';
+          } else {
+            return 'sedang-cuti';
+          }
+        } else {
+          return 'sedang-cuti';
+        }
+      }
+    }
+    
+    return 'sedang-cuti';
+  }
+};
