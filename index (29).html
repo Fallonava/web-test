@@ -1,0 +1,4661 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INFO JADWAL PRAKTEK DOKTER SPESIALIS - RSU SIAGA MEDIKA PURBALINGGA</title>
+  <meta name="description" content="Jadwal praktek dokter spesialis RSU Siaga Medika Purbalingga - Informasi terbaru jam praktek dan status dokter">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Material Symbols v3 -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+<style>
+  :root {
+  /* New Color Palette - Soft Pastels */
+  --color-primary: #6D8BFF;
+  --color-primary-light: #8FA6FF;
+  --color-primary-dark: #5A75E6;
+  --color-secondary: #FF9E7D;
+  --color-accent: #7DE0FF;
+  --color-accent-light: #A5EBFF;
+  
+  /* Neutral Colors - Soft & Clean */
+  --color-bg: #F7F9FC;
+  --color-bg-light: #FFFFFF;
+  --color-surface: #FFFFFF;
+  --color-text: #2D3748;
+  --color-text-dark: #1A202C;
+  --color-text-light: #718096;
+  
+  /* Status Colors - Soft Pastels */
+  --color-status-buka: #68D391;
+  --color-status-penuh: #F6AD55;
+  --color-status-selesai: #63B3ED;
+  --color-status-tidak: #B794F4;
+  --color-status-cuti: #FC8181;
+  --color-status-tidak-poli: #A0AEC0;
+  
+  /* Status Cuti Colors */
+  --color-status-akan-cuti: #F6AD55;
+  --color-status-sedang-cuti: #FC8181;
+  
+  /* Semantic Colors */
+  --color-success: var(--color-status-buka);
+  --color-warning: var(--color-status-penuh);
+  --color-info: var(--color-status-selesai);
+  --color-error: var(--color-status-tidak);
+  
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-shadow: rgba(0, 0, 0, 0.04);
+  
+  /* Enhanced spacing system */
+  --space-1: 4px;
+  --space-2: 6px;
+  --space-2x: 10px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  
+  /* Typography Scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  
+  /* Glassmorphism Variables */
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.25);
+  --glass-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  --card-radius: 12px;
+  
+  /* Header Overlap Variables */
+  --header-overlap: 60px;
+  
+  /* Optimasi GPU */
+  --gpu-accelerate: translate3d(0, 0, 0);
+  --smooth-scroll: smooth;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+  max-width: 100vw;
+  scroll-behavior: var(--smooth-scroll);
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #F0F4FF 0%, #F7F9FC 100%);
+  color: var(--color-text-dark);
+  opacity: 0;
+  animation: fadeInPage 1s ease forwards;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-weight: 400;
+}
+
+@keyframes fadeInPage {
+  to { opacity: 1; }
+}
+
+/* ===== HEADER OVERLAP EFFECT ===== */
+.header-container {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+header {
+  position: relative;
+  text-align: center;
+  padding: var(--space-4) var(--space-6);
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  overflow: hidden;
+  z-index: 1;
+  height: 220px;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-primary-light) 50%,
+    var(--color-accent) 100%
+  );
+  border-bottom-left-radius: var(--card-radius);
+  border-bottom-right-radius: var(--card-radius);
+  box-shadow: 0 4px 15px rgba(109, 139, 255, 0.15);
+}
+
+header h1 {
+  margin: 0;
+  font-size: var(--text-3xl);
+  line-height: 1.1;
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  color: white;
+  padding-top: var(--space-4);
+  font-weight: 700;
+}
+
+header h2 {
+  margin: 0;
+  font-size: var(--text-xl);
+  line-height: 1.1;
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  color: white;
+  padding-top: var(--space-3);
+  font-weight: 600;
+}
+
+/* ===== CONTENT WITH HEADER OVERLAP ===== */
+.content-wrapper {
+  flex: 1;
+  display: flex;
+  padding: 0 var(--space-4) var(--space-4);
+  gap: var(--space-4);
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 3;
+  margin-top: calc(var(--header-overlap) * -1);
+}
+
+.section {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--glass-shadow);
+  padding: var(--space-3) 0;
+  flex: 1;
+  min-width: 0;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.8s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  z-index: 3;
+}
+
+.section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section h2 {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  color: white;
+  padding: var(--space-3) 0;
+  margin: 0 var(--space-3) var(--space-3);
+  border-radius: var(--card-radius);
+  font-size: var(--text-lg);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  font-weight: 600;
+}
+
+/* Update Notification */
+.update-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(104, 211, 145, 0.95);
+  color: white;
+  padding: 12px 18px;
+  border-radius: 10px;
+  box-shadow: var(--glass-shadow);
+  z-index: 10000;
+  font-weight: 600;
+  display: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Sync Status Indicator */
+.sync-status {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(45, 55, 72, 0.9);
+  color: white;
+  padding: var(--space-2) var(--space-4);
+  border-radius: 20px;
+  font-size: var(--text-xs);
+  z-index: 1000;
+   
+}
+
+.sync-status.syncing::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #F6AD55;
+  display: inline-block;
+  margin-right: 6px;
+  animation: pulse 1.5s infinite;
+}
+
+.sync-status.up-to-date::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #68D391;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ===== ACCESSIBILITY ===== */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 10px;
+  background: var(--color-primary);
+  color: white;
+  padding: var(--space-2) var(--space-3);
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 100;
+  font-weight: 600;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 10px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Offline/Online Banners */
+.offline-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #FC8181;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  z-index: 10000;
+  font-weight: bold;
+  display: none;
+}
+
+.online-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #68D391;
+  color: white;
+  padding: 8px;
+  text-align: center;
+  z-index: 10000;
+  font-weight: bold;
+  display: none;
+}
+
+/* ===== OPTIMIZED LOGO WITH MATERIAL SYMBOLS ===== */
+.hospital-logo {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-6);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.logo-container {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background: var(--glass-bg);
+  border-radius: var(--card-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--glass-shadow);
+  border: 1px solid var(--glass-border);
+   
+  transition: all 0.3s ease;
+}
+
+.logo-container:hover {
+  box-shadow: 0 8px 25px rgba(109, 139, 255, 0.15);
+}
+
+.logo-icon {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2.5rem;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.logo-text {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  font-size: var(--text-sm);
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== OPTIMIZED DATE STYLES ===== */
+.tanggal {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: white;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--card-radius);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.5px;
+  margin: var(--space-3) auto;
+  display: inline-block;
+   
+}
+
+.particles {
+  display: none;
+}
+
+/* ===== OPTIMIZED LOADING ===== */
+.loading {
+  display: none;
+  text-align: center;
+  padding: var(--space-6);
+  color: var(--color-text);
+  font-weight: 600;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  background: var(--glass-bg);
+  border-radius: var(--card-radius);
+  box-shadow: var(--glass-shadow);
+  border: 1px solid var(--glass-border);
+   
+}
+
+.loading.spinner {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(109, 139, 255, 0.2);
+  border-radius: 50%;
+  border-top-color: var(--color-primary);
+  animation: spin 1s ease-in-out infinite;
+  margin-right: var(--space-3);
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== OPTIMIZED DATETIME CORNER ===== */
+.datetime-corner {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-6);
+  text-align: right;
+  z-index: 10;
+}
+
+.datetime-corner .tanggal {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+.datetime-corner .jam {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 6px;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--card-radius);
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+   
+}
+
+.jam-utama {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  line-height: 1;
+  position: relative;
+  z-index: 2;
+}
+
+.jam-detik {
+  font-size: var(--text-base);
+  opacity: 0.9;
+  margin-bottom: 6px;
+  color: rgba(255, 255, 255, 0.9);
+  position: relative;
+  z-index: 2;
+}
+
+.table-container {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transform: var(--gpu-accelerate);
+  scroll-behavior: var(--smooth-scroll);
+  padding-bottom: 60px; /* TAMBAHKAN INI */
+  position: relative;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-base);
+  flex: 1;
+  border-spacing: 0;
+}
+
+thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+th {
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text-dark);
+  font-weight: 600;
+  border-bottom: 2px solid var(--color-primary-light);
+  font-size: var(--text-lg);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+/* OPTIMIZED TABLE ALIGNMENT */
+.table-align-left {
+  text-align: left;
+  padding-left: var(--space-4);
+}
+
+.table-align-center {
+  text-align: center;
+}
+
+tbody {
+  overflow-y: auto;
+  flex: 1;
+}
+
+tbody tr {
+  transition: background-color 0.15s ease;
+  vertical-align: middle;
+}
+
+tbody tr:hover {
+  background-color: rgba(109, 139, 255, 0.04);
+}
+
+/* Zebra striping untuk readability */
+tbody tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+tbody tr:nth-child(even):hover {
+  background-color: rgba(109, 139, 255, 0.06);
+}
+
+/* ===== ENHANCED STATUS VISUAL HIERARCHY ===== */
+/* Untuk dokter dengan status BUKA - border hijau */
+tbody tr:has(.status--buka) {
+  border-left: 4px solid var(--color-status-buka);
+}
+
+tbody tr:has(.status--buka) td {
+  opacity: 1;
+  color: var(--color-text-dark);
+  font-weight: 500;
+}
+
+/* Untuk dokter dengan status PENUH - border orange */
+tbody tr:has(.status--penuh) {
+  border-left: 4px solid var(--color-status-penuh);
+}
+
+/* Untuk dokter dengan status SELESAI - border blue */
+tbody tr:has(.status--selesai) {
+  border-left: 4px solid var(--color-status-selesai);
+}
+
+/* Untuk dokter dengan status CUTI - border merah */
+tbody tr:has(.status--cuti) {
+  border-left: 4px solid var(--color-status-cuti);
+}
+
+/* Untuk dokter dengan status TIDAK - border purple */
+tbody tr:has(.status--tidak) {
+  border-left: 4px solid var(--color-status-tidak);
+}
+
+/* Untuk dokter dengan status TIDAK POLI - border gray */
+tbody tr:has(.status--tidak-poli) {
+  border-left: 4px solid var(--color-status-tidak-poli);
+}
+
+/* Teks redup untuk semua status selain BUKA */
+tbody tr:not(:has(.status--buka)) td {
+  opacity: 0.7;
+  color: var(--color-text-light);
+}
+
+/* Default border untuk rows tanpa status khusus */
+tbody tr {
+  border-left: 4px solid transparent;
+}
+
+/* Hover effect subtle */
+tbody tr:not(:has(.status--buka)):hover {
+  opacity: 0.9;
+}
+
+/* Pastikan status badge tetap visible */
+tbody tr .status {
+  opacity: 1;
+}
+
+td {
+  padding: var(--space-2x) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-dark);
+  font-size: var(--text-base);
+  font-weight: 500;
+  background: transparent;
+  line-height: 1.4;
+}
+
+/* ===== MATERIAL ICONS FOR STATUS ===== */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+  font-size: var(--text-sm);
+  min-width: 100px;
+  min-height: 44px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  position: relative;
+  overflow: hidden;
+  justify-content: center;
+}
+
+/* Material Icons Base Style */
+.status::before {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.2em;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  vertical-align: middle;
+}
+
+/* Status dengan Material Icons */
+.status--buka::before { content: "check_circle"; }
+.status--penuh::before { content: "warning"; }
+.status--selesai::before { content: "schedule"; }
+.status--cuti::before { content: "beach_access"; }
+.status--tidak::before { content: "medication"; }
+.status--tidak-poli::before { content: "block"; }
+
+/* Status Colors tetap sama */
+.status--buka { 
+  --gradient-start: #68D391;
+  --gradient-end: #48BB78;
+  background: linear-gradient(135deg, #68D391, #48BB78, #38A169);
+}
+
+.status--penuh { 
+  --gradient-start: #F6AD55;
+  --gradient-end: #ED8936;
+  background: linear-gradient(135deg, #F6AD55, #ED8936, #DD6B20);
+}
+
+.status--selesai { 
+  --gradient-start: #63B3ED;
+  --gradient-end: #4299E1;
+  background: linear-gradient(135deg, #63B3ED, #4299E1, #3182CE);
+}
+
+.status--tidak { 
+  --gradient-start: #B794F4;
+  --gradient-end: #9F7AEA;
+  background: linear-gradient(135deg, #B794F4, #9F7AEA, #805AD5);
+}
+
+.status--cuti { 
+  --gradient-start: #FC8181;
+  --gradient-end: #F56565;
+  background: linear-gradient(135deg, #FC8181, #F56565, #E53E3E);
+}
+
+.status--tidak-poli { 
+  --gradient-start: #A0AEC0;
+  --gradient-end: #718096;
+  background: linear-gradient(135deg, #A0AEC0, #718096, #4A5568);
+}
+
+/* Skeleton Loading */
+.skeleton-line {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite ease-in-out;
+  border-radius: 4px;
+  height: 16px;
+}
+
+.skeleton-status {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite ease-in-out;
+  border-radius: 12px;
+  width: 85px;
+  height: 28px;
+  margin: 0 auto;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Empty State Styles */
+.empty-state {
+  text-align: center;
+  padding: var(--space-8) var(--space-6);
+  color: var(--color-text-light);
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-4);
+  opacity: 0.5;
+}
+
+.empty-message {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+  color: var(--color-text);
+}
+
+.empty-help {
+  font-size: var(--text-sm);
+  opacity: 0.7;
+}
+
+/* Auto-center optimization */
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(1)) .cuti-scroll-content,
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(2)) .cuti-scroll-content,
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(3)) .cuti-scroll-content,
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(4)) .cuti-scroll-content,
+.cuti-scroll-container:has(.cuti-item:nth-child(1):nth-last-child(5)) .cuti-scroll-content {
+  animation: none;
+  justify-content: center;
+}
+
+/* ===== FLOATING MODERN FOOTER ===== */
+.floating-footer {
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1200px;
+  z-index: 100;
+  background: rgb(255, 255, 255);
+  border-radius: 20px;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.1),
+    0 1px 8px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.floating-footer:hover {
+  transform: translateX(-50%) translateY(-5px);
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.15),
+    0 5px 15px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.floating-footer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-5);
+  background: linear-gradient(135deg, 
+    rgba(109, 139, 255, 0.9) 0%, 
+    rgba(255, 158, 125, 0.85) 50%, 
+    rgba(125, 224, 255, 0.8) 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.floating-footer-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.floating-footer-toggle {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  color: white;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+   
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.floating-footer-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.floating-footer-content {
+  padding: var(--space-4);
+  max-height: 200px;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.floating-footer.collapsed .floating-footer-content {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* Floating Cuti Scroll Container */
+.floating-cuti-scroll-container {
+  overflow: hidden;
+  position: relative;
+  height: 80px;
+}
+
+.floating-cuti-scroll-content {
+  display: flex;
+  gap: var(--space-4);
+  /*animation: scrollCuti 120s linear infinite;*/
+  padding: 0 var(--space-3);
+  transform: var(--gpu-accelerate);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  justify-content: center; /* TAMBAHKAN INI */
+  align-items: center; /* TAMBAHKAN INI */
+  flex-wrap: nowrap;
+  height: 100%;
+}
+
+/* PERBAIKAN: Animasi Scroll yang Lebih Optimal 
+@keyframes scrollCuti {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-100% - var(--space-4))); }
+}*/
+
+/* Pause animation on hover */
+.floating-cuti-scroll-container:hover .floating-cuti-scroll-content {
+  animation-play-state: paused;
+}
+
+/* Floating Cuti Item */
+.floating-cuti-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: rgba(255, 255, 255, 0.7);
+  padding: var(--space-3) var(--space-4);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  flex-shrink: 0;
+  min-width: 260px;
+  height: 70px;
+  min-height: 60px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+        0 2px 20px rgba(150, 144, 144, 0.301),
+        0 1px 4px rgba(109, 98, 98, 0.192),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.95); /* Ganti backdrop-filter */
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.floating-cuti-item:hover {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 
+        0 8px 30px rgba(0, 0, 0, 0.08),
+        0 3px 10px rgba(0, 0, 0, 0.03),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    transform: translateY(-3px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.floating-cuti-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6D8BFF, #7DE0FF);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  flex-shrink: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.floating-cuti-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.floating-cuti-name-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  line-height: 1;
+}
+
+.floating-cuti-dokter-name {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-dark);
+  white-space: nowrap;
+}
+
+.floating-cuti-separator {
+  color: var(--color-text-light);
+  font-size: var(--text-xs);
+}
+
+.floating-cuti-spesialis {
+  font-size: var(--text-xs);
+  color: var(--color-text-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.floating-cuti-date-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-xs);
+  color: var(--color-text);
+  line-height: 1;
+}
+
+.floating-cuti-date-icon {
+  font-size: var(--text-xs);
+  opacity: 0.7;
+}
+
+/* Floating Cuti Badge Styles */
+.floating-cuti-badge {
+  padding: var(--space-2) var(--space-3);
+  border-radius: 10px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: white;
+  margin-left: var(--space-2);
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  position: relative;
+  overflow: hidden;
+   
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating-cuti-badge.akan-cuti {
+  --gradient-start: #F6AD55;
+  --gradient-end: #ED8936;
+  background: linear-gradient(135deg, #F6AD55, #ED8936, #DD6B20);
+}
+
+.floating-cuti-badge.sedang-cuti {
+  --gradient-start: #FC8181;
+  --gradient-end: #F56565;
+  background: linear-gradient(135deg, #FC8181, #F56565, #E53E3E);
+}
+
+/* Empty State */
+.floating-cuti-empty {
+  text-align: center;
+  padding: var(--space-5);
+  color: var(--color-text-light);
+  font-style: italic;
+  font-size: var(--text-sm);
+}
+
+/* ===== OPTIMIZED MODAL ===== */
+.cuti-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+   
+}
+
+.cuti-modal.active {
+  display: flex;
+}
+
+.cuti-modal-content {
+  background: var(--glass-bg);
+  border-radius: var(--card-radius);
+  padding: var(--space-6);
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: var(--glass-shadow);
+  border: 1px solid var(--glass-border);
+   
+}
+
+.cuti-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-4);
+  border-bottom: 2px solid var(--color-border);
+}
+
+.cuti-modal-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+
+.cuti-modal-close {
+  background: none;
+  border: none;
+  font-size: var(--text-2xl);
+  cursor: pointer;
+  color: var(--color-text-light);
+  padding: var(--space-2);
+  border-radius: 8px;
+  transition: background 0.2s ease;
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cuti-modal-close:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.cuti-detail-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: var(--card-radius);
+  margin-bottom: var(--space-3);
+  border: 1px solid var(--color-border);
+}
+
+.cuti-detail-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-status-cuti), #9F7AEA);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: var(--text-lg);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.cuti-detail-info {
+  flex: 1;
+}
+
+.cuti-detail-name {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--color-text-dark);
+  margin-bottom: var(--space-1);
+}
+
+.cuti-detail-spec {
+  font-size: var(--text-sm);
+  color: var(--color-text-light);
+  margin-bottom: var(--space-2);
+}
+
+.cuti-detail-dates {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--color-status-cuti);
+  font-weight: 600;
+}
+
+.cuti-detail-status {
+  padding: var(--space-2) var(--space-3);
+  border-radius: 20px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  position: relative;
+  overflow: hidden;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cuti-detail-status.akan-cuti {
+  --gradient-start: #F6AD55;
+  --gradient-end: #ED8936;
+  background: linear-gradient(135deg, #F6AD55, #ED8936, #DD6B20);
+}
+
+.cuti-detail-status.sedang-cuti {
+  --gradient-start: #FC8181;
+  --gradient-end: #F56565;
+  background: linear-gradient(135deg, #FC8181, #F56565, #E53E3E);
+}
+
+/* ===== ERROR STATES ===== */
+.error-message {
+  text-align: center;
+  padding: var(--space-6) var(--space-6);
+  color: var(--color-status-tidak);
+  font-weight: 600;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--text-base);
+}
+
+.error-message button {
+  background: var(--color-secondary);
+  border: none;
+  border-radius: 8px;
+  padding: var(--space-3) var(--space-6);
+  margin-top: var(--space-3);
+  font-weight: 600;
+  cursor: pointer;
+  font-size: var(--text-sm);
+  color: white;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease;
+  min-height: 44px;
+  min-width: 120px;
+}
+
+.error-message button:hover {
+  transform: translateY(-2px);
+}
+
+/* ============================ */
+/* RESPONSIVE MEDIA QUERIES */
+/* ============================ */
+
+/* ===== DESKTOP LARGE ===== */
+@media screen and (min-width: 1200px) {
+  .hospital-logo {
+      top: var(--space-4);
+      left: var(--space-6);
+  }
+  
+  .logo-container {
+      width: 70px;
+      height: 70px;
+  }
+  
+  .logo-icon {
+      font-size: 2.5rem;
+  }
+  
+  .logo-text {
+      font-size: var(--text-base);
+  }
+}
+
+/* ===== TABLET LANDSCAPE ===== */
+@media screen and (max-width: 1024px) {
+  .floating-footer {
+      width: 95%;
+      bottom: 20px;
+  }
+  
+  .floating-cuti-item {
+      min-width: 240px;
+      height: 65px;
+      padding: var(--space-3) var(--space-4);
+  }
+  
+  .hospital-logo {
+      top: var(--space-3);
+      left: var(--space-4);
+  }
+  
+  .logo-container {
+      width: 50px;
+      height: 50px;
+  }
+  
+  .logo-icon {
+      font-size: 2rem;
+  }
+  
+  .tanggal {
+      font-size: var(--text-base);
+      padding: var(--space-2) var(--space-4);
+  }
+}
+
+/* ===== TABLET PORTRAIT & MOBILE LANDSCAPE ===== */
+@media screen and (max-width: 768px) {
+  :root {
+      font-size: 14px;
+  }
+  
+  /* Header Optimization */
+  header {
+      height: 150px;
+      padding: var(--space-3) var(--space-4);
+  }
+  
+  header h1 {
+      font-size: var(--text-lg);
+      padding-top: var(--space-2);
+      line-height: 1.2;
+  }
+  
+  header h2 {
+      font-size: var(--text-base);
+      padding-top: var(--space-2);
+  }
+  
+  /* Layout Optimization */
+  .content-wrapper {
+      flex-direction: column;
+      min-height: auto;
+      overflow: visible;
+      margin-top: -40px;
+      padding: 0 var(--space-3) var(--space-3);
+      gap: var(--space-3);
+  }
+  
+  .section {
+      min-height: 300px;
+      margin-bottom: var(--space-4);
+      padding: var(--space-2) 0;
+  }
+  
+  .section h2 {
+      font-size: var(--text-base);
+      padding: var(--space-2) 0;
+      margin: 0 var(--space-2) var(--space-2);
+  }
+  
+  /* Table Optimization */
+  .table-container {
+      max-height: 380px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+  }
+  
+  th {
+      font-size: var(--text-sm);
+      padding: var(--space-2) var(--space-3);
+  }
+  
+  td {
+      font-size: var(--text-xs);
+      padding: var(--space-2) var(--space-3);
+      line-height: 1.3;
+  }
+  
+  .status {
+      font-size: var(--text-xs);
+      min-width: 85px;
+      padding: var(--space-1) var(--space-2);
+      min-height: 40px;
+  }
+  
+  /* Floating Footer Optimization */
+  .floating-footer {
+      width: 92%;
+      bottom: 15px;
+  }
+  
+  .floating-footer-header {
+      padding: var(--space-2) var(--space-4);
+  }
+  
+  .floating-footer-content {
+      padding: var(--space-3);
+  }
+  
+  .floating-cuti-scroll-container {
+      height: 70px;
+  }
+  
+  .floating-cuti-item {
+      min-width: 250px;
+      height: 65px;
+      padding: var(--space-2) var(--space-3);
+  }
+  
+  .floating-cuti-avatar {
+      width: 36px;
+      height: 36px;
+      font-size: var(--text-xs);
+  }
+  
+  .floating-cuti-dokter-name {
+      font-size: var(--text-xs);
+  }
+  
+  .floating-cuti-spesialis {
+      font-size: var(--text-xs);
+  }
+  
+  .floating-cuti-date-row {
+      font-size: var(--text-xs);
+  }
+  
+  .floating-cuti-badge {
+      font-size: var(--text-xs);
+      padding: var(--space-1) var(--space-2);
+      min-height: 26px;
+  }
+  
+  /* Logo Optimization */
+  .hospital-logo {
+      top: var(--space-2);
+      left: var(--space-3);
+  }
+  
+  .logo-container {
+      width: 45px;
+      height: 45px;
+  }
+  
+  .logo-icon {
+      font-size: 1.8rem;
+  }
+  
+  .logo-text {
+      display: none;
+  }
+  
+  /* DateTime Optimization */
+  .datetime-corner {
+      top: var(--space-2);
+      right: var(--space-4);
+  }
+  
+  .datetime-corner .jam {
+      padding: var(--space-2) var(--space-3);
+  }
+  
+  .jam-utama {
+      font-size: var(--text-xl);
+  }
+  
+  .jam-detik {
+      font-size: var(--text-xs);
+  }
+  
+  .tanggal {
+      font-size: var(--text-base);
+      padding: var(--space-2) var(--space-3);
+      margin: var(--space-2) auto;
+  }
+  
+  /* Loading Optimization */
+  .loading {
+      padding: var(--space-4);
+      font-size: var(--text-sm);
+  }
+  
+  .loading.spinner {
+      width: 20px;
+      height: 20px;
+  }
+}
+
+/* ===== MOBILE LARGE ===== */
+@media screen and (max-width: 480px) {
+  :root {
+      font-size: 13px;
+  }
+  
+  /* Header Optimization */
+  header {
+      height: 90px;
+      padding: var(--space-2) var(--space-3);
+  }
+  
+  header h1 {
+      font-size: var(--text-base);
+      padding-top: var(--space-1);
+      line-height: 1.3;
+  }
+  
+  header h2 {
+      font-size: var(--text-sm);
+      padding-top: var(--space-1);
+  }
+  
+  /* Layout Optimization */
+  .content-wrapper {
+      padding: 0 var(--space-2) var(--space-2);
+      gap: var(--space-2);
+      margin-top: -30px;
+  }
+  
+  .section {
+      padding: var(--space-2) 0;
+      min-height: 250px;
+  }
+  
+  .section h2 {
+      font-size: var(--text-sm);
+      padding: var(--space-2) 0;
+      margin: 0 var(--space-2) var(--space-2);
+      letter-spacing: 0.3px;
+  }
+  
+  th {
+      font-size: var(--text-xs);
+      padding: var(--space-2) var(--space-2);
+      letter-spacing: 0.2px;
+  }
+  
+  td {
+      font-size: var(--text-xs);
+      padding: var(--space-1) var(--space-2);
+      line-height: 1.3;
+  }
+  
+  .status {
+      font-size: var(--text-xs);
+      min-width: 70px;
+      padding: var(--space-1) var(--space-2);
+      min-height: 20px;
+      border-radius: 10px;
+  }
+  
+  .table-container {
+      max-height: 720px;
+  }
+  
+  /* Floating Footer Optimization */
+  .floating-footer {
+      width: 96%;
+      bottom: 10px;
+      border-radius: 16px;
+  }
+  
+  .floating-footer-header {
+      padding: var(--space-2) var(--space-3);
+  }
+  
+  .floating-footer-title {
+      font-size: var(--text-xs);
+  }
+  
+  .floating-footer-toggle {
+      width: 28px;
+      height: 28px;
+      min-height: 36px;
+      min-width: 36px;
+  }
+  
+  .floating-footer-content {
+      padding: var(--space-2);
+  }
+  
+  .floating-cuti-scroll-container {
+      height: 60px;
+  }
+  
+  .floating-cuti-item {
+      min-width: 220px;
+      height: 55px;
+      padding: var(--space-2);
+      border-radius: 12px;
+  }
+  
+  .floating-cuti-avatar {
+      width: 32px;
+      height: 32px;
+      font-size: var(--text-xs);
+  }
+  
+  .floating-cuti-info {
+      gap: 2px;
+  }
+  
+  .floating-cuti-name-row {
+      gap: var(--space-1);
+  }
+  
+  .floating-cuti-dokter-name {
+      font-size: var(--text-xs);
+  }
+  
+  .floating-cuti-separator {
+      font-size: var(--text-xs);
+  }
+  
+  .floating-cuti-spesialis {
+      font-size: var(--text-xs);
+  }
+  
+  .floating-cuti-date-row {
+      font-size: var(--text-xs);
+      gap: 2px;
+  }
+  
+  .floating-cuti-badge {
+      font-size: var(--text-xs);
+      padding: 4px 8px;
+      min-height: 24px;
+      border-radius: 8px;
+  }
+  
+  /* Logo Optimization */
+  .hospital-logo {
+      top: 8px;
+      left: 10px;
+  }
+  
+  .logo-container {
+      width: 40px;
+      height: 40px;
+  }
+  
+  .logo-icon {
+      font-size: 1.6rem;
+  }
+  
+  /* DateTime Optimization */
+  .datetime-corner {
+      top: 8px;
+      right: 10px;
+  }
+  
+  .datetime-corner .jam {
+      padding: var(--space-2) var(--space-3);
+  }
+  
+  .jam-utama {
+      font-size: var(--text-lg);
+  }
+  
+  .jam-detik {
+      font-size: var(--text-xs);
+      margin-bottom: 4px;
+  }
+  
+  .tanggal {
+      font-size: var(--text-sm);
+      padding: var(--space-1) var(--space-2);
+      margin: var(--space-1) auto;
+  }
+  
+  /* Empty Space Optimization */
+  .empty-space {
+      height: 120px;
+  }
+  
+  /* Notification Optimization */
+  .update-notification {
+      padding: 10px 14px;
+      font-size: var(--text-xs);
+  }
+  
+  .sync-status {
+      padding: 6px 12px;
+      font-size: var(--text-xs);
+  }
+}
+
+/* ===== MOBILE SMALL ===== */
+@media screen and (max-width: 360px) {
+  :root {
+      font-size: 12px;
+  }
+  
+  header {
+      height: 110px;
+      padding: var(--space-2);
+  }
+  
+  header h1 {
+      font-size: var(--text-sm);
+  }
+  
+  .floating-cuti-item {
+      min-width: 200px;
+      height: 50px;
+      padding: var(--space-1) var(--space-2);
+  }
+  
+  .floating-cuti-avatar {
+      width: 28px;
+      height: 28px;
+      font-size: var(--text-xs);
+  }
+  
+  .hospital-logo {
+      top: 6px;
+      left: 8px;
+  }
+  
+  .logo-container {
+      width: 35px;
+      height: 35px;
+  }
+  
+  .logo-icon {
+      font-size: 1.4rem;
+  }
+}
+
+/* ===== TV 43 INCH OPTIMIZATION ===== */
+@media screen and (min-width: 1920px) and (max-height: 1080px) {
+  :root {
+      font-size: 18px;
+  }
+  
+  header {
+      height: 180px;
+      padding: var(--space-4) var(--space-6);
+  }
+  
+  header h1 {
+      font-size: var(--text-3xl);
+      line-height: 1;
+      padding-top: var(--space-3);
+  }
+  
+  header h2 {
+      font-size: var(--text-xl);
+      line-height: 1;
+      padding-top: var(--space-2);
+  }
+  
+  .tanggal {
+      font-size: var(--text-lg);
+      padding: var(--space-2) var(--space-5);
+      margin: var(--space-2) auto;
+  }
+  
+  .datetime-corner {
+      top: var(--space-4);
+      right: var(--space-6);
+  }
+  
+  .datetime-corner .jam {
+      padding: var(--space-3) var(--space-5);
+  }
+  
+  .jam-utama {
+      font-size: var(--text-3xl);
+  }
+  
+  .jam-detik {
+      font-size: var(--text-base);
+      margin-bottom: var(--space-1);
+  }
+  
+  .section h2 {
+      font-size: var(--text-xl);
+      padding: var(--space-3) 0;
+      margin: 0 var(--space-3) var(--space-3);
+  }
+  
+  th {
+      font-size: var(--text-lg);
+      padding: var(--space-3) var(--space-4);
+  }
+  
+  td {
+      font-size: var(--text-xl);
+      padding: var(--space-2) var(--space-4);
+  }
+  
+  .status {
+      font-size: var(--text-sm);
+      min-width: 100px;
+      padding: var(--space-2) var(--space-3);
+  }
+  
+  .content-wrapper {
+      padding: 0 var(--space-4) var(--space-4);
+      gap: var(--space-4);
+  }
+  
+  .hospital-logo {
+      top: var(--space-4);
+      left: var(--space-6);
+  }
+  
+  .logo-container {
+      width: 60px;
+      height: 60px;
+  }
+  
+  .logo-icon {
+      font-size: 1.8rem;
+  }
+  
+  .floating-footer {
+      width: 85%;
+      bottom: 30px;
+  }
+  
+  .floating-cuti-item {
+      min-width: 280px;
+      height: 75px;
+  }
+  
+  .floating-cuti-avatar {
+      width: 44px;
+      height: 44px;
+      font-size: var(--text-sm);
+  }
+  
+  .floating-cuti-dokter-name,
+  .floating-cuti-spesialis {
+      font-size: var(--text-sm);
+  }
+  
+  .floating-cuti-date-row {
+      font-size: var(--text-xs);
+  }
+  
+  .floating-cuti-badge {
+      font-size: var(--text-xs);
+      padding: var(--space-2) var(--space-4);
+  }
+}
+
+/* ===== SPECIFIC RESOLUTION OPTIMIZATIONS ===== */
+
+/* Untuk resolusi 1600x900 */
+@media screen and (min-width: 1600px) and (max-height: 1000px) {
+  :root {
+      font-size: 16px;
+  }
+  
+  header {
+      height: 180px;
+      padding: var(--space-3) var(--space-5);
+  }
+  
+  header h1 {
+      font-size: var(--text-2xl);
+      padding-top: var(--space-3);
+  }
+  
+  header h2 {
+      font-size: var(--text-lg);
+      padding-top: var(--space-2);
+  }
+  
+  .content-wrapper {
+      padding: 0 var(--space-4) var(--space-4);
+      gap: var(--space-4);
+  }
+  
+  .section h2 {
+      font-size: var(--text-lg);
+      padding: var(--space-3) 0;
+      margin: 0 var(--space-3) var(--space-3);
+  }
+  
+  th {
+      font-size: var(--text-base);
+      padding: var(--space-3) var(--space-4);
+  }
+  
+  td {
+      font-size: var(--text-xl);
+      padding: var(--space-2) var(--space-4);
+      
+  }
+  .tanggal {
+    font-size: var(--text-sm);
+  }
+  
+  .status {
+      font-size: var(--text-sm);
+      min-width: 90px;
+      min-height: 30px;
+      padding: var(--space-2) var(--space-3);
+  }
+  
+  .floating-footer {
+      width: 92%;
+      bottom: 20px;
+  }
+  .floating-cuti-date-row {
+    font-size: var(--text-xl);
+  }
+  
+  .floating-cuti-item {
+      min-width: 280px;
+      height: 70px;
+  }
+  
+  .floating-cuti-avatar {
+      width: 40px;
+      height: 40px;
+      font-size: var(--text-xs);
+  }
+  
+  .floating-cuti-dokter-name {
+      font-size: var(--text-xl);
+  }
+  
+  .floating-cuti-spesialis {
+      font-size: var(--text-lg);
+  }
+  
+  .hospital-logo {
+      top: var(--space-3);
+      left: var(--space-5);
+  }
+  
+  .logo-container {
+      width: 50px;
+      height: 50px;
+  }
+  
+  .datetime-corner {
+      top: var(--space-3);
+      right: var(--space-5);
+  }
+  
+  .datetime-corner .jam {
+      padding: var(--space-3) var(--space-4);
+  }
+  
+  .jam-utama {
+      font-size: var(--text-2xl);
+  }
+  
+  .jam-detik {
+      font-size: var(--text-sm);
+  }
+}
+
+/* Untuk resolusi 1366x768 */
+@media screen and (min-width: 1366px) and (max-height: 868px) {
+  :root {
+      font-size: 15px;
+  }
+  
+  header {
+      height: 150px;
+      padding: var(--space-3) var(--space-4);
+  }
+  
+  header h1 {
+      font-size: var(--text-3xl);
+      padding-top: var(--space-1);
+      line-height: 1.2;
+  }
+  
+  header h2 {
+      font-size: var(--text-sm);
+      padding-top: var(--space-2);
+  }
+  
+  .content-wrapper {
+      padding: 0 var(--space-3) var(--space-3);
+      gap: var(--space-3);
+  }
+  
+  .section {
+      padding: var(--space-2) 0;
+  }
+  
+  .section h2 {
+      font-size: var(--text-xl);
+      padding: var(--space-2) 0;
+      margin: 0 var(--space-2) var(--space-2);
+  }
+  
+  th {
+      font-size: var(--text-xl);
+      padding: var(--space-2) var(--space-3);
+  }
+  
+  td {
+      font-size: var(--text-xl);
+      padding: var(--space-1) var(--space-3);
+  }
+  
+  .status {
+      padding: var(--space-1) var(--space-2);
+      min-height: 35px;
+  }
+  
+  .table-container {
+      max-height: 768px;
+  }
+  
+  .floating-footer {
+      width: 94%;
+      bottom: 15px;
+  }
+  
+  .floating-footer-header {
+      padding: var(--space-2) var(--space-4);
+  }
+  
+  .floating-footer-content {
+      padding: var(--space-3);
+  }
+  
+  .floating-cuti-scroll-container {
+      height: 70px;
+  }
+  
+  .floating-cuti-item {
+      min-width: 250px;
+      height: 65px;
+      padding: var(--space-2) var(--space-3);
+  }
+  
+  .floating-cuti-avatar {
+      width: 36px;
+      height: 36px;
+      font-size: var(--text-xs);
+  }
+  
+  .floating-cuti-dokter-name {
+      font-size: var(--text-xl);
+      font-weight: 700 !important;
+  }
+  
+  .floating-cuti-spesialis {
+      font-size: var(--text-base);
+      font-weight: 600 !important;
+      color: var(--color-text-dark);
+  }
+  
+  .floating-cuti-date-row {
+      font-size: var(--text-xl);
+      font-weight: 600 !important;
+  }
+  
+  .floating-cuti-badge {
+      font-size: var(--text-xs);
+      padding: var(--space-1) var(--space-2);
+      min-height: 26px;
+  }
+  
+  .hospital-logo {
+      top: var(--space-2);
+      left: var(--space-4);
+  }
+  
+  .logo-container {
+      width: 45px;
+      height: 45px;
+  }
+  
+  .datetime-corner {
+      top: var(--space-2);
+      right: var(--space-4);
+  }
+  
+  .datetime-corner .jam {
+      padding: var(--space-2) var(--space-3);
+  }
+  
+  .jam-utama {
+      font-size: var(--text-xl);
+  }
+  
+  .jam-detik {
+      font-size: var(--text-xs);
+  }
+  
+  .tanggal {
+      font-size: var(--text-base);
+      padding: var(--space-2) var(--space-3);
+      margin: var(--space-2) auto;
+  }
+}
+
+/* Untuk resolusi 1280x720 */
+@media screen and (max-width: 1280px) and (max-height: 720px) {
+  :root {
+      font-size: 15px;
+  }
+  
+  header {
+      height: 140px;
+      padding: var(--space-3) var(--space-4);
+  }
+  
+  header h1 {
+      font-size: var(--text-3xl);
+      padding-top: var(--space-1);
+      line-height: 0.6;
+  }
+  
+  header h2 {
+      font-size: var(--text-sm);
+      padding-top: var(--space-2);
+  }
+  
+  .content-wrapper {
+      padding: 0 var(--space-3) var(--space-3);
+      gap: var(--space-3);
+  }
+  
+  .section {
+      padding: var(--space-2) 0;
+  }
+  
+  .section h2 {
+      font-size: var(--text-base);
+      padding: var(--space-2) 0;
+      margin: 0 var(--space-2) var(--space-2);
+  }
+  
+  th {
+      font-size: var(--text-base);
+      padding: var(--space-2) var(--space-3);
+  }
+  
+  td {
+      font-size: var(--text-xl);
+      padding: var(--space-1) var(--space-3);
+  }
+  
+  .status {
+      padding: var(--space-1) var(--space-2);
+      min-height: 30px;
+  }
+  
+  .table-container {
+      max-height: 768px;
+  }
+  
+  .floating-footer {
+      width: 94%;
+      bottom: 15px;
+  }
+  
+  .floating-footer-header {
+      padding: var(--space-1) var(--space-4);
+  }
+  
+  .floating-footer-content {
+      padding: var(--space-3);
+  }
+  
+  .floating-cuti-scroll-container {
+      height: 70px;
+  }
+  
+  .floating-cuti-item {
+      min-width: 250px;
+      height: 65px;
+      padding: var(--space-2) var(--space-3);
+  }
+  
+  .floating-cuti-avatar {
+      width: 36px;
+      height: 36px;
+      font-size: var(--text-xs);
+  }
+  
+  .floating-cuti-dokter-name {
+      font-size: var(--text-base);
+      font-weight: 600 !important;
+  }
+  
+  .floating-cuti-spesialis {
+      font-size: var(--text-base);
+      font-weight: 600 !important;
+      color: var(--color-text-dark);
+  }
+  
+  .floating-cuti-date-row {
+      font-size: var(--text-sm);
+      font-weight: 600 !important;
+  }
+  
+  .floating-cuti-badge {
+      font-size: var(--text-xs);
+      padding: var(--space-1) var(--space-2);
+      min-height: 26px;
+  }
+  
+  .hospital-logo {
+      top: var(--space-2);
+      left: var(--space-4);
+  }
+  
+  .logo-container {
+      width: 45px;
+      height: 45px;
+  }
+  
+  .datetime-corner {
+      top: var(--space-2);
+      right: var(--space-4);
+  }
+  
+  .datetime-corner .jam {
+      padding: var(--space-4) var(--space-3);
+  }
+  
+  .jam-utama {
+      font-size: var(--text-4xl);
+  }
+  
+  .jam-detik {
+      font-size: var(--text-xl);
+  }
+  
+  .tanggal {
+      font-size: var(--text-base);
+      padding: var(--space-2) var(--space-3);
+      margin: var(--space-2) auto;
+  }
+}
+
+/* Fallback untuk rentang resolusi yang mirip */
+@media screen and (max-width: 1366px) and (min-width: 1280px) {
+  :root {
+      font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .content-wrapper {
+      flex-direction: row;
+      gap: var(--space-3);
+  }
+  
+  .section {
+      min-height: 300px;
+  }
+}
+
+.footer {
+  background: #ffffff;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  padding: 20px 20px 20px;
+  box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.08);
+  position: relative;
+  margin-top: 0px;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 30px;
+  padding: 0 15px;
+}
+
+.footer-section h3 {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.footer-links {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 12px;
+}
+
+.footer-links a {
+  color: #7f8c8d;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #3498db;
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 30px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid #ecf0f1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copyright {
+  color: #95a5a6;
+  font-size: 0.9rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: #f8f9fa;
+  border-radius: 50%;
+  color: #7f8c8d;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-links a:hover {
+  background: #3498db;
+  color: white;
+  transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+      flex-direction: column;
+  }
+  
+  .footer-section {
+      min-width: 100%;
+  }
+  
+  .footer-bottom {
+      flex-direction: column;
+      text-align: center;
+      gap: 15px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .particles,
+  .controls,
+  .loading,
+  .floating-footer,
+  .datetime-corner,
+  .cuti-modal,
+  .hospital-logo,
+  .offline-banner,
+  .online-banner,
+  .update-notification,
+  .sync-status {
+      display: none !important;
+  }
+  
+  body {
+      transform: none !important;
+      animation: none;
+      opacity: 1;
+      margin-top: 0 !important;
+  }
+  
+  .section {
+      box-shadow: none;
+      border: 2px solid #000;
+      break-inside: avoid;
+  }
+  
+  .status {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+  }
+
+  tbody tr:nth-child(even) {
+      background-color: #f9f9f9 !important;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+      animation: none !important;
+      transition: none !important;
+  }
+  
+  .floating-cuti-scroll-content {
+      animation: none !important;
+  }
+  
+  .status:hover {
+      transform: none !important;
+  }
+}
+</style>
+</head>
+<body>
+  <!-- Banners -->
+  <div class="offline-banner" id="offlineBanner">
+    ⚠️ Anda sedang offline. Menampilkan data cache terakhir.
+  </div>
+  <div class="online-banner" id="onlineBanner">
+    Koneksi internet tersedia. Memperbarui data...
+  </div>
+
+  <!-- Notifications -->
+  <div class="update-notification" id="updateNotification">
+    <span>✅</span>
+    <span>Data jadwal diperbarui</span>
+  </div>
+
+  <div class="sync-status up-to-date" id="syncStatus">
+    Data terkini
+  </div>
+
+  <a href="#main-content" class="skip-link">Langsung ke konten utama</a>
+  <div class="particles" id="particles"></div>
+
+  <!-- Live region -->
+  <div aria-live="polite" aria-atomic="true" class="sr-only" id="liveRegion">
+    Data jadwal dokter telah diperbarui
+  </div>
+
+<div class="hospital-logo">
+    <div class="logo-container">
+        <span class="logo-icon" style="font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;">medical_services</span>
+    </div>
+    <div class="logo-text"></div>
+</div>
+
+  <!-- Header Container -->
+  <div class="header-container">
+    <header>
+      <h1>INFORMASI PRAKTEK DOKTER SPESIALIS</h1>
+      <h2 class="tanggal" id="tanggal"></h2>
+      <div class="datetime-corner">
+        <div class="jam" id="jam"></div>
+      </div>
+    </header>
+  </div>
+
+  <div class="loading" id="loadingIndicator">
+    <span class="spinner"></span>
+    <span id="loadingMessage">Memuat jadwal terbaru... </span>
+  </div>
+
+  <div class="content-wrapper" id="main-content">
+    <div class="section" id="bedahSection">
+      <h2>BEDAH</h2>
+      <div class="table-container">
+        <table id="tableBedah">
+          <thead>
+            <tr>
+              <th class="table-align-left">Spesialis</th>
+              <th class="table-align-left">Dokter</th>
+              <th class="table-align-center">Status</th>
+              <th class="table-align-center">Jam</th>
+            </tr>
+          </thead>
+          <tbody id="bedahBody">
+            <!-- Data akan dimuat di sini -->
+          </tbody>
+        </table>
+        <div class="empty-space"></div>
+      </div>
+    </div>
+
+    <div class="section" id="nonBedahSection">
+      <h2>NON BEDAH</h2>
+      <div class="table-container">
+        <table id="tableNonBedah">
+          <thead>
+            <tr>
+              <th class="table-align-left">Spesialis</th>
+              <th class="table-align-left">Dokter</th>
+              <th class="table-align-center">Status</th>
+              <th class="table-align-center">Jam</th>
+            </tr>
+          </thead>
+          <tbody id="nonBedahBody">
+            <!-- Data akan dimuat di sini -->
+          </tbody>
+        </table>
+         <div class="empty-space"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Footer -->
+  <div class="floating-footer" id="floatingFooter">
+    <div class="floating-footer-header">
+      <div class="floating-footer-title">
+        <span>🏖️</span>
+        <span>Informasi Cuti Dokter</span>
+      </div>
+      <div class="floating-footer-toggle" id="floatingFooterToggle">
+        <span>−</span>
+      </div>
+    </div>
+    <div class="floating-footer-content">
+      <div class="floating-cuti-scroll-container">
+        <div class="floating-cuti-scroll-content" id="floatingCutiScrollContent">
+          <!-- Cuti doctors will be loaded here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+            <div class="footer-content"></div>
+        </footer>
+
+  <!-- Cuti Detail Modal -->
+  <div class="cuti-modal" id="cutiDetailModal">
+    <div class="cuti-modal-content">
+      <div class="cuti-modal-header">
+        <div class="cuti-modal-title">
+          <span>🏖️</span>
+          <span>Detail Cuti Dokter</span>
+        </div>
+        <button class="cuti-modal-close" id="cutiModalClose">×</button>
+      </div>
+      <div id="cutiDetailContent">
+        <!-- Detail cuti akan dimuat di sini -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+// ==================== OPTIMIZED CONFIGURATION ====================
+const CONFIG = {
+    MAIN_SHEET_URL: "https://script.google.com/macros/s/AKfycbyVnM9JhKx8xj2EZhETj1BdSCnmJxtNBV4eFmohKE0denRS4VEA3JqPI-RVsQFg7ZuEtw/exec",
+    FOOTER_SHEET_URL: "https://script.google.com/macros/s/AKfycbxYREx42acZcDyDe8DF75UJlB0hroAoQ4QH_gpd71RgGtbI889yAAtzegrjgwvfLkFY4Q/exec",
+    REFRESH_INTERVAL: 45000,
+    CACHE_DURATION: 900000,
+    FETCH_TIMEOUT: 10000,
+    MAX_RETRIES: 2,
+    TV_MODE: true
+};
+
+// ==================== MEMORY-SAFE UTILITY FUNCTIONS ====================
+const Utils = {
+    escapeHtml(text) {
+        if (text == null) return '';
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    },
+
+    getInitials(name) {
+        if (!name) return 'DR';
+        return name.split(/\s+/).map(word => word.charAt(0)).join('').toUpperCase().substring(0, 2);
+    },
+
+    determineCutiStatus(doctor) {
+        const statusCuti = doctor.StatusCuti || '';
+        const tanggalCuti = doctor.Tanggal || '';
+        const today = new Date();
+        
+        if (statusCuti.toLowerCase().includes('akan')) return 'akan-cuti';
+        if (statusCuti.toLowerCase().includes('sedang')) return 'sedang-cuti';
+        
+        const dateMatch = tanggalCuti.match(/(\d{1,2})\s*[-–]\s*(\d{1,2})\s+([A-Za-z]+)/i);
+        if (dateMatch) {
+            const startDay = parseInt(dateMatch[1]);
+            const monthName = dateMatch[3].toLowerCase();
+            const monthMap = {
+                'januari': 0, 'februari': 1, 'maret': 2, 'april': 3,
+                'mei': 4, 'juni': 5, 'juli': 6, 'agustus': 7,
+                'september': 8, 'oktober': 9, 'november': 10, 'desember': 11
+            };
+            
+            const currentMonth = today.getMonth();
+            const currentDay = today.getDate();
+            const cutiMonth = monthMap[monthName];
+            
+            if (cutiMonth !== undefined) {
+                if (cutiMonth > currentMonth) return 'akan-cuti';
+                if (cutiMonth === currentMonth && currentDay < startDay) return 'akan-cuti';
+            }
+        }
+        
+        return 'sedang-cuti';
+    }
+};
+
+// ==================== MEMORY-SAFE EVENT MANAGER ====================
+class MemorySafeEventManager {
+    constructor() {
+        this.handlers = new Map();
+        this.delegatedHandlers = new Map();
+    }
+    
+    addDelegatedEvent(container, event, selector, handler) {
+        const wrappedHandler = (e) => {
+            const target = e.target.closest(selector);
+            if (target) handler(e, target);
+        };
+        
+        container.addEventListener(event, wrappedHandler, { passive: true });
+        const key = `${container.id}-${event}-${selector}`;
+        this.delegatedHandlers.set(key, { container, event, handler: wrappedHandler });
+    }
+    
+    addEventListener(target, event, handler, options = {}) {
+        target.addEventListener(event, handler, { passive: true, ...options });
+        const key = `${target.id || 'global'}-${event}`;
+        if (!this.handlers.has(key)) this.handlers.set(key, []);
+        this.handlers.get(key).push({ target, event, handler });
+    }
+    
+    cleanup() {
+        // Clean delegated events
+        this.delegatedHandlers.forEach(({ container, event, handler }) => {
+            container.removeEventListener(event, handler);
+        });
+        this.delegatedHandlers.clear();
+        
+        // Clean direct events
+        this.handlers.forEach(handlers => {
+            handlers.forEach(({ target, event, handler }) => {
+                target.removeEventListener(event, handler);
+            });
+        });
+        this.handlers.clear();
+    }
+}
+
+// ==================== MEMORY-SAFE RESOURCE MANAGER ====================
+class MemorySafeResourceManager {
+    constructor() {
+        this.intervals = new Set();
+        this.timeouts = new Set();
+        this.animationFrames = new Set();
+        this.abortControllers = new Set();
+    }
+
+    setInterval(callback, delay) {
+        const id = setInterval(callback, delay);
+        this.intervals.add(id);
+        return id;
+    }
+
+    setTimeout(callback, delay) {
+        const id = setTimeout(() => {
+            this.timeouts.delete(id);
+            callback();
+        }, delay);
+        this.timeouts.add(id);
+        return id;
+    }
+
+    requestAnimationFrame(callback) {
+        const id = requestAnimationFrame(() => {
+            this.animationFrames.delete(id);
+            callback();
+        });
+        this.animationFrames.add(id);
+        return id;
+    }
+
+    createAbortController() {
+        const controller = new AbortController();
+        this.abortControllers.add(controller);
+        return controller;
+    }
+
+    cleanup() {
+        // Clear intervals
+        this.intervals.forEach(id => {
+            clearInterval(id);
+            console.log('✅ Cleared interval:', id);
+        });
+        this.intervals.clear();
+        
+        // Clear timeouts
+        this.timeouts.forEach(id => {
+            clearTimeout(id);
+            console.log('✅ Cleared timeout:', id);
+        });
+        this.timeouts.clear();
+        
+        // Clear animation frames
+        this.animationFrames.forEach(id => {
+            cancelAnimationFrame(id);
+            console.log('✅ Cancelled animation frame:', id);
+        });
+        this.animationFrames.clear();
+        
+        // Abort fetch requests
+        this.abortControllers.forEach(controller => {
+            controller.abort();
+            console.log('✅ Aborted fetch controller');
+        });
+        this.abortControllers.clear();
+    }
+}
+
+// ==================== MEMORY-SAFE SYNC SYSTEM ====================
+class MemorySafeSync {
+    constructor() {
+        this.lastDataHash = null;
+        this.isChecking = false;
+    }
+
+    generateSimpleHash(data) {
+        if (!data || !Array.isArray(data)) return 'invalid';
+        let hash = 0;
+        for (const doctor of data) {
+            hash = ((hash << 5) - hash) + 
+                (doctor.Dokter?.length || 0) + 
+                (doctor.Status?.length || 0);
+            hash = hash & hash;
+        }
+        return Math.abs(hash).toString(36);
+    }
+
+    async checkForUpdates(resourceManager) {
+        if (this.isChecking || document.hidden) return false;
+        this.isChecking = true;
+
+        try {
+            const controller = resourceManager.createAbortController();
+            const timeoutId = resourceManager.setTimeout(() => controller.abort(), 8000);
+
+            const response = await fetch(CONFIG.MAIN_SHEET_URL, { 
+                signal: controller.signal,
+                cache: 'no-cache'
+            });
+
+            resourceManager.setTimeout(() => clearTimeout(timeoutId), 100);
+            
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const data = await response.json();
+            
+            if (!this.validateData(data)) throw new Error('Invalid data');
+            const newHash = this.generateSimpleHash(data);
+            const hasChanged = newHash !== this.lastDataHash;
+            
+            this.lastDataHash = newHash;
+            return hasChanged ? { data, hash: newHash } : false;
+
+        } catch (error) {
+            if (error.name !== 'AbortError') {
+                console.warn('Update check failed:', error.message);
+            }
+            return false;
+        } finally {
+            this.isChecking = false;
+        }
+    }
+
+    validateData(data) {
+        return Array.isArray(data) && data.every(item => 
+            item && typeof item === 'object' &&
+            'Spesialis' in item && 'Dokter' in item && 'Status' in item
+        );
+    }
+
+    cleanup() {
+        this.lastDataHash = null;
+        this.isChecking = false;
+    }
+}
+
+// ==================== MEMORY-SAFE RENDERER ====================
+class MemorySafeRenderer {
+    static getStatusClass(status) {
+        if (!status) return 'status--tidak';
+        const statusUpper = status.toUpperCase();
+        if (statusUpper.includes('BUKA')) return 'status--buka';
+        if (statusUpper.includes('PENUH')) return 'status--penuh';
+        if (statusUpper.includes('SELESAI')) return 'status--selesai';
+        if (statusUpper.includes('CUTI')) return 'status--cuti';
+        if (statusUpper.includes('TIDAK ADA POLI') || statusUpper.includes('TIDAK-ADA-POLI')) return 'status--tidak-poli';
+        if (statusUpper.includes('TIDAK')) return 'status--tidak';
+        return 'status--tidak';
+    }
+
+    static createTableRow(item) {
+        const tr = document.createElement('tr');
+        const statusClass = this.getStatusClass(item.Status);
+        
+        // Add status class to tr for CSS optimization
+        tr.classList.add(`tr-${statusClass.replace('status--', '')}`);
+        
+        tr.innerHTML = `
+            <td class="table-align-left">${Utils.escapeHtml(item.Spesialis || '-')}</td>
+            <td class="table-align-left">${Utils.escapeHtml(item.Dokter || '-')}</td>
+            <td class="table-align-center"><span class="status ${statusClass}">${Utils.escapeHtml(item.Status || 'TIDAK')}</span></td>
+            <td class="table-align-center">${Utils.escapeHtml(item.Jam || '-')}</td>
+        `;
+        
+        return tr;
+    }
+
+    static showData(data) {
+        const bedahTable = document.getElementById("bedahBody");
+        const nonBedahTable = document.getElementById("nonBedahBody");
+        
+        if (!data || data.length === 0) {
+            this.showEmptyState();
+            return;
+        }
+
+        // Use document fragments for batch DOM operations
+        const bedahFragment = document.createDocumentFragment();
+        const nonBedahFragment = document.createDocumentFragment();
+
+        for (const item of data) {
+            const row = this.createTableRow(item);
+            if (item.Jenis === "Bedah") {
+                bedahFragment.appendChild(row);
+            } else {
+                nonBedahFragment.appendChild(row);
+            }
+        }
+
+        // Single DOM update for each table
+        bedahTable.innerHTML = '';
+        nonBedahTable.innerHTML = '';
+        bedahTable.appendChild(bedahFragment);
+        nonBedahTable.appendChild(nonBedahFragment);
+
+        // Animate sections
+        document.querySelectorAll('.section').forEach((sec, index) => {
+            setTimeout(() => sec.classList.add('show'), index * 100);
+        });
+    }
+
+    static showEmptyState() {
+        const emptyHTML = `
+            <tr>
+                <td colspan="4" class="empty-state">
+                    <div class="empty-icon">👨‍⚕️</div>
+                    <div class="empty-message">Tidak ada jadwal praktek hari ini</div>
+                </td>
+            </tr>
+        `;
+        
+        document.querySelectorAll('tbody').forEach(tbody => {
+            tbody.innerHTML = emptyHTML;
+        });
+    }
+
+    static displayCutiDoctors(data) {
+        const cutiContainer = document.getElementById('floatingCutiScrollContent');
+        
+        if (!data || !Array.isArray(data) || data.length === 0) {
+            cutiContainer.innerHTML = '<div class="floating-cuti-empty">Tidak ada dokter yang sedang cuti</div>';
+            return;
+        }
+
+        const fragment = document.createDocumentFragment();
+        
+        for (const doctor of data) {
+            try {
+                const namaDokter = doctor.Dokter || doctor.Nama || doctor['Nama Dokter'];
+                if (!namaDokter) continue;
+
+                const spesialis = doctor.Spesialis || doctor.Poli || 'Spesialis';
+                const tanggalCuti = doctor.Tanggal || doctor.Period || 'Cuti';
+                
+                const statusCuti = Utils.determineCutiStatus(doctor);
+                const badgeClass = statusCuti;
+                const badgeText = statusCuti === 'akan-cuti' ? 'AKAN CUTI' : 'SEDANG CUTI';
+                
+                const cutiItem = document.createElement('div');
+                cutiItem.className = 'floating-cuti-item';
+                cutiItem.setAttribute('data-dokter', Utils.escapeHtml(namaDokter));
+                cutiItem.setAttribute('data-spesialis', Utils.escapeHtml(spesialis));
+                cutiItem.setAttribute('data-tanggal', Utils.escapeHtml(tanggalCuti));
+                cutiItem.setAttribute('data-status', badgeClass);
+                cutiItem.innerHTML = `
+                    <div class="floating-cuti-avatar">${Utils.getInitials(namaDokter)}</div>
+                    <div class="floating-cuti-info">
+                        <div class="floating-cuti-name-row">
+                            <span class="floating-cuti-dokter-name">${Utils.escapeHtml(namaDokter)}</span>
+                            <span class="floating-cuti-separator">-</span>
+                            <span class="floating-cuti-spesialis">${Utils.escapeHtml(spesialis)}</span>
+                        </div>
+                        <div class="floating-cuti-date-row">
+                            <span class="floating-cuti-date-icon">📅</span>
+                            <span>${Utils.escapeHtml(tanggalCuti)}</span>
+                        </div>
+                    </div>
+                    <div class="floating-cuti-badge ${badgeClass}">${badgeText}</div>
+                `;
+                
+                fragment.appendChild(cutiItem);
+            } catch (error) {
+                console.error('Error processing cuti doctor:', error);
+            }
+        }
+
+        cutiContainer.innerHTML = '';
+        cutiContainer.appendChild(fragment);
+    }
+}
+
+// ==================== MEMORY-SAFE FLOATING FOOTER ====================
+class MemorySafeFloatingFooter {
+    constructor() {
+        this.isAutoToggleEnabled = true;
+        this.openTimeout = null;
+        this.closeTimeout = null;
+        this.openInterval = null;
+        this.initialDelay = 20000;
+        this.openIntervalTime = 120000;
+        this.closeDelay = 20000;
+    }
+
+    start(resourceManager) {
+        console.log('🔄 Starting floating footer auto-toggle');
+        this.stop(); // Ensure clean state
+        
+        this.closeTimeout = resourceManager.setTimeout(() => {
+            this.closeFooter();
+            
+            this.openInterval = resourceManager.setInterval(() => {
+                this.openFooter();
+                
+                this.closeTimeout = resourceManager.setTimeout(() => {
+                    this.closeFooter();
+                }, this.closeDelay);
+                
+            }, this.openIntervalTime);
+            
+        }, this.initialDelay);
+    }
+
+    stop() {
+        // Timeouts and intervals are managed by resourceManager
+        this.isAutoToggleEnabled = false;
+    }
+
+    openFooter() {
+        if (!this.isAutoToggleEnabled || !AppState.isInitialized) return;
+        
+        try {
+            const footer = document.getElementById('floatingFooter');
+            const toggle = document.getElementById('floatingFooterToggle');
+            if (footer && toggle) {
+                footer.classList.remove('collapsed');
+                toggle.querySelector('span').textContent = '−';
+            }
+        } catch (e) {
+            console.warn('Failed to open footer:', e);
+        }
+    }
+
+    closeFooter() {
+        if (!this.isAutoToggleEnabled || !AppState.isInitialized) return;
+        
+        try {
+            const footer = document.getElementById('floatingFooter');
+            const toggle = document.getElementById('floatingFooterToggle');
+            if (footer && toggle) {
+                footer.classList.add('collapsed');
+                toggle.querySelector('span').textContent = '+';
+            }
+        } catch (e) {
+            console.warn('Failed to close footer:', e);
+        }
+    }
+
+    cleanup() {
+        this.stop();
+        this.isAutoToggleEnabled = false;
+    }
+}
+
+// ==================== MEMORY-SAFE CACHE MANAGER ====================
+class MemorySafeCacheManager {
+    static cacheData(data) {
+        try {
+            const cache = {
+                mainData: data.mainData,
+                cutiData: data.cutiData,
+                timestamp: Date.now()
+            };
+            localStorage.setItem('doctorSchedule', JSON.stringify(cache));
+        } catch (e) {
+            console.warn('Gagal menyimpan cache');
+        }
+    }
+
+    static getCachedData() {
+        try {
+            const cached = localStorage.getItem('doctorSchedule');
+            if (!cached) return null;
+            
+            const { mainData, cutiData, timestamp } = JSON.parse(cached);
+            
+            if (Date.now() - timestamp < CONFIG.CACHE_DURATION) {
+                return { mainData, cutiData };
+            }
+        } catch (e) {
+            console.warn('Gagal memuat cache');
+        }
+        return null;
+    }
+
+    static clearExpiredCache() {
+        try {
+            const cached = localStorage.getItem('doctorSchedule');
+            if (cached) {
+                const { timestamp } = JSON.parse(cached);
+                if (Date.now() - timestamp > CONFIG.CACHE_DURATION * 2) {
+                    localStorage.removeItem('doctorSchedule');
+                }
+            }
+        } catch (e) {
+            // Ignore errors
+        }
+    }
+}
+
+// ==================== OPTIMIZED APPLICATION STATE ====================
+const AppState = {
+    allData: [],
+    cutiData: [],
+    isChecking: false,
+    isInitialized: false,
+    
+    // Memory-safe managers
+    resources: new MemorySafeResourceManager(),
+    events: new MemorySafeEventManager(),
+    smartSync: new MemorySafeSync(),
+    floatingFooter: new MemorySafeFloatingFooter(),
+    
+    elements: {},
+
+    initialize() {
+        if (this.isInitialized) return;
+        
+        console.log('🚀 Initializing memory-safe application...');
+        this.isInitialized = true;
+        
+        this.cacheDOMElements();
+        this.initializeEventDelegation();
+        this.initializeModalEvents();
+        this.initializeFloatingFooter();
+        
+        this.updateDateTime();
+        this.showSkeletonLoading();
+        this.loadInitialData();
+        
+        // Start intervals
+        this.resources.setInterval(() => this.updateDateTime(), 1000);
+        this.startTVOptimizedPolling();
+        
+        // Event listeners
+        this.events.addEventListener(document, 'visibilitychange', () => this.handleVisibilityChange());
+        this.events.addEventListener(window, 'online', () => this.handleOnlineStatus());
+        this.events.addEventListener(window, 'offline', () => this.handleOnlineStatus());
+        
+        // Periodic memory maintenance
+        this.resources.setInterval(() => this.memoryMaintenance(), 60000);
+    },
+
+    cacheDOMElements() {
+        this.elements = {
+            loadingIndicator: document.getElementById('loadingIndicator'),
+            loadingMessage: document.getElementById('loadingMessage'),
+            liveRegion: document.getElementById('liveRegion'),
+            offlineBanner: document.getElementById('offlineBanner'),
+            onlineBanner: document.getElementById('onlineBanner'),
+            updateNotification: document.getElementById('updateNotification'),
+            syncStatus: document.getElementById('syncStatus'),
+            cutiModal: document.getElementById('cutiDetailModal'),
+            cutiModalClose: document.getElementById('cutiModalClose'),
+            cutiDetailContent: document.getElementById('cutiDetailContent'),
+            floatingCutiScrollContent: document.getElementById('floatingCutiScrollContent'),
+            floatingFooter: document.getElementById('floatingFooter'),
+            floatingFooterToggle: document.getElementById('floatingFooterToggle'),
+            tanggal: document.getElementById('tanggal'),
+            jam: document.getElementById('jam'),
+            bedahBody: document.getElementById('bedahBody'),
+            nonBedahBody: document.getElementById('nonBedahBody')
+        };
+    },
+
+    cleanup() {
+        console.log('🧹 Performing comprehensive cleanup...');
+        this.isInitialized = false;
+        
+        // Cleanup sequence matters!
+        this.floatingFooter.cleanup();
+        this.smartSync.cleanup();
+        this.events.cleanup();
+        this.resources.cleanup();
+        
+        // Clear data references
+        this.allData = [];
+        this.cutiData = [];
+        
+        // Force DOM cleanup
+        this.cleanupDOMReferences();
+        
+        console.log('✅ Cleanup completed');
+    },
+
+    cleanupDOMReferences() {
+        // Clear any stored DOM references
+        Object.keys(this.elements).forEach(key => {
+            this.elements[key] = null;
+        });
+    },
+
+    memoryMaintenance() {
+        // Periodic memory cleanup
+        MemorySafeCacheManager.clearExpiredCache();
+        
+        // Force GC if available
+        if (window.gc) {
+            window.gc();
+        }
+        
+        console.log('🧠 Memory maintenance performed');
+    },
+
+    initializeEventDelegation() {
+        this.events.addDelegatedEvent(
+            this.elements.floatingCutiScrollContent,
+            'click',
+            '.floating-cuti-item',
+            (e, target) => {
+                const dokter = target.getAttribute('data-dokter');
+                const spesialis = target.getAttribute('data-spesialis');
+                const tanggal = target.getAttribute('data-tanggal');
+                const status = target.getAttribute('data-status');
+                this.showCutiDetail(dokter, spesialis, tanggal, status);
+            }
+        );
+    },
+
+    initializeModalEvents() {
+        this.events.addEventListener(this.elements.cutiModalClose, 'click', () => this.closeCutiModal());
+        this.events.addEventListener(document, 'keydown', (e) => {
+            if (e.key === 'Escape') this.closeCutiModal();
+        });
+        this.events.addEventListener(this.elements.cutiModal, 'click', (e) => {
+            if (e.target === this.elements.cutiModal) this.closeCutiModal();
+        });
+    },
+
+    initializeFloatingFooter() {
+        this.events.addEventListener(this.elements.floatingFooterToggle, 'click', () => {
+            this.toggleFloatingFooter();
+        });
+        this.floatingFooter.start(this.resources);
+    },
+
+    toggleFloatingFooter() {
+        const isCollapsing = !this.elements.floatingFooter.classList.contains('collapsed');
+        
+        if (isCollapsing) {
+            this.elements.floatingFooter.classList.add('collapsed');
+            this.elements.floatingFooterToggle.querySelector('span').textContent = '+';
+        } else {
+            this.elements.floatingFooter.classList.remove('collapsed');
+            this.elements.floatingFooterToggle.querySelector('span').textContent = '−';
+        }
+    },
+
+    async loadInitialData() {
+        const cached = MemorySafeCacheManager.getCachedData();
+        if (cached) {
+            console.log('📂 Loading from cache');
+            MemorySafeRenderer.showData(cached.mainData);
+            MemorySafeRenderer.displayCutiDoctors(cached.cutiData);
+            this.smartSync.lastDataHash = this.smartSync.generateSimpleHash(cached.mainData);
+            this.hideLoading();
+            
+            // Load fresh data in background
+            this.resources.setTimeout(() => this.loadFreshData(), 2000);
+            return;
+        }
+
+        await this.loadFreshData();
+    },
+
+    async loadFreshData() {
+        try {
+            this.showLoading();
+            const [mainData, footerData] = await Promise.all([
+                this.fetchWithRetry(CONFIG.MAIN_SHEET_URL),
+                this.fetchWithRetry(CONFIG.FOOTER_SHEET_URL)
+            ]);
+          
+            if (!this.validateMainData(mainData)) {
+                throw new Error('Format data utama tidak valid');
+            }
+          
+            this.allData = mainData;
+            this.cutiData = footerData;
+            this.smartSync.lastDataHash = this.smartSync.generateSimpleHash(mainData);
+          
+            MemorySafeCacheManager.cacheData({ mainData, cutiData: footerData });
+            MemorySafeRenderer.showData(mainData);
+            MemorySafeRenderer.displayCutiDoctors(footerData);
+            this.hideLoading();
+          
+            this.announceToScreenReader('Data jadwal dokter telah dimuat');
+          
+        } catch (err) {
+            console.error("Gagal memuat data:", err);
+            this.handleLoadError(err);
+        }
+    },
+
+    async fetchWithRetry(url, retries = CONFIG.MAX_RETRIES) {
+        for (let i = 0; i < retries; i++) {
+            try {
+                return await this.fetchWithTimeout(url);
+            } catch (error) {
+                if (i === retries - 1) throw error;
+                await new Promise(resolve => this.resources.setTimeout(resolve, 1000 * (i + 1)));
+            }
+        }
+    },
+
+    async fetchWithTimeout(url) {
+        const controller = this.resources.createAbortController();
+        const timeoutId = this.resources.setTimeout(() => controller.abort(), CONFIG.FETCH_TIMEOUT);
+        
+        try {
+            const response = await fetch(url, { 
+                signal: controller.signal,
+                cache: 'no-cache'
+            });
+            
+            this.resources.setTimeout(() => clearTimeout(timeoutId), 100);
+            
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            return await response.json();
+        } catch (error) {
+            this.resources.setTimeout(() => clearTimeout(timeoutId), 100);
+            throw error;
+        }
+    },
+
+    validateMainData(data) {
+        return Array.isArray(data) && data.every(item => 
+            item && typeof item === 'object' &&
+            'Spesialis' in item && 'Dokter' in item &&
+            'Status' in item && 'Jenis' in item
+        );
+    },
+
+    handleLoadError(error) {
+        const cached = MemorySafeCacheManager.getCachedData();
+        if (cached) {
+            MemorySafeRenderer.showData(cached.mainData);
+            MemorySafeRenderer.displayCutiDoctors(cached.cutiData);
+            this.showUpdateNotification('Menggunakan data cache');
+        } else {
+            this.showErrorState('Gagal memuat data jadwal');
+        }
+        this.hideLoading();
+    },
+
+    startTVOptimizedPolling() {
+        const poll = async () => {
+            if (this.isInitialized && !document.hidden) {
+                await this.checkForDataUpdates();
+            }
+            this.resources.setTimeout(poll, CONFIG.REFRESH_INTERVAL);
+        };
+        
+        poll();
+    },
+
+    async checkForDataUpdates() {
+        if (this.isChecking || !this.isInitialized) return;
+        
+        this.isChecking = true;
+        this.updateSyncStatus('syncing');
+        
+        try {
+            const updateResult = await this.smartSync.checkForUpdates(this.resources);
+          
+            if (updateResult) {
+                console.log('🎉 Data updated');
+                this.allData = updateResult.data;
+                MemorySafeRenderer.showData(updateResult.data);
+                MemorySafeCacheManager.cacheData({ mainData: updateResult.data, cutiData: this.cutiData });
+                this.showUpdateNotification();
+            }
+        } catch (error) {
+            console.warn('Update check failed:', error);
+        } finally {
+            this.isChecking = false;
+            this.updateSyncStatus('up-to-date');
+        }
+    },
+
+    updateSyncStatus(status) {
+        if (this.elements.syncStatus) {
+            this.elements.syncStatus.className = `sync-status ${status}`;
+            this.elements.syncStatus.textContent = status === 'syncing' ? 'Memeriksa update...' : 'Data terkini';
+        }
+    },
+
+    showUpdateNotification(message = 'Data jadwal diperbarui') {
+        if (this.elements.updateNotification) {
+            this.elements.updateNotification.querySelector('span:last-child').textContent = message;
+            this.elements.updateNotification.style.display = 'flex';
+            this.resources.setTimeout(() => {
+                if (this.elements.updateNotification) {
+                    this.elements.updateNotification.style.display = 'none';
+                }
+            }, 3000);
+        }
+    },
+
+    showSkeletonLoading() {
+        const skeletonRow = `
+            <tr class="skeleton-row">
+                <td class="table-align-left"><div class="skeleton-line" style="width: 80%"></div></td>
+                <td class="table-align-left"><div class="skeleton-line" style="width: 60%"></div></td>
+                <td class="table-align-center"><div class="skeleton-status"></div></td>
+                <td class="table-align-center"><div class="skeleton-line" style="width: 40%"></div></td>
+            </tr>
+        `;
+        
+        if (this.elements.bedahBody) this.elements.bedahBody.innerHTML = skeletonRow.repeat(3);
+        if (this.elements.nonBedahBody) this.elements.nonBedahBody.innerHTML = skeletonRow.repeat(5);
+    },
+
+    showLoading() {
+        if (this.elements.loadingIndicator) {
+            this.elements.loadingIndicator.style.display = 'block';
+        }
+    },
+
+    hideLoading() {
+        if (this.elements.loadingIndicator) {
+            this.elements.loadingIndicator.style.display = 'none';
+        }
+    },
+
+    showErrorState(message) {
+        const errorHTML = `
+            <tr>
+                <td colspan="4" class="error-message">
+                    ${message}
+                    <button onclick="AppState.retryLoad()">Coba Lagi</button>
+                </td>
+            </tr>
+        `;
+        
+        ['bedahBody', 'nonBedahBody'].forEach(id => {
+            const element = document.getElementById(id);
+            if (element && element.children.length === 0) {
+                element.innerHTML = errorHTML;
+            }
+        });
+    },
+
+    async retryLoad() {
+        this.showLoading();
+        await this.loadFreshData();
+    },
+
+    updateDateTime() {
+        if (!this.isInitialized) return;
+        
+        const now = new Date();
+        if (this.elements.tanggal) {
+            this.elements.tanggal.textContent = now.toLocaleDateString('id-ID', { 
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+            });
+        }
+        
+        if (this.elements.jam) {
+            const jam = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+            const detik = now.toLocaleTimeString('id-ID', { second: '2-digit' });
+        
+            this.elements.jam.innerHTML = `
+                <span class="jam-utama">${jam}</span>
+                <span class="jam-detik">${detik}</span>
+            `;
+        }
+    },
+
+    handleVisibilityChange() {
+        if (document.hidden) {
+            console.log('📱 Page hidden, pausing updates');
+        } else {
+            console.log('📱 Page visible, resuming updates');
+            this.resources.setTimeout(() => this.checkForDataUpdates(), 1000);
+        }
+    },
+
+    handleOnlineStatus() {
+        if (this.elements.offlineBanner) {
+            this.elements.offlineBanner.style.display = navigator.onLine ? 'none' : 'block';
+        }
+        
+        if (navigator.onLine && this.elements.onlineBanner) {
+            this.elements.onlineBanner.style.display = 'block';
+            this.resources.setTimeout(() => {
+                if (this.elements.onlineBanner) {
+                    this.elements.onlineBanner.style.display = 'none';
+                }
+            }, 3000);
+            this.resources.setTimeout(() => this.checkForDataUpdates(), 2000);
+        }
+    },
+
+    announceToScreenReader(message) {
+        if (this.elements.liveRegion) {
+            this.elements.liveRegion.textContent = message;
+            this.resources.setTimeout(() => {
+                if (this.elements.liveRegion) {
+                    this.elements.liveRegion.textContent = '';
+                }
+            }, 100);
+        }
+    },
+
+    showCutiDetail(nama, spesialis, tanggal, status) {
+        const badgeClass = status;
+        const badgeText = status === 'akan-cuti' ? 'AKAN CUTI' : 'SEDANG CUTI';
+        
+        if (this.elements.cutiDetailContent) {
+            this.elements.cutiDetailContent.innerHTML = `
+                <div class="cuti-detail-item">
+                    <div class="cuti-detail-avatar">${Utils.getInitials(nama)}</div>
+                    <div class="cuti-detail-info">
+                        <div class="cuti-detail-name">${Utils.escapeHtml(nama)}</div>
+                        <div class="cuti-detail-spec">${Utils.escapeHtml(spesialis)}</div>
+                        <div class="cuti-detail-dates">
+                            <span>📅 ${Utils.escapeHtml(tanggal)}</span>
+                        </div>
+                    </div>
+                    <div class="cuti-detail-status ${badgeClass}">${badgeText}</div>
+                </div>
+            `;
+        }
+        
+        if (this.elements.cutiModal) {
+            this.elements.cutiModal.classList.add('active');
+        }
+    },
+
+    closeCutiModal() {
+        if (this.elements.cutiModal) {
+            this.elements.cutiModal.classList.remove('active');
+        }
+    }
+};
+
+// ==================== MEMORY-SAFE INITIALIZATION ====================
+function initializeApp() {
+    try {
+        const requiredElements = [
+            'bedahBody', 'nonBedahBody', 'loadingIndicator', 
+            'floatingCutiScrollContent', 'tanggal', 'jam'
+        ];
+        
+        const missingElements = requiredElements.filter(id => !document.getElementById(id));
+        if (missingElements.length > 0) {
+            throw new Error(`Missing required elements: ${missingElements.join(', ')}`);
+        }
+        
+        AppState.initialize();
+        console.log('✅ Memory-safe application initialized');
+        
+    } catch (error) {
+        console.error('❌ Failed to initialize application:', error);
+        
+        // Simple fallback
+        document.body.innerHTML = `
+            <div style="padding: 20px; text-align: center;">
+                <h2>⚠️ Gagal Memuat Aplikasi</h2>
+                <button onclick="location.reload()" style="
+                    background: #4299e1; 
+                    color: white; 
+                    border: none; 
+                    padding: 10px 20px; 
+                    border-radius: 5px; 
+                    cursor: pointer;
+                ">Refresh Halaman</button>
+            </div>
+        `;
+    }
+}
+
+// Memory-safe cleanup on page unload
+window.addEventListener('beforeunload', () => {
+    console.log('🔄 Page unloading, performing cleanup');
+    if (AppState && AppState.cleanup) {
+        AppState.cleanup();
+    }
+});
+
+// Initialize when ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeApp);
+} else {
+    initializeApp();
+}
+
+// Global export for debugging
+window.AppState = AppState;
+</script>
+
+  <script>
+// ==================== TV FREEZE MANAGEMENT SYSTEM ====================
+
+class TVFreezeDetector {
+    constructor() {
+        this.lastResponseTime = Date.now();
+        this.freezeThreshold = 10000; // 10 detik
+        this.healthCheckInterval = null;
+        this.init();
+    }
+    
+    init() {
+        console.log('🔍 Freeze Detector Activated');
+        
+        // Health check setiap 5 detik
+        this.healthCheckInterval = setInterval(() => {
+            this.performanceHealthCheck();
+        }, 5000);
+        
+        // Monitor user interactions
+        this.monitorUserActivity();
+        
+        // Monitor JavaScript event loop
+        this.monitorEventLoop();
+    }
+    
+    performanceHealthCheck() {
+        const now = Date.now();
+        const timeSinceLastResponse = now - this.lastResponseTime;
+        
+        console.log(`🕒 Health Check: ${timeSinceLastResponse}ms since last response`);
+        
+        // Jika tidak ada response dalam 10 detik → FREEZE
+        if (timeSinceLastResponse > this.freezeThreshold) {
+            console.error('🚨 FREEZE DETECTED: No response for', timeSinceLastResponse, 'ms');
+            this.handleFreeze('health_check_timeout');
+        }
+    }
+    
+    monitorUserActivity() {
+        // Update last response time pada setiap interaksi
+        const activities = ['click', 'keydown', 'mousemove', 'scroll', 'touchstart'];
+        activities.forEach(event => {
+            document.addEventListener(event, () => {
+                this.lastResponseTime = Date.now();
+            }, { passive: true });
+        });
+    }
+    
+    monitorEventLoop() {
+        // Check jika event loop blocked
+        let lastLoopTime = Date.now();
+        
+        const checkEventLoop = () => {
+            const now = Date.now();
+            const loopDelay = now - lastLoopTime;
+            lastLoopTime = now;
+            
+            // Jika event loop blocked lebih dari 2 detik
+            if (loopDelay > 2000) {
+                console.error('🚨 EVENT LOOP BLOCKED:', loopDelay, 'ms');
+                this.handleFreeze('event_loop_blocked');
+            }
+            
+            // Schedule check berikutnya
+            setTimeout(checkEventLoop, 1000);
+        };
+        
+        checkEventLoop();
+    }
+    
+    handleFreeze(reason) {
+        console.error('🧊 Handling freeze:', reason);
+        
+        // Step 1: Coba recovery methods bertahap
+        this.attemptGradualRecovery(reason);
+    }
+    
+    async attemptGradualRecovery(reason) {
+        console.log('🔄 Attempting gradual recovery...');
+        
+        try {
+            // STEP 1: Coba gentle cleanup dulu
+            if (await this.tryGentleCleanup()) {
+                console.log('✅ Gentle cleanup successful');
+                return;
+            }
+            
+            // STEP 2: Coba reload komponen tertentu
+            if (await this.tryComponentReload()) {
+                console.log('✅ Component reload successful');
+                return;
+            }
+            
+            // STEP 3: Force page reload
+            console.log('🔄 Gentle methods failed, forcing page reload');
+            this.forcePageReload();
+            
+        } catch (error) {
+            console.error('❌ All recovery methods failed, forcing reload');
+            this.forcePageReload();
+        }
+    }
+    
+    async tryGentleCleanup() {
+        console.log('🔧 Attempting gentle cleanup...');
+        
+        try {
+            // 1. Clear intervals & timeouts
+            this.clearAllTimers();
+            
+            // 2. Force garbage collection jika available
+            this.forceGarbageCollection();
+            
+            // 3. Free memory-intensive data
+            this.freeMemory();
+            
+            // 4. Test jika aplikasi kembali responsif
+            return await this.testResponsiveness();
+            
+        } catch (error) {
+            console.error('Gentle cleanup failed:', error);
+            return false;
+        }
+    }
+    
+    clearAllTimers() {
+        // Dapatkan ID intervals dan timeouts tertinggi
+        const highestId = setTimeout(() => {}, 0);
+        
+        // Clear semua timers
+        for (let i = highestId; i >= 0; i--) {
+            clearTimeout(i);
+            clearInterval(i);
+        }
+        
+        console.log('✅ Cleared all timers');
+    }
+    
+    forceGarbageCollection() {
+        // Method 1: Trigger GC jika available
+        if (window.gc) {
+            window.gc();
+            console.log('✅ Manual GC triggered');
+        }
+        
+        // Method 2: Force memory cleanup dengan large allocation
+        try {
+            const cleanupArray = new Array(1000000).fill(null);
+            setTimeout(() => {
+                cleanupArray.length = 0;
+            }, 100);
+        } catch (e) {}
+        
+        // Method 3: Clear caches
+        if (window.caches) {
+            caches.keys().then(keys => {
+                keys.forEach(key => caches.delete(key));
+            });
+        }
+    }
+    
+    freeMemory() {
+        // Clear application data state
+        if (window.AppState && AppState.cleanup) {
+            AppState.cleanup();
+        }
+        
+        // Clear large data structures
+        const largeElements = document.querySelectorAll('.table-container, .floating-cuti-scroll-content');
+        largeElements.forEach(el => {
+            if (el.innerHTML.length > 10000) {
+                el.innerHTML = '<div>Reloading...</div>';
+            }
+        });
+    }
+    
+    async testResponsiveness() {
+        return new Promise((resolve) => {
+            let responded = false;
+            
+            // Test dengan simple timeout
+            const testTimer = setTimeout(() => {
+                if (!responded) {
+                    responded = true;
+                    resolve(false); // Tidak responsif
+                }
+            }, 2000);
+            
+            // Coba execute simple operation
+            Promise.resolve().then(() => {
+                if (!responded) {
+                    responded = true;
+                    clearTimeout(testTimer);
+                    resolve(true); // Responsif
+                }
+            });
+        });
+    }
+    
+    async tryComponentReload() {
+        console.log('🔄 Attempting component reload...');
+        
+        try {
+            // 1. Reload tables data saja
+            await this.reloadTableData();
+            
+            // 2. Reload cuti data
+            await this.reloadCutiData();
+            
+            // 3. Re-initialize event listeners
+            this.reinitializeEvents();
+            
+            // 4. Test responsiveness lagi
+            return await this.testResponsiveness();
+            
+        } catch (error) {
+            console.error('Component reload failed:', error);
+            return false;
+        }
+    }
+    
+    async reloadTableData() {
+        // Clear existing table data
+        const tables = ['bedahBody', 'nonBedahBody'];
+        tables.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.innerHTML = '<tr><td colspan="4">Memuat ulang data...</td></tr>';
+            }
+        });
+        
+        // Fetch fresh data
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 5000);
+            
+            const response = await fetch(CONFIG.MAIN_SHEET_URL, { 
+                signal: controller.signal
+            });
+            
+            clearTimeout(timeoutId);
+            
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const data = await response.json();
+            
+            // Render data baru
+            if (window.MemorySafeRenderer) {
+                MemorySafeRenderer.showData(data);
+            }
+            return true;
+        } catch (error) {
+            console.error('Failed to reload table data:', error);
+            return false;
+        }
+    }
+    
+    async reloadCutiData() {
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 5000);
+            
+            const response = await fetch(CONFIG.FOOTER_SHEET_URL, { 
+                signal: controller.signal
+            });
+            
+            clearTimeout(timeoutId);
+            
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const data = await response.json();
+            
+            // Render cuti data baru
+            if (window.MemorySafeRenderer) {
+                MemorySafeRenderer.displayCutiDoctors(data);
+            }
+            return true;
+        } catch (error) {
+            console.error('Failed to reload cuti data:', error);
+            return false;
+        }
+    }
+    
+    reinitializeEvents() {
+        // Re-initialize essential event listeners
+        if (window.AppState && AppState.initializeEventDelegation) {
+            AppState.initializeEventDelegation();
+        }
+    }
+    
+    forcePageReload() {
+        console.log('🔄 Force page reload triggered');
+        
+        // Show reload message to user
+        this.showReloadMessage();
+        
+        // Reload after 3 seconds
+        setTimeout(() => {
+            window.location.reload();
+        }, 3000);
+    }
+    
+    showReloadMessage() {
+        // Create emergency reload overlay
+        const overlay = document.createElement('div');
+        overlay.id = 'freeze-recovery-overlay';
+        overlay.style.cssText = `
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, #6D8BFF, #7DE0FF);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-size: 2.5rem;
+            z-index: 100000;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+        `;
+        overlay.innerHTML = `
+            <div style="margin-bottom: 30px;">🔄</div>
+            <div style="font-weight: bold; margin-bottom: 15px;">Sistem Pemulihan</div>
+            <div style="font-size: 1.5rem; margin-bottom: 10px;">Mengembalikan aplikasi...</div>
+            <div style="font-size: 1rem; opacity: 0.8;">Harap tunggu sebentar</div>
+        `;
+        
+        document.body.appendChild(overlay);
+    }
+    
+    cleanup() {
+        if (this.healthCheckInterval) {
+            clearInterval(this.healthCheckInterval);
+        }
+    }
+}
+
+class FreezePrevention {
+    constructor() {
+        this.performanceMonitor = null;
+        this.preventiveReloadInterval = null;
+        this.init();
+    }
+    
+    init() {
+        console.log('🛡️ Freeze Prevention Activated');
+        this.startPerformanceMonitoring();
+        this.startPreventiveMaintenance();
+    }
+    
+    startPerformanceMonitoring() {
+        // Monitor memory usage setiap 30 detik
+        this.performanceMonitor = setInterval(() => {
+            this.checkPerformanceMetrics();
+        }, 30000);
+    }
+    
+    checkPerformanceMetrics() {
+        // Memory monitoring
+        if (performance.memory) {
+            const used = performance.memory.usedJSHeapSize;
+            const limit = performance.memory.jsHeapSizeLimit;
+            
+            const usagePercent = (used / limit) * 100;
+            
+            console.log(`🧠 Memory Usage: ${Math.round(usagePercent)}%`);
+            
+            // Jika memory usage > 80%, trigger preventive action
+            if (usagePercent > 80) {
+                console.warn('🟡 High memory usage, triggering cleanup');
+                this.preventiveCleanup();
+            }
+        }
+        
+        // Frame rate monitoring
+        this.monitorFrameRate();
+    }
+    
+    monitorFrameRate() {
+        let lastTime = performance.now();
+        let frameCount = 0;
+        
+        const checkFrameRate = () => {
+            frameCount++;
+            const currentTime = performance.now();
+            
+            if (currentTime - lastTime >= 1000) {
+                const fps = Math.round((frameCount * 1000) / (currentTime - lastTime));
+                
+                // Jika FPS drop di bawah 10, warning
+                if (fps < 10) {
+                    console.warn('🟡 Low FPS detected:', fps);
+                    this.optimizeRendering();
+                }
+                
+                frameCount = 0;
+                lastTime = currentTime;
+            }
+            
+            requestAnimationFrame(checkFrameRate);
+        };
+        
+        checkFrameRate();
+    }
+    
+    preventiveCleanup() {
+        console.log('🛡️ Performing preventive cleanup');
+        
+        try {
+            // 1. Clear non-essential data
+            if (window.AppState && AppState.allData) {
+                // Keep only essential data (limit to 50 items)
+                AppState.allData = AppState.allData.slice(0, 50);
+            }
+            
+            // 2. Clear cached images/data
+            Object.keys(localStorage).forEach(key => {
+                if (key.includes('cache') || key.includes('temp')) {
+                    localStorage.removeItem(key);
+                }
+            });
+            
+            // 3. Force DOM cleanup
+            const nonVisibleElements = document.querySelectorAll('[style*="display: none"]');
+            nonVisibleElements.forEach(el => {
+                if (el.children.length > 10) {
+                    el.innerHTML = '';
+                }
+            });
+            
+            console.log('✅ Preventive cleanup completed');
+        } catch (error) {
+            console.error('Preventive cleanup failed:', error);
+        }
+    }
+    
+    optimizeRendering() {
+        console.log('🎨 Optimizing rendering performance');
+        
+        try {
+            // Reduce rendering complexity
+            document.querySelectorAll('.status, .floating-cuti-item').forEach(el => {
+                el.style.willChange = 'auto';
+            });
+            
+            // Force layout stabilization
+            document.body.style.contentVisibility = 'auto';
+        } catch (error) {
+            console.error('Rendering optimization failed:', error);
+        }
+    }
+    
+    startPreventiveMaintenance() {
+        // Preventive reload setiap 2 jam
+        this.preventiveReloadInterval = setInterval(() => {
+            console.log('🛡️ Preventive maintenance reload');
+            this.gracefulReload();
+        }, 2 * 60 * 60 * 1000); // 2 jam
+    }
+    
+    gracefulReload() {
+        // Show maintenance message
+        const maintenanceMsg = document.createElement('div');
+        maintenanceMsg.style.cssText = `
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 158, 125, 0.95);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            z-index: 10000;
+            font-weight: bold;
+        `;
+        maintenanceMsg.textContent = '🛠️ Pemeliharaan sistem...';
+        document.body.appendChild(maintenanceMsg);
+        
+        // Reload after 5 seconds
+        setTimeout(() => {
+            window.location.reload();
+        }, 5000);
+    }
+    
+    cleanup() {
+        if (this.performanceMonitor) {
+            clearInterval(this.performanceMonitor);
+        }
+        if (this.preventiveReloadInterval) {
+            clearInterval(this.preventiveReloadInterval);
+        }
+    }
+}
+
+class TVEmergencyManager {
+    constructor() {
+        this.crashCount = 0;
+        this.lastCrashTime = 0;
+        this.maxCrashAttempts = 3;
+        this.init();
+    }
+    
+    init() {
+        console.log('🚨 Emergency Manager Activated');
+        
+        // Global error handler
+        window.addEventListener('error', (e) => {
+            console.error('🚨 Global Error:', e);
+            this.handleGlobalError(e);
+        });
+        
+        // Unhandled promise rejection
+        window.addEventListener('unhandledrejection', (e) => {
+            console.error('🚨 Unhandled Promise Rejection:', e.reason);
+            this.handlePromiseRejection(e);
+        });
+    }
+    
+    handleGlobalError(error) {
+        // Critical errors → immediate action
+        if (this.isCriticalError(error)) {
+            console.error('🚨 CRITICAL ERROR - Immediate action required');
+            this.emergencyReload();
+        } else {
+            // Non-critical errors → increment counter
+            this.incrementCrashCount();
+        }
+    }
+    
+    handlePromiseRejection(event) {
+        // Network errors → try recovery first
+        if (event.reason?.name === 'TypeError' || event.reason?.message?.includes('fetch')) {
+            console.warn('🌐 Network error, attempting recovery...');
+            this.attemptNetworkRecovery();
+        } else {
+            this.incrementCrashCount();
+        }
+    }
+    
+    isCriticalError(error) {
+        const criticalPatterns = [
+            'out of memory',
+            'maximum call stack',
+            'script error',
+            'undefined is not a function',
+            'failed to execute'
+        ];
+        
+        const errorStr = error.message?.toLowerCase() || error.toString().toLowerCase();
+        return criticalPatterns.some(pattern => errorStr.includes(pattern));
+    }
+    
+    incrementCrashCount() {
+        this.crashCount++;
+        this.lastCrashTime = Date.now();
+        
+        console.log(`📊 Crash count: ${this.crashCount}/${this.maxCrashAttempts}`);
+        
+        // Jika terlalu banyak crash dalam waktu singkat
+        if (this.crashCount >= this.maxCrashAttempts) {
+            const timeSinceLastCrash = Date.now() - this.lastCrashTime;
+            if (timeSinceLastCrash < 60000) { // 1 menit
+                console.error('🚨 MULTIPLE CRASHES - Emergency reload');
+                this.emergencyReload();
+            }
+        }
+        
+        // Reset counter setelah 2 menit
+        setTimeout(() => {
+            this.crashCount = Math.max(0, this.crashCount - 1);
+        }, 120000);
+    }
+    
+    attemptNetworkRecovery() {
+        // Try to recover from network issues
+        setTimeout(() => {
+            if (window.AppState && AppState.checkForDataUpdates) {
+                AppState.checkForDataUpdates().catch(() => {
+                    // If recovery fails, show offline message
+                    this.showOfflineMessage();
+                });
+            }
+        }, 2000);
+    }
+    
+    emergencyReload() {
+        console.log('🚨 EMERGENCY RELOAD TRIGGERED');
+        
+        // Show emergency message
+        this.showEmergencyMessage();
+        
+        // Reload with different strategies based on crash count
+        const reloadDelay = this.crashCount > 2 ? 10000 : 5000; // Longer delay for repeated crashes
+        
+        setTimeout(() => {
+            if (this.crashCount > 3) {
+                // Aggressive reload for persistent crashes
+                window.location.replace(window.location.href);
+            } else {
+                // Normal reload
+                window.location.reload();
+            }
+        }, reloadDelay);
+    }
+    
+    showEmergencyMessage() {
+        const emergencyOverlay = document.createElement('div');
+        emergencyOverlay.id = 'emergency-reload-overlay';
+        emergencyOverlay.style.cssText = `
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, #FC8181, #F56565);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-size: 2rem;
+            z-index: 100000;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+        `;
+        emergencyOverlay.innerHTML = `
+            <div style="margin-bottom: 30px;">🚨</div>
+            <div style="font-weight: bold; margin-bottom: 15px;">Pemulihan Darurat</div>
+            <div style="font-size: 1.5rem; margin-bottom: 10px;">Mengalami masalah sistem</div>
+            <div style="font-size: 1rem; opacity: 0.8;">Aplikasi akan dimuat ulang...</div>
+        `;
+        
+        document.body.appendChild(emergencyOverlay);
+    }
+    
+    showOfflineMessage() {
+        // Update existing offline banner if available
+        const offlineBanner = document.getElementById('offlineBanner');
+        if (offlineBanner) {
+            offlineBanner.textContent = '⚠️ Gagal memuat data. Menggunakan cache...';
+            offlineBanner.style.display = 'block';
+        }
+    }
+}
+
+class TVFreezeManager {
+    constructor() {
+        this.detector = null;
+        this.prevention = null;
+        this.emergency = null;
+        this.init();
+    }
+    
+    init() {
+        console.log('🛡️ TV Freeze Management System Initializing...');
+        
+        // Initialize subsystems dengan delay untuk avoid startup conflicts
+        setTimeout(() => {
+            this.detector = new TVFreezeDetector();
+            this.prevention = new FreezePrevention();
+            this.emergency = new TVEmergencyManager();
+            
+            console.log('✅ TV Freeze Management System Fully Activated');
+        }, 5000); // Delay 5 detik setelah app startup
+    }
+    
+    // Public method untuk manual cleanup jika needed
+    cleanup() {
+        if (this.detector) {
+            this.detector.cleanup();
+        }
+        if (this.prevention) {
+            this.prevention.cleanup();
+        }
+        console.log('🧹 Freeze Management System Cleaned Up');
+    }
+}
+
+// ==================== TV REMOTE CONTROL NAVIGATION ====================
+
+class TVRemoteNavigation {
+    constructor() {
+        this.focusableElements = [];
+        this.currentFocusIndex = 0;
+        this.isEnabled = false;
+        this.init();
+    }
+    
+    init() {
+        // Only enable on large screens (TV)
+        if (window.innerWidth < 1280) {
+            console.log('📱 Remote navigation disabled - not TV screen');
+            return;
+        }
+        
+        console.log('🎮 TV Remote Navigation Activated');
+        this.isEnabled = true;
+        
+        this.updateFocusableElements();
+        this.setupEventListeners();
+        this.initializeFocus();
+        
+        // Update elements periodically
+        setInterval(() => this.updateFocusableElements(), 10000);
+    }
+    
+    updateFocusableElements() {
+        if (!this.isEnabled) return;
+        
+        // Get all focusable elements
+        this.focusableElements = Array.from(document.querySelectorAll(
+            '.floating-cuti-item, .cuti-modal-close, button, .status'
+        )).filter(el => {
+            // Filter out hidden elements
+            const style = window.getComputedStyle(el);
+            return style.display !== 'none' && 
+                   style.visibility !== 'hidden' &&
+                   style.opacity !== '0';
+        });
+        
+        console.log(`🎯 Focusable elements: ${this.focusableElements.length}`);
+    }
+    
+    setupEventListeners() {
+        // Handle remote control keys
+        document.addEventListener('keydown', (e) => {
+            if (!this.isEnabled) return;
+            
+            switch(e.key) {
+                case 'ArrowUp': 
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    this.navigate(-1); 
+                    break;
+                    
+                case 'ArrowDown': 
+                case 'ArrowRight':
+                    e.preventDefault();
+                    this.navigate(1); 
+                    break;
+                    
+                case 'Enter': 
+                    e.preventDefault();
+                    this.activate(); 
+                    break;
+                    
+                case 'Backspace': 
+                case 'Escape':
+                    e.preventDefault();
+                    this.goBack(); 
+                    break;
+            }
+        }, { passive: false });
+        
+        // Update elements when DOM changes
+        const observer = new MutationObserver(() => {
+            this.updateFocusableElements();
+        });
+        
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    }
+    
+    initializeFocus() {
+        // Focus first element after a delay
+        setTimeout(() => {
+            if (this.focusableElements.length > 0) {
+                this.currentFocusIndex = 0;
+                this.focusCurrentElement();
+            }
+        }, 3000);
+    }
+    
+    navigate(direction) {
+        if (this.focusableElements.length === 0) {
+            this.updateFocusableElements();
+            return;
+        }
+        
+        // Calculate new index dengan wrap-around
+        this.currentFocusIndex = 
+            (this.currentFocusIndex + direction + this.focusableElements.length) % 
+            this.focusableElements.length;
+        
+        this.focusCurrentElement();
+    }
+    
+    focusCurrentElement() {
+        const element = this.focusableElements[this.currentFocusIndex];
+        if (!element) return;
+        
+        // Remove focus from all elements
+        this.focusableElements.forEach(el => el.classList.remove('tv-focused'));
+        
+        // Add focus to current element
+        element.classList.add('tv-focused');
+        element.focus({ preventScroll: true });
+        
+        // Scroll element into view jika needed
+        element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'center'
+        });
+        
+        console.log(`🎯 Focused: ${element.textContent.substring(0, 30)}...`);
+    }
+    
+    activate() {
+        const element = this.focusableElements[this.currentFocusIndex];
+        if (!element) return;
+        
+        console.log('🎮 Activating:', element);
+        
+        // Simulate click on the element
+        element.click();
+        
+        // Special handling for different element types
+        if (element.classList.contains('floating-cuti-item')) {
+            // Already handled by click
+        } else if (element.classList.contains('cuti-modal-close')) {
+            // Already handled by click  
+        }
+    }
+    
+    goBack() {
+        console.log('🎮 Back button pressed');
+        
+        // Close modal if open
+        const modal = document.getElementById('cutiDetailModal');
+        if (modal && modal.classList.contains('active')) {
+            modal.classList.remove('active');
+            return;
+        }
+        
+        // Collapse floating footer if open
+        const footer = document.getElementById('floatingFooter');
+        if (footer && !footer.classList.contains('collapsed')) {
+            footer.classList.add('collapsed');
+            const toggle = document.getElementById('floatingFooterToggle');
+            if (toggle) {
+                toggle.querySelector('span').textContent = '+';
+            }
+            return;
+        }
+        
+        // If nothing else to go back to, refresh elements
+        this.updateFocusableElements();
+    }
+}
+
+// ==================== TV MEMORY MANAGER ====================
+
+class TVMemoryManager {
+    constructor() {
+        this.autoRefreshInterval = null;
+        this.healthCheckInterval = null;
+        this.cursorTimeout = null;
+        this.init();
+    }
+    
+    init() {
+        console.log('🧠 TV Memory Manager Activated');
+        
+        // Only activate on large screens
+        if (window.innerWidth < 1280) return;
+        
+        this.startAutoRefresh();
+        this.startHealthCheck();
+        this.hideMouseCursor();
+    }
+    
+    startAutoRefresh() {
+        // Refresh data setiap 30 detik untuk TV
+        this.autoRefreshInterval = setInterval(() => {
+            if (!document.hidden && window.AppState) {
+                console.log('🔄 TV Auto-refresh');
+                AppState.checkForDataUpdates().catch(console.error);
+            }
+        }, 30000);
+        
+        // Full page reload setiap 30 menit (prevent memory leaks)
+        setTimeout(() => {
+            if (!document.hidden) {
+                console.log('🔄 TV Scheduled Full Refresh');
+                this.gracefulReload();
+            }
+        }, 30 * 60 * 1000);
+    }
+    
+    startHealthCheck() {
+        this.healthCheckInterval = setInterval(() => {
+            this.performHealthCheck();
+        }, 60000); // Setiap 1 menit
+    }
+    
+    performHealthCheck() {
+        if (document.hidden) return;
+        
+        // Check memory usage jika available
+        if (performance.memory) {
+            const usedMB = Math.round(performance.memory.usedJSHeapSize / 1048576);
+            const totalMB = Math.round(performance.memory.totalJSHeapSize / 1048576);
+            
+            console.log(`🧠 Memory Health: ${usedMB}MB / ${totalMB}MB`);
+            
+            // Jika memory usage terlalu tinggi, warning
+            if (usedMB > 300) {
+                console.warn('🟡 High memory usage detected');
+            }
+        }
+        
+        // Check responsiveness
+        this.checkResponsiveness();
+    }
+    
+    checkResponsiveness() {
+        const startTime = performance.now();
+        
+        setTimeout(() => {
+            const responseTime = performance.now() - startTime;
+            
+            if (responseTime > 1000) { // Jika lag lebih dari 1 detik
+                console.warn('🟡 Slow response detected:', responseTime, 'ms');
+            }
+        }, 100);
+    }
+    
+    hideMouseCursor() {
+        // Hide cursor untuk TV
+        document.body.style.cursor = 'none';
+        
+        // Show cursor temporarily on interaction, then hide again
+        const showCursor = () => {
+            document.body.style.cursor = 'default';
+            clearTimeout(this.cursorTimeout);
+            this.cursorTimeout = setTimeout(() => {
+                document.body.style.cursor = 'none';
+            }, 2000);
+        };
+        
+        document.addEventListener('mousemove', showCursor);
+        document.addEventListener('keydown', showCursor);
+    }
+    
+    gracefulReload() {
+        // Show reload message
+        const reloadMsg = document.createElement('div');
+        reloadMsg.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(109, 139, 255, 0.95);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            z-index: 10000;
+            font-weight: bold;
+            font-size: 1.2rem;
+        `;
+        reloadMsg.textContent = '🔄 Memuat ulang untuk optimalisasi...';
+        document.body.appendChild(reloadMsg);
+        
+        // Reload after 3 seconds
+        setTimeout(() => {
+            window.location.reload();
+        }, 3000);
+    }
+    
+    cleanup() {
+        if (this.autoRefreshInterval) {
+            clearInterval(this.autoRefreshInterval);
+        }
+        if (this.healthCheckInterval) {
+            clearInterval(this.healthCheckInterval);
+        }
+        if (this.cursorTimeout) {
+            clearTimeout(this.cursorTimeout);
+        }
+    }
+}
+
+// ==================== TV MODE ACTIVATION ====================
+
+class TVModeActivator {
+    constructor() {
+        this.isTVMode = false;
+        this.init();
+    }
+    
+    init() {
+        // Check if this is a TV (large screen)
+        this.isTVMode = window.innerWidth >= 1280;
+        
+        if (this.isTVMode) {
+            console.log('📺 TV MODE DETECTED - Activating TV features');
+            this.activateTVMode();
+        } else {
+            console.log('📱 Mobile/Desktop Mode - TV features disabled');
+        }
+    }
+    
+    activateTVMode() {
+        // Apply TV-specific CSS
+        this.applyTVStyles();
+        
+        // Initialize TV systems dengan staggered startup
+        setTimeout(() => new TVRemoteNavigation(), 1000);
+        setTimeout(() => new TVMemoryManager(), 2000);
+        setTimeout(() => new TVFreezeManager(), 3000);
+        
+        // Add TV-specific event listeners
+        this.setupTVEvents();
+    }
+    
+    applyTVStyles() {
+        const style = document.createElement('style');
+        style.textContent = `
+            /* TV Optimization Styles */
+            @media (min-width: 1280px) {
+                :root {
+                    --tv-font-scale: 1.2;
+                    --tv-spacing-scale: 1.3;
+                }
+                
+                body {
+                    font-size: calc(var(--text-base) * var(--tv-font-scale));
+                    cursor: none !important;
+                }
+                
+                /* Larger text untuk TV */
+                header h1 {
+                    font-size: calc(var(--text-3xl) * 1.1) !important;
+                }
+                
+                header h2 {
+                    font-size: calc(var(--text-xl) * 1.1) !important;
+                }
+                
+                /* Larger table fonts */
+                th, td {
+                    font-size: calc(var(--text-base) * 1.2) !important;
+                    padding: calc(var(--space-3) * 1.3) calc(var(--space-4) * 1.3) !important;
+                }
+                
+                /* Larger interactive elements */
+                .status {
+                    min-height: 50px !important;
+                    min-width: 120px !important;
+                    font-size: calc(var(--text-sm) * 1.2) !important;
+                }
+                
+                .floating-cuti-item {
+                    min-height: 70px !important;
+                    min-width: 280px !important;
+                }
+                
+                /* TV Focus Styles */
+                .tv-focused {
+                    outline: 3px solid #FF9E7D !important;
+                    outline-offset: 3px !important;
+                    transform: scale(1.02);
+                    box-shadow: 0 0 20px rgba(255, 158, 125, 0.4) !important;
+                    transition: all 0.2s ease !important;
+                }
+                
+                /* Better scrolling untuk TV */
+                .table-container {
+                    scrollbar-width: thick !important;
+                }
+                
+                .table-container::-webkit-scrollbar {
+                    width: 12px !important;
+                    height: 12px !important;
+                }
+                
+                .table-container::-webkit-scrollbar-thumb {
+                    background: var(--color-primary) !important;
+                    border-radius: 6px !important;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    setupTVEvents() {
+        // Page visibility handling untuk TV
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                // Page became visible - refresh data
+                setTimeout(() => {
+                    if (window.AppState && AppState.checkForDataUpdates) {
+                        AppState.checkForDataUpdates();
+                    }
+                }, 1000);
+            }
+        });
+        
+        // Prevent context menu pada TV
+        document.addEventListener('contextmenu', (e) => {
+            if (this.isTVMode) {
+                e.preventDefault();
+            }
+        });
+    }
+}
+
+// ==================== GLOBAL INITIALIZATION ====================
+
+// Initialize TV Mode ketika page loaded
+let tvModeActivator;
+
+function initializeTVMode() {
+    console.log('🎯 Initializing TV Mode System...');
+    
+    try {
+        tvModeActivator = new TVModeActivator();
+        console.log('✅ TV Mode System Initialized Successfully');
+    } catch (error) {
+        console.error('❌ TV Mode Initialization Failed:', error);
+    }
+}
+
+// Cleanup function untuk page unload
+function cleanupTVSystems() {
+    console.log('🧹 Cleaning up TV systems...');
+    
+    if (window.tvFreezeManager) {
+        tvFreezeManager.cleanup();
+    }
+    
+    if (window.tvMemoryManager) {
+        tvMemoryManager.cleanup();
+    }
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeTVMode);
+} else {
+    setTimeout(initializeTVMode, 1000);
+}
+
+// Cleanup on page unload
+window.addEventListener('beforeunload', cleanupTVSystems);
+
+// Export untuk debugging
+window.TVSystems = {
+    activator: tvModeActivator,
+    cleanup: cleanupTVSystems
+};
+
+console.log('📺 TV Management Systems Loaded Successfully');
+</script>
+</body>
+</html>
