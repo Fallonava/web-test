@@ -916,21 +916,27 @@ td {
   will-change: transform;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(10px);
-  box-shadow: 5px 7px 12px rgb(0 0 0 / 17%), 0 1px 3px rgba(0, 0, 0, 0.03);
+  box-shadow: 
+        0 2px 20px rgba(0, 0, 0, 0.06),
+        0 1px 4px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4
 }
 
 .floating-cuti-item:hover {
   background: rgba(255, 255, 255, 0.9);
   border: 1px solid rgba(109, 139, 255, 0.3);
-  box-shadow: 
-    0 8px 20px rgba(0, 0, 0, 0.08),
-    0 3px 8px rgba(0, 0, 0, 0.05);
-  transform: translateY(-2px);
+   box-shadow: 
+        0 8px 30px rgba(0, 0, 0, 0.08),
+        0 3px 10px rgba(0, 0, 0, 0.03),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    transform: translateY(-3px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 .floating-cuti-avatar {
-  width: 40px;
-  height: 40px;
+  width: 40px;  height: 40px;
   border-radius: 50%;
   background: linear-gradient(135deg, #6D8BFF, #7DE0FF);
   display: flex;
