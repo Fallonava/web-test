@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jadwal Dokter - RSU Siaga Medika</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <style>
+        :root {
+            /* Semantic Base Colors (Default Dark) */
+            --bg-body: #000000;
+            --bg-ambient: radial-gradient(circle at 10% 20%, rgba(10, 132, 255, 0.4) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(191, 90, 242, 0.4) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(48, 209, 88, 0.15) 0%, transparent 60%);
+            --text-primary: #f5f5f7;
+            --text-secondary: rgba(235, 235, 245, 0.6);
+            /* Performance: Higher opacity to replace blur */
+            --glass-panel: rgba(30, 30, 35, 0.90);
+            --card-bg: rgba(44, 44, 46, 0.95);
+            --header-bg: rgba(255, 255, 255, 0.03);
+            --border-light: rgba(255, 255, 255, 0.08);
+            --platter-border: rgba(255, 255, 255, 0.05);
+            --footer-bg: rgba(20, 20, 22, 0.95);
+            --app-bg-overlay: rgba(20, 20, 22, 0.85);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            --accent-blue: #0A84FF;
+            --accent-purple: #BF5AF2;
+            --accent-green: #30D158;
+            --accent-orange: #FF9F0A;
+            --accent-red: #FF453A;
+            --logo-text: #ffffff;
+        }
+
+        /* Light Mode Theme */
+        [data-theme="light"] {
+            --bg-body: #f5f5f7;
+            --bg-ambient: radial-gradient(circle at 10% 20%, rgba(10, 132, 255, 0.25) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(191, 90, 242, 0.25) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(48, 209, 88, 0.1) 0%, transparent 60%);
+            --text-primary: #1d1d1f;
+            --text-secondary: rgba(60, 60, 67, 0.6);
+            --glass-panel: rgba(255, 255, 255, 0.90);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --header-bg: rgba(0, 0, 0, 0.03);
+            --border-light: rgba(0, 0, 0, 0.08);
+            --platter-border: rgba(0, 0, 0, 0.05);
+            --footer-bg: rgba(255, 255, 255, 0.95);
+            --app-bg-overlay: rgba(255, 255, 255, 0.85);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            /* Softer shadow */
+            --logo-text: #ffffff;
+        }
+
+        /* ===== RESET & BASE ===== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-body);
+            color: var(--text-primary);
+            user-select: none;
+            cursor: none;
+            transition: background 0.8s ease, color 0.8s ease;
+        }
+
+        .ambient-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            /* Performance: Static background, no animation */
+            background: radial-gradient(circle at 50% 50%, rgba(10, 132, 255, 0.1) 0%, transparent 60%);
+            opacity: 0.5;
+        }
+
+        /* ===== HARDWARE SAFE MODE (TCL/Android TV Optimization) ===== */
+        @media (prefers-reduced-motion: reduce) {
+            .ambient-bg {
+                animation: none;
+                opacity: 1;
+                background: #1c1c1e;
+            }
+
+            .app-container,
+            .footer {
+                backdrop-filter: none !important;
+                background: rgba(20, 20, 22, 0.95);
+            }
+
+            .platter {
+                box-shadow: none;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            * {
+                animation-duration: 0s !important;
+                transition-duration: 0s !important;
+            }
+        }
+
+        @keyframes breathe {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(1.1);
+                opacity: 0.7;
+            }
+        }
+
+        /* ===== LAYOUT CONTAINER ===== */
+        .app-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 16px 24px;
+            gap: 16px;
+            /* Performance: Removed backdrop-filter */
+            background: var(--app-bg-overlay);
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+            flex-shrink: 0;
+            padding: 0 8px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(10, 132, 255, 0.3);
+        }
+
+        .logo-icon {
+            font-size: 26px;
+            color: white;
+        }
+
+        .title-group h1 {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            color: var(--text-primary);
+        }
+
+        .title-group span {
+            font-size: 11px;
+            font-weight: 500;
+            opacity: 0.7;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .time-group {
+            text-align: right;
+        }
+
+        .clock {
+            font-size: 32px;
+            font-weight: 400;
+            letter-spacing: -0.03em;
+            font-variant-numeric: tabular-nums;
+            line-height: 1;
+        }
+
+        .date {
+            font-size: 12px;
+            font-weight: 600;
+            opacity: 0.6;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        /* ===== CONTENT GRID ===== */
+        .content {
+            flex: 1;
+            display: flex;
+            gap: 20px;
+            min-height: 0;
+        }
+
+        .island {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--glass-panel);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-light);
+            /* Subtle glass border */
+            overflow: hidden;
+            transition: background 0.8s ease, border-color 0.8s ease;
+        }
+
+        .island-header {
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            flex-shrink: 0;
+            background: var(--header-bg);
+            border-bottom: 1px solid var(--border-light);
+            transition: background 0.8s ease, border-color 0.8s ease;
+        }
+
+        .island-title {
+            font-size: 12px;
+            font-weight: 700;
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .island-badge {
+            font-size: 12px;
+            font-weight: 700;
+            background: rgba(125, 125, 125, 0.15);
+            color: var(--text-primary);
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+        .scroll-mask {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            /* Fade masks for scroll feel */
+            mask-image: linear-gradient(to bottom, transparent, black 16px, black calc(100% - 16px), transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 16px, black calc(100% - 16px), transparent);
+        }
+
+        .scroller {
+            padding: 16px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            will-change: transform;
+            /* Hint to browser compositor */
+        }
+
+        /* ===== PLATTER CARD ===== */
+        .platter {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 18px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            /* Edge Glow (Top/Left highlight) */
+            border: 1px solid var(--platter-border);
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, 0.1),
+                inset 1px 1px 1px var(--border-light);
+            transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            transform: translateZ(0);
+        }
+
+        /* Light Sweep Effect */
+        .platter::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg,
+                    transparent 40%,
+                    rgba(255, 255, 255, 0.03) 45%,
+                    rgba(255, 255, 255, 0.06) 50%,
+                    rgba(255, 255, 255, 0.03) 55%,
+                    transparent 60%);
+            transform: rotate(25deg);
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .platter.st-buka::after {
+            animation: lightSweep 8s infinite cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 1;
+        }
+
+        @keyframes lightSweep {
+            0% {
+                transform: translateX(-100%) rotate(25deg);
+            }
+
+            30% {
+                transform: translateX(100%) rotate(25deg);
+            }
+
+            100% {
+                transform: translateX(100%) rotate(25deg);
+            }
+        }
+
+        /* Status Edge Accent */
+        .platter::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            bottom: 12px;
+            width: 3.5px;
+            background: var(--status-color);
+            border-radius: 0 4px 4px 0;
+            opacity: 0.8;
+        }
+
+        /* Avatar */
+        .initials {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            background: rgba(125, 125, 125, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            flex-shrink: 0;
+            position: relative;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05), 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Info */
+        .info-col {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .doc-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            letter-spacing: -0.015em;
+        }
+
+        /* Specialty Kicker Style */
+        .doc-spec {
+            font-size: 8.5px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-top: 1px;
+        }
+
+        /* Meta */
+        .meta-col {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .status-pill {
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 9.5px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            background: var(--status-bg);
+            color: var(--status-color);
+            display: flex;
+            align-items: center;
+            gap: 4.5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Jam / Call Info */
+        .jam-box {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .jam-label {
+            font-size: 7.5px;
+            font-weight: 800;
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.5px;
+        }
+
+        .jam-val {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--text-primary);
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.02em;
+            line-height: 1;
+        }
+
+        /* Status Styles */
+        .st-buka {
+            --status-color: #30D158;
+            --status-bg: rgba(48, 209, 88, 0.2);
+        }
+
+        .st-penuh {
+            --status-color: #FF9F0A;
+            --status-bg: rgba(255, 159, 10, 0.2);
+        }
+
+        .st-selesai {
+            --status-color: #0A84FF;
+            --status-bg: rgba(10, 132, 255, 0.2);
+            opacity: 0.75;
+        }
+
+        .st-cuti {
+            --status-color: #FF453A;
+            --status-bg: rgba(255, 69, 58, 0.2);
+            opacity: 0.65;
+        }
+
+        .st-nopoli {
+            --status-color: #8E8E93;
+            --status-bg: rgba(142, 142, 147, 0.2);
+            opacity: 0.5;
+        }
+
+        /* Active Premium Highlight (The Apple Touch) */
+        .platter.st-buka {
+            background: rgba(255, 255, 255, 0.14);
+            border-color: rgba(48, 209, 88, 0.35);
+            /* Soft Ambient Glow matching status color */
+            box-shadow:
+                0 12px 30px rgba(0, 0, 0, 0.15),
+                0 0 15px rgba(48, 209, 88, 0.12),
+                inset 1px 1px 1px rgba(255, 255, 255, 0.08);
+            transform: scale(1.01);
+            z-index: 5;
+        }
+
+        [data-theme="light"] .platter.st-buka {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow:
+                0 12px 30px rgba(48, 209, 88, 0.15),
+                0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .platter.st-buka .initials {
+            background: linear-gradient(135deg, rgba(48, 209, 88, 0.3), rgba(48, 209, 88, 0.15));
+            color: #30D158;
+            border: 1px solid rgba(48, 209, 88, 0.2);
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(48, 209, 88, 0.2);
+        }
+
+        .platter.st-buka .jam-val {
+            color: #30D158;
+            text-shadow: 0 0 12px rgba(48, 209, 88, 0.5);
+            font-size: 17px;
+        }
+
+        /* ===== ACTIVE CALL HIGHLIGHT (NEW) ===== */
+        .platter {
+            display: flex;
+            flex-direction: column;
+            /* Changed to column to support expansion */
+            align-items: stretch;
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .platter-main {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            width: 100%;
+        }
+
+        .platter.active {
+            transform: scale(1.02) translateZ(20px);
+            z-index: 100;
+            background: #1c1c1e !important;
+            /* Solid dark background for contrast */
+            border: 1px solid #30D158 !important;
+            box-shadow:
+                0 24px 60px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(48, 209, 88, 0.3);
+            /* Subtle inner ring */
+            padding-bottom: 2px;
+        }
+
+        /* Light Mode Override */
+        [data-theme="light"] .platter.active {
+            background: #ffffff !important;
+            box-shadow:
+                0 24px 60px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(48, 209, 88, 0.3);
+            color: #000 !important;
+        }
+
+        .platter.active::before {
+            width: 6px;
+            box-shadow: 0 0 15px #30D158;
+            height: 100%;
+            top: 0;
+            bottom: 0;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .platter.active .initials {
+            background: #30D158;
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(48, 209, 88, 0.4);
+            transform: scale(1.1);
+            border: none;
+        }
+
+        .platter.active .doc-name {
+            font-size: 18px;
+            /* Slightly larger */
+            text-shadow: none;
+            /* Cleaner text */
+            color: #fff !important;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        [data-theme="light"] .platter.active .doc-name {
+            color: #000 !important;
+        }
+
+        [data-theme="light"] .platter.active .detail-label {
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        [data-theme="light"] .platter.active .detail-time {
+            color: #000;
+        }
+
+        /* ===== EXPANDED DETAIL (NEW) ===== */
+        .platter-detail {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            border-top: 1px solid rgba(255, 255, 255, 0);
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        .platter.active .platter-detail {
+            max-height: 120px;
+            opacity: 1;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .detail-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .detail-label {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.6;
+            color: #fff;
+        }
+
+        .detail-time {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.5px;
+        }
+
+        .live-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #30D158;
+            /* Solid green for premium look */
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(48, 209, 88, 0.4);
+            border: none;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            animation: pulse-white 2s infinite;
+        }
+
+        .live-text {
+            font-size: 10px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        @keyframes pulse-white {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+            }
+
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 6px rgba(255, 255, 255, 0);
+            }
+
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+            }
+        }
+
+        /* Active Badge (removed in favor of live status) */
+        .active-badge {
+            display: none;
+        }
+
+        /* ===== DYNAMIC ISLAND (NEW) ===== */
+        .dynamic-island {
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            height: 54px;
+            width: 32px;
+            background: #000;
+            border-radius: 27px;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            opacity: 0;
+            will-change: transform, width, opacity;
+        }
+
+        .dynamic-island.expanded {
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
+            width: 320px;
+            height: 54px;
+            border-radius: 27px;
+        }
+
+        .di-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+            width: 100%;
+            padding: 0 16px;
+        }
+
+        .dynamic-island.expanded .di-content {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .di-spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid #30D158;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .di-icon {
+            font-size: 20px;
+            color: #fff;
+        }
+
+        .di-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .di-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .di-msg {
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            white-space: nowrap;
+        }
+
+        .di-warn .di-spinner {
+            border-top-color: #FF453A;
+        }
+
+        .di-warn .di-msg {
+            color: #FF453A;
+        }
+
+        .di-icon[textContent="check_circle"] {
+            color: #30D158;
+        }
+
+        /* Or simply use a class if we want to be more explicit, but the JS uses material icons text */
+        .material-icons-round.di-icon {
+            color: #fff;
+        }
+
+        .material-icons-round.di-icon:contains("check_circle") {
+            color: #30D158;
+        }
+
+        /* Since CSS doesn't have :contains, let's just add a success class in JS or use a reliable selector */
+        .di-success .di-icon {
+            color: #30D158;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ===== FOOTER "DYNAMIC ISLAND" ===== */
+        .footer {
+            height: 48px;
+            background: var(--footer-bg);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            flex-shrink: 0;
+            /* Performance: Removed backdrop-filter */
+            transition: background 0.8s ease, border-color 0.8s ease;
+        }
+
+        .legend {
+            display: flex;
+            gap: 16px;
+            padding-right: 20px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .lg-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            opacity: 0.7;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .ticker {
+            flex: 1;
+            margin: 0 20px;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .ticker-inner {
+            white-space: nowrap;
+            animation: marquee 30s linear infinite;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .status-pill-lg {
+            background: rgba(125, 125, 125, 0.15);
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-primary);
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #30D158;
+            box-shadow: 0 0 8px #30D158;
+        }
+
+        .live-dot.warn {
+            background: #FF9F0A;
+            box-shadow: none;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        /* ===== SKELETON ===== */
+        .skel {
+            background: rgba(125, 125, 125, 0.1);
+            border-radius: 4px;
+            animation: pulse-bg 1.5s infinite;
+        }
+
+        @keyframes pulse-bg {
+            0% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.6;
+            }
+        }
+
+        /* ===== THEMES (Overridden by root var logic for simplicity in this proactive mode) ===== */
+        /* Using pure dark mode standard for "Professional Display" look */
+    </style>
+</head>
+
+<body>
+    <div class="app-bg">
+        <div class="bg-orb orb1"></div>
+        <div class="bg-orb orb2"></div>
+        <div class="bg-grid"></div>
+    </div>
+
+    <!-- DYNAMIC ISLAND PRE-MOUNT -->
+    <div id="dynamicIsland" class="dynamic-island">
+        <div class="di-content">
+            <div id="diIcon" class="di-spinner"></div>
+            <div class="di-text">
+                <span id="diTitle" class="di-title">System</span>
+                <span id="diMsg" class="di-msg">Loading...</span>
+            </div>
+        </div>
+    </div>
+    <div class="ambient-bg"></div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="brand">
+                <div class="logo-box"><span class="material-icons-round logo-icon">local_hospital</span></div>
+                <div class="title-group">
+                    <h1>PENDAFTARAN RSU SIAGA MEDIKA PURBALINGGA </h1>
+                    <span>Jadwal Pemanggilan Antrian Pendaftaran</span>
+                </div>
+            </div>
+            <div class="time-group">
+                <div class="clock" id="clock">00:00</div>
+                <div class="date" id="date">Thinking Different...</div>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <main class="content">
+            <!-- Bedah Island -->
+            <section class="island">
+                <div class="island-header">
+                    <span class="island-title">Surgical (Bedah)</span>
+                    <span class="island-badge" id="countBedah">0</span>
+                </div>
+                <div class="scroll-mask" id="maskBedah">
+                    <div class="scroller" id="scrollBedah"></div>
+                </div>
+            </section>
+
+            <!-- Non Bedah Island -->
+            <section class="island">
+                <div class="island-header">
+                    <span class="island-title">Non-Surgical (Non-Bedah)</span>
+                    <span class="island-badge" id="countNonBedah">0</span>
+                </div>
+                <div class="scroll-mask" id="maskNonBedah">
+                    <div class="scroller" id="scrollNonBedah"></div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer Bar -->
+        <footer class="footer">
+            <div class="legend">
+                <div class="lg-item">
+                    <div class="dot" style="background:var(--accent-green)"></div>Buka
+                </div>
+                <div class="lg-item">
+                    <div class="dot" style="background:var(--accent-orange)"></div>Penuh
+                </div>
+                <div class="lg-item">
+                    <div class="dot" style="background:var(--accent-blue)"></div>Selesai
+                </div>
+                <div class="lg-item">
+                    <div class="dot" style="background:var(--accent-red)"></div>Cuti
+                </div>
+            </div>
+            <div class="ticker">
+                <div class="ticker-inner" id="tickerText">Processing live data stream...</div>
+            </div>
+            <div class="status-pill-lg">
+                <div class="live-dot" id="liveDot"></div>
+                <span id="liveText">LIVE STREAM</span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // ===== CONFIGURATION =====
+        const CFG = {
+            API_MAIN: "https://script.google.com/macros/s/AKfycbyVnM9JhKx8xj2EZhETj1BdSCnmJxtNBV4eFmohKE0denRS4VEA3JqPI-RVsQFg7ZuEtw/exec",
+            API_CUTI: "https://script.google.com/macros/s/AKfycbxYREx42acZcDyDe8DF75UJlB0hroAoQ4QH_gpd71RgGtbI889yAAtzegrjgwvfLkFY4Q/exec",
+            POLL_MS: 60000,
+            SCROLL_PX: 0.4, // Ultra smooth 24px/sec
+            SCROLL_PAUSE: 4000
+        };
+
+        // ===== CORE ENGINE =====
+        const $ = id => document.getElementById(id);
+        const esc = t => { const d = document.createElement('div'); d.textContent = t || ''; return d.innerHTML; };
+        const initials = n => n ? n.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase() : 'DR';
+
+        // Helper: Check if current time is within schedule
+        // Helper: Check if current time is within schedule
+        const checkTime = (jamStr) => {
+            if (!jamStr || typeof jamStr !== 'string' || jamStr === '-') return false;
+
+            // Normalize: remove all spaces, change . to :
+            const clean = jamStr.replace(/\s/g, '').replace(/\./g, ':').toLowerCase();
+
+            // 1. Try Range: "08:00-12:00" or "08:00s/d12:00"
+            const rangeMatch = clean.match(/(\d{1,2}:\d{2}).*?(\d{1,2}:\d{2})/);
+
+            if (rangeMatch) {
+                const now = new Date();
+                const curH = now.getHours();
+                const curM = now.getMinutes();
+                const currentMins = (curH * 60) + curM;
+
+                const parseMins = (t) => {
+                    const [h, m] = t.split(':').map(Number);
+                    return (h * 60) + m;
+                };
+
+                const start = parseMins(rangeMatch[1]);
+                const end = parseMins(rangeMatch[2]);
+
+                // Handle overnight shifts
+                if (end < start) {
+                    return currentMins >= start || currentMins <= end;
+                }
+                return currentMins >= start && currentMins <= end;
+            }
+
+            // 2. Try Single Time: "08:00"
+            const singleMatch = clean.match(/(\d{1,2}:\d{2})/);
+            if (singleMatch) {
+                const now = new Date();
+                const curH = now.getHours();
+                const curM = now.getMinutes();
+                const currentMins = (curH * 60) + curM;
+
+                const parseMins = (t) => {
+                    const [h, m] = t.split(':').map(Number);
+                    return (h * 60) + m;
+                };
+
+                const start = parseMins(singleMatch[1]);
+                // Assume 4 hour shift if only start time is known
+                const end = start + (4 * 60);
+
+                return currentMins >= start && currentMins <= end;
+            }
+
+            return false;
+        };
+
+
+        // Performance-optimized scroller
+        class SmoothScroller {
+            constructor(id) {
+                this.el = $(id);
+                this.y = 0;
+                this.dir = 1;
+                this.paused = false;
+                this.active = true;
+                this.h = 0; // Cached scrollHeight
+                this.vh = 0; // Cached clientHeight
+
+                // Update metrics on resize
+                window.addEventListener('resize', () => this.updateMetrics());
+            }
+
+            updateMetrics() {
+                if (!this.el) return;
+                this.h = this.el.scrollHeight;
+                this.vh = this.el.parentElement.clientHeight;
+                // Reset position if content is smaller than view
+                if (this.h <= this.vh) {
+                    this.y = 0;
+                    this.el.style.transform = `translate3d(0,0,0)`;
+                }
+            }
+
+            start() {
+                const tick = () => {
+                    if (!this.active) return;
+                    requestAnimationFrame(tick);
+
+                    // Optimization: overflow checks done in updateMetrics
+                    if (this.paused || !this.el || this.h <= this.vh) return;
+
+                    this.y += CFG.SCROLL_PX * this.dir;
+
+                    // Boundary Logic with Cached Metrics
+                    if (this.y >= (this.h - this.vh)) {
+                        this.y = this.h - this.vh;
+                        this.pause(-1);
+                    } else if (this.y <= 0) {
+                        this.y = 0;
+                        this.pause(1);
+                    }
+
+                    this.el.style.transform = `translate3d(0, -${this.y}px, 0)`;
+                };
+                tick();
+            }
+
+            pause(newDir) {
+                this.paused = true;
+                setTimeout(() => { this.dir = newDir; this.paused = false; }, CFG.SCROLL_PAUSE);
+            }
+
+            reset() {
+                this.y = 0;
+                this.dir = 1;
+                this.paused = false;
+                // Important: Recalculate metrics after content update
+                // We'll call updateMetrics manually after render
+            }
+        }
+
+        const s1 = new SmoothScroller('scrollBedah');
+        const s2 = new SmoothScroller('scrollNonBedah');
+
+        // Dynamic Island Controller (with Queue)
+        const Island = {
+            el: $('dynamicIsland'),
+            icon: $('diIcon'),
+            title: $('diTitle'),
+            msg: $('diMsg'),
+            timer: null,
+            queue: [],
+            busy: false,
+
+            show(title, msg, type = 'load', duration = 3000) {
+                this.queue.push({ title, msg, type, duration });
+                if (!this.busy) this._next();
+            },
+
+            _next() {
+                if (this.queue.length === 0) { this.busy = false; return; }
+                this.busy = true;
+                const n = this.queue.shift();
+
+                this.title.textContent = n.title;
+                this.msg.textContent = n.msg;
+
+                this.el.classList.remove('di-warn', 'di-success');
+
+                // Icon Logic
+                if (n.type === 'load') {
+                    this.icon.className = 'di-spinner';
+                } else if (n.type === 'warn') {
+                    this.icon.className = 'material-icons-round di-icon';
+                    this.icon.textContent = 'error';
+                    this.el.classList.add('di-warn');
+                } else if (n.type === 'info') {
+                    this.icon.className = 'material-icons-round di-icon';
+                    this.icon.textContent = 'info';
+                } else if (n.type === 'success') {
+                    this.icon.className = 'material-icons-round di-icon';
+                    this.icon.textContent = 'check_circle';
+                    this.el.classList.add('di-success');
+                }
+
+                this.el.classList.add('expanded');
+
+                if (this.timer) clearTimeout(this.timer);
+                this.timer = setTimeout(() => {
+                    this.hide();
+                    // Wait for hide animation, then show next
+                    setTimeout(() => this._next(), 600);
+                }, n.duration);
+            },
+
+            hide() {
+                this.el.classList.remove('expanded');
+            }
+        };
+
+        // Main App Logic
+        const App = {
+            _prevDoctors: {}, // Track previous doctor states for change detection
+            _greetSent: {},   // Track which greetings have been sent today
+            _customMsgIdx: 0,
+            _customMsgs: [
+                { title: 'Info', text: 'Terimakasih sudah menunggu 🙏' },
+                { title: 'Info', text: 'Terimakasih sudah tertib 🌟' },
+                { title: 'Antrian', text: 'Belum online? Yo ambil antrian 🎫' },
+                { title: 'Info', text: 'Terimakasih sudah mengantri 😊' }
+            ],
+
+            _isFetching: false, // Network lock
+
+            async init() {
+                // Greeting based on time
+                const h = new Date().getHours();
+                const greeting = h < 11 ? 'Selamat Pagi' : h < 15 ? 'Selamat Siang' : h < 18 ? 'Selamat Sore' : 'Selamat Malam';
+                Island.show('PETUGAS PENDAFTARAN', greeting + ' 👋', 'success', 3000);
+
+                this.clock(); setInterval(() => this.clock(), 1000);
+                this.updateTheme(); setInterval(() => this.updateTheme(), 60000);
+                this.skel();
+
+                await this.fetch();
+                s1.start(); s2.start();
+                setInterval(() => this.fetch(), CFG.POLL_MS);
+
+                // Watchdog: Auto-reload every 1 hour to clear memory
+                setTimeout(() => window.location.reload(), 3600000);
+            },
+
+            clock() {
+                const d = new Date();
+                $('clock').textContent = d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+                $('date').textContent = d.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long' }).toUpperCase();
+
+                const h = d.getHours();
+                const m = d.getMinutes();
+                const s = d.getSeconds();
+
+                // Custom Rotating Notification every 5 minutes (avoid clash with break time at 12:00)
+                if (m % 5 === 0 && s === 0 && h !== 12) {
+                    const msg = this._customMsgs[this._customMsgIdx];
+                    Island.show(msg.title, msg.text, 'info', 6000);
+                    this._customMsgIdx = (this._customMsgIdx + 1) % this._customMsgs.length;
+                }
+
+                // Break Time Logic (12:00 - 13:00)
+                if (h === 12 && m % 10 === 0 && s === 0) {
+                    Island.show('Istirahat', 'Sedang Jam Istirahat 🕐', 'info', 10000);
+                }
+
+                // Time-based Greetings (fire once at the exact hour)
+                if (s === 0 && m === 0) {
+                    const key = 'greet_' + h;
+                    if (!this._greetSent[key]) {
+                        this._greetSent[key] = true;
+                        if (h === 6) Island.show('Pagi', 'Selamat Pagi 🌅', 'info', 4000);
+                        if (h === 12) Island.show('Siang', 'Selamat Siang ☀️', 'info', 4000);
+                        if (h === 18) Island.show('Sore', 'Selamat Sore 🌇', 'info', 4000);
+                    }
+                }
+            },
+
+            updateTheme() {
+                const h = new Date().getHours();
+                const isLight = h >= 6 && h < 16;
+                document.documentElement.setAttribute('data-theme', isLight ? 'light' : 'dark');
+            },
+
+            skel() {
+                const make = () => Array(4).fill(0).map(() =>
+                    `<div class="platter" style="height:76px; opacity:0.6"><div class="skel" style="width:48px;height:48px;border-radius:50%"></div><div class="skel" style="width:60%;height:16px"></div></div>`
+                ).join('');
+                $('scrollBedah').innerHTML = make();
+                $('scrollNonBedah').innerHTML = make();
+            },
+
+            async fetch() {
+                if (this._isFetching) {
+                    console.warn('Network busy, skipping fetch...');
+                    return;
+                }
+                this._isFetching = true;
+
+                try {
+                    const [m, c] = await Promise.all([
+                        fetch(CFG.API_MAIN).then(r => r.json()),
+                        fetch(CFG.API_CUTI).then(r => r.json())
+                    ]);
+
+                    // Detect doctor status changes before render
+                    this._detectChanges(m);
+
+                    this.render(m);
+                    this.ticker(c);
+                    this.status('LIVE STREAM', false);
+                } catch (e) {
+                    console.error(e);
+                    Island.show('Koneksi', 'Offline Mode — Tidak Ada Koneksi', 'warn', 8000);
+                    this.status('OFFLINE MODE', true);
+                } finally {
+                    this._isFetching = false;
+                }
+            },
+
+            _detectChanges(data) {
+                if (!data) return;
+                const now = {};
+
+                data.forEach(d => {
+                    const name = (d.Dokter || '').trim();
+                    const st = (d.Status || '').toUpperCase();
+                    const wasActive = this._prevDoctors[name];
+                    const isNowActive = checkTime(d.Jam) && (st.includes('BUKA') || st.includes('PENUH'));
+                    now[name] = isNowActive;
+
+                    // Only fire if we have previous state (not first load)
+                    if (wasActive !== undefined) {
+                        // Doctor just started serving
+                        if (!wasActive && isNowActive) {
+                            Island.show('Praktek Dimulai', `${name} Mulai Melayani`, 'success', 5000);
+                        }
+                        // Doctor just finished (was active, now gone or status changed)
+                        if (wasActive && !isNowActive && st.includes('SELESAI')) {
+                            Island.show('Selesai', `${name} Selesai Praktek`, 'info', 5000);
+                        }
+                    }
+                });
+
+                this._prevDoctors = now;
+            },
+
+            status(msg, warn) {
+                $('liveText').textContent = msg;
+                $('liveDot').className = warn ? 'live-dot warn' : 'live-dot';
+            },
+
+            render(data) {
+                if (!data) return;
+                const group = { Bedah: [], NonBedah: [] };
+
+                // 1. Filter: Sembunyikan hanya yang SELESAI, TIDAK PRAKTEK, atau LIBUR
+                const activeData = data.filter(d => {
+                    const s = (d.Status || '').toUpperCase();
+                    if (s.includes('SELESAI')) return false;
+                    if (s.includes('TIDAK')) return false;
+                    if (s.includes('LIBUR')) return false;
+                    return true;
+                });
+
+                // Pre-calculate Active State for Sorting
+                activeData.forEach(d => {
+                    const s = (d.Status || '').toUpperCase();
+                    d._isActive = checkTime(d.Jam) && (s.includes('BUKA') || s.includes('PENUH'));
+                });
+
+                // Sorting: ACTIVE (Top) -> BUKA (4) -> PENUH (3) -> HANYA OPERASI (2) -> CUTI (1)
+                const score = s => {
+                    const u = s.toUpperCase();
+                    if (u.includes('BUKA')) return 4;
+                    if (u.includes('PENUH')) return 3;
+                    if (u.includes('OPERASI')) return 2;
+                    if (u.includes('CUTI')) return 1;
+                    return 0;
+                };
+
+                activeData.sort((a, b) => {
+                    // Priority 1: Active
+                    if (a._isActive && !b._isActive) return -1;
+                    if (!a._isActive && b._isActive) return 1;
+                    // Priority 2: Status Score
+                    return score(b.Status) - score(a.Status);
+                });
+
+                activeData.forEach(d => {
+                    const g = d.Jenis === 'Bedah' ? 'Bedah' : 'NonBedah';
+                    if (group[g]) group[g].push(d);
+                });
+
+                // --- DOM RECYCLING ENGINE ---
+                const updateList = (containerId, list) => {
+                    const container = $(containerId);
+                    const oldMap = new Map();
+                    // Map existing elements by Doctor Name
+                    Array.from(container.children).forEach(el => {
+                        if (el.dataset.id) oldMap.set(el.dataset.id, el);
+                    });
+
+                    let hasLayoutChange = false;
+                    const newElements = list.map(d => {
+                        const id = d.Dokter;
+                        // Hash: Change detection key (Status + Jam + Active + Code)
+                        const hash = `${d.Status}|${d.Jam}|${d._isActive}|${d['Code Antrian'] || ''}`;
+
+                        // Helpers for styles
+                        const st = d.Status.toUpperCase();
+                        let c = 'st-nopoli', i = 'block', l = d.Status;
+                        if (st.includes('BUKA')) { c = 'st-buka'; i = 'check_circle'; l = 'BUKA'; }
+                        else if (st.includes('PENUH')) { c = 'st-penuh'; i = 'groups'; l = 'PENUH'; }
+                        else if (st.includes('OPERASI')) { c = 'st-operasi'; i = 'local_hospital'; l = 'OPERASI'; }
+                        else if (st.includes('CUTI')) { c = 'st-cuti'; i = 'flight'; l = 'CUTI'; }
+                        const avatarText = d['Code Antrian'] || d.CodeAntrian || d.Code || d.Kode || initials(d.Dokter);
+                        if (d._isActive) c += ' active';
+
+                        // Inner HTML Generator
+                        const getInner = () => `
+                            <div class="platter-main">
+                                <div class="initials">${avatarText}</div>
+                                <div class="info-col">
+                                    <div class="doc-name">${esc(d.Dokter)}</div>
+                                    <div class="doc-spec">${esc(d.Spesialis)}</div>
+                                </div>
+                                <div class="meta-col">
+                                    <div class="status-pill" style="background:var(--status-bg); color:var(--status-color)">
+                                        <span class="material-icons-round" style="font-size:12px">${i}</span>${l}
+                                    </div>
+                                    ${(d.Jam && d.Jam != '-' && !d._isActive) ? `
+                                    <div class="jam-box">
+                                        <span class="jam-label">PEMANGGILAN</span>
+                                        <span class="jam-val">${esc(d.Jam)}</span>
+                                    </div>` : ''}
+                                </div>
+                            </div>
+                            <div class="platter-detail">
+                                <div class="detail-info">
+                                    <span class="detail-label">JADWAL PEMANGGILAN</span>
+                                    <span class="detail-time">${esc(d.Jam)}</span>
+                                </div>
+                                <div class="live-status">
+                                     <div class="pulse-dot"></div>
+                                     <span class="live-text">SEDANG MELAYANI</span>
+                                </div>
+                            </div>`;
+
+                        let el = oldMap.get(id);
+
+                        if (el) {
+                            // RECYCLE: Only update if Hash changed
+                            if (el.dataset.hash !== hash) {
+                                el.className = `platter ${c}`;
+                                el.innerHTML = getInner();
+                                el.dataset.hash = hash;
+                            }
+                            oldMap.delete(id); // Mark handled
+                        } else {
+                            // CREATE: New element
+                            el = document.createElement('div');
+                            el.className = `platter ${c}`;
+                            el.dataset.id = id;
+                            el.dataset.hash = hash;
+                            el.innerHTML = getInner();
+                            hasLayoutChange = true;
+                        }
+                        return el;
+                    });
+
+                    // If items removed, we need layout update
+                    if (oldMap.size > 0) hasLayoutChange = true;
+
+                    // Check if order changed
+                    if (!hasLayoutChange) {
+                        for (let i = 0; i < newElements.length; i++) {
+                            if (container.children[i] !== newElements[i]) {
+                                hasLayoutChange = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    // Apply to DOM only if structural change occurred
+                    if (hasLayoutChange) {
+                        container.replaceChildren(...newElements);
+                        return true; // Signal scroller to reset
+                    }
+
+                    return false; // No scroll reset needed
+                };
+
+                const changed1 = updateList('scrollBedah', group.Bedah);
+                const changed2 = updateList('scrollNonBedah', group.NonBedah);
+
+                $('countBedah').textContent = group.Bedah.length;
+                $('countNonBedah').textContent = group.NonBedah.length;
+
+                // Only reset scroller if list structure changed (avoid jumpiness on simple updates)
+                if (changed1) { s1.reset(); requestAnimationFrame(() => s1.updateMetrics()); }
+                if (changed2) { s2.reset(); requestAnimationFrame(() => s2.updateMetrics()); }
+            },
+
+            ticker(data) {
+                if (!data) return;
+                const active = data.filter(d => {
+                    const s = (d.StatusCuti || '').toLowerCase();
+                    return s.includes('sedang') || s.includes('akan');
+                });
+
+                let txt = '© 2026 TPPRJ RSU Siaga Medika Purbalingga. All Rights Reserved. ';
+                if (active.length) {
+                    txt = active.map(d => ` ⚫ 📅 ${esc(d.Dokter)} (${esc(d.Spesialis)}) - ${esc(d.Tanggal)}`).join('   ');
+                }
+
+                const el = $('tickerText');
+                el.innerHTML = txt + '   ' + txt + '   ' + txt; // Triple buffer for smooth loop
+            }
+        };
+
+        App.init();
+    </script>
+</body>
+
+</html>
