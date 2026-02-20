@@ -1,0 +1,3241 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jadwal Dokter - RSU Siaga Medika</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <style>
+        /* Google Fonts Material Icons Round */
+        @font-face {
+            font-family: 'Material Icons Round';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/materialiconsround/v108/LDItaoyNOFWtIhtsVmb28k8GoldenAge.woff2) format('woff2');
+        }
+
+        .material-icons-round {
+            font-family: 'Material Icons Round';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+
+            /* Support for all WebKit browsers. */
+            -webkit-font-smoothing: antialiased;
+            /* Support for Safari and Chrome. */
+            text-rendering: optimizeLegibility;
+
+            /* Support for Firefox. */
+            -moz-osx-font-smoothing: grayscale;
+
+            /* Support for IE. */
+            font-feature-settings: 'liga';
+        }
+
+        :root {
+            /* Semantic Base Colors (Default Dark) */
+            --bg-body: #000000;
+            --bg-ambient: radial-gradient(circle at 10% 20%, rgba(10, 132, 255, 0.4) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(191, 90, 242, 0.4) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(48, 209, 88, 0.15) 0%, transparent 60%);
+            --text-primary: #f5f5f7;
+            --text-secondary: rgba(235, 235, 245, 0.6);
+            /* Performance: Higher opacity to replace blur */
+            --glass-panel: rgba(30, 30, 35, 0.90);
+            --card-bg: rgba(44, 44, 46, 0.95);
+            --header-bg: rgba(255, 255, 255, 0.03);
+            --border-light: rgba(255, 255, 255, 0.08);
+            --platter-border: rgba(255, 255, 255, 0.05);
+            --footer-bg: rgba(20, 20, 22, 0.95);
+            --app-bg-overlay: rgba(20, 20, 22, 0.85);
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --accent-blue: #0A84FF;
+            --accent-purple: #BF5AF2;
+            --accent-green: #30D158;
+            --accent-orange: #FF9F0A;
+            --accent-red: #FF453A;
+            --logo-text: #ffffff;
+        }
+
+        /* Light Mode Theme */
+        [data-theme="light"] {
+            --bg-body: #f5f5f7;
+            --bg-ambient: radial-gradient(circle at 10% 20%, rgba(10, 132, 255, 0.25) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(191, 90, 242, 0.25) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(48, 209, 88, 0.1) 0%, transparent 60%);
+            --text-primary: #1d1d1f;
+            --text-secondary: rgba(60, 60, 67, 0.6);
+            --glass-panel: rgba(255, 255, 255, 0.90);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --header-bg: rgba(0, 0, 0, 0.03);
+            --border-light: rgba(0, 0, 0, 0.08);
+            --platter-border: rgba(0, 0, 0, 0.05);
+            --footer-bg: rgba(255, 255, 255, 0.95);
+            --app-bg-overlay: rgba(255, 255, 255, 0.85);
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            /* Softer shadow */
+            --logo-text: #ffffff;
+        }
+
+        /* ===== RESET & BASE ===== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-body);
+            color: var(--text-primary);
+            user-select: none;
+            cursor: none;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        .ambient-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            /* Performance: Static background, no animation */
+            background: radial-gradient(circle at 50% 50%, rgba(10, 132, 255, 0.1) 0%, transparent 60%);
+            opacity: 0.5;
+        }
+
+        /* ===== HARDWARE SAFE MODE (TCL/Android TV Optimization) ===== */
+        @media (prefers-reduced-motion: reduce) {
+            .ambient-bg {
+                animation: none;
+                opacity: 1;
+                background: #1c1c1e;
+            }
+
+            .app-container,
+            .footer {
+                backdrop-filter: none !important;
+                background: rgba(20, 20, 22, 0.95);
+            }
+
+            .platter {
+                box-shadow: none;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            * {
+                animation-duration: 0s !important;
+                transition-duration: 0s !important;
+            }
+        }
+
+        @keyframes breathe {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(1.1);
+                opacity: 0.7;
+            }
+        }
+
+        /* ===== LAYOUT CONTAINER ===== */
+        .app-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 4px 6px;
+            gap: 16px;
+            /* Performance: Removed backdrop-filter */
+            background: var(--app-bg-overlay);
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: auto;
+            flex-shrink: 0;
+            padding: 24px 20px 0 20px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .header .brand {
+            width: 100%;
+        }
+
+        .header .time-group {
+            width: 100%;
+            text-align: left;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(10, 132, 255, 0.3);
+        }
+
+        .logo-icon {
+            font-size: 26px;
+            color: white;
+        }
+
+        .title-group h1 {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            color: var(--text-primary);
+        }
+
+        .title-group span {
+            font-size: 11px;
+            font-weight: 500;
+            opacity: 0.7;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .time-group {
+            text-align: right;
+        }
+
+        .clock {
+            font-size: 32px;
+            font-weight: 400;
+            letter-spacing: -0.03em;
+            font-variant-numeric: tabular-nums;
+            line-height: 1;
+        }
+
+        .date {
+            font-size: 12px;
+            font-weight: 600;
+            opacity: 0.6;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        /* ===== CONTENT GRID ===== */
+        .content {
+            flex: 1;
+            display: flex;
+            gap: 20px;
+            min-height: 0;
+        }
+
+        .island {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--glass-panel);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-light);
+            /* Subtle glass border */
+            overflow: hidden;
+            transition: background 0.5s ease;
+        }
+
+        .sidebar-panel {
+            flex: 0 0 320px;
+            max-width: 340px;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            background: var(--glass-panel);
+            border-right: none;
+            border-radius: 24px;
+            margin-right: 0;
+            overflow: hidden;
+            z-index: 10;
+            box-shadow: 4px 0 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .sidebar-panel .island-header {
+            background: transparent;
+            border-bottom: 1px solid rgba(125, 125, 125, 0.06);
+        }
+
+        /* Sidebar Item Tweaks */
+        /* Sidebar Item Tweaks */
+        .sidebar-panel .platter {
+            background: transparent;
+            border: 1px solid transparent;
+            box-shadow: none;
+            padding: 8px 10px;
+            /* Reduced padding */
+            border-radius: 14px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            color: #333;
+            gap: 10px;
+            /* Reduced gap */
+        }
+
+        /* Stat Panel */
+        .stat-panel {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 16px;
+            background: rgba(0, 0, 0, 0.03);
+            border-bottom: 1px solid var(--border-light);
+            gap: 8px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .stat-count {
+            font-size: 18px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.6;
+            margin-top: 4px;
+        }
+
+        /* Force dark text in sidebar when in light mode, but adapt in dark mode */
+        [data-theme="light"] .sidebar-panel {
+            color: #1d1d1f;
+        }
+
+        [data-theme="dark"] .sidebar-panel {
+            color: #f5f5f7;
+        }
+
+        [data-theme="dark"] .sidebar-panel .doc-name,
+        [data-theme="dark"] .sidebar-panel .header h1,
+        [data-theme="dark"] .sidebar-panel .clock {
+            color: #fff !important;
+        }
+
+        [data-theme="dark"] .sidebar-panel .doc-spec,
+        [data-theme="dark"] .sidebar-panel .header span,
+        [data-theme="dark"] .sidebar-panel .date,
+        [data-theme="dark"] .sidebar-panel .island-title {
+            color: rgba(255, 255, 255, 0.6) !important;
+        }
+
+        .sidebar-panel .doc-name {
+            color: var(--text-primary) !important;
+        }
+
+        .sidebar-panel .doc-spec {
+            color: var(--text-secondary) !important;
+            margin-top: 1px;
+        }
+
+        .sidebar-panel .initials {
+            background: rgba(0, 0, 0, 0.05);
+            color: #333;
+            width: 32px;
+            /* Smaller Avatar */
+            height: 32px;
+            /* Smaller Avatar */
+            font-size: 11px;
+            line-height: 32px;
+            min-width: 32px;
+            /* Force size */
+        }
+
+        /* Header Dark Mode Override */
+        .sidebar-panel .header h1 {
+            color: #1d1d1f !important;
+        }
+
+        .sidebar-panel .header span {
+            color: rgba(0, 0, 0, 0.6) !important;
+        }
+
+        .sidebar-panel .clock {
+            color: #1d1d1f !important;
+        }
+
+        .sidebar-panel .date {
+            color: rgba(0, 0, 0, 0.6) !important;
+        }
+
+        .sidebar-panel .island-title {
+            color: rgba(0, 0, 0, 0.5) !important;
+        }
+
+        .sidebar-panel .island-badge {
+            background: rgba(125, 125, 125, 0.15);
+            color: var(--text-primary);
+        }
+
+        .sidebar-panel .platter:hover {
+            background: rgba(125, 125, 125, 0.05);
+        }
+
+        .sidebar-panel .platter.active {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+            background: var(--status-bg) !important;
+            color: var(--text-primary);
+        }
+
+        /* Active Accent Indicator for Sidebar */
+        /* Active Accent Indicator for Sidebar */
+        .sidebar-panel .platter.active::before {
+            background: var(--status-color);
+            width: 3px;
+            border-radius: 3px;
+            left: 4px;
+            top: 8px;
+            bottom: 8px;
+        }
+
+        .sidebar-panel .doc-name {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            line-height: 1.2;
+        }
+
+        .sidebar-panel .doc-spec {
+            font-size: 9px;
+            font-weight: 600;
+        }
+
+
+
+
+        .island-header {
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            flex-shrink: 0;
+            background: var(--header-bg);
+            border-bottom: 1px solid rgba(125, 125, 125, 0.08);
+            transition: background 0.5s ease;
+        }
+
+        .island-title {
+            font-size: 12px;
+            font-weight: 700;
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .island-badge {
+            font-size: 12px;
+            font-weight: 700;
+            background: rgba(125, 125, 125, 0.15);
+            color: var(--text-primary);
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
+        .scroll-mask {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            /* Fade masks for scroll feel — bawah lebih tipis agar konten terakhir terlihat */
+            mask-image: linear-gradient(to bottom, transparent, black 16px, black calc(100% - 6px), transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 16px, black calc(100% - 6px), transparent);
+        }
+
+        .scroller {
+            padding: 16px 16px 24px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            will-change: transform;
+            /* Hint to browser compositor */
+        }
+
+        /* ===== PLATTER CARD ===== */
+        .platter {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: var(--card-bg);
+            border-radius: 14px;
+            border: 1px solid var(--platter-border);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: opacity 0.4s ease, border-color 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            transform: translateZ(0);
+        }
+
+        /* Light Sweep Effect — DIMATIKAN untuk performa Smart TV */
+        /* Efek visual tetap dijaga melalui border-color hijau pada .st-buka */
+
+        /* Status Edge Accent */
+        .platter::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            bottom: 12px;
+            width: 3.5px;
+            background: var(--status-color);
+            border-radius: 0 4px 4px 0;
+            opacity: 0.8;
+        }
+
+        /* Avatar */
+        .initials {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            background: rgba(125, 125, 125, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        /* Info */
+        .info-col {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .doc-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            letter-spacing: -0.015em;
+        }
+
+        /* Specialty Kicker Style */
+        .doc-spec {
+            font-size: 8.5px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-top: 1px;
+        }
+
+        /* Meta */
+        .meta-col {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .status-pill {
+            padding: 3px 10px;
+            border-radius: 8px;
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            background: var(--status-bg);
+            color: var(--status-color);
+            display: flex;
+            align-items: center;
+            gap: 4.5px;
+        }
+
+        /* Jam / Call Info */
+        .jam-box {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .jam-label {
+            font-size: 7.5px;
+            font-weight: 800;
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.5px;
+        }
+
+        .jam-val {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--text-primary);
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.02em;
+            line-height: 1;
+        }
+
+        /* Status Styles */
+        .st-buka {
+            --status-color: #30D158;
+            --status-bg: rgba(48, 209, 88, 0.2);
+        }
+
+        .st-penuh {
+            --status-color: #FF9F0A;
+            --status-bg: rgba(255, 159, 10, 0.2);
+        }
+
+        .st-selesai {
+            --status-color: #0A84FF;
+            --status-bg: rgba(10, 132, 255, 0.2);
+            opacity: 0.75;
+        }
+
+        .st-cuti {
+            --status-color: #FF453A;
+            --status-bg: rgba(255, 69, 58, 0.2);
+            opacity: 0.65;
+        }
+
+        .st-nopoli {
+            --status-color: #8E8E93;
+            --status-bg: rgba(142, 142, 147, 0.2);
+            opacity: 0.5;
+        }
+
+        /* #5: Avatar berwarna per status — identifikasi visual dari jauh */
+        .st-penuh .initials {
+            background: rgba(255, 159, 10, 0.15);
+            color: #FF9F0A;
+        }
+
+        .st-cuti .initials {
+            background: rgba(255, 69, 58, 0.12);
+            color: #FF453A;
+        }
+
+        /* #6: Card BUKA lebih kontras — terlihat "menyala" dari jarak 3-5m */
+        .platter.st-buka {
+            background: rgba(48, 209, 88, 0.10);
+            border-color: rgba(48, 209, 88, 0.35);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 5;
+        }
+
+        [data-theme="light"] .platter.st-buka {
+            background: rgba(48, 209, 88, 0.06);
+            border-color: rgba(48, 209, 88, 0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .platter.st-buka .initials {
+            background: rgba(48, 209, 88, 0.2);
+            color: #30D158;
+            border: 1px solid rgba(48, 209, 88, 0.2);
+        }
+
+        .platter.st-buka .jam-val {
+            color: #30D158;
+            font-size: 14px;
+        }
+
+        /* ===== ACTIVE CALL HIGHLIGHT (NEW) ===== */
+        .platter {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            transition: opacity 0.4s ease, border-color 0.4s ease;
+        }
+
+        .platter-main {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            width: 100%;
+        }
+
+        .platter.active {
+            z-index: 100;
+            /* Background disesuaikan menggunakan warna transparan dari status saat itu */
+            background: var(--status-bg) !important;
+            border: 1px solid var(--status-color) !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+            padding-bottom: 2px;
+        }
+
+        /* Light Mode Override */
+        [data-theme="light"] .platter.active {
+            background: #ffffff !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            color: #000 !important;
+        }
+
+        .platter.active::before {
+            width: 5px;
+            height: 100%;
+            top: 0;
+            bottom: 0;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .platter.active .initials {
+            background: var(--status-color);
+            color: #fff;
+            border: none;
+        }
+
+        .platter.active .doc-name {
+            font-size: 16px;
+            /* Slightly larger */
+            text-shadow: none;
+            /* Cleaner text */
+            color: #fff !important;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        [data-theme="light"] .platter.active .doc-name {
+            color: #000 !important;
+        }
+
+        [data-theme="light"] .platter.active .detail-label {
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        [data-theme="light"] .platter.active .detail-time {
+            color: #000;
+        }
+
+        /* ===== EXPANDED DETAIL (NEW) ===== */
+        .platter-detail {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            border-top: 1px solid rgba(255, 255, 255, 0);
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        /* #2: Border Expanded Detail Adaptif untuk Light Mode */
+        [data-theme="light"] .platter.active .platter-detail {
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .platter.active .platter-detail {
+            max-height: 120px;
+            opacity: 1;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .detail-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .detail-label {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.6;
+            color: #fff;
+        }
+
+        .detail-time {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.5px;
+        }
+
+        .live-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--status-color);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: none;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            animation: pulse-white 2s infinite;
+        }
+
+        .live-text {
+            font-size: 10px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Pulse: Hanya opacity — jauh lebih ringan dari box-shadow */
+        @keyframes pulse-white {
+            0% {
+                opacity: 0.4;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.4;
+            }
+        }
+
+        /* Active Badge (removed in favor of live status) */
+        .active-badge {
+            display: none;
+        }
+
+        /* ===== DYNAMIC ISLAND (NEW) ===== */
+        .dynamic-island {
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            height: 54px;
+            width: 32px;
+            background: #000;
+            border-radius: 27px;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.4s ease, width 0.4s ease, opacity 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+
+        .dynamic-island.expanded {
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
+            width: 320px;
+            height: 54px;
+            border-radius: 27px;
+        }
+
+        .di-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+            width: 100%;
+            padding: 0 16px;
+        }
+
+        .dynamic-island.expanded .di-content {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .di-spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid #30D158;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .di-icon {
+            font-size: 20px;
+            color: #fff;
+        }
+
+        .di-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .di-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .di-msg {
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            white-space: nowrap;
+        }
+
+        .di-warn .di-spinner {
+            border-top-color: #FF453A;
+        }
+
+        .di-warn .di-msg {
+            color: #FF453A;
+        }
+
+        .di-icon[textContent="check_circle"] {
+            color: #30D158;
+        }
+
+        /* Or simply use a class if we want to be more explicit, but the JS uses material icons text */
+        .material-icons-round.di-icon {
+            color: #fff;
+        }
+
+        .material-icons-round.di-icon:contains("check_circle") {
+            color: #30D158;
+        }
+
+        /* Since CSS doesn't have :contains, let's just add a success class in JS or use a reliable selector */
+        .di-success .di-icon {
+            color: #30D158;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            height: 48px;
+            background: var(--footer-bg);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            flex-shrink: 0;
+            transition: background 0.5s ease;
+        }
+
+        .legend {
+            display: flex;
+            gap: 16px;
+            padding-right: 20px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .lg-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            opacity: 0.7;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .ticker {
+            flex: 1;
+            margin: 0 20px;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .ticker-inner {
+            white-space: nowrap;
+            animation: marquee 30s linear infinite;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .status-pill-lg {
+            background: rgba(125, 125, 125, 0.15);
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-primary);
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #30D158;
+            box-shadow: 0 0 8px #30D158;
+        }
+
+        .live-dot.warn {
+            background: #FF9F0A;
+            box-shadow: none;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        /* ===== SKELETON ===== */
+        .skel {
+            background: rgba(125, 125, 125, 0.1);
+            border-radius: 4px;
+            animation: pulse-bg 1.5s infinite;
+        }
+
+        @keyframes pulse-bg {
+            0% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.6;
+            }
+        }
+
+        /* ===== SIDEBAR SECTION HEADER (Grouped by Status) ===== */
+        .sidebar-section-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 10px 4px 10px;
+            margin-top: 2px;
+        }
+
+        .sidebar-section-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .sidebar-section-label {
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: rgba(0, 0, 0, 0.4);
+        }
+
+        .sidebar-section-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, rgba(125, 125, 125, 0.12), transparent);
+        }
+
+        .sidebar-section-count {
+            font-size: 9px;
+            font-weight: 700;
+            color: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.04);
+            padding: 1px 6px;
+            border-radius: 4px;
+        }
+
+        /* ===== ANIMASI SLIDE-IN (Item Baru) ===== */
+        @keyframes slideInRight {
+            0% {
+                opacity: 0;
+                transform: translateX(30px) scale(0.95);
+            }
+
+            60% {
+                opacity: 1;
+                transform: translateX(-4px) scale(1.01);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+
+        .platter-new {
+            animation: slideInRight 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        /* ===== THEMES (Overridden by root var logic for simplicity in this proactive mode) ===== */
+        /* Using pure dark mode standard for "Professional Display" look */
+
+        /* ===== MOBILE RESPONSIVE (Smartphone) ===== */
+        @media (max-width: 768px) {
+
+            html,
+            body {
+                overflow-y: auto !important;
+                /* Allow native scrolling */
+                height: auto !important;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .app-container {
+                height: auto !important;
+                min-height: 100vh;
+                flex-direction: column;
+                /* Stack vertically */
+                padding: 12px;
+                gap: 24px;
+                overflow: visible;
+            }
+
+            /* Header Adjustments */
+            .header {
+                padding: 0 4px;
+                margin-bottom: 12px;
+            }
+
+            .header .brand {
+                gap: 12px;
+            }
+
+            .logo-box {
+                width: 40px;
+                height: 40px;
+            }
+
+            .title-group h1 {
+                font-size: 16px;
+            }
+
+            /* Sidebar becomes top section */
+            .sidebar-panel {
+                flex: none;
+                width: 100%;
+                max-width: none;
+                margin-right: 0;
+                margin-bottom: 16px;
+                position: relative;
+                z-index: 20;
+            }
+
+            .sidebar-panel .island-header {
+                position: sticky;
+                top: 0;
+                z-index: 5;
+                background: var(--card-bg);
+                /* Ensure visibility when sticky */
+                backdrop-filter: blur(10px);
+            }
+
+            /* Content Stack */
+            .content {
+                flex-direction: column;
+                height: auto !important;
+                gap: 24px;
+                overflow: visible;
+            }
+
+            /* Remove Island Scroll Masks/Limits */
+            .island {
+                flex: none;
+                /* Auto height */
+                height: auto !important;
+                overflow: visible;
+                background: transparent;
+                /* Cleaner look on mobile */
+                box-shadow: none;
+                border: none;
+            }
+
+            .island-header {
+                background: var(--card-bg);
+                border-radius: 16px;
+                margin-bottom: 12px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            }
+
+            .scroll-mask {
+                mask-image: none !important;
+                -webkit-mask-image: none !important;
+                overflow: visible;
+                height: auto !important;
+            }
+
+            .scroller {
+                padding: 0;
+                /* Remove internal padding */
+                gap: 12px;
+                overflow: visible;
+                transform: none !important;
+                /* Disable JS transform */
+            }
+
+            /* Footer */
+            .footer {
+                position: sticky;
+                bottom: 12px;
+                z-index: 100;
+                margin-top: auto;
+                box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+            }
+
+            /* Hide non-critical elements */
+            .bg-orb {
+                opacity: 0.3;
+            }
+        }
+
+        /* ===== OPTIMASI RESOLUSI 962x541 (Smart TV / Display Kiosk) ===== */
+        @media (max-width: 1024px) and (max-height: 600px) {
+
+            /* --- CONTAINER: Padding lebih ketat --- */
+            .app-container {
+                padding: 8px 12px;
+                gap: 8px;
+            }
+
+            /* --- CONTENT GRID: Gap lebih rapat --- */
+            .content {
+                gap: 10px;
+            }
+
+            /* --- SIDEBAR: Lebih ramping --- */
+            .sidebar-panel {
+                flex: 0 0 240px;
+                min-width: 220px;
+                max-width: 260px;
+                border-radius: 16px;
+            }
+
+            /* --- HEADER (di sidebar): Padat vertikal --- */
+            .header {
+                padding: 10px 12px 0 12px;
+                gap: 8px;
+                margin-bottom: 6px;
+            }
+
+            .header .time-group {
+                padding-top: 8px;
+            }
+
+            .logo-box {
+                width: 32px;
+                height: 32px;
+                border-radius: 8px;
+            }
+
+            .logo-icon {
+                font-size: 18px;
+            }
+
+            .title-group h1 {
+                font-size: 13px;
+            }
+
+            .title-group span {
+                font-size: 8px;
+            }
+
+            .sidebar-panel .header h1 {
+                font-size: 12px !important;
+            }
+
+            .sidebar-panel .header span {
+                font-size: 8px !important;
+            }
+
+            .clock {
+                font-size: 24px !important;
+            }
+
+            .date {
+                font-size: 9px;
+            }
+
+            .brand {
+                gap: 8px;
+            }
+
+            /* --- ISLAND PANELS --- */
+            .island {
+                border-radius: 16px;
+            }
+
+            .island-header {
+                height: 36px;
+                padding: 0 12px;
+            }
+
+            .island-title {
+                font-size: 10px;
+                letter-spacing: 0.08em;
+            }
+
+            .island-badge {
+                font-size: 10px;
+                padding: 1px 6px;
+            }
+
+            /* --- SIDEBAR ISLAND HEADER --- */
+            .sidebar-panel .island-header {
+                height: 30px !important;
+            }
+
+            /* --- SCROLLER: Padding lebih kecil --- */
+            .scroller {
+                padding: 8px 8px 16px 8px;
+                gap: 6px;
+            }
+
+            .sidebar-panel .scroller {
+                padding: 6px !important;
+                gap: 4px !important;
+            }
+
+            /* --- PLATTER CARD: Kompak --- */
+            .platter {
+                padding: 5px 8px;
+                border-radius: 10px;
+                gap: 6px;
+            }
+
+            .platter::before {
+                width: 2.5px;
+                top: 6px;
+                bottom: 6px;
+            }
+
+            .initials {
+                width: 30px;
+                height: 30px;
+                border-radius: 8px;
+                font-size: 12px;
+                font-weight: 900;
+            }
+
+            .doc-name {
+                font-size: 12px;
+                font-weight: 700;
+            }
+
+            .doc-spec {
+                font-size: 8px;
+                letter-spacing: 0.08em;
+            }
+
+            .status-pill {
+                padding: 3px 7px;
+                border-radius: 6px;
+                font-size: 8.5px;
+                gap: 3px;
+            }
+
+            .status-pill .material-icons-round {
+                font-size: 10px !important;
+            }
+
+            .jam-label {
+                font-size: 8px;
+            }
+
+            .jam-val {
+                font-size: 11px;
+            }
+
+            .platter-main {
+                gap: 8px;
+            }
+
+            /* --- SIDEBAR PLATTER: Lebih kecil --- */
+            .sidebar-panel .platter {
+                padding: 5px 6px;
+                gap: 6px;
+            }
+
+            .sidebar-panel .initials {
+                width: 26px !important;
+                height: 26px !important;
+                min-width: 26px !important;
+                font-size: 10px;
+                line-height: 26px !important;
+            }
+
+            .sidebar-panel .doc-name {
+                font-size: 11px !important;
+            }
+
+            .sidebar-panel .doc-spec {
+                font-size: 8px !important;
+            }
+
+            /* --- ACTIVE CARD: Lebih kompak --- */
+            /* --- ACTIVE CARD: Lebih kompak --- */
+            /* #1: Hapus scale transform (berat di TV) & sesuaikan padding */
+            .platter.active {
+                transform: translateZ(0);
+                padding-bottom: 2px;
+            }
+
+            .platter.active .platter-detail {
+                margin-top: 6px;
+                padding-top: 6px;
+            }
+
+            .platter.active .doc-name {
+                font-size: 14px !important;
+            }
+
+            .platter.active .initials {
+                transform: scale(1.05);
+            }
+
+            .detail-label {
+                font-size: 8px;
+            }
+
+            .detail-time {
+                font-size: 18px;
+            }
+
+            .live-status {
+                padding: 4px 10px;
+                border-radius: 14px;
+            }
+
+            .pulse-dot {
+                width: 6px;
+                height: 6px;
+            }
+
+            .live-text {
+                font-size: 9px;
+            }
+
+            /* --- INFO BOX (sidebar bawah) --- */
+            .sidebar-panel>div:last-child {
+                padding: 8px 10px !important;
+            }
+
+            .sidebar-panel>div:last-child .material-icons-round {
+                font-size: 14px !important;
+            }
+
+            .sidebar-panel>div:last-child span {
+                font-size: 9px !important;
+            }
+
+            .sidebar-panel>div:last-child p {
+                font-size: 9px !important;
+            }
+
+            /* --- FOOTER: Lebih tipis --- */
+            .footer {
+                height: 36px;
+                border-radius: 16px;
+                padding: 0 12px;
+            }
+
+            .legend {
+                gap: 10px;
+                padding-right: 10px;
+            }
+
+            .lg-item {
+                font-size: 9px;
+                gap: 4px;
+            }
+
+            .dot {
+                width: 5px;
+                height: 5px;
+            }
+
+            .ticker-inner {
+                font-size: 10px;
+            }
+
+            .ticker {
+                margin: 0 10px;
+            }
+
+            .status-pill-lg {
+                padding: 2px 8px;
+                font-size: 8px;
+                gap: 4px;
+            }
+
+            .live-dot {
+                width: 5px;
+                height: 5px;
+            }
+
+            /* --- DYNAMIC ISLAND: Proporsional & Optimized --- */
+            .dynamic-island {
+                height: 48px;
+                top: 12px;
+                /* Optimize for weak GPU */
+                will-change: transform, width, height, border-radius;
+                /* Reduce box-shadow for performance */
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+                /* #5: Animasi Liquid Squircle & Smooth Width */
+                transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                    width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                    height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                    background-color 0.4s ease,
+                    border-radius 0.6s ease;
+            }
+
+            .dynamic-island.expanded {
+                width: auto;
+                min-width: 320px;
+                height: 54px;
+                border-radius: 27px;
+            }
+
+
+
+            .di-content {
+                gap: 8px;
+                padding: 0 12px;
+            }
+
+            .di-spinner {
+                width: 14px;
+                height: 14px;
+            }
+
+            .di-title {
+                font-size: 8px;
+            }
+
+            .di-msg {
+                font-size: 11px;
+            }
+
+            /* --- SCROLL MASK: Disabled for performance on Low-End TV --- */
+            .scroll-mask {
+                mask-image: none !important;
+                -webkit-mask-image: none !important;
+            }
+
+            /* --- SIDEBAR SECTION HEADER: Kompak --- */
+            .sidebar-section-header {
+                padding: 4px 6px 2px 6px;
+                gap: 6px;
+                margin-top: 1px;
+            }
+
+            .sidebar-section-dot {
+                width: 5px;
+                height: 5px;
+            }
+
+            .sidebar-section-label {
+                font-size: 8px;
+                letter-spacing: 0.8px;
+            }
+
+            .sidebar-section-count {
+                font-size: 8px;
+                padding: 2px 5px;
+            }
+        }
+
+        /* ===== ADVERTISEMENT MODAL ===== */
+        .ad-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .ad-modal.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .ad-content {
+            width: 85%;
+            max-width: 900px;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            border-radius: 24px;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+            transform: scale(0.9);
+            transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            position: relative;
+        }
+
+        .ad-modal.show .ad-content {
+            transform: scale(1);
+        }
+
+        .ad-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ad-close:hover {
+            background: rgba(255, 0, 0, 0.6);
+            transform: scale(1.1);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ad-modal {
+                backdrop-filter: none;
+                background: #000;
+            }
+
+            .ad-content {
+                transform: none;
+                transition: none;
+            }
+        }
+
+        /* ===== APPLE 2026 BREAK MODAL ===== */
+        .break-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .break-modal.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .break-content {
+            width: 88%;
+            max-width: 1400px;
+            aspect-ratio: 21 / 9;
+            /* Cinematic ratio for modern look */
+            border-radius: 40px;
+            /* Ultra-rounded corners */
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            transform: scale(0.95);
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(10, 10, 10, 0.4);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+        }
+
+        .dynamic-break-bg {
+            position: absolute;
+            inset: -50%;
+            /* Oversize to hide animation edges */
+            z-index: 1;
+            background-size: 300% 300%;
+            animation: apple-mesh-flow 20s ease-in-out infinite alternate;
+            opacity: 0.9;
+            transition: background 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: blur(80px);
+            /* Deep blur for mesh gradient effect */
+        }
+
+        .break-siang {
+            background: radial-gradient(circle at 20% 30%, rgba(10, 132, 255, 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(48, 209, 88, 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(0, 200, 255, 0.6) 0%, transparent 50%);
+            background-color: #05101a;
+        }
+
+        .break-sore {
+            background: radial-gradient(circle at 80% 20%, rgba(255, 159, 10, 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(255, 69, 58, 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(191, 90, 242, 0.6) 0%, transparent 50%);
+            background-color: #1a0505;
+        }
+
+        .break-malam {
+            background: radial-gradient(circle at 10% 90%, rgba(94, 92, 230, 0.8) 0%, transparent 60%),
+                radial-gradient(circle at 90% 10%, rgba(10, 132, 255, 0.6) 0%, transparent 60%),
+                radial-gradient(circle at 50% 50%, rgba(50, 20, 100, 0.8) 0%, transparent 50%);
+            background-color: #020205;
+        }
+
+        @keyframes apple-mesh-flow {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(180deg) scale(1.1);
+            }
+
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
+        }
+
+        /* Glassmorphism Text Container */
+        .break-text-container {
+            position: absolute;
+            z-index: 10;
+            top: 50%;
+            left: 6%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: left;
+            padding: 40px;
+            max-width: 60%;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 32px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 2px 20px rgba(255, 255, 255, 0.05);
+        }
+
+        .break-text-container h1 {
+            font-family: 'Inter', -apple-system, sans-serif;
+            font-size: 82px;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            /* Apple subtle text gradient */
+            background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .break-text-container p {
+            font-family: 'Inter', -apple-system, sans-serif;
+            font-size: 28px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+            line-height: 1.4;
+            letter-spacing: -0.01em;
+        }
+
+        /* Responsive Break Modal */
+        @media (max-width: 1024px) {
+            .break-text-container {
+                left: 5%;
+                padding: 32px;
+                max-width: 80%;
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+            }
+
+            .break-text-container h1 {
+                font-size: 48px;
+            }
+
+            .break-text-container p {
+                font-size: 20px;
+            }
+
+            .break-countdown-timer {
+                font-size: 48px;
+            }
+
+            .break-countdown-container {
+                bottom: 32px;
+                right: 32px;
+                padding: 24px 32px;
+                border-radius: 28px;
+            }
+        }
+
+        /* Glassmorphism Timer Box */
+        .break-countdown-container {
+            position: absolute;
+            bottom: 60px;
+            right: 60px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(40px) saturate(150%);
+            -webkit-backdrop-filter: blur(40px) saturate(150%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 36px;
+            padding: 32px 48px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3), inset 0 2px 20px rgba(255, 255, 255, 0.05);
+            z-index: 10;
+        }
+
+        .break-countdown-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 0.3em;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .break-countdown-timer {
+            font-family: 'Inter', -apple-system, sans-serif;
+            font-size: 72px;
+            font-weight: 600;
+            /* Regular weight for modern digital look */
+            color: #ffffff;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            text-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .break-modal.show .break-content {
+            transform: scale(1);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .break-modal {
+                backdrop-filter: none;
+                background: #000;
+            }
+
+            .break-content {
+                transform: none;
+                transition: none;
+            }
+        }
+
+        /* ===== SMART TV FALLBACKS (WebOS/Tizen) ===== */
+        /* Menonaktifkan efek kaca dan animasi blur yang berat untuk stabilisasi framerate */
+        body.tv-optimized .break-modal {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+
+        body.tv-optimized .break-content {
+            background: #111;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        body.tv-optimized .dynamic-break-bg {
+            animation: none !important;
+            filter: none !important;
+            opacity: 1;
+        }
+
+        body.tv-optimized .break-siang {
+            background: linear-gradient(135deg, #05101a 0%, #0A84FF 100%);
+        }
+
+        body.tv-optimized .break-sore {
+            background: linear-gradient(135deg, #1a0505 0%, #FF9F0A 100%);
+        }
+
+        body.tv-optimized .break-malam {
+            background: linear-gradient(135deg, #020205 0%, #5E5CE6 100%);
+        }
+
+        body.tv-optimized .break-text-container,
+        body.tv-optimized .break-countdown-container {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            box-shadow: none !important;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ADVERTISEMENT MODAL -->
+    <div id="adModal" class="ad-modal">
+        <div class="ad-content">
+            <button class="ad-close" onclick="App.closeAd()"><span class="material-icons-round">close</span></button>
+            <div id="adVideoContainer"
+                style="width:100%; height:100%; border-radius: 24px; overflow: hidden; position: relative;"></div>
+        </div>
+    </div>
+
+    <!-- BREAK TIME MODAL -->
+    <div id="breakModal" class="break-modal">
+        <div class="break-content">
+            <!-- Dynamic Background -->
+            <div class="dynamic-break-bg" id="dynamicBreakBg"></div>
+
+            <!-- Dynamic Text -->
+            <div class="break-text-container">
+                <h1 id="breakTitle">Waktu Istirahat</h1>
+                <p id="breakSubtitle">Silakan Menunggu</p>
+            </div>
+
+            <div class="break-countdown-container">
+                <div class="break-countdown-label">WAKTU TERSISA</div>
+                <div class="break-countdown-timer" id="breakCountdownTimer">59:59</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-bg">
+        <div class="bg-orb orb1"></div>
+        <div class="bg-orb orb2"></div>
+        <div class="bg-grid"></div>
+    </div>
+
+    <!-- DYNAMIC ISLAND PRE-MOUNT -->
+    <div id="dynamicIsland" class="dynamic-island">
+        <div class="di-content">
+            <div id="diIcon" class="di-spinner"></div>
+            <div class="di-text">
+                <span id="diTitle" class="di-title">System</span>
+                <span id="diMsg" class="di-msg">Loading...</span>
+            </div>
+        </div>
+    </div>
+    <div class="ambient-bg"></div>
+    <div class="app-container">
+
+        <!-- Content -->
+        <main class="content">
+            <!-- Sidebar (Left - Integrated Header) -->
+            <aside class="island sidebar-panel">
+                <!-- Header Component (Optimized) -->
+                <div class="header" style="margin-bottom: 0; padding-bottom: 12px;">
+                    <div class="brand">
+                        <div class="logo-box" style="width: 36px; height: 36px;"><span
+                                class="material-icons-round logo-icon" style="font-size: 20px;">local_hospital</span>
+                        </div>
+                        <div class="title-group">
+                            <h1 style="font-size:14px; line-height:1.1">RSU SIAGA MEDIKA<br>PURBALINGGA</h1>
+                            <span style="font-size:9px; margin-top:2px; display:block">Antrian Pendaftaran</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ringkasan Statistik -->
+                <div class="stat-panel">
+                    <div class="stat-item">
+                        <span class="stat-count" id="statBuka" style="color: var(--accent-green)">0</span>
+                        <span class="stat-label">Buka</span>
+                    </div>
+                    <div class="stat-item"
+                        style="border-left: 1px solid var(--border-light); border-right: 1px solid var(--border-light);">
+                        <span class="stat-count" id="statPenuh" style="color: var(--accent-orange)">0</span>
+                        <span class="stat-label">Penuh</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-count" id="statCuti" style="color: var(--accent-red)">0</span>
+                        <span class="stat-label">Cuti</span>
+                    </div>
+                </div>
+
+                <!-- Clock & Date (Moved below stats for better vertical flow) -->
+                <div
+                    style="padding: 10px 16px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: flex-end; background: rgba(0,0,0,0.02);">
+                    <div class="clock" id="clock" style="font-size: 28px; font-weight: 500;">00:00</div>
+                    <div class="date" id="date"
+                        style="font-size: 10px; opacity: 0.6; text-align: right; line-height: 1.2;">-</div>
+                </div>
+
+                <!-- Sidebar Status List (Penuh/Cuti) -->
+                <div class="island-header"
+                    style="background: transparent; border-bottom: 1px solid var(--border-light); padding-top: 0; height: 36px;">
+                    <span class="island-title" style="letter-spacing: 1px;">Status Khusus</span>
+                    <span class="island-badge" id="countSidebar">0</span>
+                </div>
+
+                <div class="scroll-mask" id="maskSidebar">
+                    <div class="scroller" id="scrollSidebar" style="padding: 10px; gap: 8px;"></div>
+                </div>
+
+                <!-- Info Cards (Bottom pinned or scroll) -->
+                <div
+                    style="padding: 12px 16px; border-top: 1px solid var(--border-light); background: rgba(0,0,0,0.05);">
+                    <div style="display:flex; gap:8px; align-items:center; margin-bottom:6px">
+                        <span class="material-icons-round" style="color:var(--accent-blue); font-size:16px">info</span>
+                        <span
+                            style="font-size:10px; font-weight:700; text-transform:uppercase; color:var(--text-secondary)">Pesan
+                            Informasi</span>
+                    </div>
+                    <p id="dynamicInfoBox"
+                        style="font-size: 10px; line-height: 1.4; color: var(--text-secondary); transition: opacity 0.3s ease;">
+                        Memuat informasi terbaru...
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Bedah Island -->
+            <section class="island">
+                <div class="island-header">
+                    <div style="display:flex; align-items:center; gap:8px; min-width:0">
+                        <span class="material-icons-round"
+                            style="font-size:16px; color:var(--accent-blue); opacity:0.8">local_hospital</span>
+                        <span class="island-title">Bedah</span>
+                    </div>
+                    <span class="island-badge" id="countBedah"
+                        style="background:rgba(10,132,255,0.15); color:var(--accent-blue)">0</span>
+                </div>
+                <div class="scroll-mask" id="maskBedah">
+                    <div class="scroller" id="scrollBedah"></div>
+                </div>
+            </section>
+
+            <!-- Non Bedah Island -->
+            <section class="island">
+                <div class="island-header">
+                    <div style="display:flex; align-items:center; gap:8px; min-width:0">
+                        <span class="material-icons-round"
+                            style="font-size:16px; color:var(--accent-purple); opacity:0.8">medical_services</span>
+                        <span class="island-title">Non Bedah</span>
+                    </div>
+                    <span class="island-badge" id="countNonBedah"
+                        style="background:rgba(191,90,242,0.15); color:var(--accent-purple)">0</span>
+                </div>
+                <div class="scroll-mask" id="maskNonBedah">
+                    <div class="scroller" id="scrollNonBedah"></div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer Bar -->
+        <footer class="footer">
+            <div class="legend">
+                <div class="lg-item">
+                    <div class="dot" style="background:var(--accent-green)"></div>Buka
+                </div>
+                <div class="lg-item">
+                    <div class="dot" style="background:var(--accent-orange)"></div>Penuh
+                </div>
+                <div class="lg-item">
+                    <div class="dot" style="background:var(--accent-blue)"></div>Selesai
+                </div>
+                <div class="lg-item">
+                    <div class="dot" style="background:var(--accent-red)"></div>Cuti
+                </div>
+            </div>
+            <div class="ticker">
+                <div class="ticker-inner" id="tickerText">Processing live data stream...</div>
+            </div>
+            <div class="status-pill-lg">
+                <div class="live-dot" id="liveDot"></div>
+                <span id="liveText">LIVE STREAM</span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // ===== CONFIGURATION =====
+        const CFG = {
+            API_MAIN: "https://script.google.com/macros/s/AKfycbyVnM9JhKx8xj2EZhETj1BdSCnmJxtNBV4eFmohKE0denRS4VEA3JqPI-RVsQFg7ZuEtw/exec",
+            API_CUTI: "https://script.google.com/macros/s/AKfycbxYREx42acZcDyDe8DF75UJlB0hroAoQ4QH_gpd71RgGtbI889yAAtzegrjgwvfLkFY4Q/exec",
+            POLL_MS: 60000,
+            // Scroll Profesional: Item-by-Item
+            SCROLL_ITEM_PAUSE: 3000,   // Jeda antar item (ms) — waktu baca per kartu
+            SCROLL_EDGE_PAUSE: 6000,   // Jeda di ujung atas/bawah (ms)
+            SCROLL_DURATION: 800,      // Durasi animasi geser per item (ms)
+        };
+
+        // ===== CORE ENGINE =====
+        const $ = id => document.getElementById(id);
+        const esc = t => { const d = document.createElement('div'); d.textContent = t || ''; return d.innerHTML; };
+        const initials = n => n ? n.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase() : 'DR';
+
+        // Helper: Check if current time is within schedule
+        // Helper: Check if current time is within schedule
+        const checkTime = (jamStr) => {
+            if (!jamStr || typeof jamStr !== 'string' || jamStr === '-') return false;
+
+            // Normalize: remove all spaces, change . to :
+            const clean = jamStr.replace(/\s/g, '').replace(/\./g, ':').toLowerCase();
+
+            // 1. Try Range: "08:00-12:00" or "08:00s/d12:00"
+            const rangeMatch = clean.match(/(\d{1,2}:\d{2}).*?(\d{1,2}:\d{2})/);
+
+            if (rangeMatch) {
+                const now = new Date();
+                const curH = now.getHours();
+                const curM = now.getMinutes();
+                const currentMins = (curH * 60) + curM;
+
+                const parseMins = (t) => {
+                    const [h, m] = t.split(':').map(Number);
+                    return (h * 60) + m;
+                };
+
+                const start = parseMins(rangeMatch[1]);
+                const end = parseMins(rangeMatch[2]);
+
+                // Handle overnight shifts
+                if (end < start) {
+                    return currentMins >= start || currentMins <= end;
+                }
+                return currentMins >= start && currentMins <= end;
+            }
+
+            // 2. Try Single Time: "08:00"
+            const singleMatch = clean.match(/(\d{1,2}:\d{2})/);
+            if (singleMatch) {
+                const now = new Date();
+                const curH = now.getHours();
+                const curM = now.getMinutes();
+                const currentMins = (curH * 60) + curM;
+
+                const parseMins = (t) => {
+                    const [h, m] = t.split(':').map(Number);
+                    return (h * 60) + m;
+                };
+
+                const start = parseMins(singleMatch[1]);
+                // Assume 4 hour shift if only start time is known
+                const end = start + (4 * 60);
+
+                return currentMins >= start && currentMins <= end;
+            }
+
+            return false;
+        };
+
+        // #6: Format Jam Konsisten
+        const formatJam = (j) => {
+            if (!j || j === '-') return '-';
+            return j.replace(/\./g, ':').replace(/\s*[-–]\s*/g, ' — ').replace(/\s*s\/d\s*/gi, ' — ');
+        };
+
+
+
+        // ===== PROFESSIONAL SCROLLER (Item-by-Item with Easing) =====
+        // Pola: Scroll satu item → pause → scroll item berikutnya → ... → sampai bawah → pause lama → fade reset ke atas → ulangi
+        class SmoothScroller {
+            constructor(id) {
+                this.el = $(id);
+                this.y = 0;
+                this.targetY = 0;
+                this.currentItem = 0;
+                this.itemOffsets = [];   // Posisi Y setiap item (kartu)
+                this.active = true;
+                this.animating = false;
+                this.h = 0;             // scrollHeight
+                this.vh = 0;            // viewportHeight
+                this.timer = null;
+
+                window.addEventListener('resize', () => this.updateMetrics());
+            }
+
+            // Hitung posisi setiap item kartu
+            updateMetrics() {
+                if (!this.el) return;
+                this.h = this.el.scrollHeight;
+                this.vh = this.el.parentElement.clientHeight;
+
+                // Bangun array offset posisi tiap item
+                this.itemOffsets = [];
+                const children = this.el.children;
+                for (let i = 0; i < children.length; i++) {
+                    this.itemOffsets.push(children[i].offsetTop);
+                }
+
+                // Jika konten tidak perlu scroll, reset
+                if (this.h <= this.vh) {
+                    this.y = 0;
+                    this.targetY = 0;
+                    this.currentItem = 0;
+                    this.el.style.transform = 'translate3d(0,0,0)';
+                    this.el.style.opacity = '1';
+                }
+            }
+
+            // Easing: Cubic ease-in-out — pelan di awal & akhir, cepat di tengah
+            _ease(t) {
+                return t < 0.5
+                    ? 4 * t * t * t
+                    : 1 - Math.pow(-2 * t + 2, 3) / 2;
+            }
+
+            // Animasi scroll dari posisi saat ini ke target
+            _animateTo(target, duration, callback) {
+                if (this.animating) return;
+                this.animating = true;
+                const startY = this.y;
+                const delta = target - startY;
+                if (Math.abs(delta) < 1) {
+                    this.animating = false;
+                    if (callback) callback();
+                    return;
+                }
+
+                let startTime = null;
+                const step = (timestamp) => {
+                    if (!this.active) { this.animating = false; return; }
+                    if (!startTime) startTime = timestamp;
+
+                    const elapsed = timestamp - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const easedProgress = this._ease(progress);
+
+                    this.y = startY + (delta * easedProgress);
+                    this.el.style.transform = `translate3d(0, -${this.y}px, 0)`;
+
+                    if (progress < 1) {
+                        requestAnimationFrame(step);
+                    } else {
+                        this.y = target;
+                        this.el.style.transform = `translate3d(0, -${this.y}px, 0)`;
+                        this.animating = false;
+                        if (callback) callback();
+                    }
+                };
+                requestAnimationFrame(step);
+            }
+
+            // Fade out → reset ke atas → fade in (loop seamless)
+            _fadeResetToTop(callback) {
+                // Fade out
+                this.el.style.transition = 'opacity 0.5s ease';
+                this.el.style.opacity = '0';
+
+                setTimeout(() => {
+                    // Snap ke atas (tersembunyi)
+                    this.y = 0;
+                    this.targetY = 0;
+                    this.currentItem = 0;
+                    this.el.style.transition = 'none';
+                    this.el.style.transform = 'translate3d(0, 0, 0)';
+
+                    // Force reflow
+                    void this.el.offsetHeight;
+
+                    // Fade in
+                    this.el.style.transition = 'opacity 0.5s ease';
+                    this.el.style.opacity = '1';
+
+                    setTimeout(() => {
+                        this.el.style.transition = '';
+                        if (callback) callback();
+                    }, 500);
+                }, 500);
+            }
+
+            // Loop utama: scroll item demi item
+            _scheduleNext() {
+                if (!this.active) return;
+                if (this.h <= this.vh) return; // Tidak perlu scroll
+
+                const maxScroll = this.h - this.vh;
+
+                // Hitung berapa item yang masih bisa di-scroll
+                // Cari item berikutnya yang offset-nya masih dalam batas
+                let nextItem = this.currentItem + 1;
+
+                // Pastikan ada item berikutnya
+                if (nextItem < this.itemOffsets.length) {
+                    // Scroll ke item berikutnya — clamp ke maxScroll agar tidak overshoot
+                    this.currentItem = nextItem;
+                    // Jika item terakhir atau offset melebihi maxScroll, scroll ke maxScroll
+                    // agar konten paling bawah terlihat sepenuhnya
+                    this.targetY = Math.min(this.itemOffsets[nextItem], maxScroll);
+                    if (this.y >= maxScroll - 1) {
+                        // Sudah di posisi paling bawah, tidak perlu scroll lagi
+                        this.timer = setTimeout(() => {
+                            this._fadeResetToTop(() => {
+                                this.timer = setTimeout(() => this._scheduleNext(), CFG.SCROLL_EDGE_PAUSE);
+                            });
+                        }, CFG.SCROLL_EDGE_PAUSE);
+                        return;
+                    }
+
+                    this._animateTo(this.targetY, CFG.SCROLL_DURATION, () => {
+                        // Pause setelah sampai, lalu lanjut
+                        this.timer = setTimeout(() => this._scheduleNext(), CFG.SCROLL_ITEM_PAUSE);
+                    });
+                } else {
+                    // Sudah melewati semua item — scroll ke maxScroll jika belum
+                    if (this.y < maxScroll - 1) {
+                        this._animateTo(maxScroll, CFG.SCROLL_DURATION, () => {
+                            this.timer = setTimeout(() => {
+                                this._fadeResetToTop(() => {
+                                    this.timer = setTimeout(() => this._scheduleNext(), CFG.SCROLL_EDGE_PAUSE);
+                                });
+                            }, CFG.SCROLL_EDGE_PAUSE);
+                        });
+                    } else {
+                        // Sudah di ujung bawah — pause lama, lalu fade reset
+                        this.timer = setTimeout(() => {
+                            this._fadeResetToTop(() => {
+                                // Pause di atas, lalu mulai scroll lagi
+                                this.timer = setTimeout(() => this._scheduleNext(), CFG.SCROLL_EDGE_PAUSE);
+                            });
+                        }, CFG.SCROLL_EDGE_PAUSE);
+                    }
+                }
+            }
+
+            start() {
+                // Pause awal di posisi atas sebelum mulai scroll
+                this.timer = setTimeout(() => this._scheduleNext(), CFG.SCROLL_EDGE_PAUSE);
+            }
+
+            reset() {
+                // Bersihkan semua timer dan state
+                if (this.timer) clearTimeout(this.timer);
+                this.animating = false;
+                this.y = 0;
+                this.targetY = 0;
+                this.currentItem = 0;
+                if (this.el) {
+                    this.el.style.transition = 'none';
+                    this.el.style.transform = 'translate3d(0, 0, 0)';
+                    this.el.style.opacity = '1';
+                }
+                // Restart cycle setelah metrics diupdate
+                this.timer = setTimeout(() => this._scheduleNext(), CFG.SCROLL_EDGE_PAUSE);
+            }
+        }
+
+        const isMobile = window.innerWidth <= 768;
+
+        let s1, s2, s3;
+
+        if (!isMobile) {
+            s1 = new SmoothScroller('scrollBedah');
+            s2 = new SmoothScroller('scrollNonBedah');
+            s3 = new SmoothScroller('scrollSidebar');
+        }
+
+
+        // Dynamic Island Controller (with Queue)
+        // Dynamic Island Controller (with Queue & Idle Cycle)
+        const Island = {
+            el: null,
+            _queue: [],
+            _isAnimating: false,
+            _idleTimer: null,
+
+            init() {
+                this.el = $('dynamicIsland');
+                // #2 & #4: Mulai cycle idle message (sapaan / info)
+                this.startIdleCycle();
+            },
+
+            // #2: Sapaan Waktu Otomatis
+            getGreeting() {
+                const h = new Date().getHours();
+                if (h < 10) return "Selamat Pagi, Semangat Sehat! ☀️";
+                if (h < 15) return "Selamat Siang, Mohon Menunggu 🌤️";
+                if (h < 18) return "Selamat Sore 👋";
+                return "Selamat Malam 🌙";
+            },
+
+            // #4: Rotasi Info Edukasi
+            getIdleMessage() {
+                const msgs = [
+                    this.getGreeting(),
+                    "Dilarang Merokok di Area RS 🚭",
+                    "Jagalah Kebersihan Ruang Tunggu 🗑️",
+                    "Gunakan Masker Jika Batuk 😷",
+                    "Antri Dengan Tertib 🚶‍♂️🚶‍♀️",
+                    "Siapkan KTP & BPJS Anda 🆔"
+                ];
+                return msgs[Math.floor(Math.random() * msgs.length)];
+            },
+
+            startIdleCycle() {
+                // Tampilkan info idle setiap 3 menit (180s)
+                setInterval(() => {
+                    if (this._queue.length === 0 && !this._isAnimating) {
+                        this.show('Info', this.getIdleMessage(), 'idle', 'tips_and_updates', 6000);
+                    }
+                }, 180000);
+            },
+
+            // show(title, msg, type, [icon], [duration])
+            async show(title, msg, type = 'info', arg4 = null, arg5 = null) {
+                let duration = 8000;
+                let icon = null;
+
+                // Overload handling
+                if (typeof arg4 === 'number') {
+                    duration = arg4;
+                } else if (typeof arg4 === 'string') {
+                    icon = arg4;
+                    if (typeof arg5 === 'number') duration = arg5;
+                }
+
+                // Default icons
+                if (!icon) {
+                    if (type === 'success') icon = 'check_circle';
+                    else if (type === 'warn') icon = 'warning';
+                    else if (type === 'error') icon = 'error';
+                    else if (type === 'info') icon = 'info';
+                    else if (type === 'idle') icon = 'notifications';
+                }
+
+                this._queue.push({ title, msg, type, icon, duration });
+                this.processQueue();
+            },
+
+            async processQueue() {
+                if (this._isAnimating || this._queue.length === 0) return;
+
+                this._isAnimating = true;
+                const item = this._queue.shift();
+
+                // 1. Reset Classes
+                this.el.className = `dynamic-island ${item.type}`;
+
+                // 2. Set Content
+                $('diTitle').textContent = item.title;
+                $('diMsg').textContent = item.msg;
+                // 3. Set Icon
+                const iconEl = $('diIcon');
+                if (iconEl) {
+                    iconEl.textContent = item.icon || 'info';
+                    // Fix: Reset class to remove spinner
+                    iconEl.className = 'material-icons-round di-icon';
+                }
+
+                // Force layout recalc to restart transitions cleanly
+                void this.el.offsetWidth;
+
+                // 4. Expand Animation (in next frame for smoothness)
+                requestAnimationFrame(() => {
+                    this.el.classList.add('expanded');
+                });
+
+                // 5. Wait Notification Duration
+                await new Promise(r => setTimeout(r, item.duration));
+
+                // 5. Collapse Animation
+                this.el.classList.remove('expanded');
+
+                // 6. Cleanup & Next
+                setTimeout(() => {
+                    this._isAnimating = false;
+                    this.el.className = 'dynamic-island'; // Reset to base
+                    this.processQueue();
+                }, 600); // 0.6s match CSS liquid render
+            }
+        };
+
+
+
+        // Main App Logic
+        const App = {
+            _prevDoctors: {}, // Track previous doctor states for change detection
+            _greetSent: {},   // Track which greetings have been sent today
+
+            // Jadwal tayang Iklan Layanan Masyarakat (Optimal untuk Alur Rumah Sakit Tipe C/B)
+            // Didesain untuk MENGHINDARI jam sibuk (07:00 - 09:30) saat pasien berkerumun melihat layar.
+            // Didesain untuk MENGHINDARI jam 12:00 (karena bentrok dengan Notifikasi Jam Istirahat Petugas).
+            _adSchedules: [
+                { h: 7, m: 15 },  // Pagi awal: mengedukasi pasien yang baru datang / BPJS
+                { h: 10, m: 30 }, // Pertengahan pagi: saat ritme loket mulai stabil / agak lengang
+                { h: 11, m: 45 }, // Menjelang istirahat siang (penutup sesi pagi)
+                { h: 13, m: 15 }, // Pembukaan poli siang / sesudah istirahat
+                { h: 14, m: 45 }  // Sore hari menuju poli usai
+            ],
+            _adShownToday: {},
+            _adTimer: null,
+            _activeBreakId: null,
+
+            // Konfigurasi Jadwal Istirahat Dinamis
+            _breakSchedules: [
+                { id: 'siang', startH: 12, startM: 0, endH: 13, endM: 0, subtitle: 'Layanan pendaftaran ditutup sementara. Kami akan kembali pukul 13:00 WIB.', label: 'Jam Istirahat Siang' },
+                { id: 'sore', startH: 15, startM: 0, endH: 15, endM: 40, subtitle: 'Waktu pergantian shift sore petugas. Mohon bersabar menunggu sebentar.', label: 'Istirahat Sore' },
+                { id: 'malam', startH: 18, startM: 0, endH: 18, endM: 45, subtitle: 'Waktu istirahat dan ibadah malam. Layanan akan segera dilanjutkan.', label: 'Istirahat Malam' }
+            ],
+
+            _customMsgIdx: 0,
+            _customMsgs: [
+                { title: 'Info', text: 'Terimakasih sudah menunggu 🙏' },
+                { title: 'Info', text: 'Terimakasih sudah tertib 🌟' },
+                { title: 'Antrian', text: 'Belum online? Yo ambil antrian 🎫' },
+                { title: 'Info', text: 'Terimakasih sudah mengantri 😊' }
+            ],
+
+            _isFetching: false, // Network lock
+            _infoMsgIdx: 0,
+            _infoMsgs: [
+                'Pasien dengan status <strong>PENUH</strong> mohon mendaftar di hari lain.',
+                'Silakan siapkan <strong>KTP & Kartu BPJS</strong> sebelum ke loket pendaftaran.',
+                'Gunakan aplikasi <strong>MOBILE JKN</strong> untuk pendaftaran online.',
+                'Harap datang <strong>30 menit</strong> sebelum jam praktek dimulai.',
+                'Pasien <strong>BPJS</strong> wajib membawa surat rujukan dari Faskes tingkat 1.',
+                'Pastikan data diri Anda sudah sesuai dengan kartu identitas.',
+                'Informasi lebih lanjut hubungi <strong>INFORMASI</strong> atau <strong>0823-2344-6076</strong>.',
+            ],
+
+            async init() {
+                Island.init(); // Initialize Dynamic Island
+
+                // --- SMART TV OPTIMIZATION DETECTOR ---
+                const ua = navigator.userAgent.toLowerCase();
+                if (ua.includes('webos') || ua.includes('tizen') || ua.includes('smarttv') || ua.includes('netcast')) {
+                    document.body.classList.add('tv-optimized');
+                }
+
+                // --- TRICK AUTOPLAY AUDIO WEBOS SMART TV (LG) ---
+                // WebOS TV PASTI akan mematikan paksa suara (mute) iframe atau video pihak ketiga (seperti streamable) 
+                // jika halaman dibuka otomatis (seperti dari server/live-server) TANPA PERNAH ADA interaksi user.
+                // KITA KEMBALIKAN TOMBOL "UNLOCK" YANG WAJIB DIKLIK 1 KALI OLEH TEKNISI TIAP PAGI:
+                this._createUnlockAudioOverlay();
+
+                // Greeting based on time
+                const h = new Date().getHours();
+                const greeting = h < 11 ? 'Selamat Pagi' : h < 15 ? 'Selamat Siang' : h < 18 ? 'Selamat Sore' : 'Selamat Malam';
+                Island.show('PETUGAS PENDAFTARAN', greeting + ' 👋', 'success', 3000);
+
+                // --- DEMO PREVIEW IKLAN ---
+                // Iklan akan muncul 3 detik setelah halaman dibuka agar Anda bisa melihat contohnya
+                setTimeout(() => this.showAd(), 3000);
+
+                this.clock(); setInterval(() => this.clock(), 1000);
+                this.updateTheme(); setInterval(() => this.updateTheme(), 60000);
+                this.skel();
+
+
+                await this.fetch();
+                this.updateInfoBox();
+                if (!isMobile) {
+                    s1.start(); s2.start(); s3.start();
+                }
+                setInterval(() => this.fetch(), CFG.POLL_MS);
+                setInterval(() => this.updateInfoBox(), 8000); // Ganti info tiap 8 detik
+
+                // Watchdog: Auto-reload every 1 hour to clear memory
+                setTimeout(() => window.location.reload(), 3600000);
+            },
+
+            clock() {
+                const d = new Date();
+                $('clock').textContent = d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+                $('date').textContent = d.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long' }).toUpperCase();
+
+                const h = d.getHours();
+                const m = d.getMinutes();
+                const s = d.getSeconds();
+
+                // Custom Rotating Notification every 5 minutes (avoid clash with break time at 12:00)
+                if (m % 5 === 0 && s === 0 && h !== 12) {
+                    const msg = this._customMsgs[this._customMsgIdx];
+                    Island.show(msg.title, msg.text, 'info', 6000);
+                    this._customMsgIdx = (this._customMsgIdx + 1) % this._customMsgs.length;
+                }
+
+                // Dynamic Break Time Logic
+                const breakModal = document.getElementById('breakModal');
+                const timerEl = document.getElementById('breakCountdownTimer');
+
+                // Cari jadwal istirahat yang sedang aktif saat ini
+                const currentMins = (h * 60) + m;
+                let activeBreak = null;
+
+                for (const b of this._breakSchedules) {
+                    const startMins = (b.startH * 60) + b.startM;
+                    const endMins = (b.endH * 60) + b.endM;
+                    if (currentMins >= startMins && currentMins < endMins) {
+                        activeBreak = b;
+                        break;
+                    }
+                }
+
+                if (activeBreak) {
+                    // Jika baru saja masuk break
+                    if (this._activeBreakId !== activeBreak.id) {
+                        this._activeBreakId = activeBreak.id;
+
+                        // Update background class
+                        const bgEl = document.getElementById('dynamicBreakBg');
+                        if (bgEl) bgEl.className = 'dynamic-break-bg break-' + activeBreak.id;
+
+                        // Update Title & Subtitle
+                        const titleEl = document.getElementById('breakTitle');
+                        if (titleEl) titleEl.textContent = activeBreak.label;
+
+                        const subtitleEl = document.getElementById('breakSubtitle');
+                        if (subtitleEl) subtitleEl.textContent = activeBreak.subtitle;
+
+                        if (breakModal) breakModal.classList.add('show');
+                        Island.show('Istirahat', `Sedang ${activeBreak.label} 🕐`, 'info', 'coffee', 10000);
+                    }
+
+                    // Notifikasi island rutin selama istirahat
+                    if (m % 10 === 0 && s === 0) {
+                        Island.show('Istirahat', `Sedang ${activeBreak.label} 🕐`, 'info', 'coffee', 10000);
+                    }
+
+                    // Update Countdown
+                    if (timerEl) {
+                        const endMins = (activeBreak.endH * 60) + activeBreak.endM;
+                        // Sisa waktu total dalam hitungan detik
+                        const diffSeconds = ((endMins - currentMins) * 60) - s;
+
+                        const remainingMinutes = Math.floor(diffSeconds / 60);
+                        const remainingSeconds = diffSeconds % 60;
+
+                        const mm = remainingMinutes.toString().padStart(2, '0');
+                        const ss = remainingSeconds.toString().padStart(2, '0');
+                        timerEl.textContent = `${mm}:${ss}`;
+                    }
+                } else {
+                    // Tidak ada break aktif
+                    if (this._activeBreakId !== null) {
+                        this._activeBreakId = null;
+                        if (breakModal) breakModal.classList.remove('show');
+                    }
+                }
+
+                // Time-based Greetings (fire once at the exact hour)
+                if (s === 0 && m === 0) {
+                    const key = 'greet_' + h;
+                    if (!this._greetSent[key]) {
+                        this._greetSent[key] = true;
+                        if (h === 6) Island.show('Pagi', 'Selamat Pagi 🌅', 'info', 4000);
+                        if (h === 12) Island.show('Siang', 'Selamat Siang ☀️', 'info', 4000);
+                        if (h === 18) Island.show('Sore', 'Selamat Sore 🌇', 'info', 4000);
+                    }
+                }
+
+                // Cek jadwal iklan layanan masyarakat
+                if (s === 0) {
+                    const isAdTime = this._adSchedules.some(sch => sch.h === h && sch.m === m);
+                    if (isAdTime) {
+                        const adKey = `ad_${h}_${m}`;
+                        if (!this._adShownToday[adKey]) {
+                            this._adShownToday[adKey] = true;
+                            this.showAd();
+                        }
+                    }
+                }
+            },
+
+            showAd() {
+                const modal = $('adModal');
+                const container = $('adVideoContainer');
+                if (!modal || !container) return;
+
+                // Memutar Streamable
+                // PENTING: param `loop=0` untuk mematikan pengulangan otomatis.
+                // Ditambahkan trik `background-color:#000` mencegah layar flicker putih saat RAM TV lambat/lag me-render iframe
+                container.innerHTML = `<iframe id="streamablePlayer" src="https://streamable.com/e/ewfmo8?autoplay=1&nocontrols=1&loop=0" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="width:100%;height:100%;position:absolute;left:0px;top:0px;border:none;pointer-events:none;background-color:#000;"></iframe>`;
+
+                modal.classList.add('show');
+                Island.show('Informasi', 'Iklan Layanan Masyarakat', 'info', 'play_circle', 5000);
+
+                // --- ABSOLUTE TIMER AUTO-CLOSE ---
+                // Karena API "postMessage" Streamable sedang error secara global (WebSocket Server Down),
+                // Kita gunakan timer absolut. Video berdurasi 46 Detik, kita set timer 47 Detik.
+                if (this._adTimer) clearTimeout(this._adTimer);
+                this._adTimer = setTimeout(() => this.closeAd(), 47000);
+            },
+
+            closeAd() {
+                const modal = $('adModal');
+                const container = $('adVideoContainer');
+                if (!modal) return;
+
+                modal.classList.remove('show');
+                if (this._adTimer) clearTimeout(this._adTimer);
+
+                // Hapus video setelah transisi CSS selesai (0.5s) agar video berhenti bermain di background otomatis
+                setTimeout(() => {
+                    if (container) container.innerHTML = '';
+                }, 500);
+            },
+
+            updateTheme() {
+                const h = new Date().getHours();
+                const isLight = h >= 6 && h < 16;
+                document.documentElement.setAttribute('data-theme', isLight ? 'light' : 'dark');
+            },
+
+            skel() {
+                const make = () => Array(4).fill(0).map(() =>
+                    `<div class="platter" style="height:48px; opacity:0.6"><div class="skel" style="width:32px;height:32px;border-radius:10px"></div><div class="skel" style="width:60%;height:14px"></div></div>`
+                ).join('');
+                $('scrollBedah').innerHTML = make();
+                $('scrollNonBedah').innerHTML = make();
+            },
+
+            async fetch() {
+                if (this._isFetching) {
+                    console.warn('Network busy, skipping fetch...');
+                    return;
+                }
+                this._isFetching = true;
+
+                try {
+                    const [m, c] = await Promise.all([
+                        fetch(CFG.API_MAIN).then(r => r.json()),
+                        fetch(CFG.API_CUTI).then(r => r.json())
+                    ]);
+
+                    // Detect doctor status changes before render
+                    this._detectChanges(m);
+
+                    this.render(m);
+                    this.ticker(c);
+                    this.status('LIVE STREAM', false);
+                } catch (e) {
+                    console.error(e);
+                    Island.show('Koneksi', 'Offline Mode — Tidak Ada Koneksi', 'warn', 8000);
+                    this.status('OFFLINE MODE', true);
+                } finally {
+                    this._isFetching = false;
+                }
+            },
+
+            _createUnlockAudioOverlay() {
+                // Trik spesifik WebOS TV (LG): HARUS ada User Interaction (Pointer / Remote Click) agar DOM Audio Context diperbolehkan berdenting.
+                const overlay = document.createElement('div');
+                overlay.style.cssText = `
+                    position: fixed; inset: 0; z-index: 99999;
+                    background: transparent; padding: 20px;
+                    display: flex; align-items: flex-end; justify-content: flex-end;
+                `;
+                overlay.innerHTML = `
+                    <button id="unlockSoundBtn" style="
+                        background: #0A84FF; color: white; border:none; cursor: pointer;
+                        padding: 12px 24px; border-radius: 12px; font-weight: bold;
+                        box-shadow: 0 8px 32px rgba(0,0,0,0.5); font-size: 14px;
+                        animation: pulse-bg 2s infinite; outline:none;
+                    ">
+                        KLIK UNTUK MENGAKTIFKAN SUARA IKLAN (WEB OS)
+                    </button>
+                `;
+
+                const unlockAudio = () => {
+                    // Pancingan Audio Context untuk menjebol dinding pertahanan WebOS TV Browser
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    if (AudioContext) {
+                        const audioCtx = new AudioContext();
+                        audioCtx.resume();
+                    }
+                    try {
+                        let audio = new Audio();
+                        audio.play().catch(() => { });
+                    } catch (e) { }
+
+                    overlay.remove();
+                    Island.show('Sistem TV', 'Akses Suara Diaktifkan', 'success', 'volume_up', 3000);
+                };
+
+                overlay.querySelector('#unlockSoundBtn').addEventListener('click', unlockAudio);
+                // Biarkan orang klik sembarang tempat memakai pointer/remote-nya:
+                overlay.addEventListener('click', unlockAudio);
+                document.body.appendChild(overlay);
+            },
+
+            _detectChanges(data) {
+                if (!data) return;
+                const now = {}; // { status: string, active: boolean }
+
+                data.forEach(d => {
+                    const name = (d.Dokter || '').trim();
+                    const st = (d.Status || '').toUpperCase();
+                    // Active logic: Inside time AND (BUKA or PENUH)
+                    const isNowActive = checkTime(d.Jam) && (st.includes('BUKA') || st.includes('PENUH'));
+
+                    const prev = this._prevDoctors[name]; // { status, active } or undefined
+
+                    // Store current state
+                    now[name] = { status: st, active: isNowActive };
+
+                    // Only fire if we have previous state (not first load)
+                    if (prev) {
+                        // 1. Time-based Start (Status same/diff, but became active by time)
+                        if (!prev.active && isNowActive) {
+                            Island.show('Praktek Dimulai', `${name} Mulai Melayani Pasien`, 'success', 'door_front', 8000);
+                            return; // Prioritize start notification
+                        }
+
+                        // 2. Status String Change Detection
+                        if (prev.status !== st) {
+                            if (st.includes('PENUH')) {
+                                Island.show('Kuota Penuh', `Pendaftaran ${name} Ditutup`, 'warn', 'groups', 8000);
+                            } else if (st.includes('SELESAI')) {
+                                Island.show('Praktek Selesai', `${name} Telah Selesai Praktek`, 'info', 'check_circle', 8000);
+                            } else if (st.includes('CUTI')) {
+                                Island.show('Jadwal Cuti', `${name} Sedang Tidak Praktek`, 'error', 'flight', 8000);
+                            } else if (st.includes('OPERASI')) {
+                                Island.show('Status Dokter', `${name} Sedang Tindakan Operasi`, 'info', 'medical_services', 8000);
+                            } else if (st.includes('ISTIRAHAT')) {
+                                Island.show('Istirahat', `${name} Sedang Istirahat`, 'warn', 'coffee', 8000);
+                            } else if (st.includes('BUKA')) {
+                                Island.show('Praktek Dibuka', `${name} Mulai Melayani Pasien`, 'success', 'door_front', 8000);
+                            }
+                        }
+                    }
+                });
+
+                this._prevDoctors = now;
+            },
+
+            updateInfoBox() {
+                const el = $('dynamicInfoBox');
+                if (!el) return;
+                el.style.opacity = '0';
+                setTimeout(() => {
+                    el.innerHTML = this._infoMsgs[this._infoMsgIdx];
+                    el.style.opacity = '1';
+                    this._infoMsgIdx = (this._infoMsgIdx + 1) % this._infoMsgs.length;
+                }, 300);
+            },
+
+            status(msg, warn) {
+                $('liveText').textContent = msg;
+                $('liveDot').className = warn ? 'live-dot warn' : 'live-dot';
+            },
+
+            render(data) {
+                if (!data) return;
+
+                // 0. Calculate Stats
+                let countBuka = 0, countPenuh = 0, countCuti = 0;
+                data.forEach(d => {
+                    const s = (d.Status || '').toUpperCase();
+                    if (s.includes('BUKA')) countBuka++;
+                    else if (s.includes('PENUH')) countPenuh++;
+                    else if (s.includes('CUTI')) countCuti++;
+                });
+                $('statBuka').textContent = countBuka;
+                $('statPenuh').textContent = countPenuh;
+                $('statCuti').textContent = countCuti;
+
+                const group = { Bedah: [], NonBedah: [], Sidebar: [] };
+
+                // 1. ACTIVE List (Main Display) - Exclude Penuh, Cuti, Selesai, Tidak Praktek
+                const mainData = data.filter(d => {
+                    const s = (d.Status || '').toUpperCase();
+                    if (s.includes('SELESAI') || s.includes('TIDAK') || s.includes('LIBUR')) return false;
+                    // Move Penuh & Cuti to Sidebar
+                    if (s.includes('PENUH') || s.includes('CUTI')) return false;
+                    return true;
+                });
+
+                // 2. SIDEBAR List - Only Penuh & Cuti
+                const sidebarData = data.filter(d => {
+                    const s = (d.Status || '').toUpperCase();
+                    if (s.includes('SELESAI') || s.includes('TIDAK') || s.includes('LIBUR')) return false;
+                    return (s.includes('PENUH') || s.includes('CUTI'));
+                });
+
+
+                // Pre-calculate Active State for Sorting
+                [...mainData, ...sidebarData].forEach(d => {
+                    const s = (d.Status || '').toUpperCase();
+                    d._isActive = checkTime(d.Jam) && (s.includes('BUKA') || s.includes('PENUH'));
+                });
+
+                // Sorting: ACTIVE (Top) -> BUKA (4) -> PENUH (3) -> HANYA OPERASI (2) -> CUTI (1)
+                const score = s => {
+                    const u = s.toUpperCase();
+                    if (u.includes('BUKA')) return 4;
+                    if (u.includes('PENUH')) return 3;
+                    if (u.includes('OPERASI')) return 2;
+                    if (u.includes('CUTI')) return 1;
+                    return 0;
+                };
+
+                const sortFn = (a, b) => {
+                    // Priority 1: Active
+                    if (a._isActive && !b._isActive) return -1;
+                    if (!a._isActive && b._isActive) return 1;
+                    // Priority 2: Status Score
+                    return score(b.Status) - score(a.Status);
+                };
+
+                mainData.sort(sortFn);
+                sidebarData.sort(sortFn);
+
+                // Group Main Data
+                mainData.forEach(d => {
+                    const g = d.Jenis === 'Bedah' ? 'Bedah' : 'NonBedah';
+                    if (group[g]) group[g].push(d);
+                });
+
+                // Group Sidebar Data — terpisah per status
+                group.SidebarPenuh = sidebarData.filter(d => (d.Status || '').toUpperCase().includes('PENUH'));
+                group.SidebarCuti = sidebarData.filter(d => (d.Status || '').toUpperCase().includes('CUTI'));
+
+
+                // --- DOM RECYCLING ENGINE ---
+                const updateList = (containerId, list) => {
+                    const container = $(containerId);
+                    const oldMap = new Map();
+                    // Map existing elements by Doctor Name
+                    Array.from(container.children).forEach(el => {
+                        if (el.dataset.id) oldMap.set(el.dataset.id, el);
+                    });
+
+                    let hasLayoutChange = false;
+                    const newElements = list.map(d => {
+                        const id = d.Dokter;
+                        // Hash: Change detection key (Status + Jam + Active + Code)
+                        const hash = `${d.Status}|${d.Jam}|${d._isActive}|${d['Code Antrian'] || ''}`;
+
+                        // Helpers for styles
+                        const st = d.Status.toUpperCase();
+                        let c = 'st-nopoli', i = 'block', l = d.Status;
+                        if (st.includes('BUKA')) { c = 'st-buka'; i = 'check_circle'; l = 'BUKA'; }
+                        else if (st.includes('PENUH')) { c = 'st-penuh'; i = 'groups'; l = 'PENUH'; }
+                        else if (st.includes('OPERASI')) { c = 'st-operasi'; i = 'local_hospital'; l = 'OPERASI'; }
+                        else if (st.includes('CUTI')) { c = 'st-cuti'; i = 'flight'; l = 'CUTI'; }
+                        const avatarText = d['Code Antrian'] || d.CodeAntrian || d.Code || d.Kode || initials(d.Dokter);
+                        if (d._isActive) c += ' active';
+
+                        // Inner HTML Generator
+                        const getInner = () => `
+                            <div class="platter-main">
+                                <div class="initials">${avatarText}</div>
+                                <div class="info-col">
+                                    <div class="doc-name">${esc(d.Dokter)}</div>
+                                    <div class="doc-spec">${esc(d.Spesialis)}</div>
+                                </div>
+                                <div class="meta-col">
+                                    <div class="status-pill" style="background:var(--status-bg); color:var(--status-color)">
+                                        <span class="material-icons-round" style="font-size:12px">${i}</span>${l}
+                                    </div>
+                                    ${(d.Jam && d.Jam != '-' && !d._isActive) ? `
+                                    <div class="jam-box">
+                                        <span class="jam-label">REGISTRASI</span>
+                                        <span class="jam-val">${esc(d.Jam)}</span>
+                                    </div>` : ''}
+                                </div>
+                            </div>
+                                <div class="platter-detail">
+                                    <div class="detail-info">
+                                        <!-- #3: Label & Format Jam Baru -->
+                                        <span class="detail-label">REGISTRASI DIBUKA</span>
+                                        <span class="detail-time">${formatJam(d.Jam)}</span>
+                                    </div>
+                                <div class="live-status">
+                                     <div class="pulse-dot"></div>
+                                     <span class="live-text">SEDANG MELAYANI</span>
+                                </div>
+                            </div>`;
+
+                        let el = oldMap.get(id);
+
+                        if (el) {
+                            // RECYCLE: Only update if Hash changed
+                            if (el.dataset.hash !== hash) {
+                                el.className = `platter ${c}`;
+                                el.innerHTML = getInner();
+                                el.dataset.hash = hash;
+                            }
+                            // Hapus class animasi lama
+                            el.classList.remove('platter-new');
+                            oldMap.delete(id); // Mark handled
+                        } else {
+                            // CREATE: New element dengan animasi slide-in
+                            el = document.createElement('div');
+                            el.className = `platter ${c} platter-new`;
+                            el.dataset.id = id;
+                            el.dataset.hash = hash;
+                            el.innerHTML = getInner();
+                            hasLayoutChange = true;
+                            // Hapus class animasi setelah selesai
+                            el.addEventListener('animationend', () => el.classList.remove('platter-new'), { once: true });
+                        }
+                        return el;
+                    });
+
+                    // If items removed, we need layout update
+                    if (oldMap.size > 0) hasLayoutChange = true;
+
+                    // Check if order changed
+                    if (!hasLayoutChange) {
+                        for (let i = 0; i < newElements.length; i++) {
+                            if (container.children[i] !== newElements[i]) {
+                                hasLayoutChange = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    // Apply to DOM only if structural change occurred
+                    if (hasLayoutChange) {
+                        container.replaceChildren(...newElements);
+                        return true; // Signal scroller to reset
+                    }
+
+                    return false; // No scroll reset needed
+                };
+
+                const changed1 = updateList('scrollBedah', group.Bedah);
+                const changed2 = updateList('scrollNonBedah', group.NonBedah);
+
+                // --- SIDEBAR: Grouped Render (PENUH + CUTI terpisah) ---
+                const changed3 = this._renderSidebar(group.SidebarPenuh, group.SidebarCuti, updateList);
+
+                $('countBedah').textContent = group.Bedah.length;
+                $('countNonBedah').textContent = group.NonBedah.length;
+                $('countSidebar').textContent = group.SidebarPenuh.length + group.SidebarCuti.length;
+
+                // Only reset scroller if list structure changed (avoid jumpiness on simple updates)
+                if (!isMobile) {
+                    if (changed1) { s1.reset(); requestAnimationFrame(() => s1.updateMetrics()); }
+                    if (changed2) { s2.reset(); requestAnimationFrame(() => s2.updateMetrics()); }
+                    if (changed3) { s3.reset(); requestAnimationFrame(() => s3.updateMetrics()); }
+                }
+            },
+
+            // Render sidebar dengan section header terpisah
+            _renderSidebar(penuhList, cutiList, updateList) {
+                const container = $('scrollSidebar');
+                const oldMap = new Map();
+                Array.from(container.children).forEach(el => {
+                    if (el.dataset.id) oldMap.set(el.dataset.id, el);
+                });
+
+                const allElements = [];
+                let hasLayoutChange = false;
+
+                // Helper: Buat section header
+                const makeSectionHeader = (label, color, count, id) => {
+                    let el = container.querySelector(`[data-section="${id}"]`);
+                    if (!el) {
+                        el = document.createElement('div');
+                        el.className = 'sidebar-section-header';
+                        el.dataset.section = id;
+                        hasLayoutChange = true;
+                    }
+                    el.innerHTML = `
+                        <div class="sidebar-section-dot" style="background:${color}"></div>
+                        <span class="sidebar-section-label">${label}</span>
+                        <div class="sidebar-section-line"></div>
+                        <span class="sidebar-section-count">${count}</span>
+                    `;
+                    return el;
+                };
+
+                // Helper: Buat platter card (reuse dari updateList logic)
+                const makeCard = (d) => {
+                    const id = d.Dokter;
+                    const hash = `${d.Status}|${d.Jam}|${d._isActive}|${d['Code Antrian'] || ''}`;
+                    const st = d.Status.toUpperCase();
+                    let c = 'st-nopoli', i = 'block', l = d.Status;
+                    if (st.includes('BUKA')) { c = 'st-buka'; i = 'check_circle'; l = 'BUKA'; }
+                    else if (st.includes('PENUH')) { c = 'st-penuh'; i = 'groups'; l = 'PENUH'; }
+                    else if (st.includes('OPERASI')) { c = 'st-operasi'; i = 'local_hospital'; l = 'OPERASI'; }
+                    else if (st.includes('CUTI')) { c = 'st-cuti'; i = 'flight'; l = 'CUTI'; }
+                    const avatarText = d['Code Antrian'] || d.CodeAntrian || d.Code || d.Kode || initials(d.Dokter);
+                    if (d._isActive) c += ' active';
+
+                    const getInner = () => `
+                        <div class="platter-main">
+                            <div class="initials">${avatarText}</div>
+                            <div class="info-col">
+                                <div class="doc-name">${esc(d.Dokter)}</div>
+                                <div class="doc-spec">${esc(d.Spesialis)}</div>
+                            </div>
+                            <div class="meta-col">
+                                <div class="status-pill" style="background:var(--status-bg); color:var(--status-color)">
+                                    <span class="material-icons-round" style="font-size:12px">${i}</span>${l}
+                                </div>
+                                ${(d.Jam && d.Jam != '-' && !d._isActive) ? `
+                                <div class="jam-box">
+                                    <span class="jam-label">REGISTRASI</span>
+                                    <span class="jam-val">${esc(d.Jam)}</span>
+                                </div>` : ''}
+                            </div>
+                        </div>
+                        <div class="platter-detail">
+                            <div class="detail-info">
+                                <!-- #3: Label & Format Jam Baru -->
+                                <span class="detail-label">REGISTRASI DIBUKA</span>
+                                <span class="detail-time">${formatJam(d.Jam)}</span>
+                            </div>
+                            <div class="live-status">
+                                 <div class="pulse-dot"></div>
+                                 <span class="live-text">SEDANG MELAYANI</span>
+                            </div>
+                        </div>`;
+
+                    let el = oldMap.get(id);
+                    if (el) {
+                        if (el.dataset.hash !== hash) {
+                            el.className = `platter ${c}`;
+                            el.innerHTML = getInner();
+                            el.dataset.hash = hash;
+                        }
+                        el.classList.remove('platter-new');
+                        oldMap.delete(id);
+                    } else {
+                        el = document.createElement('div');
+                        el.className = `platter ${c} platter-new`;
+                        el.dataset.id = id;
+                        el.dataset.hash = hash;
+                        el.innerHTML = getInner();
+                        hasLayoutChange = true;
+                        el.addEventListener('animationend', () => el.classList.remove('platter-new'), { once: true });
+                    }
+                    return el;
+                };
+
+                // --- Build grouped layout ---
+                if (penuhList.length > 0) {
+                    allElements.push(makeSectionHeader('Kuota Penuh', '#FF9F0A', penuhList.length, 'sec-penuh'));
+                    penuhList.forEach(d => allElements.push(makeCard(d)));
+                }
+
+                if (cutiList.length > 0) {
+                    allElements.push(makeSectionHeader('Sedang Cuti', '#FF453A', cutiList.length, 'sec-cuti'));
+                    cutiList.forEach(d => allElements.push(makeCard(d)));
+                }
+
+                // Deteksi perubahan
+                if (oldMap.size > 0) hasLayoutChange = true;
+                if (!hasLayoutChange) {
+                    const currentChildren = Array.from(container.children);
+                    if (currentChildren.length !== allElements.length) {
+                        hasLayoutChange = true;
+                    } else {
+                        for (let i = 0; i < allElements.length; i++) {
+                            if (currentChildren[i] !== allElements[i]) {
+                                hasLayoutChange = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (hasLayoutChange) {
+                    container.replaceChildren(...allElements);
+                    return true;
+                }
+                return false;
+            },
+
+
+            ticker(data) {
+                if (!data) return;
+                const active = data.filter(d => {
+                    const s = (d.StatusCuti || '').toLowerCase();
+                    return s.includes('sedang') || s.includes('akan');
+                });
+
+                let txt = '© 2026 TPPRJ RSU Siaga Medika Purbalingga. All Rights Reserved. ';
+                if (active.length) {
+                    txt = active.map(d => ` ⚫ 📅 ${esc(d.Dokter)} (${esc(d.Spesialis)}) - ${esc(d.Tanggal)}`).join('   ');
+                }
+
+                const el = $('tickerText');
+                el.innerHTML = txt + '   ' + txt + '   ' + txt; // Triple buffer for smooth loop
+            }
+        };
+
+        App.init();
+    </script>
+</body>
+
+</html>
